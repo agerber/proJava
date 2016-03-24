@@ -29,10 +29,6 @@ public abstract class Sprite implements Movable {
 	public double[] dLengths;
 	public double[] dDegrees;
 	
-	//for drawing alternative 
-	//public double[] dLengthAlts;
-	//public double[] dDegreeAlts;
-	
 
 	//fade value for fading in and out
 	private int nFade;
@@ -126,11 +122,6 @@ public abstract class Sprite implements Movable {
 	public int getExpire() {
 		return nExpiry;
 	}
-
-	public boolean isExploding() {
-		return false;
-	}
-
 
 	public int getOrientation() {
 		return nOrientation;
@@ -229,8 +220,7 @@ public abstract class Sprite implements Movable {
 	//see Falcon or Bullet constructor for examples
 	protected double[] convertToPolarDegs(ArrayList<Point> pntPoints) {
 
-		//ArrayList<Tuple<Double,Double>> dblCoords = new ArrayList<Tuple<Double,Double>>();
-		double[] dDegs = new double[pntPoints.size()];
+	   double[] dDegs = new double[pntPoints.size()];
 
 		int nC = 0;
 		for (Point pnt : pntPoints) {
@@ -271,10 +261,8 @@ public abstract class Sprite implements Movable {
 		setLengths(convertToPolarLens(pntCs));
 
 	}
-	
 
-
-	
+	@Override
     public void draw(Graphics g) {
         nXCoords = new int[dDegrees.length];
         nYCoords = new int[dDegrees.length];
@@ -294,12 +282,7 @@ public abstract class Sprite implements Movable {
             //need this line of code to create the points which we will need for debris
             pntCoords[nC] = new Point(nXCoords[nC], nYCoords[nC]);
         }
-        
-        
-        
 
-		
-        
         g.setColor(getColor());
         g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
     }
@@ -316,8 +299,6 @@ public abstract class Sprite implements Movable {
 	public void setObjectPoint(Point pnt, int nIndex) {
 		 pntCoords[nIndex] = pnt;
 	}
-
-
 
 	public int getFadeValue() {
 		return nFade;

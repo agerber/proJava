@@ -96,7 +96,7 @@ public class Asteroid extends Sprite {
 		
 
 	}
-	
+
 	public int getSize(){
 		
 		int nReturn = 0;
@@ -116,7 +116,8 @@ public class Asteroid extends Sprite {
 		
 	}
 
-	//overridden
+
+	@Override
 	public void move(){
 		super.move();
 		

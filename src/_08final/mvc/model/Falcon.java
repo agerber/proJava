@@ -109,7 +109,7 @@ public class Falcon extends Sprite {
 	// ==============================================================
 	// METHODS 
 	// ==============================================================
-
+	@Override
 	public void move() {
 		super.move();
 		if (bThrusting) {
@@ -178,6 +178,7 @@ public class Falcon extends Sprite {
 		}
 	}
 
+	@Override
 	public void draw(Graphics g) {
 
 		//does the fading at the beginning or after hyperspace
@@ -189,17 +190,7 @@ public class Falcon extends Sprite {
 					getFadeValue(), 175), getFadeValue());
 		}
 
-//		//shield on
-//		if (bShield && nShield > 0) {
-//
-//			setShield(getShield() - 1);
-//
-//			g.setColor(Color.cyan);
-//			g.drawOval(getCenter().x - getRadius(),
-//					getCenter().y - getRadius(), getRadius() * 2,
-//					getRadius() * 2);
-//
-//		} //end if shield
+
 
 		//thrusting
 		if (bFlame) {
@@ -260,17 +251,8 @@ public class Falcon extends Sprite {
 		bProtected = bParam;
 	}
 
-	public void setProtected(boolean bParam, int n) {
-		if (bParam && n % 3 == 0) {
-			setFadeValue(n);
-		} else if (bParam) {
-			setFadeValue(0);
-		}
-		bProtected = bParam;
-	}	
 
 	public boolean getProtected() {return bProtected;}
-	public void setShield(int n) {nShield = n;}
-	public int getShield() {return nShield;}	
+
 	
 } //end class

@@ -63,6 +63,7 @@ public class NewShipFloater extends Sprite {
 
 	}
 
+	@Override
 	public void move() {
 		super.move();
 		setOrientation(getOrientation() + getSpin());

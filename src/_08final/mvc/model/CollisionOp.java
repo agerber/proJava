@@ -8,7 +8,7 @@ package _08final.mvc.model;
 public class CollisionOp {
 
     //this could also be a boolean, but we want to be explicit about what we're doing
-    public static enum Operation {
+    public enum Operation {
         ADD, REMOVE
     }
 

@@ -44,7 +44,7 @@ public Bullet(Falcon fal){
 
 	}
 
-	//implementing the expire functionality in the move method - added by Dmitriy
+	@Override
 	public void move(){
 
 		super.move();
