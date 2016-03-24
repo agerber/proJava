@@ -1,0 +1,32 @@
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+proDesign: Object-Oriented Analysis and Design
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Review Exercises: 3 points each. Starting on page 578 of textbook Big Java. Place your answers in
+ReviewExercises.txt located in the root of this project.
+
+R12.1 OO Analysis and Design
+R12.2 OO Analysis and Design
+R12.3 OO Analysis and Design
+R12.8 Relationships
+R12.11 CRC Cards (no need to draw them, just create a text version of the CRC card and put answers in ReviewExercises)
+R12.13 UML Diagram - Use the UML tool in IntelliJ. Indicate to the grader where this is located.
+R12.14 UML Diagram and CRC - Use the UML tool in IntelliJ. Indicate to the grader where this is located.
+R12.16 Identifying objects from problem description
+R12.18 Identifying objects from problem description
+R12.19 imports and fully qualified names
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Programming Exercises: Name your packages according to the Programming Exercise identifier, except
+replace the period with underscore. You will want a Driver class (with a static main() method) to drive your program.
+
+35 points each
+P12.6 Arithmetic. You can write this as a console-app. No need to make it GUI.
+P12.8 VendingMachine. You can write this as a console-app. No need to make it GUI.
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
