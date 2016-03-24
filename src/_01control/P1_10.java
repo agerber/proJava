@@ -7,6 +7,6 @@ public class P1_10 {
 
     public static void main(String[] args) {
         //stub
-        //another
+
     }
 }

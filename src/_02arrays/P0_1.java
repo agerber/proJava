@@ -24,7 +24,7 @@ public class P0_1 {
             //print the line content to console + newline
 
         Scanner scan = new Scanner(System.in);
-        //C:\dev\java\pros\proArrays\instructions.txt as test input
+        //C:\dev\java\pros\proArrays\_instructions.txt as test input
         System.out.print("Add line numbers. What is the absolute path to your file?:");
         String strPath = scan.next();
         File fileInput = new File(strPath);

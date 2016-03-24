@@ -1,0 +1,37 @@
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+proControl
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Review Exercises: 3 points each. Place your answers in ReviewExercises.txt located in the root of this project.
+R1.5 Benefits of using Java over machine code
+R2.3 Translating math expressions to Java.  See R2.4 for inspiration.
+R2.6 Order of precedence, and integer division.
+R2.10 Formatting. Hint: DecimalFormat object.
+R2.11 Types expressed in code
+R2.15 Math library and the modulus (%) operator
+R3.18 Pseudocode
+R4.9 Types of loops
+R4.12 Pseudocode
+R4.15 for/while
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Programming Exercises: 7 points each. Create a Java class file for each of the following Programming Exercises from the
+textbook, Big Java. Name your source files according to its Programming Exercise identifier, except replace the period with an
+underscore.  For example, if the Programming Exercise identifier is P1.15, then name your java source file P1_15.java. See
+P0_0.java for an example.
+
+P1.10 Draw ascii art. Check out chris.com/ascii/  for inspiration.
+P2.17 Military times. Do the “extra-credit” as well, only there is no extra-credit.
+P3.14 Cards and text equivalents.
+P3.16 Sorting strings
+P3.18 Translating pseudocode to Java
+P3.21 1913 tax schedule
+P3.26 Roman numerals
+P4.6 Translate pseudocode to Java code. Use Scanner; your inputs should be space-seperated integers into a Java console.
+P4.11 Count Syllables
+P4.18 Prime Numbers
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&

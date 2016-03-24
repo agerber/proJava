@@ -1,0 +1,20 @@
+#########################################################################
+# Use this file to answer Review Exercises from the Big Java textbook
+#########################################################################
+
+R5.6 Parameters and return values.  The difference between an argument and a return value is that an argument is passed
+into a method, whereas a return value is the value returned from it.
+
+You can have n number of arguments, whereas you can only have one return value. By varying either the number and/or type of arguments,
+you change the method's signature, which means you may overload a method. Varying the return value only does not change the
+method's signature and therefore does not qualify the method for overloading.
+
+Since Java5, you can even specify a variable number of arguments aka varargs which looks something like this:
+ private String[] someMethod(int nGrade, String... strNickNames) {//implementation};
+Notice that the varargs parameter "String... strNickNames" must be listed last.  Calling this method would look something like this:
+ String[] strReturnValues = someMethod(99, "Jim", "Jamie", "James", "Jamey", "Jimmy", "Jimbo");
+
+
+
+
+
