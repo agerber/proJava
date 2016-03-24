@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Cc {
+public class CommandCenter {
 
 	private  int nNumFalcon;
 	private  int nLevel;
@@ -23,16 +23,16 @@ public class Cc {
 
 	private GameOpsList opsList = new GameOpsList();
 
-	//added by Dmitriy
-	private static Cc instance = null;
+
+	private static CommandCenter instance = null;
 
 	// Constructor made private - static Utility class only
-	private Cc() {}
+	private CommandCenter() {}
 
 
-	public static Cc getInstance(){
+	public static CommandCenter getInstance(){
 		if (instance == null){
-			instance = new Cc();
+			instance = new CommandCenter();
 		}
 		return instance;
 	}
@@ -50,7 +50,7 @@ public class Cc {
 	public  void spawnFalcon(boolean bFirst) {
 		if (getNumFalcons() != 0) {
 			falShip = new Falcon();
-			//movFriends.enqueue(falShip);
+
 			opsList.enqueue(falShip, CollisionOp.Operation.ADD);
 			if (!bFirst)
 			    setNumFalcons(getNumFalcons() - 1);

@@ -1,7 +1,7 @@
 package _08final.mvc.view;
 
 import _08final.mvc.controller.Game;
-import _08final.mvc.model.Cc;
+import _08final.mvc.model.CommandCenter;
 import _08final.mvc.model.Falcon;
 import _08final.mvc.model.Movable;
 
@@ -54,8 +54,8 @@ public class GamePanel extends Panel {
 	private void drawScore(Graphics g) {
 		g.setColor(Color.white);
 		g.setFont(fnt);
-		if (Cc.getInstance().getScore() != 0) {
-			g.drawString("SCORE :  " + Cc.getInstance().getScore(), nFontWidth, nFontHeight);
+		if (CommandCenter.getInstance().getScore() != 0) {
+			g.drawString("SCORE :  " + CommandCenter.getInstance().getScore(), nFontWidth, nFontHeight);
 		} else {
 			g.drawString("NO SCORE", nFontWidth, nFontHeight);
 		}
@@ -75,9 +75,9 @@ public class GamePanel extends Panel {
 
 		drawScore(grpOff);
 		
-		if (!Cc.getInstance().isPlaying()) {
+		if (!CommandCenter.getInstance().isPlaying()) {
 			displayTextOnScreen();
-		} else if (Cc.getInstance().isPaused()) {
+		} else if (CommandCenter.getInstance().isPaused()) {
 			strDisplay = "Game Paused";
 			grpOff.drawString(strDisplay,
 					(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4);
@@ -89,15 +89,15 @@ public class GamePanel extends Panel {
 			//draw them in decreasing level of importance
 			//friends will be on top layer and debris on the bottom
 			iterateMovables(grpOff,
-					(ArrayList<Movable>)  Cc.getInstance().getMovFriends(),
-					(ArrayList<Movable>)  Cc.getInstance().getMovFoes(),
-					(ArrayList<Movable>)  Cc.getInstance().getMovFloaters(),
-					(ArrayList<Movable>)  Cc.getInstance().getMovDebris());
+					(ArrayList<Movable>)  CommandCenter.getInstance().getMovFriends(),
+					(ArrayList<Movable>)  CommandCenter.getInstance().getMovFoes(),
+					(ArrayList<Movable>)  CommandCenter.getInstance().getMovFloaters(),
+					(ArrayList<Movable>)  CommandCenter.getInstance().getMovDebris());
 
 
 			drawNumberShipsLeft(grpOff);
-			if (Cc.getInstance().isGameOver()) {
-				Cc.getInstance().setPlaying(false);
+			if (CommandCenter.getInstance().isGameOver()) {
+				CommandCenter.getInstance().setPlaying(false);
 				//bPlaying = false;
 			}
 		}
@@ -124,7 +124,7 @@ public class GamePanel extends Panel {
 
 	// Draw the number of falcons left on the bottom-right of the screen. 
 	private void drawNumberShipsLeft(Graphics g) {
-		Falcon fal = Cc.getInstance().getFalcon();
+		Falcon fal = CommandCenter.getInstance().getFalcon();
 		double[] dLens = fal.getLengths();
 		int nLen = fal.getDegrees().length;
 		Point[] pntMs = new Point[nLen];
@@ -142,7 +142,7 @@ public class GamePanel extends Panel {
 		//set the color to white
 		g.setColor(Color.white);
 		//for each falcon left (not including the one that is playing)
-		for (int nD = 1; nD < Cc.getInstance().getNumFalcons(); nD++) {
+		for (int nD = 1; nD < CommandCenter.getInstance().getNumFalcons(); nD++) {
 			//create x and y values for the objects to the bottom right using cartesean points again
 			for (int nC = 0; nC < fal.getDegrees().length; nC++) {
 				nXs[nC] = pntMs[nC].x + Game.DIM.width - (20 * nD);
