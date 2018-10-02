@@ -9,3 +9,15 @@ R1.5 The following are all benefits to using Java over machine code:
 4/ Java was designed for networking and the Internet in mind; and it is generally safer than machine code
 
 
+R2.3 Translating math expressions to Java.  See R2.4 for inspiration.
+
+this is my answwer toafdsfd
+
+R2.6 Order of precedence, and integer division.
+R2.10 Formatting. Hint: DecimalFormat object.
+R2.11 Types expressed in code
+R2.15 Math library and the modulus (%) operator
+R3.18 Pseudocode
+R4.9 Types of loops
+R4.12 Pseudocode
+R4.15 for/while
