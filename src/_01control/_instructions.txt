@@ -20,19 +20,22 @@ R4.14 Calendar problem
 
 Programming Exercises: 7 points each. Create a Java class file for each of the following Programming Exercises from the
 textbook, Big Java. Name your source files according to its Programming Exercise identifier, except replace the period with an
-underscore.  For example, if the Programming Exercise identifier is P1.15, then name your java source file P1_15.java. See
-P0_0.java for an example.
+underscore.  For example, if the Programming Exercise identifier is P1.15 or E2.4 then name your java source file P1_15.java or E2_4
+respecitvely. See P0_0.java for an example.
 
-P1.10 Draw ascii art. Check out chris.com/ascii/  for inspiration.
-P2.17 Military times. Do the “extra-credit” as well, only there is no extra-credit.
-P3.14 Cards and text equivalents.
-P3.16 Sorting strings
-P3.18 Translating pseudocode to Java
-P3.21 1913 tax schedule
-P3.26 Roman numerals
-P4.6 Translate pseudocode to Java code. Use Scanner; your inputs should be space-seperated integers into a Java console.
-P4.11 Count Syllables
-P4.18 Prime Numbers
+E2.4 Print integers from CLI
+E2.6 Conversions imperial to metric
+E2.20 Ascii graphics - x-mas tree
+P2.5 Phone number conversions
+E3.14 The seasons program
+P3.7 Simple income tax
+P3.13 Roman numeral conversion
+P3.14 Leap year
+E4.1 More loops
+E4.17 digital to binary - your solution will print binary units from right to left (the proper way).
+
+
+
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
