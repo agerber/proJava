@@ -4,15 +4,16 @@ proControl
 
 Review Exercises: 3 points each. Place your answers in ReviewExercises.txt located in the root of this project.
 R1.5 Benefits of using Java over machine code
-R2.3 Translating math expressions to Java.  See R2.4 for inspiration.
-R2.6 Order of precedence, and integer division.
-R2.10 Formatting. Hint: DecimalFormat object.
-R2.11 Types expressed in code
-R2.15 Math library and the modulus (%) operator
-R3.18 Pseudocode
-R4.9 Types of loops
-R4.12 Pseudocode
-R4.15 for/while
+R2.4 Translating math expressions to Java.
+R2.7 Understanding integer operations, order of precedence, and integer division.
+R2.14 How the compiler interprets primitive values
+R2.17 Pseudocode understading
+R2.22 More pseudocode - you do not need to draw a diagram for this question
+R3.19 Pseudocode for grade problem
+R3.30 Boolean expressions
+R4.12 Implementing loops
+R4.14 Calendar problem
+
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
