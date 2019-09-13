@@ -10,17 +10,22 @@ R5.6 Parameters and return values
 R5.8 Pseudocode
 R5.10 Variable scope
 R5.14 Pass by value versus pass by reference
-R6.6 Arrays, initialize and and out-of-bounds
-R6.10 ArrayLists rules
-R6.11 Index values
-R6.21 Rotate elements of array pseudocode
-R6.23 Binary insert algorithm
-R6.25 References to arrays
-R7.6 Checked versus unchecked exceptions
-R7.7 Checked versus unchecked exceptions
-R7.9 Exceptions
-R7.11 Exceptions
-R7.14 Exceptions
+R6.3 Considering loops
+R6.10 Enhanced for-loop
+R6.23 Computing runs
+R6.29 Multi-dimensional arrays
+R6.34 Understanding arrays
+R7.1 Exceptions
+R7.6 Throwing and catching
+R7.7 Checked versus unchecked
+R7.8 Exceptions philosophy in Java
+R7.11 What is an exception object
+R7.15 Scanner exceptions. Explain why these are either checked or unchecked.
+
+
+
+
+
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
