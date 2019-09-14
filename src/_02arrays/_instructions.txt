@@ -34,14 +34,17 @@ Programming Exercises: 7 points each. Create a Java class file for each of the f
 textbook, Big Java. Name your source files according to its Programming Exercise identifier, except replace the period with an
 underscore.  For example, if the Programming Exercise identifier is P1.15, then name your java source file P1_15.java.
 
-P5.8 Text manipulation
-P5.20 Leap year
-P5.25 Bar codes
-P6.12 Translating pseudocode with arrays
-P6.23 Histogram
-P6.28 Merging sorted ArrayLists
-P7.2 File i/o
-P7.17 File i/o
+
+
+P5.8 Leap year
+P5.24 Roman numerals
+E6.1 Array initialization
+E6.9 Check for equality of elements
+E6.12 random values and sort
+E6.16 Histogram
+E7.4 Marry had a little lamb
+P7.5 CSV file
+
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
