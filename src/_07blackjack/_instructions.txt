@@ -7,42 +7,56 @@ ReviewExercises.txt located in the root of this project.
 
 R13.1 Terms
 R13.2 Smallest value
-R13.3 Sort array of numbers
+R13.4 Sort array of numbers
 R13.6 Exponents recursively
 R13.8 Factorial recursively
 
+R19.1 operations on Stream<String>
+R19.3 How to read Java8
+R19.6 Transforming values
+R19.11 Terminal operations
+R19.12 Collectors
+
+
+
+
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-Place your Yoda apps in one package and your BlackJack game in another.
 
-5 points
+
+Programming exercises: 7 points each.
+
+
+
+E13.4 binary recursively.
+E13.20 Paying for something with bills recursively
+
+P13.3 Telephone words recursively
+
+
 YodaSpeak : Create a console program that takes a sentence and reverses the order
 of the words. For example, if the sentence is "The force is strong with you", The output
 would be "you with strong is force The". Implement this program iteratively.
 
-5 points
+
 YodaSpeakRecursive : Create console program that takes a sentence and reverses the order
 of the words. For example, if the sentence is "The force is strong with you", The output
 would be "you with strong is force The". Implement this program recursively.
 
 
-75 points
-The game of BlackJack 21. Create a game of BlackJack. User plays against the computer which is the dealer.
-You must create a GUI application. This project provides an excellent opportunity to use your OO Analysis and
-Design skills, as well as your Swing-GUI skills.
+E19.5 comma-separated values (you may need to read ahead to generics to complete this)
+E19.6 Transform currencies
+E19.7 Transform strings
+E19.16 GroupBy and collect
+E19.14 Parellel stream - you can use this txt version of War and Peace -> https://archive.org/stream/warandpeace030164mbp/warandpeace030164mbp_djvu.txt
 
-Here are the rules of blackjack: http://en.wikipedia.org/wiki/Blackjack
 
-To keep things simple, you should use a 6-Deck shoe.
-No splits
-No insurance
-User starts with 1000$
-You must respect hard and soft aces (either 1 or 11)
-Dealer must hit on soft 17
 
-There are many resource online where you can find png's or jpg's or cards.
+
+
+
 
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
