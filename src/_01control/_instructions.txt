@@ -3,7 +3,7 @@ proControl
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 Review Exercises: 3 points each. Place your answers in ReviewExercises.txt located in the root of this project.
-R1.5 Benefits of using Java over machine code
+R1.5 Benefits of using Java over machine code (This one is already answered for you)
 R2.4 Translating math expressions to Java.
 R2.7 Understanding integer operations, order of precedence, and integer division.
 R2.14 How the compiler interprets primitive values
@@ -20,7 +20,7 @@ R4.14 Calendar problem
 
 Programming Exercises: 7 points each. Create a Java class file for each of the following Programming Exercises from the
 textbook, Big Java. Name your source files according to its Programming Exercise identifier, except replace the period with an
-underscore.  For example, if the Programming Exercise identifier is P1.15 or E2.4 then name your java source file P1_15.java or E2_4
+underscore.  For example, if the Programming Exercise identifier is P1.15 or E2.4 then name your java source file P1_15.java or E2_4.java
 respecitvely. See P0_0.java for an example.
 
 E2.4 Print integers from CLI

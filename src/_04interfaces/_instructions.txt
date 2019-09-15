@@ -2,8 +2,8 @@
 proInterfaces : Interfaces
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-Review Exercises: 3 points each. Starting on page 456 of textbook Big Java. Place your answers in
-ReviewExercises.txt located in the root of this project.
+Review Exercises: 3 points each. Place your answers in
+ReviewExercises.txt located in the root of this project director.
 
 R9.1 Superclas and subclass
 R9.2 superclass and subclass

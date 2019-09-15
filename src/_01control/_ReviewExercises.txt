@@ -7,6 +7,6 @@ R1.5 The following are all benefits to using Java over machine code:
 2/ Java JIT compilers can run efficient Java programs as fast or faster than machine code programs
 3/ Java is memory-managed. This reduces about 95% of runtime errors (mostly memory-related) as compared to unmanaged code.
 4/ Java was designed for networking and the Internet in mind; and it is generally safer than machine code
-
+5/ With the introduction of Java8, Java is now a declarative and functional programming language.
 
 

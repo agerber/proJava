@@ -1,5 +1,5 @@
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-proBlackJack: Recursion and Advanced Gui
+proStreams: Streams and Recursion
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 Review Exercises: 3 points each. Starting on page 619 of textbook Big Java. Place your answers in

@@ -2,7 +2,7 @@
 proDesign: Object-Oriented Analysis and Design
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-Review Exercises: 3 points each. Starting on page 578 of textbook Big Java. Place your answers in
+Review Exercises: 3 points each. Place your answers in
 ReviewExercises.txt located in the root of this project. No need to draw CRC cards, just create a text version of the CRC
 card and put answers in ReviewExercises. For UML, sse the UML tool in IntelliJ. Indicate to the grader where this is located.
 

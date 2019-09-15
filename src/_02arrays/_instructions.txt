@@ -32,7 +32,7 @@ R7.15 Scanner exceptions. Explain why these are either checked or unchecked.
 
 Programming Exercises: 7 points each. Create a Java class file for each of the following Programming Exercises from the
 textbook, Big Java. Name your source files according to its Programming Exercise identifier, except replace the period with an
-underscore.  For example, if the Programming Exercise identifier is P1.15, then name your java source file P1_15.java.
+underscore.  For example, if the Programming Exercise identifier is P1.15, or E6.1 then name your java source file P1_15.java or E6_1.java
 
 
 
