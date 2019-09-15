@@ -25,16 +25,20 @@ replace the period with underscore. You will want a Driver class (with a static 
 See package P0_2 for an example.
 
 7 points each
-P8.4 Address
+P8.1 microwave control panel
 P8.5 SodaCan
 P8.6 Car
-P8.8 Student
-P8.9 ComboLock
+P8.7 ComboLock
+P8.8 VotingMachine
+
+
+
 
 12 points each
-P8.11 Letter
-P8.14 Static methods
-P8.15 Object-oriented approach of above
+P8.14 Country
+P8.16 Email
+P8.19 Canonball
+
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
