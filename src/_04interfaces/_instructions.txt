@@ -24,14 +24,14 @@ replace the period with underscore. You will want a Driver class (with a static 
 See package P0_3 for an example.
 
 10 points each
-P9.8 Person
-P9.10 BetterRectangle
-P9.13 Point
-P9.14 SodaCan
+E9.8 BankAccount
+E9.11 Person
+E9.13 BetterRectangle
+E9.17 SodaCan
 
 15 points each
-P9.16 Measurable interface
-9.23 Appointment book
+P9.1 Clock
+P9.6 Appointment book
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
