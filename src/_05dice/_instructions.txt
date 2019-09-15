@@ -25,12 +25,12 @@ replace the period with underscore. You will want a Driver class (with a static 
 
 
 10 points each
-P10.2 ButtonViewer
-P10.26 Olympic rings
+P10.9 Italian flag
+P10.10 Olympic rings
 
 15 points each
-P10.35 Restaurant bill
-P11.22 Triangle
+P10.19 Restaurant bill
+P11.9 Circle with clicks
 
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
