@@ -26,7 +26,7 @@ respecitvely. See P0_0.java for an example.
 E2.4 Print integers from CLI
 E2.6 Conversions imperial to metric
 E2.20 Ascii graphics - x-mas tree
-P2.5 Phone number conversions
+P2.5 Dollars and cents extraction
 E3.14 The seasons program
 P3.7 Simple income tax
 P3.13 Roman numeral conversion
