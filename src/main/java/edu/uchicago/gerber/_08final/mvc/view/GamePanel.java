@@ -108,6 +108,7 @@ public class GamePanel extends Panel {
 
 	
 	//for each movable array, process it.
+	//todo use List instead of ArrayList
 	private void iterateMovables(Graphics g, ArrayList<Movable>...movMovz){
 		
 		for (ArrayList<Movable> movMovs : movMovz) {

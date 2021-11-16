@@ -12,6 +12,9 @@ public class CollisionOp {
         ADD, REMOVE
     }
 
+    /*
+    todo use normal names, rather than m or s prefixes.
+     */
     //members
     private Movable mMovable;
     private Operation mOperation;

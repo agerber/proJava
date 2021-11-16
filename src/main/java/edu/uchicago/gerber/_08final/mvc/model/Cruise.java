@@ -2,7 +2,9 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import java.awt.*;
 import java.util.ArrayList;
-
+/*
+todo remove this class, too complicated.
+ */
 public class Cruise extends Sprite {
 
 	private final double FIRE_POWER = 15.0;

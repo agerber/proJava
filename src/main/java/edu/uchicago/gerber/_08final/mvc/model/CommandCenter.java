@@ -49,6 +49,9 @@ public class CommandCenter {
 	
 	// The parameter is true if this is for the beginning of the game, otherwise false
 	// When you spawn a new falcon, you need to decrement its number
+	/*todo refactor this method so that it takes no params. Instead of checking first, just add one extra
+	 ship initially */
+
 	public  void spawnFalcon(boolean bFirst) {
 		if (getNumFalcons() != 0) {
 			falShip = new Falcon();

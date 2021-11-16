@@ -87,6 +87,7 @@ public class Falcon extends Sprite {
 		pntCs.add(new Point(1,6));
 		pntCs.add(new Point(0,9));
 
+		//todo redundant
 		assignPolarPoints(pntCs);
 
 		setColor(Color.white);

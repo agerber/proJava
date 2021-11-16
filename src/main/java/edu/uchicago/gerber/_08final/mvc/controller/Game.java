@@ -22,6 +22,7 @@ public class Game implements Runnable, KeyListener {
 
 	public static final Dimension DIM = new Dimension(1100, 900); //the dimension of the game.
 	private GamePanel gmpPanel;
+	//this is used throughout many classes.
 	public static Random R = new Random();
 	public final static int ANI_DELAY = 45; // milliseconds between screen
 											// updates (animation)
@@ -105,6 +106,7 @@ public class Game implements Runnable, KeyListener {
 
 		// this thread animates the scene
 		while (Thread.currentThread() == thrAnim) {
+			//todo tick is redundant, use System.getCurrentMillis();
 			tick();
 			spawnNewShipFloater();
 			gmpPanel.update(gmpPanel.getGraphics()); // update takes the graphics context we must 
@@ -135,9 +137,10 @@ public class Game implements Runnable, KeyListener {
 
 	private void checkCollisions() {
 
-		
+
 
 		Point pntFriendCenter, pntFoeCenter;
+		//todo refactor the names of these local variables
 		int nFriendRadiux, nFoeRadiux;
 
 		for (Movable movFriend : CommandCenter.getInstance().getMovFriends()) {
@@ -150,6 +153,10 @@ public class Game implements Runnable, KeyListener {
 
 				//detect collision
 				if (pntFriendCenter.distance(pntFoeCenter) < (nFriendRadiux + nFoeRadiux)) {
+
+					//todo make protected() a method of the Movable interace. Sprite's protected() will return false,
+					// and Falcon's will return true if the fade calculation is in force, otherwise false.
+					// Then we don't have to do the movFriend instanceof Falcon check.
 
 					//falcon
 					if ((movFriend instanceof Falcon) ){
@@ -175,8 +182,10 @@ public class Game implements Runnable, KeyListener {
 		//check for collisions between falcon and floaters
 		if (CommandCenter.getInstance().getFalcon() != null){
 			Point pntFalCenter = CommandCenter.getInstance().getFalcon().getCenter();
+			//todo refactor the names of these local variables
 			int nFalRadiux = CommandCenter.getInstance().getFalcon().getRadius();
 			Point pntFloaterCenter;
+			//todo refactor the names of these local variables
 			int nFloaterRadiux;
 			
 			for (Movable movFloater : CommandCenter.getInstance().getMovFloaters()) {
@@ -239,6 +248,7 @@ public class Game implements Runnable, KeyListener {
 
 		}
 		//a request to the JVM is made every frame to garbage collect, however, the JVM will choose when and how to do this
+		//todo this .gc() call is not required. remove it.
 		System.gc();
 		
 	}//end meth
@@ -272,6 +282,7 @@ public class Game implements Runnable, KeyListener {
 
 	}
 
+	//todo use System.getCurrentMillis();
 	//some methods for timing events in the game,
 	//such as the appearance of UFOs, floaters (power-ups), etc. 
 	public void tick() {

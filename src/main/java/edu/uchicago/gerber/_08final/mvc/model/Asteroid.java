@@ -136,6 +136,7 @@ public class Asteroid extends Sprite {
 	}
 	
 	//this is for an asteroid only
+	//todo use cartesian coordiantes and assign the pntCoords, and nothing else.
 	  public void assignRandomShape ()
 	  {
 	    int nSide = Game.R.nextInt( 7 ) + 7;

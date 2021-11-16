@@ -25,6 +25,7 @@ public class NewShipFloater extends Sprite {
 		pntCs.add(new Point(-5, 5));
 		pntCs.add(new Point(0,4));
 
+		//todo redundant
 		assignPolarPoints(pntCs);
 
 		setExpire(250);
@@ -68,7 +69,7 @@ public class NewShipFloater extends Sprite {
 		super.move();
 		setOrientation(getOrientation() + getSpin());
 
-		//adding expire functionality
+		//todo put this  block in the Sprite class.
 		if (getExpire() == 0)
 			CommandCenter.getInstance().getOpsList().enqueue(this, CollisionOp.Operation.REMOVE);
 		else
@@ -92,6 +93,7 @@ public class NewShipFloater extends Sprite {
 	public void draw(Graphics g) {
 		super.draw(g);
 		//fill this polygon (with whatever color it has)
+		//todo use the pntCoords to fill polygon. ditto below.
 		g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
 		//now draw a white border
 		g.setColor(Color.WHITE);

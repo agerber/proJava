@@ -11,9 +11,14 @@ public abstract class Sprite implements Movable {
 	//this causes movement; change in x and change in y
 	private double dDeltaX, dDeltaY;
 	//every sprite needs to know about the size of the gaming environ
+
+	/*
+	todo this is redundant
+	 */
 	private Dimension dim; //dim of the gaming environment
 
 	//we need to know what team we're on
+	//todo rename all members and strip out the "m" or "n" or "d"
 	private Team mTeam;
 
 	//the radius of circumscibing circle
@@ -24,6 +29,10 @@ public abstract class Sprite implements Movable {
 	//the color of this sprite
 	private Color col;
 
+	/*
+	todo we don't need these members, they can be calculated from the cartesian
+	coords.
+	 */
 	//radial coordinates
 	//this game uses radial coordinates to render sprites
 	public double[] dLengths;
@@ -31,10 +40,18 @@ public abstract class Sprite implements Movable {
 	
 
 	//fade value for fading in and out
+	/*
+	todo use a long instead of nFade, and call it instantiateTime and set it to the
+	System.currentTimeMillis(). Calculate any fade that way.
+	 */
 	private int nFade;
 
 	//these are used to draw the polygon. You don't usually need to interface with these
 	private Point[] pntCoords; //an array of points used to draw polygon
+
+	/*
+	todo these are likewise redundant. Use the cartesian pntCoords instead.
+	 */
 	private int[] nXCoords;
 	private int[] nYCoords;
 
@@ -43,6 +60,7 @@ public abstract class Sprite implements Movable {
 	public Team getTeam() {
 		//default
 	  return mTeam;
+
 	}
 
 	public void setTeam(Team team){
@@ -76,7 +94,7 @@ public abstract class Sprite implements Movable {
 	public Sprite() {
 
 	//you can override this and many more in the subclasses
-		setDim(Game.DIM);
+		setDim(Game.DIM); // todo this is redundant, just use the Game.DIM
 		setColor(Color.white);
 		setCenter(new Point(Game.R.nextInt(Game.DIM.width),
 				Game.R.nextInt(Game.DIM.height)));
@@ -119,6 +137,7 @@ public abstract class Sprite implements Movable {
 		return 0;
 	}
 
+	//todo possible candidate for Movable interface
 	public int getExpire() {
 		return nExpiry;
 	}
@@ -156,6 +175,7 @@ public abstract class Sprite implements Movable {
 
 	}
 
+	//todo just use the Game.DIM, no need for member here.
 	public Dimension getDim() {
 		return dim;
 	}
@@ -262,6 +282,7 @@ public abstract class Sprite implements Movable {
 
 	}
 
+	//todo reengineer this so that draw converts pntCoords to xCoords, yCoords on the fly locally, and NOT as members.
 	@Override
     public void draw(Graphics g) {
         nXCoords = new int[dDegrees.length];
