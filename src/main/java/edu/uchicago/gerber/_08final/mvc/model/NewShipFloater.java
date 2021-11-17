@@ -27,7 +27,7 @@ public class NewShipFloater extends Sprite {
 		pntCs.add(new Point(-5, 5));
 		pntCs.add(new Point(0,4));
 
-		setObjectPoints(pntCs);
+
 
 		//todo redundant
 		//assignPolarPoints(pntCs);
@@ -65,7 +65,7 @@ public class NewShipFloater extends Sprite {
 
 		//random orientation 
 		 setOrientation(Game.R.nextInt(360));
-
+		setObjectPoints(pntCs);
 	}
 
 	@Override

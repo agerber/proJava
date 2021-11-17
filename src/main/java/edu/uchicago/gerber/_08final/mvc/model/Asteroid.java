@@ -71,13 +71,10 @@ public class Asteroid extends Sprite {
 		//random delta-y - the smaller the asteroid the faster its possible speed
 		setDeltaY(somePosNegValue(10 + newSmallerSize * 2));
 
-		assignRandomShape();
-		
-		//an nSize of zero is a big asteroid
-		//a nSize of 1 or 2 is med or small asteroid respectively
 
 		setRadius(RAD/(newSmallerSize * 2));
 		setCenter(astExploded.getCenter());
+		assignRandomShape();
 		
 		
 		
@@ -118,8 +115,7 @@ public class Asteroid extends Sprite {
 		this.nSpin = nSpin;
 	}
 	
-	//this is for an asteroid only
-	//todo use cartesian coordiantes and assign the pntCoords, and nothing else.
+
 	  public void assignRandomShape ()
 	  {
 	    int nSide = Game.R.nextInt( 7 ) + 7;

@@ -25,7 +25,7 @@ public Bullet(Falcon fal){
 		pntCs.add(new Point(0,-2));
 		pntCs.add(new Point(-1,-1));
 
-		setObjectPoints(pntCs);
+
 
 		//a bullet expires after 20 frames
 	    setExpire( 20 );
@@ -41,6 +41,7 @@ public Bullet(Falcon fal){
 
 	    //set the bullet orientation to the falcon (ship) orientation
 	    setOrientation(fal.getOrientation());
+	    setObjectPoints(pntCs);
 
 
 	}

@@ -27,8 +27,7 @@ public class Falcon extends Sprite {
 	
 	private int nShield;
 			
-	private final double[] FLAME = { 23 * Math.PI / 24 + Math.PI / 2,
-			Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2 };
+	private final double[] FLAME = { 23 * Math.PI / 24 + Math.PI / 2, Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2 };
 
 	private int[] nXFlames = new int[FLAME.length];
 	private int[] nYFlames = new int[FLAME.length];
@@ -88,7 +87,7 @@ public class Falcon extends Sprite {
 		pntCs.add(new Point(1,6));
 		pntCs.add(new Point(0,9));
 
-		setObjectPoints(pntCs);
+
 
 		setColor(Color.white);
 		
@@ -104,6 +103,7 @@ public class Falcon extends Sprite {
 		//these are falcon specific
 		setProtected(true);
 		setFadeValue(0);
+		setObjectPoints(pntCs);
 	}
 	
 	

@@ -232,10 +232,16 @@ public abstract class Sprite implements Movable {
 			//int x = (int) (Math.round(lengths[nC] * Math.cos(angleInRadians) * 100f) / 100f);
 			//int y = (int) (Math.round(lengths[nC] * Math.sin(angleInRadians) * 100f) / 100f);
 			//double theta = rOutOfOne[nC]* getRadius();
-			double x = (rOutOfOne[nC] * 30) * Math.cos(radians[nC]);
-			double y = (rOutOfOne[nC] * 30) * Math.sin(radians[nC]);
+//			double x = (rOutOfOne[nC] * getRadius()) * Math.cos(Math.toDegrees(radians[nC]));
+//			double y = (rOutOfOne[nC] * getRadius()) * Math.sin(Math.toDegrees(radians[nC]));
 			//double[] vals = new double[]{radians[nC] * Math.cos(theta), radians[nC] * Math.sin(theta)};
-			pnts[nC] = new Point((int)x,(int)y);
+			pnts[nC] = 		 new Point((int) (getCenter().x + 2
+					* getRadius()
+					* Math.sin(Math.toRadians(getOrientation())
+					+ radians[nC])), (int) (getCenter().y - 2
+					* getRadius()
+					* Math.cos(Math.toRadians(getOrientation())
+					+ radians[nC])));
 		}
 		return pnts;
 		
