@@ -13,20 +13,13 @@ public abstract class Sprite implements Movable {
 	private double deltaX, deltaY;
 	//every sprite needs to know about the size of the gaming environ
 
-	/*
-	todo this is redundant
-	 */
-	//private Dimension dim; //dim of the gaming environment
-
-	//we need to know what team we're on
-	//todo rename all members and strip out the "m" or "n" or "d"
-	private Team mTeam;
+	private Team team;
 
 	//the radius of circumscibing circle
-	private int nRadius;
+	private int rad;
 
-	private int nOrientation;
-	private int nExpiry; //natural mortality (short-living objects)
+	private int orientation;
+	private int expiry; //natural mortality (short-living objects)
 	//the color of this sprite
 	private Color col;
 
@@ -60,12 +53,12 @@ public abstract class Sprite implements Movable {
 	@Override
 	public Team getTeam() {
 		//default
-	  return mTeam;
+	  return team;
 
 	}
 
 	public void setTeam(Team team){
-		mTeam = team;
+		this.team = team;
 	}
 
 	public void move() {
@@ -104,7 +97,7 @@ public abstract class Sprite implements Movable {
 	}
 
 	public void setExpire(int n) {
-		nExpiry = n;
+		expiry = n;
 
 	}
 
@@ -140,15 +133,15 @@ public abstract class Sprite implements Movable {
 
 	//todo possible candidate for Movable interface
 	public int getExpire() {
-		return nExpiry;
+		return expiry;
 	}
 
 	public int getOrientation() {
-		return nOrientation;
+		return orientation;
 	}
 
 	public void setOrientation(int n) {
-		nOrientation = n;
+		orientation = n;
 	}
 
 	public void setDeltaX(double dSet) {
@@ -168,11 +161,11 @@ public abstract class Sprite implements Movable {
 	}
 
 	public int getRadius() {
-		return nRadius;
+		return rad;
 	}
 
 	public void setRadius(int n) {
-		nRadius = n;
+		rad = n;
 
 	}
 
