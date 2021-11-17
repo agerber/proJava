@@ -60,25 +60,23 @@ public class Asteroid extends Sprite {
 		//call Sprite constructor
 		super();
 		setTeam(Team.FOE);
-		int  nSizeNew =	astExploded.getSize() + 1;
-
+		int  newSmallerSize =	astExploded.getSize() + 1;
 
 		//the spin will be either plus or minus 0-9
 		setSpin(somePosNegValue(10));
 
-		//random delta-x
-		setDeltaX(somePosNegValue(10 + nSizeNew * 2));
+		//random delta-x - the smaller the asteroid the faster its possible speed
+		setDeltaX(somePosNegValue(10 + newSmallerSize * 2));
 
-		//random delta-y
-		setDeltaY(somePosNegValue(10 + nSizeNew * 2));
+		//random delta-y - the smaller the asteroid the faster its possible speed
+		setDeltaY(somePosNegValue(10 + newSmallerSize * 2));
 
-		//todo redundant
 		assignRandomShape();
 		
 		//an nSize of zero is a big asteroid
 		//a nSize of 1 or 2 is med or small asteroid respectively
 
-		setRadius(RAD/(nSizeNew * 2));
+		setRadius(RAD/(newSmallerSize * 2));
 		setCenter(astExploded.getCenter());
 		
 		
@@ -141,13 +139,16 @@ public class Asteroid extends Sprite {
 
 	    Arrays.sort( nSides );
 
+
+
 	    double[]  dDegrees = new double[nSidesTemp];
 	    for ( int nC = 0; nC <dDegrees.length; nC++ )
 	    {
 	    	dDegrees[nC] = nSides[nC] * Math.PI / 24 + Math.PI / 2;
 	    }
-	   setDegrees( dDegrees);
-	   
+
+	   //setDegrees( dDegrees);
+
 		double[] dLengths = new double[dDegrees.length];
 			for (int nC = 0; nC < dDegrees.length; nC++) {
 				if(nC %3 == 0)
@@ -155,7 +156,8 @@ public class Asteroid extends Sprite {
 				else
 					dLengths[nC] = 1;
 			}
-		setLengths(dLengths);
+		//setLengths(dLengths);
+		polarToCartesian(dDegrees, dLengths);
 
 	  }
 

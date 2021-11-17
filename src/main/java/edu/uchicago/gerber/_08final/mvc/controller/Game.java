@@ -425,12 +425,7 @@ public class Game implements Runnable, KeyListener {
 				Sound.playSound("laser.wav");
 				break;
 				
-			//special is a special weapon, current it just fires the cruise missile. 
-			case SPECIAL:
-				CommandCenter.getInstance().getOpsList().enqueue(new Cruise(fal), CollisionOp.Operation.ADD);
-				//Sound.playSound("laser.wav");
-				break;
-				
+
 			case LEFT:
 				fal.stopRotating();
 				break;

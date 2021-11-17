@@ -25,7 +25,7 @@ public Bullet(Falcon fal){
 		pntCs.add(new Point(0,-2));
 		pntCs.add(new Point(-1,-1));
 
-		assignPolarPoints(pntCs);
+		setObjectPoints(pntCs);
 
 		//a bullet expires after 20 frames
 	    setExpire( 20 );

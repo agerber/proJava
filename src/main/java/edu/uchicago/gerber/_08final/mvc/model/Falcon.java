@@ -4,6 +4,7 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Falcon extends Sprite {
@@ -87,8 +88,7 @@ public class Falcon extends Sprite {
 		pntCs.add(new Point(1,6));
 		pntCs.add(new Point(0,9));
 
-		//todo redundant
-		assignPolarPoints(pntCs);
+		setObjectPoints(pntCs);
 
 		setColor(Color.white);
 		
@@ -241,7 +241,13 @@ public class Falcon extends Sprite {
 	public void drawShipWithColor(Graphics g, Color col) {
 		super.draw(g);
 		g.setColor(col);
-		g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+
+		g.drawPolygon(
+				convertStreamToArray(Arrays.stream(getObjectPoints()).map(pnt -> (int) pnt.getX())),
+				convertStreamToArray(Arrays.stream(getObjectPoints()).map(pnt -> (int) pnt.getY())),
+				getObjectPoints().length);
+
+		//g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
 	}
 
 

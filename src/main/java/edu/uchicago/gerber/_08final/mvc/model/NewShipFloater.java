@@ -4,6 +4,8 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class NewShipFloater extends Sprite {
 
@@ -14,7 +16,7 @@ public class NewShipFloater extends Sprite {
 
 		super();
 		setTeam(Team.FLOATER);
-		ArrayList<Point> pntCs = new ArrayList<Point>();
+		List<Point> pntCs = new ArrayList<Point>();
 		// top of ship
 		pntCs.add(new Point(5, 5));
 		pntCs.add(new Point(4,0));
@@ -25,8 +27,10 @@ public class NewShipFloater extends Sprite {
 		pntCs.add(new Point(-5, 5));
 		pntCs.add(new Point(0,4));
 
+		setObjectPoints(pntCs);
+
 		//todo redundant
-		assignPolarPoints(pntCs);
+		//assignPolarPoints(pntCs);
 
 		setExpire(250);
 		setRadius(50);
@@ -92,12 +96,18 @@ public class NewShipFloater extends Sprite {
 	@Override
 	public void draw(Graphics g) {
 		super.draw(g);
-		//fill this polygon (with whatever color it has)
-		//todo use the pntCoords to fill polygon. ditto below.
-		g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
+
+		g.fillPolygon(
+				convertStreamToArray(Arrays.stream(getObjectPoints()).map(pnt -> (int) pnt.getX())),
+				convertStreamToArray(Arrays.stream(getObjectPoints()).map(pnt -> (int) pnt.getY())),
+				getObjectPoints().length);
+
 		//now draw a white border
 		g.setColor(Color.WHITE);
-		g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+		g.drawPolygon(
+				convertStreamToArray(Arrays.stream(getObjectPoints()).map(pnt -> (int) pnt.getX())),
+				convertStreamToArray(Arrays.stream(getObjectPoints()).map(pnt -> (int) pnt.getY())),
+				getObjectPoints().length);
 	}
 
 }
