@@ -94,8 +94,8 @@ public class GamePanel extends Panel {
 					(ArrayList<Movable>)  CommandCenter.getInstance().getMovFloaters(),
 					(ArrayList<Movable>)  CommandCenter.getInstance().getMovDebris());
 
-
-			drawNumberShipsLeft(grpOff);
+			//todo revisit this method
+			//drawNumberShipsLeft(grpOff);
 			if (CommandCenter.getInstance().isGameOver()) {
 				CommandCenter.getInstance().setPlaying(false);
 				//bPlaying = false;
@@ -117,6 +117,7 @@ public class GamePanel extends Panel {
 				mov.move();
 				mov.draw(g);
 
+
 			}
 		}
 		
@@ -124,34 +125,34 @@ public class GamePanel extends Panel {
 	
 
 	// Draw the number of falcons left on the bottom-right of the screen. 
-	private void drawNumberShipsLeft(Graphics g) {
-		Falcon fal = CommandCenter.getInstance().getFalcon();
-		double[] dLens = fal.getLengths();
-		int nLen = fal.getDegrees().length;
-		Point[] pntMs = new Point[nLen];
-		int[] nXs = new int[nLen];
-		int[] nYs = new int[nLen];
-	
-		//convert to cartesean points
-		for (int nC = 0; nC < nLen; nC++) {
-			pntMs[nC] = new Point((int) (10 * dLens[nC] * Math.sin(Math
-					.toRadians(90) + fal.getDegrees()[nC])),
-					(int) (10 * dLens[nC] * Math.cos(Math.toRadians(90)
-							+ fal.getDegrees()[nC])));
-		}
-		
-		//set the color to white
-		g.setColor(Color.white);
-		//for each falcon left (not including the one that is playing)
-		for (int nD = 1; nD < CommandCenter.getInstance().getNumFalcons(); nD++) {
-			//create x and y values for the objects to the bottom right using cartesean points again
-			for (int nC = 0; nC < fal.getDegrees().length; nC++) {
-				nXs[nC] = pntMs[nC].x + Game.DIM.width - (20 * nD);
-				nYs[nC] = pntMs[nC].y + Game.DIM.height - 40;
-			}
-			g.drawPolygon(nXs, nYs, nLen);
-		} 
-	}
+//	private void drawNumberShipsLeft(Graphics g) {
+//		Falcon fal = CommandCenter.getInstance().getFalcon();
+//		double[] dLens = fal.getLengths();
+//		int nLen = fal.getDegrees().length;
+//		Point[] pntMs = new Point[nLen];
+//		int[] nXs = new int[nLen];
+//		int[] nYs = new int[nLen];
+//
+//		//convert to cartesean points
+//		for (int nC = 0; nC < nLen; nC++) {
+//			pntMs[nC] = new Point((int) (10 * dLens[nC] * Math.sin(Math
+//					.toRadians(90) + fal.getDegrees()[nC])),
+//					(int) (10 * dLens[nC] * Math.cos(Math.toRadians(90)
+//							+ fal.getDegrees()[nC])));
+//		}
+//
+//		//set the color to white
+//		g.setColor(Color.white);
+//		//for each falcon left (not including the one that is playing)
+//		for (int nD = 1; nD < CommandCenter.getInstance().getNumFalcons(); nD++) {
+//			//create x and y values for the objects to the bottom right using cartesean points again
+//			for (int nC = 0; nC < fal.getDegrees().length; nC++) {
+//				nXs[nC] = pntMs[nC].x + Game.DIM.width - (20 * nD);
+//				nYs[nC] = pntMs[nC].y + Game.DIM.height - 40;
+//			}
+//			g.drawPolygon(nXs, nYs, nLen);
+//		}
+//	}
 	
 	private void initView() {
 		Graphics g = getGraphics();			// get the graphics context for the panel

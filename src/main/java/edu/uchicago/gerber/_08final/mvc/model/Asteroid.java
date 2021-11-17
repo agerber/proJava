@@ -157,7 +157,7 @@ public class Asteroid extends Sprite {
 					dLengths[nC] = 1;
 			}
 		//setLengths(dLengths);
-		polarToCartesian(dDegrees, dLengths);
+		setObjectPoints(polarToCartesian(dDegrees, dLengths));
 
 	  }
 
