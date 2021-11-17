@@ -351,10 +351,57 @@ public abstract class Sprite implements Movable {
         g.setColor(getColor());
        // g.drawPolygon(new int[]{5,3,6},  new int[]{8,7,9}, 3);
         //Arrays.stream(pntCoords).map(pnt -> pnt.getX()).collect(Collectors.toList()).toArray()
-        g.drawPolygon(
-				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getX() + getCenter().x)),
-				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getY() + getCenter().y)),
-				pntCoords.length);
+
+		Point[] adjPoints = new Point[getObjectPoints().length];
+		double[] radians = convertToPolarDegs(Arrays.asList(getObjectPoints()));
+		int[] nXFlames = new int[getObjectPoints().length];
+		int[] nYFlames = new int[getObjectPoints().length];
+
+
+		for (int nC = 0; nC < getObjectPoints().length; nC++) {
+			if (nC % 2 != 0) //odd
+			{
+				adjPoints[nC] = new Point((int) (getCenter().x + 2
+						* getRadius()
+						* Math.sin(Math.toRadians(getOrientation())
+						+ radians[nC])), (int) (getCenter().y - 2
+						* getRadius()
+						* Math.cos(Math.toRadians(getOrientation())
+						+ radians[nC])));
+
+			} else //even
+			{
+				adjPoints[nC] = new Point((int) (getCenter().x + getRadius()
+						* 1.1
+						* Math.sin(Math.toRadians(getOrientation())
+						+ radians[nC])),
+						(int) (getCenter().y - getRadius()
+								* 1.1
+								* Math.cos(Math.toRadians(getOrientation())
+								+ radians[nC])));
+
+			} //end even/odd else
+
+		} //end for loop
+
+		for (int nC = 0; nC < radians.length; nC++) {
+			nXFlames[nC] = adjPoints[nC].x;
+			nYFlames[nC] = adjPoints[nC].y;
+
+		} //end assign flame points
+
+		//g.setColor( Color.white );
+		g.drawPolygon(nXFlames, nYFlames, getObjectPoints().length);
+
+
+
+
+
+
+//        g.drawPolygon(
+//				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getX() + getCenter().x)),
+//				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getY() + getCenter().y)),
+//				pntCoords.length);
 
 //		g.drawPolygon(
 //				convertToPolarDegs(Arrays.asList(pntCoords)),
