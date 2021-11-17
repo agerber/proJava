@@ -2,6 +2,7 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Bullet extends Sprite {
@@ -16,7 +17,7 @@ public Bullet(Falcon fal){
 	    setTeam(Team.FRIEND);
 		
 		//defined the points on a cartesean grid
-		ArrayList<Point> pntCs = new ArrayList<Point>();
+		List<Point> pntCs = new ArrayList<Point>();
 		
 		pntCs.add(new Point(0,3)); //top point
 		

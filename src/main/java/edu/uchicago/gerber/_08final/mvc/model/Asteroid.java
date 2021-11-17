@@ -23,25 +23,17 @@ public class Asteroid extends Sprite {
 		super();
 
 		setTeam(Team.FOE);
-		
+
 		//the spin will be either plus or minus 0-9
-		int nSpin = Game.R.nextInt(10);
-		if(nSpin %2 ==0)
-			nSpin = -nSpin;
-		setSpin(nSpin);
-			
+		setSpin(somePosNegValue(10));
+
 		//random delta-x
-		int nDX = Game.R.nextInt(10);
-		if(nDX %2 ==0)
-			nDX = -nDX;
-		setDeltaX(nDX);
-		
+		setDeltaX(somePosNegValue(10));
+
 		//random delta-y
-		int nDY = Game.R.nextInt(10);
-		if(nDY %2 ==0)
-			nDY = -nDY;
-		setDeltaY(nDY);
-			
+		setDeltaY(somePosNegValue(10));
+
+		//todo redundant
 		assignRandomShape();
 		
 		//an nSize of zero is a big asteroid
@@ -53,10 +45,15 @@ public class Asteroid extends Sprite {
 		
 
 	}
-	
 
-	
-	
+	private int somePosNegValue(int seed) {
+		int randomNumber = Game.R.nextInt(seed);
+		if (randomNumber % 2 == 0)
+			randomNumber = -randomNumber;
+		return randomNumber;
+	}
+
+
 	public Asteroid(Asteroid astExploded){
 	
 
@@ -64,26 +61,18 @@ public class Asteroid extends Sprite {
 		super();
 		setTeam(Team.FOE);
 		int  nSizeNew =	astExploded.getSize() + 1;
-		
-		
+
+
 		//the spin will be either plus or minus 0-9
-		int nSpin = Game.R.nextInt(10);
-		if(nSpin %2 ==0)
-			nSpin = -nSpin;
-		setSpin(nSpin);
-			
+		setSpin(somePosNegValue(10));
+
 		//random delta-x
-		int nDX = Game.R.nextInt(10 + nSizeNew*2);
-		if(nDX %2 ==0)
-			nDX = -nDX;
-		setDeltaX(nDX);
-		
+		setDeltaX(somePosNegValue(10 + nSizeNew * 2));
+
 		//random delta-y
-		int nDY = Game.R.nextInt(10+ nSizeNew*2);
-		if(nDY %2 ==0)
-			nDY = -nDY;
-		setDeltaY(nDY);
-			
+		setDeltaY(somePosNegValue(10 + nSizeNew * 2));
+
+		//todo redundant
 		assignRandomShape();
 		
 		//an nSize of zero is a big asteroid
@@ -98,22 +87,17 @@ public class Asteroid extends Sprite {
 	}
 
 	public int getSize(){
-		
-		int nReturn = 0;
-		
+
 		switch (getRadius()) {
 			case 100:
-				nReturn= 0;
-				break;
+				return 0;
 			case 50:
-				nReturn= 1;
-				break;
+				return 1;
 			case 25:
-				nReturn= 2;
-				break;
+				return 2;
+			default:
+				return 0;
 		}
-		return nReturn;
-		
 	}
 
 
@@ -126,6 +110,7 @@ public class Asteroid extends Sprite {
 		
 	}
 
+	//todo use Lombok for getters/setters
 	public int getSpin() {
 		return this.nSpin;
 	}

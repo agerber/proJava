@@ -4,18 +4,19 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Sprite implements Movable {
 	//the center-point of this sprite
 	private Point pntCenter;
 	//this causes movement; change in x and change in y
-	private double dDeltaX, dDeltaY;
+	private double deltaX, deltaY;
 	//every sprite needs to know about the size of the gaming environ
 
 	/*
 	todo this is redundant
 	 */
-	private Dimension dim; //dim of the gaming environment
+	//private Dimension dim; //dim of the gaming environment
 
 	//we need to know what team we're on
 	//todo rename all members and strip out the "m" or "n" or "d"
@@ -74,16 +75,16 @@ public abstract class Sprite implements Movable {
 		double dY = pnt.y + getDeltaY();
 		
 		//this just keeps the sprite inside the bounds of the frame
-		if (pnt.x > getDim().width) {
+		if (pnt.x > Game.DIM.width) {
 			setCenter(new Point(1, pnt.y));
 
 		} else if (pnt.x < 0) {
-			setCenter(new Point(getDim().width - 1, pnt.y));
-		} else if (pnt.y > getDim().height) {
+			setCenter(new Point(Game.DIM.width - 1, pnt.y));
+		} else if (pnt.y > Game.DIM.height) {
 			setCenter(new Point(pnt.x, 1));
 
 		} else if (pnt.y < 0) {
-			setCenter(new Point(pnt.x, getDim().height - 1));
+			setCenter(new Point(pnt.x, Game.DIM.height - 1));
 		} else {
 
 			setCenter(new Point((int) dX, (int) dY));
@@ -94,7 +95,7 @@ public abstract class Sprite implements Movable {
 	public Sprite() {
 
 	//you can override this and many more in the subclasses
-		setDim(Game.DIM); // todo this is redundant, just use the Game.DIM
+
 		setColor(Color.white);
 		setCenter(new Point(Game.R.nextInt(Game.DIM.width),
 				Game.R.nextInt(Game.DIM.height)));
@@ -151,19 +152,19 @@ public abstract class Sprite implements Movable {
 	}
 
 	public void setDeltaX(double dSet) {
-		dDeltaX = dSet;
+		deltaX = dSet;
 	}
 
 	public void setDeltaY(double dSet) {
-		dDeltaY = dSet;
+		deltaY = dSet;
 	}
 
 	public double getDeltaY() {
-		return dDeltaY;
+		return deltaY;
 	}
 
 	public double getDeltaX() {
-		return dDeltaX;
+		return deltaX;
 	}
 
 	public int getRadius() {
@@ -175,14 +176,6 @@ public abstract class Sprite implements Movable {
 
 	}
 
-	//todo just use the Game.DIM, no need for member here.
-	public Dimension getDim() {
-		return dim;
-	}
-
-	public void setDim(Dimension dim) {
-		this.dim = dim;
-	}
 
 	public Point getCenter() {
 		return pntCenter;
@@ -238,7 +231,7 @@ public abstract class Sprite implements Movable {
 	//since it's much easier to describe a sprite as a list of cartesean points
 	//sprites (except Asteroid) should use the cartesean technique to describe the coordinates
 	//see Falcon or Bullet constructor for examples
-	protected double[] convertToPolarDegs(ArrayList<Point> pntPoints) {
+	protected double[] convertToPolarDegs(List<Point> pntPoints) {
 
 	   double[] dDegs = new double[pntPoints.size()];
 
@@ -249,7 +242,7 @@ public abstract class Sprite implements Movable {
 		return dDegs;
 	}
 	//utility function to convert to polar
-	protected double[] convertToPolarLens(ArrayList<Point> pntPoints) {
+	protected double[] convertToPolarLens(List<Point> pntPoints) {
 
 		double[] dLens = new double[pntPoints.size()];
 
@@ -276,7 +269,7 @@ public abstract class Sprite implements Movable {
 
 	}
 
-	protected void assignPolarPoints(ArrayList<Point> pntCs) {
+	protected void assignPolarPoints(List<Point> pntCs) {
 		setDegrees(convertToPolarDegs(pntCs));
 		setLengths(convertToPolarLens(pntCs));
 

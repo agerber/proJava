@@ -9,6 +9,8 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class GameOpsList extends LinkedList {
 
+    //this data structure is in contention by the "Event Dispatch" thread aka main-swing-thread, and the animation
+    // thread. We must restrict access to it by one thread at a time by using a Lock.
     private ReentrantLock lock;
 
     public GameOpsList() {
@@ -16,6 +18,7 @@ public class GameOpsList extends LinkedList {
     }
 
     public void enqueue(Movable mov, CollisionOp.Operation operation) {
+
 
        try {
             lock.lock();
