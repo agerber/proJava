@@ -371,12 +371,12 @@ public abstract class Sprite implements Movable {
 
 			} else //even
 			{
-				adjPoints[nC] = new Point((int) (getCenter().x + getRadius()
-						* 1.1
+				adjPoints[nC] = new Point((int) (getCenter().x + 2* getRadius()
+
 						* Math.sin(Math.toRadians(getOrientation())
 						+ radians[nC])),
-						(int) (getCenter().y - getRadius()
-								* 1.1
+						(int) (getCenter().y - 2* getRadius()
+
 								* Math.cos(Math.toRadians(getOrientation())
 								+ radians[nC])));
 
