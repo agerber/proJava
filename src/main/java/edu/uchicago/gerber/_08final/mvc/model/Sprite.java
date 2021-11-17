@@ -246,10 +246,13 @@ public abstract class Sprite implements Movable {
 
 			if (nC % 2 != 0) //odd
 			{
-				pnts[nC] = new Point((int) (getCenter().x + 2
-						* getRadius()
+				pnts[nC] = new Point(
+
+						(int) (getCenter().x + 2 * getRadius()
 						* Math.sin(Math.toRadians(getOrientation())
-						+ radians[nC])), (int) (getCenter().y - 2
+						+ radians[nC])),
+
+						(int) (getCenter().y - 2
 						* getRadius()
 						* Math.cos(Math.toRadians(getOrientation())
 						+ radians[nC])));
@@ -257,11 +260,12 @@ public abstract class Sprite implements Movable {
 			} else //even
 			{
 				pnts[nC] = new Point((int) (getCenter().x + getRadius()
-						* 1.1
+						//* 1.1
 						* Math.sin(Math.toRadians(getOrientation())
 						+ radians[nC])),
+
 						(int) (getCenter().y - getRadius()
-								* 1.1
+								//* 1.1
 								* Math.cos(Math.toRadians(getOrientation())
 								+ radians[nC])));
 
