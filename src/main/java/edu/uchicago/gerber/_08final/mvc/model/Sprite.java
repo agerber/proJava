@@ -221,14 +221,21 @@ public abstract class Sprite implements Movable {
 		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
 	}
 
-	protected Point[] polarToCartesian(double[] degrees, double[] lengths){
+	protected Point[] polarToCartesian(double[] radians, double[] rOutOfOne){
 
-		Point[] pnts = new Point[degrees.length];
-		for (int nC = 0; nC < degrees.length; nC++) {
-			double angleInRadians = Math.toRadians(degrees[nC]);
-			int x = (int) (Math.round(lengths[nC] * Math.cos(angleInRadians) * 100f) / 100f);
-			int y = (int) (Math.round(lengths[nC] * Math.sin(angleInRadians) * 100f) / 100f);
-			pnts[nC] = new Point(x,y);
+
+
+		Point[] pnts = new Point[radians.length];
+		for (int nC = 0; nC < radians.length; nC++) {
+			//double rRadius = rOutOfOne[nC] * getRadius();
+		//	double angleInRadians = Math.toRadians(degrees[nC]);
+			//int x = (int) (Math.round(lengths[nC] * Math.cos(angleInRadians) * 100f) / 100f);
+			//int y = (int) (Math.round(lengths[nC] * Math.sin(angleInRadians) * 100f) / 100f);
+			//double theta = rOutOfOne[nC]* getRadius();
+			double x = (rOutOfOne[nC] * 30) * Math.cos(radians[nC]);
+			double y = (rOutOfOne[nC] * 30) * Math.sin(radians[nC]);
+			//double[] vals = new double[]{radians[nC] * Math.cos(theta), radians[nC] * Math.sin(theta)};
+			pnts[nC] = new Point((int)x,(int)y);
 		}
 		return pnts;
 		
@@ -307,6 +314,7 @@ public abstract class Sprite implements Movable {
 //        }
 
         g.setColor(getColor());
+       // g.drawPolygon(new int[]{5,3,6},  new int[]{8,7,9}, 3);
         //Arrays.stream(pntCoords).map(pnt -> pnt.getX()).collect(Collectors.toList()).toArray()
         g.drawPolygon(
 				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getX())),
