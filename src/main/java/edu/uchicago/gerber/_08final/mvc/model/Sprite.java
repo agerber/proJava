@@ -228,20 +228,45 @@ public abstract class Sprite implements Movable {
 		Point[] pnts = new Point[radians.length];
 		for (int nC = 0; nC < radians.length; nC++) {
 			//double rRadius = rOutOfOne[nC] * getRadius();
-		//	double angleInRadians = Math.toRadians(degrees[nC]);
+			//	double angleInRadians = Math.toRadians(degrees[nC]);
 			//int x = (int) (Math.round(lengths[nC] * Math.cos(angleInRadians) * 100f) / 100f);
 			//int y = (int) (Math.round(lengths[nC] * Math.sin(angleInRadians) * 100f) / 100f);
 			//double theta = rOutOfOne[nC]* getRadius();
 //			double x = (rOutOfOne[nC] * getRadius()) * Math.cos(Math.toDegrees(radians[nC]));
 //			double y = (rOutOfOne[nC] * getRadius()) * Math.sin(Math.toDegrees(radians[nC]));
 			//double[] vals = new double[]{radians[nC] * Math.cos(theta), radians[nC] * Math.sin(theta)};
-			pnts[nC] = 		 new Point((int) (getCenter().x + 2
-					* getRadius()
-					* Math.sin(Math.toRadians(getOrientation())
-					+ radians[nC])), (int) (getCenter().y - 2
-					* getRadius()
-					* Math.cos(Math.toRadians(getOrientation())
-					+ radians[nC])));
+//			pnts[nC] = 		 new Point((int) (getCenter().x + 2
+//					* getRadius()
+//					* Math.sin(Math.toRadians(getOrientation())
+//					+ radians[nC])), (int) (getCenter().y - 2
+//					* getRadius()
+//					* Math.cos(Math.toRadians(getOrientation())
+//					+ radians[nC])));
+
+
+			if (nC % 2 != 0) //odd
+			{
+				pnts[nC] = new Point((int) (getCenter().x + 2
+						* getRadius()
+						* Math.sin(Math.toRadians(getOrientation())
+						+ radians[nC])), (int) (getCenter().y - 2
+						* getRadius()
+						* Math.cos(Math.toRadians(getOrientation())
+						+ radians[nC])));
+
+			} else //even
+			{
+				pnts[nC] = new Point((int) (getCenter().x + getRadius()
+						* 1.1
+						* Math.sin(Math.toRadians(getOrientation())
+						+ radians[nC])),
+						(int) (getCenter().y - getRadius()
+								* 1.1
+								* Math.cos(Math.toRadians(getOrientation())
+								+ radians[nC])));
+
+
+			}
 		}
 		return pnts;
 		
@@ -323,9 +348,14 @@ public abstract class Sprite implements Movable {
        // g.drawPolygon(new int[]{5,3,6},  new int[]{8,7,9}, 3);
         //Arrays.stream(pntCoords).map(pnt -> pnt.getX()).collect(Collectors.toList()).toArray()
         g.drawPolygon(
-				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getX())),
-				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getY())),
+				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getX() + getCenter().x)),
+				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getY() + getCenter().y)),
 				pntCoords.length);
+
+//		g.drawPolygon(
+//				convertToPolarDegs(Arrays.asList(pntCoords)),
+//				convertToPolarLens(Arrays.asList(pntCoords)),
+//				pntCoords.length);
     }
 
 	protected int[] convertStreamToArray(Stream<Integer> stream) {
