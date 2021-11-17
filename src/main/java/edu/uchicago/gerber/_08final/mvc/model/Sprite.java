@@ -361,21 +361,19 @@ public abstract class Sprite implements Movable {
 		for (int nC = 0; nC < getObjectPoints().length; nC++) {
 			if (nC % 2 != 0) //odd
 			{
-				adjPoints[nC] = new Point((int) (getCenter().x + 2
-						* getRadius()
+				adjPoints[nC] = new Point((int) (getCenter().x +  getRadius()
 						* Math.sin(Math.toRadians(getOrientation())
-						+ radians[nC])), (int) (getCenter().y - 2
-						* getRadius()
+						+ radians[nC])), (int) (getCenter().y -  getRadius()
 						* Math.cos(Math.toRadians(getOrientation())
 						+ radians[nC])));
 
 			} else //even
 			{
-				adjPoints[nC] = new Point((int) (getCenter().x + 2* getRadius()
+				adjPoints[nC] = new Point((int) (getCenter().x + getRadius()
 
 						* Math.sin(Math.toRadians(getOrientation())
 						+ radians[nC])),
-						(int) (getCenter().y - 2* getRadius()
+						(int) (getCenter().y - getRadius()
 
 								* Math.cos(Math.toRadians(getOrientation())
 								+ radians[nC])));
