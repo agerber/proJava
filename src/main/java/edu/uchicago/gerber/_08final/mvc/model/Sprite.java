@@ -354,6 +354,7 @@ public abstract class Sprite implements Movable {
 
 		Point[] adjPoints = new Point[getObjectPoints().length];
 		double[] radians = convertToPolarDegs(Arrays.asList(getObjectPoints()));
+		double[] rads = convertToPolarLens(Arrays.asList(getObjectPoints()));
 		int[] nXFlames = new int[getObjectPoints().length];
 		int[] nYFlames = new int[getObjectPoints().length];
 
@@ -361,19 +362,19 @@ public abstract class Sprite implements Movable {
 		for (int nC = 0; nC < getObjectPoints().length; nC++) {
 			if (nC % 2 != 0) //odd
 			{
-				adjPoints[nC] = new Point((int) (getCenter().x +  getRadius()
+				adjPoints[nC] = new Point((int) (getCenter().x + rads[nC] * getRadius()
 						* Math.sin(Math.toRadians(getOrientation())
-						+ radians[nC])), (int) (getCenter().y -  getRadius()
+						+ radians[nC])), (int) (getCenter().y - rads[nC] * getRadius()
 						* Math.cos(Math.toRadians(getOrientation())
 						+ radians[nC])));
 
 			} else //even
 			{
-				adjPoints[nC] = new Point((int) (getCenter().x + getRadius()
+				adjPoints[nC] = new Point((int) (getCenter().x + rads[nC] * getRadius()
 
 						* Math.sin(Math.toRadians(getOrientation())
 						+ radians[nC])),
-						(int) (getCenter().y - getRadius()
+						(int) (getCenter().y - rads[nC] * getRadius()
 
 								* Math.cos(Math.toRadians(getOrientation())
 								+ radians[nC])));
