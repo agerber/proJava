@@ -18,10 +18,10 @@ public class CommandCenter {
 	private  boolean bPaused;
 	
 	// These ArrayLists with capacities set
-	private List<Movable> movDebris = new ArrayList<Movable>(300);
-	private List<Movable> movFriends = new ArrayList<Movable>(100);
-	private List<Movable> movFoes = new ArrayList<Movable>(200);
-	private List<Movable> movFloaters = new ArrayList<Movable>(50);
+	private List<Movable> movDebris = new ArrayList<Movable>(50);
+	private List<Movable> movFriends = new ArrayList<Movable>(20);
+	private List<Movable> movFoes = new ArrayList<Movable>(20);
+	private List<Movable> movFloaters = new ArrayList<Movable>(5);
 
 	private GameOpsList opsList = new GameOpsList();
 
@@ -46,11 +46,6 @@ public class CommandCenter {
 		setNumFalcons(4);
 		spawnFalcon();
 	}
-	
-	// The parameter is true if this is for the beginning of the game, otherwise false
-	// When you spawn a new falcon, you need to decrement its number
-	/*todo refactor this method so that it takes no params. Instead of checking first, just add one extra
-	 ship initially */
 
 	public  void spawnFalcon() {
 		if (getNumFalcons() != 0) {
