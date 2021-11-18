@@ -209,17 +209,10 @@ public abstract class Sprite implements Movable {
 
 
 		for (Point pnt : pntCartesians) {
-			double len;
-			if (pnt.x == 0 && pnt.y > 0) {
-				len = hypot(pnt.x, pnt.y) / hypotenuse;
-			} else if (pnt.x < 0 && pnt.y > 0) {
-				len = hypot(pnt.x, pnt.y) / hypotenuse;
-			} else {
-				len = hypot(pnt.x, pnt.y) / hypotenuse;
-			}
-
-			polars.add(new Pair(Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180, len));
-
+			polars.add(new Pair(
+					Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180,
+					hypot(pnt.x, pnt.y) / hypotenuse)
+			);
 		}
 		return polars;
 
