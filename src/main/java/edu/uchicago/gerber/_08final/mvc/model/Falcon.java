@@ -50,7 +50,7 @@ public class Falcon extends Sprite {
 		setFadeValue(0);
 
 		//be sure to set cartesian points last.
-		ArrayList<Point> pntCs = new ArrayList<>();
+		List<Point> pntCs = new ArrayList<>();
 		// Robert Alef's awesome falcon design
 		pntCs.add(new Point(0,9));
 		pntCs.add(new Point(-1, 6));
