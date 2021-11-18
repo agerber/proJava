@@ -38,34 +38,20 @@ public class Sound {
 	//for looping wav clips
 	//http://stackoverflow.com/questions/4875080/music-loop-in-java
 	public static Clip clipForLoopFactory(String strPath){
-		
+
 		Clip clp = null;
-		
-		// this line caused the original exceptions
-		
 		try {
-			AudioInputStream aisStream = 
+			AudioInputStream aisStream =
 					  AudioSystem.getAudioInputStream(Sound.class.getResourceAsStream("/sounds/" + strPath));
 			clp = AudioSystem.getClip();
 		    clp.open( aisStream );
-				
-		} catch (UnsupportedAudioFileException exp) {
-			
+
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException exp) {
 			exp.printStackTrace();
-		} catch (IOException exp) {
-			
-			exp.printStackTrace();
-		} catch (LineUnavailableException exp) {
-			
-			exp.printStackTrace();
-			
-		//the next three lines were added to catch all exceptions generated
-		}catch(Exception exp){
-			System.out.println("error");
-		}
-		
+		} //the next three lines were added to catch all exceptions generated
+
 		return clp;
-		
+
 	}
 	
 	
