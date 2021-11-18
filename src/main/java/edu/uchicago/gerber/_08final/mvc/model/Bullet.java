@@ -41,7 +41,7 @@ public Bullet(Falcon fal){
 
 	    //set the bullet orientation to the falcon (ship) orientation
 	    setOrientation(fal.getOrientation());
-	    setObjectPoints(pntCs);
+	    setCartesianPoints(pntCs);
 
 
 	}

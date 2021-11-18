@@ -4,7 +4,6 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class Falcon extends Sprite {
@@ -91,7 +90,7 @@ public class Falcon extends Sprite {
 		setFadeValue(0);
 
 		//be sure to set object points last.
-		setObjectPoints(pntCs);
+		setCartesianPoints(pntCs);
 	}
 
 	@Override

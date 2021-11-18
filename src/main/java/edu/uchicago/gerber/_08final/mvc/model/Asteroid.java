@@ -2,7 +2,6 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -116,7 +115,7 @@ public class Asteroid extends Sprite {
 			  pairs.add(new Pair<>(theta,r));
 		  }
 
-		 setObjectPoints(polarToCartesian(
+		 setCartesianPoints(polarToCartesian(
 
 		 		pairs.stream()
 				 .sorted(new Comparator<Pair<Double, Double>>() {

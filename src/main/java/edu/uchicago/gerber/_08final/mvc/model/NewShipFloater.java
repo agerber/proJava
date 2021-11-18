@@ -4,7 +4,6 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NewShipFloater extends Sprite {
@@ -46,7 +45,7 @@ public class NewShipFloater extends Sprite {
 
 		//random orientation 
 		setOrientation(Game.R.nextInt(360));
-		setObjectPoints(pntCs);
+		setCartesianPoints(pntCs);
 	}
 
 	@Override

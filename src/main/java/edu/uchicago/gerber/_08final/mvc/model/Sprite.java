@@ -7,7 +7,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public abstract class Sprite implements Movable {
 	//the center-point of this sprite
@@ -17,9 +16,8 @@ public abstract class Sprite implements Movable {
 
 	//every sprite has a team: friend, foe, floater, or debris.
 	private Team team;
-
 	//the radius of circumscribing circle
-	private int rad;
+	private int radius;
 
 	private int orientation;
 	private int expiry; //natural mortality (short-living objects)
@@ -145,11 +143,11 @@ public abstract class Sprite implements Movable {
 	}
 
 	public int getRadius() {
-		return rad;
+		return radius;
 	}
 
 	public void setRadius(int n) {
-		rad = n;
+		radius = n;
 
 	}
 
@@ -266,10 +264,10 @@ public abstract class Sprite implements Movable {
 
 	private void render(Graphics g) {
 		//to render this Sprite, we need to adjust the original cartesian coords by calculating the orientation.
-		Point[] adjPoints = new Point[getObjectPoints().length];
-		List<Pair<Double,Double>> polars = convertToPolars(Arrays.asList(getObjectPoints()));
+		Point[] adjPoints = new Point[getCartesianPoints().length];
+		List<Pair<Double,Double>> polars = convertToPolars(Arrays.asList(getCartesianPoints()));
 
-		for (int nC = 0; nC < getObjectPoints().length; nC++) {
+		for (int nC = 0; nC < getCartesianPoints().length; nC++) {
 			if (nC % 2 != 0) //odd
 			{
 				adjPoints[nC] = new Point((int) (getCenter().x + polars.get(nC).getValue() * getRadius()
@@ -306,7 +304,7 @@ public abstract class Sprite implements Movable {
 						.mapToInt(Integer::intValue)
 						.toArray(),
 
-				getObjectPoints().length);
+				getCartesianPoints().length);
 
 		//for debugging center-point. Feel free to remove these two lines.
 		//#########################################
@@ -316,16 +314,15 @@ public abstract class Sprite implements Movable {
 	}
 
 
-	public Point[] getObjectPoints() {
+	public Point[] getCartesianPoints() {
 		return pntCoords;
 	}
 	
-	public void setObjectPoints(Point[] pntPs) {
+	public void setCartesianPoints(Point[] pntPs) {
 		 pntCoords = pntPs;
 	}
 
-	public void setObjectPoints(List<Point> pntPs) {
-
+	public void setCartesianPoints(List<Point> pntPs) {
 		pntCoords = pntPs.stream()
 				.toArray(Point[]::new);
 	}

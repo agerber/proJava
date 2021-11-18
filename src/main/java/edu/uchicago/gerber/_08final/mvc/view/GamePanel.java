@@ -8,7 +8,6 @@ import edu.uchicago.gerber._08final.mvc.model.Movable;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class GamePanel extends Panel {
@@ -139,17 +138,17 @@ public class GamePanel extends Panel {
 		g.setColor(Color.white);
 
 		g.drawPolygon(
-					Arrays.stream(falcon.getObjectPoints())
+					Arrays.stream(falcon.getCartesianPoints())
 							.map(pnt -> pnt.x + Game.DIM.width - (20 * offSet))
 							.mapToInt(Integer::intValue)
 							.toArray(),
 
-					Arrays.stream(falcon.getObjectPoints())
+					Arrays.stream(falcon.getCartesianPoints())
 							.map(pnt -> pnt.y + Game.DIM.height - 40)
 							.mapToInt(Integer::intValue)
 							.toArray(),
 
-					falcon.getObjectPoints().length);
+					falcon.getCartesianPoints().length);
 
 
 
