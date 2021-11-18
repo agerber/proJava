@@ -200,15 +200,10 @@ public class GamePanel extends Panel {
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
 						+ fontHeight + 240);
 
-		strDisplay = "left index finger on 'F' for Guided Missile";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 280);
-
 		strDisplay = "'Numeric-Enter' for Hyperspace";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 320);
+						+ fontHeight + 280);
 	}
 	
 
