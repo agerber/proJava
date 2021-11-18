@@ -50,6 +50,13 @@ public abstract class Sprite implements Movable {
 		this.team = team;
 	}
 
+	protected void expire(){
+		if (getExpire() == 0)
+			CommandCenter.getInstance().getOpsList().enqueue(this, CollisionOp.Operation.REMOVE);
+		else
+			setExpire(getExpire() - 1);
+	}
+
 	public void move() {
 
 		Point pnt = getCenter();

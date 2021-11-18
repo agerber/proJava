@@ -48,13 +48,8 @@ public Bullet(Falcon fal){
 
 	@Override
 	public void move(){
-
+		expire();
 		super.move();
-
-		if (getExpire() == 0)
-			CommandCenter.getInstance().getOpsList().enqueue(this, CollisionOp.Operation.REMOVE);
-		else
-			setExpire(getExpire() - 1);
 
 	}
 

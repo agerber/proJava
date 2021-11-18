@@ -72,12 +72,8 @@ public class NewShipFloater extends Sprite {
 	public void move() {
 		super.move();
 		setOrientation(getOrientation() + getSpin());
+		expire();
 
-		//todo put this  block in the Sprite class.
-		if (getExpire() == 0)
-			CommandCenter.getInstance().getOpsList().enqueue(this, CollisionOp.Operation.REMOVE);
-		else
-			setExpire(getExpire() - 1);
 
 
 	}
