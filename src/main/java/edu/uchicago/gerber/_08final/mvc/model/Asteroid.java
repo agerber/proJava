@@ -12,7 +12,6 @@ import javafx.util.Pair;
 
 public class Asteroid extends Sprite {
 
-
 	//radius of a large asteroid
 	private final int RAD = 100;
 	
@@ -117,14 +116,17 @@ public class Asteroid extends Sprite {
 			  pairs.add(new Pair<>(theta,r));
 		  }
 
-		 setObjectPoints(polarToCartesian( pairs.stream()
+		 setObjectPoints(polarToCartesian(
+
+		 		pairs.stream()
 				 .sorted(new Comparator<Pair<Double, Double>>() {
 					 @Override
 					 public int compare(Pair<Double, Double> p1, Pair<Double, Double> p2) {
 						 return  p1.getKey().compareTo(p2.getKey());
 					 }
 				 })
-				 .collect(Collectors.toList())));
+				 .collect(Collectors.toList()))
+		 );
 
 	  }
 

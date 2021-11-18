@@ -290,14 +290,14 @@ public class Game implements Runnable, KeyListener {
 	
 	private boolean isLevelClear(){
 		//if there are no more Asteroids on the screen
-		boolean bAsteroidFree = true;
+		boolean asteroidFree = true;
 		for (Movable movFoe : CommandCenter.getInstance().getMovFoes()) {
 			if (movFoe instanceof Asteroid){
-				bAsteroidFree = false;
+				asteroidFree = false;
 				break;
 			}
 		}
-		return bAsteroidFree;
+		return asteroidFree;
 	}
 	
 	private void checkNewLevel(){
