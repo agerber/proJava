@@ -18,12 +18,11 @@ public class CommandCenter {
 	private  Falcon falcon;
 	private  boolean playing;
 	private  boolean paused;
-	
-	// These ArrayLists with capacities set
-	private List<Movable> movDebris = new ArrayList<Movable>(50);
-	private List<Movable> movFriends = new ArrayList<Movable>(20);
-	private List<Movable> movFoes = new ArrayList<Movable>(20);
-	private List<Movable> movFloaters = new ArrayList<Movable>(5);
+
+	private List<Movable> movDebris = new ArrayList<>();
+	private List<Movable> movFriends = new ArrayList<>();
+	private List<Movable> movFoes = new ArrayList<>();
+	private List<Movable> movFloaters = new ArrayList<>();
 
 	private GameOpsList opsList = new GameOpsList();
 
