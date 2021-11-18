@@ -108,12 +108,12 @@ public class Asteroid extends Sprite {
 		  //6.283 is the max radians
 		  final int MAX_RADIANS_X1000 =6283;
 
-		  int nSide = Game.R.nextInt( 7 ) + 17;
+		  int sides = Game.R.nextInt( 7 ) + 17;
 		  List<Pair<Double, Double>> pairs = new ArrayList<>();
-		  for ( int nC = 0; nC < nSide; nC++ ){
+		  for ( int nC = 0; nC < sides; nC++ ){
 		  	double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0;
 		  	double r = (800 + Game.R.nextInt(200)) / 1000.0;
-			  pairs.add(new Pair<>(theta,r));
+			pairs.add(new Pair<>(theta,r));
 		  }
 
 		 setCartesianPoints(polarToCartesian(
