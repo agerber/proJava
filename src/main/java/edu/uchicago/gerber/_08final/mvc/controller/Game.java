@@ -119,11 +119,8 @@ public class Game implements Runnable, KeyListener {
 														// this simply controls delay time between 
 														// the frames of the animation
 
-			//this might be a good place to check for collisions
+
 			checkCollisions();
-			//this might be a god place to check if the level is clear (no more foes)
-			//if the level is clear then spawn some big asteroids -- the number of asteroids 
-			//should increase with the level. 
 			checkNewLevel();
 
 			try {
@@ -134,15 +131,12 @@ public class Game implements Runnable, KeyListener {
 				Thread.sleep(Math.max(0,
 						lStartTime - System.currentTimeMillis()));
 			} catch (InterruptedException e) {
-				// just skip this frame -- no big deal
-				continue;
+				// do nothing (bury the exception), and just continue, e.g. skip this frame -- no big deal
 			}
 		} // end while
 	} // end run
 
 	private void checkCollisions() {
-
-
 
 		Point pntFriendCenter, pntFoeCenter;
 		int radFriend, radFoe;
@@ -157,10 +151,6 @@ public class Game implements Runnable, KeyListener {
 
 				//detect collision
 				if (pntFriendCenter.distance(pntFoeCenter) < (radFriend + radFoe)) {
-
-					//todo make protected() a method of the Movable interace. Sprite's protected() will return false,
-					// and Falcon's will return true if the fade calculation is in force, otherwise false.
-					// Then we don't have to do the movFriend instanceof Falcon check.
 
 					//falcon
 					if ((movFriend instanceof Falcon) ){
@@ -186,18 +176,17 @@ public class Game implements Runnable, KeyListener {
 		//check for collisions between falcon and floaters
 		if (CommandCenter.getInstance().getFalcon() != null){
 			Point pntFalCenter = CommandCenter.getInstance().getFalcon().getCenter();
-			//todo refactor the names of these local variables
-			int nFalRadiux = CommandCenter.getInstance().getFalcon().getRadius();
+
+			int radFalcon = CommandCenter.getInstance().getFalcon().getRadius();
 			Point pntFloaterCenter;
-			//todo refactor the names of these local variables
-			int nFloaterRadiux;
+			int radFloater;
 			
 			for (Movable movFloater : CommandCenter.getInstance().getMovFloaters()) {
 				pntFloaterCenter = movFloater.getCenter();
-				nFloaterRadiux = movFloater.getRadius();
+				radFloater = movFloater.getRadius();
 	
 				//detect collision
-				if (pntFalCenter.distance(pntFloaterCenter) < (nFalRadiux + nFloaterRadiux)) {
+				if (pntFalCenter.distance(pntFloaterCenter) < (radFalcon + radFloater)) {
 
 					CommandCenter.getInstance().getOpsList().enqueue(movFloater, CollisionOp.Operation.REMOVE);
 					Sound.playSound("pacman_eatghost.wav");
@@ -285,10 +274,9 @@ public class Game implements Runnable, KeyListener {
 	}
 
 	private void spawnNewShipFloater() {
-		//System.out.println((System.currentTimeMillis() / ANI_DELAY));
-		//make the appearance of power-up dependent upon ticks and levels
-		//the higher the level the more frequent the appearance
-		if ((System.currentTimeMillis() / ANI_DELAY) % (SPAWN_NEW_SHIP_FLOATER - level * 7) == 0) {
+
+		//appears more often as your level increses.
+		if ((System.currentTimeMillis() / ANI_DELAY) % (SPAWN_NEW_SHIP_FLOATER - level * 7L) == 0) {
 			//CommandCenter.getInstance().getMovFloaters().enqueue(new NewShipFloater());
 			CommandCenter.getInstance().getOpsList().enqueue(new NewShipFloater(), CollisionOp.Operation.ADD);
 		}
@@ -301,8 +289,7 @@ public class Game implements Runnable, KeyListener {
 		CommandCenter.getInstance().setLevel(0);
 		CommandCenter.getInstance().setPlaying(true);
 		CommandCenter.getInstance().setPaused(false);
-		//if (!bMuted)
-		   // clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
+
 	}
 
 	//this method spawns new asteroids
@@ -324,10 +311,7 @@ public class Game implements Runnable, KeyListener {
 				break;
 			}
 		}
-		
 		return bAsteroidFree;
-
-		
 	}
 	
 	private void checkNewLevel(){
@@ -335,7 +319,8 @@ public class Game implements Runnable, KeyListener {
 		if (isLevelClear() ){
 			if (CommandCenter.getInstance().getFalcon() !=null)
 				CommandCenter.getInstance().getFalcon().setProtected(true);
-			
+
+			//more asteroids each level to increase difficulty
 			spawnAsteroids(CommandCenter.getInstance().getLevel() + 2);
 			CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);
 

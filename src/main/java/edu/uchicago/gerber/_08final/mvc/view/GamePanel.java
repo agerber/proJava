@@ -7,6 +7,7 @@ import edu.uchicago.gerber._08final.mvc.model.Movable;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class GamePanel extends Panel {
@@ -85,20 +86,16 @@ public class GamePanel extends Panel {
 		
 		//playing and not paused!
 		else {
-			
-			//draw them in decreasing level of importance
-			//friends will be on top layer and debris on the bottom
-			iterateMovables(grpOff,
-					(ArrayList<Movable>)  CommandCenter.getInstance().getMovFriends(),
-					(ArrayList<Movable>)  CommandCenter.getInstance().getMovFoes(),
-					(ArrayList<Movable>)  CommandCenter.getInstance().getMovFloaters(),
-					(ArrayList<Movable>)  CommandCenter.getInstance().getMovDebris());
 
-			//todo revisit this method
-			//drawNumberShipsLeft(grpOff);
+			iterateMovables(grpOff,
+			CommandCenter.getInstance().getMovDebris(),
+			CommandCenter.getInstance().getMovFloaters(),
+			CommandCenter.getInstance().getMovFoes(),
+			CommandCenter.getInstance().getMovFriends());
+
+
 			if (CommandCenter.getInstance().isGameOver()) {
 				CommandCenter.getInstance().setPlaying(false);
-				//bPlaying = false;
 			}
 		}
 		//draw the double-Buffered Image to the graphics context of the panel
@@ -108,10 +105,9 @@ public class GamePanel extends Panel {
 
 	
 	//for each movable array, process it.
-	//todo use List instead of ArrayList
-	private void iterateMovables(Graphics g, ArrayList<Movable>...movMovz){
+	private void iterateMovables(Graphics g, List<Movable>...movMovz){
 		
-		for (ArrayList<Movable> movMovs : movMovz) {
+		for (List<Movable> movMovs : movMovz) {
 			for (Movable mov : movMovs) {
 
 				mov.move();
@@ -210,6 +206,5 @@ public class GamePanel extends Panel {
 						+ nFontHeight + 320);
 	}
 	
-	public GameFrame getFrm() {return this.gmf;}
-	public void setFrm(GameFrame frm) {this.gmf = frm;}	
+
 }
