@@ -17,6 +17,7 @@ public abstract class Sprite implements Movable {
 	//this causes movement; change in x and change in y
 	private double deltaX, deltaY;
 
+	//every sprite has a team: friend, foe, floater, or debris.
 	private Team team;
 
 	//the radius of circumscribing circle
@@ -27,16 +28,6 @@ public abstract class Sprite implements Movable {
 	//the color of this sprite
 	private Color col;
 
-	/*
-	todo we don't need these members, they can be calculated from the cartesian
-	coords.
-	 */
-	//radial coordinates
-	//this game uses radial coordinates to render sprites
-//	public double[] dLengths;
-//	public double[] dDegrees;
-	
-
 	//fade value for fading in and out
 	/*
 	todo use a long instead of nFade, and call it instantiateTime and set it to the
@@ -46,12 +37,6 @@ public abstract class Sprite implements Movable {
 
 	//these are used to draw the polygon. You don't usually need to interface with these
 	private Point[] pntCoords; //an array of points used to draw polygon
-
-	/*
-	todo these are likewise redundant. Use the cartesian pntCoords instead.
-	 */
-//	private int[] nXCoords;
-//	private int[] nYCoords;
 
 
 	@Override
@@ -71,7 +56,7 @@ public abstract class Sprite implements Movable {
 		double newXPos = pnt.x + getDeltaX();
 		double newYPos = pnt.y + getDeltaY();
 		
-		//this just keeps the sprite inside the bounds of the frame
+		//the following code block just keeps the sprite inside the bounds of the frame
 		if (pnt.x > Game.DIM.width) {
 			setCenter(new Point(1, pnt.y));
 
@@ -91,6 +76,7 @@ public abstract class Sprite implements Movable {
 
 	public Sprite() {
 
+		//default sprite color
 		setColor(Color.white);
 		//place the sprite at some random location in the frame at instantiation
 		setCenter(new Point(Game.R.nextInt(Game.DIM.width),
@@ -103,22 +89,6 @@ public abstract class Sprite implements Movable {
 		expiry = n;
 
 	}
-
-//	public double[] getLengths() {
-//		return this.dLengths;
-//	}
-//
-//	public void setLengths(double[] dLengths) {
-//		this.dLengths = dLengths;
-//	}
-//
-//	public double[] getDegrees() {
-//		return this.dDegrees;
-//	}
-//
-//	public void setDegrees(double[] dDegrees) {
-//		this.dDegrees = dDegrees;
-//	}
 
 	public Color getColor() {
 		return col;
@@ -182,59 +152,15 @@ public abstract class Sprite implements Movable {
 	}
 
 
-//	public void setYcoord(int nValue, int nIndex) {
-//		nYCoords[nIndex] = nValue;
-//	}
-//
-//	public void setXcoord(int nValue, int nIndex) {
-//		nXCoords[nIndex] = nValue;
-//	}
-//
-//
-//	public int getYcoord( int nIndex) {
-//		return nYCoords[nIndex];// = nValue;
-//	}
-//
-//	public int getXcoord( int nIndex) {
-//		return nXCoords[nIndex];// = nValue;
-//	}
-//
-//
-//
-//	public int[] getXcoords() {
-//		return nXCoords;
-//	}
-//
-//	public int[] getYcoords() {
-//		return nYCoords;
-//	}
-//
-//
-//	public void setXcoords( int[] nCoords) {
-//		 nXCoords = nCoords;
-//	}
-//
-//	public void setYcoords(int[] nCoords) {
-//		 nYCoords =nCoords;
-//	}
-
 	protected double hypot(double dX, double dY) {
 		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
 	}
 
 	protected Point[] polarToCartesian(List<Pair<Double,Double>> pairs) {
 
-
 		int nC = 0;
 		Point[] pnts = new Point[pairs.size()];
-
-//		int[] nXFlames = new int[pairs.size()];
-//		int[] nYFlames = new int[pairs.size()];
-
-
 		for (Pair<Double, Double> pair : pairs) {
-
-
 			if (nC % 2 != 0) //odd
 			{
 				pnts[nC] = new Point((int) (getCenter().x + pair.getValue() * getRadius() * 100
@@ -245,8 +171,9 @@ public abstract class Sprite implements Movable {
 						* Math.cos(Math.toRadians(getOrientation())
 						+ pair.getKey())));
 
-			} else //even
-			{
+			}
+			//even
+			else {
 				pnts[nC] = new Point(
 						(int) (getCenter().x + pair.getValue() * getRadius() * 100
 
@@ -261,79 +188,13 @@ public abstract class Sprite implements Movable {
 
 			} //end even/odd else
 			nC++;
-
 		} //end for loop
-
-//		for (int nD = 0; nD < pairs.size(); nD++) {
-//			nXFlames[nD] = pnts[nD].x;
-//			nYFlames[nD] = pnts[nD].y;
-//
-//		} //end assign flame points
-
 
 	return pnts;
 			
-			
-			
-			
-			
-			
-			
-			
 
-
-			//double rRadius = rOutOfOne[nC] * getRadius();
-			//	double angleInRadians = Math.toRadians(degrees[nC]);
-			//int x = (int) (Math.round(lengths[nC] * Math.cos(angleInRadians) * 100f) / 100f);
-			//int y = (int) (Math.round(lengths[nC] * Math.sin(angleInRadians) * 100f) / 100f);
-			//double theta = rOutOfOne[nC]* getRadius();
-//			double x = (rOutOfOne[nC] * getRadius()) * Math.cos(Math.toDegrees(pair.getKey()));
-//			double y = (rOutOfOne[nC] * getRadius()) * Math.sin(Math.toDegrees(pair.getKey()));
-			//double[] vals = new double[]{pair.getKey() * Math.cos(theta), pair.getKey() * Math.sin(theta)};
-//			pnts[nC] = 		 new Point((int) (getCenter().x + 2
-//					* getRadius()
-//					* Math.sin(Math.toRadians(getOrientation())
-//					+ pair.getKey())), (int) (getCenter().y - 2
-//					* getRadius()
-//					* Math.cos(Math.toRadians(getOrientation())
-//					+ pair.getKey())));
-
-//
-//			if (nC % 2 != 0) //odd
-//			{
-//				pnts[nC] = new Point(
-//
-//						(int) (getCenter().x + 2 * getRadius()
-//						* Math.sin(Math.toRadians(getOrientation())
-//						+ pair.getValue())),
-//
-//						(int) (getCenter().y - 2
-//						* getRadius()
-//						* Math.cos(Math.toRadians(getOrientation())
-//						+ pair.getKey())));
-//
-//			} else //even
-//			{
-//				pnts[nC] = new Point((int) (getCenter().x + getRadius()
-//						//* 1.1
-//						* Math.sin(Math.toRadians(getOrientation())
-//						+ pair.getValue())),
-//
-//						(int) (getCenter().y - getRadius()
-//								//* 1.1
-//								* Math.cos(Math.toRadians(getOrientation())
-//								+ pair.getKey())));
-//
-//
-//			}
-//			nC++;
-//		}
-
-		
 	}
-	
 
-	//this can be done on the fly, do not assign to members
 	protected double[] convertToPolarDegs(List<Point> pntPoints) {
 
 	   double[] dDegs = new double[pntPoints.size()];
@@ -367,13 +228,13 @@ public abstract class Sprite implements Movable {
 			nC++;
 		}
 
-		// holds <thetas, lens>
 		return dLens;
 
 	}
 
 
 	public void draw(Graphics g, Color color) {
+		//set custom color
 		g.setColor(color);
 		render(g);
 
@@ -381,7 +242,7 @@ public abstract class Sprite implements Movable {
 
 	@Override
     public void draw(Graphics g) {
-
+		//set the native color of the sprite
         g.setColor(getColor());
 		render(g);
 
@@ -389,10 +250,10 @@ public abstract class Sprite implements Movable {
 
 	private void render(Graphics g) {
 		Point[] adjPoints = new Point[getObjectPoints().length];
+
+		//todo no parallel arrays, use Pair<Double,Double>
 		double[] radians = convertToPolarDegs(Arrays.asList(getObjectPoints()));
 		double[] rads = convertToPolarLens(Arrays.asList(getObjectPoints()));
-		int[] nXFlames = new int[getObjectPoints().length];
-		int[] nYFlames = new int[getObjectPoints().length];
 
 
 		for (int nC = 0; nC < getObjectPoints().length; nC++) {
@@ -419,18 +280,26 @@ public abstract class Sprite implements Movable {
 
 		} //end for loop
 
-		for (int nC = 0; nC < radians.length; nC++) {
-			nXFlames[nC] = adjPoints[nC].x;
-			nYFlames[nC] = adjPoints[nC].y;
 
-		} //end assign flame points
 
-		//g.setColor( Color.white );
-		g.drawPolygon(nXFlames, nYFlames, getObjectPoints().length);
+		g.drawPolygon(
+				Arrays.stream(adjPoints)
+						.map(pnt -> pnt.x)
+						.mapToInt(Integer::intValue)
+						.toArray(),
 
-		//for debugging asteroids
+				Arrays.stream(adjPoints)
+						.map(pnt -> pnt.y)
+						.mapToInt(Integer::intValue)
+						.toArray(),
+
+				getObjectPoints().length);
+
+		//for debugging center-point. Feel free to remove these two lines.
+		//#########################################
 		g.setColor(Color.RED);
 		g.fillOval(getCenter().x, getCenter().y, 3,3);
+		//#########################################
 	}
 
 	protected int[] convertStreamToArray(Stream<Integer> stream) {
