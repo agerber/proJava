@@ -326,10 +326,6 @@ public abstract class Sprite implements Movable {
 		pntCoords = pntPs.stream()
 				.toArray(Point[]::new);
 	}
-	
-	public void setObjectPoint(Point pnt, int nIndex) {
-		 pntCoords[nIndex] = pnt;
-	}
 
 	public int getFadeValue() {
 		return fade;
