@@ -89,10 +89,7 @@ public class CommandCenter {
 	}
 	
 	public  boolean isGameOver() {		//if the number of falcons is zero, then game over
-		if (getNumFalcons() == 0) {
-			return true;
-		}
-		return false;
+		return getNumFalcons() == 0;
 	}
 
 	public  int getLevel() {
