@@ -221,17 +221,17 @@ public abstract class Sprite implements Movable {
 	}
 
 
-	protected List<Pair<Double,Double>> convertToPolars(List<Point> pntPoints){
+	protected List<Pair<Double,Double>> convertToPolars(List<Point> pntCartesians){
 		List<Pair<Double,Double>> polars = new ArrayList<>();
 
 		//determine the largest hypotenuse
 		double hypotenuse = 0;
-		for (Point pnt : pntPoints)
+		for (Point pnt : pntCartesians)
 			if (hypot(pnt.x, pnt.y) > hypotenuse)
 				hypotenuse = hypot(pnt.x, pnt.y);
 
 
-		for (Point pnt : pntPoints) {
+		for (Point pnt : pntCartesians) {
 			double len;
 			if (pnt.x == 0 && pnt.y > 0) {
 				len = hypot(pnt.x, pnt.y) / hypotenuse;
