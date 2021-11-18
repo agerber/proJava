@@ -44,6 +44,7 @@ public class Asteroid extends Sprite {
 			setRadius(RAD/(nSize * 2));
 
 
+		//this method is in place of setting cartesean points
 		assignRandomShape();
 
 	}

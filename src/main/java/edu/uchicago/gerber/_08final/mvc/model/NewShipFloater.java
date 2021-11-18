@@ -13,16 +13,6 @@ public class NewShipFloater extends Sprite {
 
 		super();
 		setTeam(Team.FLOATER);
-		List<Point> pntCs = new ArrayList<Point>();
-		// top of ship
-		pntCs.add(new Point(5, 5));
-		pntCs.add(new Point(4,0));
-		pntCs.add(new Point(5, -5));
-		pntCs.add(new Point(0,-4));
-		pntCs.add(new Point(-5, -5));
-		pntCs.add(new Point(-4,0));
-		pntCs.add(new Point(-5, 5));
-		pntCs.add(new Point(0,4));
 
 
 
@@ -45,6 +35,18 @@ public class NewShipFloater extends Sprite {
 
 		//random orientation 
 		setOrientation(Game.R.nextInt(360));
+
+		//always set cartesean points last
+		List<Point> pntCs = new ArrayList<Point>();
+		pntCs.add(new Point(5, 5));
+		pntCs.add(new Point(4,0));
+		pntCs.add(new Point(5, -5));
+		pntCs.add(new Point(0,-4));
+		pntCs.add(new Point(-5, -5));
+		pntCs.add(new Point(-4,0));
+		pntCs.add(new Point(-5, 5));
+		pntCs.add(new Point(0,4));
+
 		setCartesianPoints(pntCs);
 	}
 

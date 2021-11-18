@@ -31,8 +31,24 @@ public class Falcon extends Sprite {
 	public Falcon() {
 		super();
 		setTeam(Team.FRIEND);
-		ArrayList<Point> pntCs = new ArrayList<Point>();
+
+
+		setColor(Color.white);
 		
+		//put falcon in the middle.
+		setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
+		
+		//with random orientation
+		setOrientation(Game.R.nextInt(360));
+		
+		//this is the size of the falcon
+		setRadius(35);
+
+		//Falcon uses fade.
+		setFadeValue(0);
+
+		//be sure to set object points last.
+		ArrayList<Point> pntCs = new ArrayList<Point>();
 		// Robert Alef's awesome falcon design
 		pntCs.add(new Point(0,9));
 		pntCs.add(new Point(-1, 6));
@@ -75,21 +91,6 @@ public class Falcon extends Sprite {
 		pntCs.add(new Point(1,6));
 		pntCs.add(new Point(0,9));
 
-		setColor(Color.white);
-		
-		//put falcon in the middle.
-		setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
-		
-		//with random orientation
-		setOrientation(Game.R.nextInt(360));
-		
-		//this is the size of the falcon
-		setRadius(35);
-
-		//Falcon uses fade.
-		setFadeValue(0);
-
-		//be sure to set object points last.
 		setCartesianPoints(pntCs);
 	}
 
