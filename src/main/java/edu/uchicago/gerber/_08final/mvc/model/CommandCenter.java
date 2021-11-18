@@ -3,17 +3,18 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 
 import edu.uchicago.gerber._08final.mvc.controller.Sound;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Data
 public class CommandCenter {
 
 	private  int numFalcons;
 	private  int level;
 	private  long score;
-	private  Falcon falShip;
+	private  Falcon falcon;
 	private  boolean playing;
 	private  boolean paused;
 	
@@ -49,20 +50,12 @@ public class CommandCenter {
 
 	public  void spawnFalcon() {
 		if (getNumFalcons() != 0) {
-			falShip = new Falcon();
-			opsList.enqueue(falShip, CollisionOp.Operation.ADD);
+			falcon = new Falcon();
+			opsList.enqueue(falcon, CollisionOp.Operation.ADD);
 			setNumFalcons(getNumFalcons() - 1);
 		}
 		Sound.playSound("shipspawn.wav");
 
-	}
-
-	public GameOpsList getOpsList() {
-		return opsList;
-	}
-
-	public void setOpsList(GameOpsList opsList) {
-		this.opsList = opsList;
 	}
 
 	public  void clearAll(){
@@ -72,78 +65,12 @@ public class CommandCenter {
 		movFloaters.clear();
 	}
 
-	public  boolean isPlaying() {
-		return playing;
-	}
 
-	public  void setPlaying(boolean bPlaying) {
-		this.playing = bPlaying;
-	}
-
-	public  boolean isPaused() {
-		return paused;
-	}
-
-	public  void setPaused(boolean bPaused) {
-		this.paused = bPaused;
-	}
-	
 	public  boolean isGameOver() {		//if the number of falcons is zero, then game over
 		return getNumFalcons() == 0;
 	}
 
-	public  int getLevel() {
-		return level;
-	}
 
-	public   long getScore() {
-		return score;
-	}
-
-	public  void setScore(long score) {
-		this.score = score;
-	}
-
-	public  void setLevel(int level) {
-		this.level = level;
-	}
-
-	public  int getNumFalcons() {
-		return numFalcons;
-	}
-
-	public  void setNumFalcons(int numFalcons) {
-		this.numFalcons = numFalcons;
-	}
-	
-	public  Falcon getFalcon(){
-		return falShip;
-	}
-	
-	public  void setFalcon(Falcon falParam){
-		falShip = falParam;
-	}
-
-	public  List<Movable> getMovDebris() {
-		return movDebris;
-	}
-
-
-
-	public  List<Movable> getMovFriends() {
-		return movFriends;
-	}
-
-
-
-	public  List<Movable> getMovFoes() {
-		return movFoes;
-	}
-
-
-	public  List<Movable> getMovFloaters() {
-		return movFloaters;
-	}
 
 
 

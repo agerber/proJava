@@ -109,7 +109,8 @@ public class GamePanel extends Panel {
 
 	
 	//for each movable array, process it.
-	private void iterateMovables(Graphics g, List<Movable>... arrayOfListMovables){
+	@SafeVarargs
+	private final void iterateMovables(Graphics g, List<Movable>... arrayOfListMovables){
 		
 		for (List<Movable> movMovs : arrayOfListMovables) {
 			for (Movable mov : movMovs) {
@@ -138,17 +139,17 @@ public class GamePanel extends Panel {
 		g.setColor(Color.white);
 
 		g.drawPolygon(
-					Arrays.stream(falcon.getCartesianPoints())
+					Arrays.stream(falcon.getCarteseans())
 							.map(pnt -> pnt.x + Game.DIM.width - (20 * offSet))
 							.mapToInt(Integer::intValue)
 							.toArray(),
 
-					Arrays.stream(falcon.getCartesianPoints())
+					Arrays.stream(falcon.getCarteseans())
 							.map(pnt -> pnt.y + Game.DIM.height - 40)
 							.mapToInt(Integer::intValue)
 							.toArray(),
 
-					falcon.getCartesianPoints().length);
+					falcon.getCarteseans().length);
 
 
 

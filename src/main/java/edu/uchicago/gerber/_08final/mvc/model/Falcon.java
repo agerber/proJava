@@ -2,11 +2,13 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 import javafx.util.Pair;
+import lombok.Data;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 
 public class Falcon extends Sprite {
@@ -47,7 +49,7 @@ public class Falcon extends Sprite {
 		setRadius(35);
 
 		//Falcon uses fade.
-		setFadeValue(0);
+		setFade(0);
 
 		//be sure to set cartesian points last.
 		List<Point> pntCs = new ArrayList<>();
@@ -93,12 +95,12 @@ public class Falcon extends Sprite {
 		pntCs.add(new Point(1,6));
 		pntCs.add(new Point(0,9));
 
-		setCartesianPoints(pntCs);
+		setCarteseans(pntCs);
 	}
 
 	@Override
 	public boolean isProtected() {
-		return getFadeValue() != 255;
+		return getFade() != 255;
 	}
 
 	// ==============================================================
@@ -109,7 +111,7 @@ public class Falcon extends Sprite {
 		super.move();
 
 		if (isProtected()) {
-			setFadeValue(getFadeValue() + 3);
+			setFade(getFade() + 3);
 		}
 
 		//apply some thrust vectors using trig.
@@ -140,6 +142,9 @@ public class Falcon extends Sprite {
 
 	} //end move
 
+
+
+	//methods for moving the falcon
 	public void rotateLeft() {
 		turningLeft = true;
 	}
@@ -162,6 +167,8 @@ public class Falcon extends Sprite {
 		flame = false;
 	}
 
+
+
 	private int adjustColor(int colorNum, int adjust) {
 		return Math.max(colorNum - adjust, 0);
 	}
@@ -170,11 +177,11 @@ public class Falcon extends Sprite {
 	public void draw(Graphics g) {
 
 		Color colShip;
-		if (getFadeValue() == 255) {
+		if (getFade() == 255) {
 			colShip = Color.white;
 		} else {
-			colShip = new Color(adjustColor(getFadeValue(), 200), adjustColor(
-					getFadeValue(), 175), getFadeValue());
+			colShip = new Color(adjustColor(getFade(), 200), adjustColor(
+					getFade(), 175), getFade());
 		}
 
 		//most Sprites do not have flames, but Falcon does

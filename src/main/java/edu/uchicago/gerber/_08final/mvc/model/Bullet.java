@@ -1,9 +1,10 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
+import lombok.Data;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Bullet extends Sprite {
 
@@ -17,7 +18,7 @@ public class Bullet extends Sprite {
 
 
         //a bullet expires after 20 frames
-        setExpire(20);
+        setExpiry(20);
         setRadius(6);
 
 
@@ -40,15 +41,15 @@ public class Bullet extends Sprite {
         pntCs.add(new Point(1, -1));
         pntCs.add(new Point(0, -2));
         pntCs.add(new Point(-1, -1));
-        setCartesianPoints(pntCs);
+        setCarteseans(pntCs);
 
 
     }
 
     @Override
     public void move() {
-        expire();
         super.move();
+        expire();
 
     }
 

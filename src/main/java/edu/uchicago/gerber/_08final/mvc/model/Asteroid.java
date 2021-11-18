@@ -118,7 +118,7 @@ public class Asteroid extends Sprite {
 			polarPairs.add(new Pair<>(theta,r));
 		  }
 
-		 setCartesianPoints(polarToCartesian(
+		 setCarteseans(polarToCartesian(
 
 		 		polarPairs.stream()
 				 .sorted(new Comparator<Pair<Double, Double>>() {

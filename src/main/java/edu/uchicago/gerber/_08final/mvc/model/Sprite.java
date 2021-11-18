@@ -4,16 +4,18 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 import javafx.util.Pair;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lombok.Data;
+import lombok.experimental.Tolerate;
 
+@Data
 public abstract class Sprite implements Movable {
 	//the center-point of this sprite
-	private Point pntCenter;
+	private Point center;
 	//this causes movement; change in x and change in y
 	private double deltaX, deltaY;
 
@@ -35,32 +37,13 @@ public abstract class Sprite implements Movable {
 	private int fade;
 
 	//these are Cartesean points used to draw the polygon.
-	private Point[] pntCoords;
-
-
-	@Override
-	public Team getTeam() {
-	  return team;
-
-	}
-
-	public void setTeam(Team team){
-		this.team = team;
-	}
-
-	public int getSpin() {
-		return this.spin;
-	}
-
-	public void setSpin(int spin) {
-		this.spin = spin;
-	}
+	private Point[] carteseans;
 
 	protected void expire(){
-		if (getExpire() == 0)
+		if (getExpiry() == 0)
 			CommandCenter.getInstance().getOpsList().enqueue(this, CollisionOp.Operation.REMOVE);
 		else
-			setExpire(getExpire() - 1);
+			setExpiry(getExpiry() - 1);
 	}
 
 	@Override
@@ -99,73 +82,6 @@ public abstract class Sprite implements Movable {
 
 
 	}
-
-	public void setExpire(int n) {
-		expiry = n;
-
-	}
-
-	public Color getColor() {
-		return color;
-	}
-
-	public void setColor(Color color) {
-		this.color = color;
-
-	}
-
-	public int points() {
-		//default is zero
-		return 0;
-	}
-
-	public int getExpire() {
-		return expiry;
-	}
-
-	public int getOrientation() {
-		return orientation;
-	}
-
-	public void setOrientation(int n) {
-		orientation = n;
-	}
-
-	public void setDeltaX(double deltaX) {
-		this.deltaX = deltaX;
-	}
-
-	public void setDeltaY(double deltaY) {
-		this.deltaY = deltaY;
-	}
-
-	public double getDeltaY() {
-		return deltaY;
-	}
-
-	public double getDeltaX() {
-		return deltaX;
-	}
-
-	@Override
-	public int getRadius() {
-		return radius;
-	}
-
-	public void setRadius(int radius) {
-		this.radius = radius;
-
-	}
-
-	@Override
-	public Point getCenter() {
-		return pntCenter;
-	}
-
-	public void setCenter(Point pntParam) {
-		pntCenter = pntParam;
-	}
-
 
 	protected double hypot(double dX, double dY) {
 		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
@@ -245,7 +161,7 @@ public abstract class Sprite implements Movable {
 	private void render(Graphics g) {
 		//to render this Sprite, we need to adjust the original cartesian coords by adjusting for both the center and
 		// orientation.
-		List<Pair<Double,Double>> polars = convertToPolars(Arrays.asList(getCartesianPoints()));
+		List<Pair<Double,Double>> polars = convertToPolars(Arrays.asList(getCarteseans()));
 
 		Function<Pair<Double,Double>,Point> adjustPointFunction =
 				pair -> new Point(
@@ -281,26 +197,13 @@ public abstract class Sprite implements Movable {
 	}
 
 
-	public Point[] getCartesianPoints() {
-		return pntCoords;
-	}
-	
-	public void setCartesianPoints(Point[] pntPs) {
-		 pntCoords = pntPs;
+	//in order to overload a lombok'ed method, we need to use the @Tolerate annotation
+	@Tolerate
+	public void setCarteseans(List<Point> pntPs) {
+		setCarteseans(pntPs.stream()
+				.toArray(Point[]::new));
+
 	}
 
-	//overloaded
-	public void setCartesianPoints(List<Point> pntPs) {
-		pntCoords = pntPs.stream()
-				.toArray(Point[]::new);
-	}
-
-	public int getFadeValue() {
-		return fade;
-	}
-
-	public void setFadeValue(int n) {
-		fade = n;
-	}
 
 }
