@@ -184,43 +184,19 @@ public abstract class Sprite implements Movable {
 	//certain Sprites, such as Asteroid use this
 	protected Point[] polarToCartesian(List<Pair<Double,Double>> pairs) {
 
-		int nC = 0;
-		Point[] pnts = new Point[pairs.size()];
-		for (Pair<Double, Double> pair : pairs) {
-			if (nC % 2 != 0) //odd
-			{
-				pnts[nC] = new Point((int) (getCenter().x + pair.getValue() * getRadius() * 100
+		Function<Pair<Double,Double>, Point> polarToCartFunction = pair ->  new Point(
+				(int) (getCenter().x + pair.getValue() * getRadius() * 100
 						* Math.sin(Math.toRadians(getOrientation())
 						+ pair.getKey())),
-
-						(int) (getCenter().y - pair.getValue() * getRadius() * 100
+				(int) (getCenter().y - pair.getValue() * getRadius() * 100
 						* Math.cos(Math.toRadians(getOrientation())
 						+ pair.getKey())));
 
-			}
-			//even
-			else {
-				pnts[nC] = new Point(
-						(int) (getCenter().x + pair.getValue() * getRadius() * 100
-
-						* Math.sin(Math.toRadians(getOrientation())
-						+ pair.getKey())),
-
-
-						(int) (getCenter().y - pair.getValue() * getRadius() * 100
-
-								* Math.cos(Math.toRadians(getOrientation())
-								+ pair.getKey())));
-
-			} //end even/odd else
-			nC++;
-		} //end for loop
-
-	return pnts;
-			
+		return pairs.stream()
+				.map(polarToCartFunction)
+				.toArray(Point[]::new);
 
 	}
-
 
 	protected List<Pair<Double,Double>> convertToPolars(List<Point> pntCartesians){
 		List<Pair<Double,Double>> polars = new ArrayList<>();
