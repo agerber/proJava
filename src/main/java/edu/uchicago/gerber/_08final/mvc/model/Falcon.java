@@ -1,9 +1,12 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
+import javafx.util.Pair;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class Falcon extends Sprite {
@@ -40,14 +43,14 @@ public class Falcon extends Sprite {
 		//with random orientation
 		setOrientation(Game.R.nextInt(360));
 		
-		//this is the size of the falcon
+		//this is the size (radius) of the falcon
 		setRadius(35);
 
 		//Falcon uses fade.
 		setFadeValue(0);
 
 		//be sure to set cartesian points last.
-		ArrayList<Point> pntCs = new ArrayList<Point>();
+		ArrayList<Point> pntCs = new ArrayList<>();
 		// Robert Alef's awesome falcon design
 		pntCs.add(new Point(0,9));
 		pntCs.add(new Point(-1, 6));
@@ -109,6 +112,7 @@ public class Falcon extends Sprite {
 			setFadeValue(getFadeValue() + 3);
 		}
 
+		//apply some thrust vectors using trig.
 		if (thrusting) {
 			flame = true;
 			double adjustX = Math.cos(Math.toRadians(getOrientation()))
@@ -157,11 +161,7 @@ public class Falcon extends Sprite {
 	}
 
 	private int adjustColor(int colorNum, int adjust) {
-		if (colorNum - adjust <= 0) {
-			return 0;
-		} else {
-			return colorNum - adjust;
-		}
+		return Math.max(colorNum - adjust, 0);
 	}
 
 	@Override
@@ -175,51 +175,52 @@ public class Falcon extends Sprite {
 					getFadeValue(), 175), getFadeValue());
 		}
 
-		 final double[] FLAME = { 23 * Math.PI / 24 + Math.PI / 2, Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2 };
-
-		 int[] nXFlames = new int[FLAME.length];
-		 int[] nYFlames = new int[FLAME.length];
-
-		 Point[] pntFlames = new Point[FLAME.length];
+		//most Sprites do not have flames, but Falcon does
+		 double[] flames = { 23 * Math.PI / 24 + Math.PI / 2, Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2 };
+		 Point[] pntFlames = new Point[flames.length];
 
 		//thrusting
 		if (flame) {
 			g.setColor(colShip);
 			//the flame
-			for (int nC = 0; nC < FLAME.length; nC++) {
+			for (int nC = 0; nC < flames.length; nC++) {
 				if (nC % 2 != 0) //odd
 				{
+					//adjust the position so that the flame is off-center
 					pntFlames[nC] = new Point((int) (getCenter().x + 2
 							* getRadius()
 							* Math.sin(Math.toRadians(getOrientation())
-									+ FLAME[nC])), (int) (getCenter().y - 2
+									+ flames[nC])), (int) (getCenter().y - 2
 							* getRadius()
 							* Math.cos(Math.toRadians(getOrientation())
-									+ FLAME[nC])));
+									+ flames[nC])));
 
 				} else //even
 				{
 					pntFlames[nC] = new Point((int) (getCenter().x + getRadius()
 							* 1.1
 							* Math.sin(Math.toRadians(getOrientation())
-									+ FLAME[nC])),
+									+ flames[nC])),
 							(int) (getCenter().y - getRadius()
 									* 1.1
 									* Math.cos(Math.toRadians(getOrientation())
-											+ FLAME[nC])));
+											+ flames[nC])));
 
 				} //end even/odd else
-
 			} //end for loop
 
-			for (int nC = 0; nC < FLAME.length; nC++) {
-				nXFlames[nC] = pntFlames[nC].x;
-				nYFlames[nC] = pntFlames[nC].y;
+			g.fillPolygon(
+					Arrays.stream(pntFlames)
+							.map(pnt -> pnt.x)
+							.mapToInt(Integer::intValue)
+							.toArray(),
 
-			} //end assign flame points
+					Arrays.stream(pntFlames)
+							.map(pnt -> pnt.y)
+							.mapToInt(Integer::intValue)
+							.toArray(),
 
-			//g.setColor( Color.white );
-			g.fillPolygon(nXFlames, nYFlames, FLAME.length);
+					flames.length);
 
 		} //end if flame
 

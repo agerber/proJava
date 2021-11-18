@@ -36,8 +36,8 @@ public class Asteroid extends Sprite {
 
 
 		
-		//an nSize of zero is a big asteroid
-		//a nSize of 1 or 2 is med or small asteroid respectively
+		//an size of zero is a big asteroid
+		//a size of 1 or 2 is med or small asteroid respectively
 		if (size == 0)
 			setRadius(RAD);
 		else
