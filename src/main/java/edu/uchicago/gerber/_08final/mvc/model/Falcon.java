@@ -22,7 +22,6 @@ public class Falcon extends Sprite {
 	final int DEGREE_STEP = 7;
 	
 	//private boolean shield = false;
-	private boolean flame = false;
 	private boolean thrusting = false;
 	private boolean turningRight = false;
 	private boolean turningLeft = false;
@@ -116,7 +115,7 @@ public class Falcon extends Sprite {
 
 		//apply some thrust vectors using trig.
 		if (thrusting) {
-			flame = true;
+			//flame = true;
 			double adjustX = Math.cos(Math.toRadians(getOrientation()))
 					* THRUST;
 			double adjustY = Math.sin(Math.toRadians(getOrientation()))
@@ -164,7 +163,6 @@ public class Falcon extends Sprite {
 
 	public void thrustOff() {
 		thrusting = false;
-		flame = false;
 	}
 
 
@@ -189,7 +187,7 @@ public class Falcon extends Sprite {
 		 Point[] pntFlames = new Point[flames.length];
 
 		//thrusting
-		if (flame) {
+		if (thrusting) {
 			g.setColor(colShip);
 			//the flame
 			for (int nC = 0; nC < flames.length; nC++) {
