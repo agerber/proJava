@@ -235,7 +235,7 @@ public class Falcon extends Sprite {
 		} //end if flame
 
 		//drawShipWithColor(g, colShip);
-		super.draw(g);
+		draw(g,colShip);
 
 	} //end draw()
 

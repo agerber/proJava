@@ -332,10 +332,6 @@ public abstract class Sprite implements Movable {
 		
 	}
 	
-	//utility function to convert from cartesian to polar
-	//since it's much easier to describe a sprite as a list of cartesean points
-	//sprites (except Asteroid) should use the cartesean technique to describe the coordinates
-	//see Falcon or Bullet constructor for examples
 
 	//this can be done on the fly, do not assign to members
 	protected double[] convertToPolarDegs(List<Point> pntPoints) {
@@ -376,38 +372,22 @@ public abstract class Sprite implements Movable {
 
 	}
 
-//	protected void assignPolarPoints(List<Point> pntCs) {
-//		setDegrees(convertToPolarDegs(pntCs));
-//		setLengths(convertToPolarLens(pntCs));
-//
-//	}
 
-	//todo reengineer this so that draw converts pntCoords to xCoords, yCoords on the fly locally, and NOT as members.
+	public void draw(Graphics g, Color color) {
+		g.setColor(color);
+		render(g);
+
+	}
+
 	@Override
     public void draw(Graphics g) {
-//        nXCoords = new int[dDegrees.length];
-//        nYCoords = new int[dDegrees.length];
-//        //need this as well
-//        pntCoords = new Point[dDegrees.length];
-//
-//
-//        for (int nC = 0; nC < dDegrees.length; nC++) {
-//            nXCoords[nC] =    (int) (getCenter().x + getRadius()
-//                            * dLengths[nC]
-//                            * Math.sin(Math.toRadians(getOrientation()) + dDegrees[nC]));
-//            nYCoords[nC] =    (int) (getCenter().y - getRadius()
-//                            * dLengths[nC]
-//                            * Math.cos(Math.toRadians(getOrientation()) + dDegrees[nC]));
-//
-//
-//            //need this line of code to create the points which we will need for debris
-//            pntCoords[nC] = new Point(nXCoords[nC], nYCoords[nC]);
-//        }
 
         g.setColor(getColor());
-       // g.drawPolygon(new int[]{5,3,6},  new int[]{8,7,9}, 3);
-        //Arrays.stream(pntCoords).map(pnt -> pnt.getX()).collect(Collectors.toList()).toArray()
+		render(g);
 
+	}
+
+	private void render(Graphics g) {
 		Point[] adjPoints = new Point[getObjectPoints().length];
 		double[] radians = convertToPolarDegs(Arrays.asList(getObjectPoints()));
 		double[] rads = convertToPolarLens(Arrays.asList(getObjectPoints()));
@@ -447,22 +427,7 @@ public abstract class Sprite implements Movable {
 
 		//g.setColor( Color.white );
 		g.drawPolygon(nXFlames, nYFlames, getObjectPoints().length);
-
-
-
-
-
-
-//        g.drawPolygon(
-//				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getX() + getCenter().x)),
-//				convertStreamToArray(Arrays.stream(pntCoords).map(pnt -> (int) pnt.getY() + getCenter().y)),
-//				pntCoords.length);
-
-//		g.drawPolygon(
-//				convertToPolarDegs(Arrays.asList(pntCoords)),
-//				convertToPolarLens(Arrays.asList(pntCoords)),
-//				pntCoords.length);
-    }
+	}
 
 	protected int[] convertStreamToArray(Stream<Integer> stream) {
 		return stream.mapToInt(Integer::intValue).toArray();
