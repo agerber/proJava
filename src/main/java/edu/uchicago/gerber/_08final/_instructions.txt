@@ -56,7 +56,7 @@ When the falcon collides with a NewShipFloater, you should increment the number 
 What else? It's your game, so use your imagination, but consider the following:
 
 Special weapons:
-You have an example of a special weapon (cruise missile). Consider creating other special weapons. You might consider
+ Consider creating special weapons. You might consider
 spawning an explosion (friend) when your special weapon either hits a foe, or expires.
 
 Consider steerable missiles which activate steering while a particular key is in key-press state, and explodes (as well
@@ -92,11 +92,6 @@ Create color-coded meters that show graphically how much time is left on a power
 information.
 
 
-Falcon morphs:
-Consider morphing the falcon into various color/shape combinations as it receives power-ups (see Cruise to see how
-morphing is done). You are not limited to two morphs, create several if you want.
-
-
 Debris:
 The Sprite class has a method called public Point[] getObjectPoints(). You can use this to get the points which describe
 the Sprite an any given frame. It may be easier for you to create your own Debris class from scratch that implements
@@ -116,7 +111,7 @@ Some things to keep in mind.
 is that polar coordinates are difficult to work with. However, I created a method that allows you to create shapes using
 an ArrayList<Point> where the points are on a cartesian grid with 0,0 at the origin. When you add your points to the
 ArrayList, order matters, so that each point is adjascent to its neighbor in the ArrayList. The following ArrayList<Point>
-describes the shape of the cruise-missile prior to deploying its wings and accelerating. Just keep in mind that creating
+describes the shape of the fictitious Sprite. Just keep in mind that creating
 this ArrayList<Point> out-of-order will produce a jaggedy-shaped sprite. The following order is correct (though I could
 have traversed the points counter-clockwise with the same good result).
 
@@ -133,4 +128,4 @@ have traversed the points counter-clockwise with the same good result).
 
 Some addition info:
 the M key is for muting music. 
-the f-key is for firing the cruise missile. 
+
