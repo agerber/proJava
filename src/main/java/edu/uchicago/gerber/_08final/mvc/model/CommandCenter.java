@@ -10,12 +10,12 @@ import java.util.List;
 
 public class CommandCenter {
 
-	private  int nNumFalcon;
-	private  int nLevel;
-	private  long lScore;
+	private  int numFalcons;
+	private  int level;
+	private  long score;
 	private  Falcon falShip;
-	private  boolean bPlaying;
-	private  boolean bPaused;
+	private  boolean playing;
+	private  boolean paused;
 	
 	// These ArrayLists with capacities set
 	private List<Movable> movDebris = new ArrayList<Movable>(50);
@@ -73,19 +73,19 @@ public class CommandCenter {
 	}
 
 	public  boolean isPlaying() {
-		return bPlaying;
+		return playing;
 	}
 
 	public  void setPlaying(boolean bPlaying) {
-		this.bPlaying = bPlaying;
+		this.playing = bPlaying;
 	}
 
 	public  boolean isPaused() {
-		return bPaused;
+		return paused;
 	}
 
 	public  void setPaused(boolean bPaused) {
-		this.bPaused = bPaused;
+		this.paused = bPaused;
 	}
 	
 	public  boolean isGameOver() {		//if the number of falcons is zero, then game over
@@ -93,27 +93,27 @@ public class CommandCenter {
 	}
 
 	public  int getLevel() {
-		return nLevel;
+		return level;
 	}
 
 	public   long getScore() {
-		return lScore;
+		return score;
 	}
 
-	public  void setScore(long lParam) {
-		lScore = lParam;
+	public  void setScore(long score) {
+		this.score = score;
 	}
 
-	public  void setLevel(int n) {
-		nLevel = n;
+	public  void setLevel(int level) {
+		this.level = level;
 	}
 
 	public  int getNumFalcons() {
-		return nNumFalcon;
+		return numFalcons;
 	}
 
-	public  void setNumFalcons(int nParam) {
-		nNumFalcon = nParam;
+	public  void setNumFalcons(int numFalcons) {
+		this.numFalcons = numFalcons;
 	}
 	
 	public  Falcon getFalcon(){
