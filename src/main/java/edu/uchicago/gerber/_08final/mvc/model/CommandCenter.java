@@ -43,8 +43,8 @@ public class CommandCenter {
 	public  void initGame(){
 		setLevel(1);
 		setScore(0);
-		setNumFalcons(3);
-		spawnFalcon(true);
+		setNumFalcons(4);
+		spawnFalcon();
 	}
 	
 	// The parameter is true if this is for the beginning of the game, otherwise false
@@ -52,15 +52,12 @@ public class CommandCenter {
 	/*todo refactor this method so that it takes no params. Instead of checking first, just add one extra
 	 ship initially */
 
-	public  void spawnFalcon(boolean bFirst) {
+	public  void spawnFalcon() {
 		if (getNumFalcons() != 0) {
 			falShip = new Falcon();
-
 			opsList.enqueue(falShip, CollisionOp.Operation.ADD);
-			if (!bFirst)
-			    setNumFalcons(getNumFalcons() - 1);
+			setNumFalcons(getNumFalcons() - 1);
 		}
-		
 		Sound.playSound("shipspawn.wav");
 
 	}

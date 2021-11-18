@@ -208,7 +208,7 @@ public class Game implements Runnable, KeyListener {
 					} else {
 						CommandCenter.getInstance().getMovFriends().remove(mov);
 						if (mov instanceof Falcon)
-							CommandCenter.getInstance().spawnFalcon(false);
+							CommandCenter.getInstance().spawnFalcon();
 					}
 					break;
 
