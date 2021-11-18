@@ -307,7 +307,7 @@ public abstract class Sprite implements Movable {
 						.mapToInt(Integer::intValue)
 						.toArray(),
 
-				getCartesianPoints().length);
+				adjPoints.length);
 
 		//for debugging center-point. Feel free to remove these two lines.
 		//#########################################
