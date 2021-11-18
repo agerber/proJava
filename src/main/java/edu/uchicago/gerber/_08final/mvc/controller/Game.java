@@ -111,14 +111,12 @@ public class Game implements Runnable, KeyListener {
 
 		// this thread animates the scene
 		while (Thread.currentThread() == animationThread) {
-			//todo tick is redundant, use System.getCurrentMillis();
 
 			spawnNewShipFloater();
 			gmpPanel.update(gmpPanel.getGraphics()); // update takes the graphics context we must 
 														// surround the sleep() in a try/catch block
 														// this simply controls delay time between 
 														// the frames of the animation
-
 
 			checkCollisions();
 			checkNewLevel();
@@ -151,12 +149,12 @@ public class Game implements Runnable, KeyListener {
 
 				//detect collision
 				if (pntFriendCenter.distance(pntFoeCenter) < (radFriend + radFoe)) {
-
+					//remove the friend (so long as he is not protected)
 					if (!movFriend.isProtected()){
 						CommandCenter.getInstance().getOpsList().enqueue(movFriend, CollisionOp.Operation.REMOVE);
 					}
-					//kill the foe and if asteroid, then spawn new asteroids
-					killFoe(movFoe);
+					//remove the foe
+					CommandCenter.getInstance().getOpsList().enqueue(movFoe, CollisionOp.Operation.REMOVE);
 					Sound.playSound("kapow.wav");
 				 }
 
@@ -184,9 +182,12 @@ public class Game implements Runnable, KeyListener {
 				}//end if 
 			}//end inner for
 		}//end if not null
-		
 
+		processGameOpsQueue();
 
+	}//end meth
+
+	private void processGameOpsQueue() {
 		//we are dequeuing the opsList and performing operations in serial to avoid mutating the movable arraylists while iterating them above
 		while(!CommandCenter.getInstance().getOpsList().isEmpty()){
 			CollisionOp cop =  CommandCenter.getInstance().getOpsList().dequeue();
@@ -199,6 +200,8 @@ public class Game implements Runnable, KeyListener {
 						CommandCenter.getInstance().getMovFoes().add(mov);
 					} else {
 						CommandCenter.getInstance().getMovFoes().remove(mov);
+						if (mov instanceof Asteroid)
+							spawnSmallerAsteroids((Asteroid) mov);
 					}
 
 					break;
@@ -232,37 +235,28 @@ public class Game implements Runnable, KeyListener {
 			}
 
 		}
-		
-	}//end meth
+	}
 
-	//todo refactor
-	private void killFoe(Movable movFoe) {
-		
-		if (movFoe instanceof Asteroid){
 
-			//we know this is an Asteroid, so we can cast without threat of ClassCastException
-			Asteroid astExploded = (Asteroid)movFoe;
+	private void spawnSmallerAsteroids(Asteroid originalAsteroid) {
+
 			//big asteroid 
-			if(astExploded.getSize() == 0){
+			if(originalAsteroid.getSize() == 0){
 				//spawn two medium Asteroids
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(astExploded), CollisionOp.Operation.ADD);
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(astExploded), CollisionOp.Operation.ADD);
+				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
+				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
 
 			} 
 			//medium size aseroid exploded
-			else if(astExploded.getSize() == 1){
+			else if(originalAsteroid.getSize() == 1){
 				//spawn three small Asteroids
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(astExploded), CollisionOp.Operation.ADD);
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(astExploded), CollisionOp.Operation.ADD);
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(astExploded), CollisionOp.Operation.ADD);
+				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
+				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
+				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
 
 			}
 
-		} 
-
-		//remove the original Foe
-		CommandCenter.getInstance().getOpsList().enqueue(movFoe, CollisionOp.Operation.REMOVE);
-
+			//if it's a small asteroid, do nothing.
 	}
 
 	private void spawnNewShipFloater() {
