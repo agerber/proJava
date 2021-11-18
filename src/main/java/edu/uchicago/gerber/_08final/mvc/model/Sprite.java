@@ -265,7 +265,8 @@ public abstract class Sprite implements Movable {
 	}
 
 	private void render(Graphics g) {
-		//to render this Sprite, we need to adjust the original cartesian coords by calculating the orientation.
+		//to render this Sprite, we need to adjust the original cartesian coords by adjusting for both the center and
+		// orientation.
 		Point[] adjPoints = new Point[getCartesianPoints().length];
 		List<Pair<Double,Double>> polars = convertToPolars(Arrays.asList(getCartesianPoints()));
 
