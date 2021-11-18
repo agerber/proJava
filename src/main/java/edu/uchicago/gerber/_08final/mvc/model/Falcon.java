@@ -22,7 +22,6 @@ public class Falcon extends Sprite {
 	private boolean turningRight = false;
 	private boolean turningLeft = false;
 
-	//todo use lombok
 
 	// ==============================================================
 	// CONSTRUCTOR 
@@ -47,7 +46,7 @@ public class Falcon extends Sprite {
 		//Falcon uses fade.
 		setFadeValue(0);
 
-		//be sure to set object points last.
+		//be sure to set cartesian points last.
 		ArrayList<Point> pntCs = new ArrayList<Point>();
 		// Robert Alef's awesome falcon design
 		pntCs.add(new Point(0,9));

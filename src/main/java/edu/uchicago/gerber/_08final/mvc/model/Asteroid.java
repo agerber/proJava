@@ -14,11 +14,11 @@ public class Asteroid extends Sprite {
 	//radius of a large asteroid
 	private final int RAD = 100;
 	
-	//nSize determines if the Asteroid is Large (0), Medium (1), or Small (2)
+	//size determines if the Asteroid is Large (0), Medium (1), or Small (2)
 	//when you explode a Large asteroid, you should spawn 2 or 3 medium asteroids
 	//same for medium asteroid, you should spawn small asteroids
-	//small asteroids get blasted into debris
-	public Asteroid(int nSize){
+	//small asteroids get blasted into debris, but do not spawn anything
+	public Asteroid(int size){
 		
 		//call Sprite constructor
 		super();
@@ -38,10 +38,10 @@ public class Asteroid extends Sprite {
 		
 		//an nSize of zero is a big asteroid
 		//a nSize of 1 or 2 is med or small asteroid respectively
-		if (nSize == 0)
+		if (size == 0)
 			setRadius(RAD);
 		else
-			setRadius(RAD/(nSize * 2));
+			setRadius(RAD/(size * 2));
 
 
 		//this method is in place of setting cartesean points
@@ -51,12 +51,14 @@ public class Asteroid extends Sprite {
 
 
 
+	//overloaded so we can spawn smaller asteroids from an exploding one
 	public Asteroid(Asteroid astExploded){
 	
 
 		//call Sprite constructor
 		super();
 		setTeam(Team.FOE);
+		//the larger the number, the smaller the asteroid radius. See getSize() method below
 		int  newSmallerSize =	astExploded.getSize() + 1;
 
 		//the spin will be either plus or minus 0-9
