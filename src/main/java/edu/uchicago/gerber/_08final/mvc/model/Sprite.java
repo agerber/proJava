@@ -237,24 +237,24 @@ public abstract class Sprite implements Movable {
 
 			if (nC % 2 != 0) //odd
 			{
-				pnts[nC] = new Point((int) (getCenter().x + pair.getValue() * getRadius()
+				pnts[nC] = new Point((int) (getCenter().x + pair.getValue() * getRadius() * 100
 						* Math.sin(Math.toRadians(getOrientation())
 						+ pair.getKey())),
 
-						(int) (getCenter().y - pair.getValue() * getRadius()
+						(int) (getCenter().y - pair.getValue() * getRadius() * 100
 						* Math.cos(Math.toRadians(getOrientation())
 						+ pair.getKey())));
 
 			} else //even
 			{
 				pnts[nC] = new Point(
-						(int) (getCenter().x + pair.getValue() * getRadius()
+						(int) (getCenter().x + pair.getValue() * getRadius() * 100
 
 						* Math.sin(Math.toRadians(getOrientation())
 						+ pair.getKey())),
 
 
-						(int) (getCenter().y - pair.getValue() * getRadius()
+						(int) (getCenter().y - pair.getValue() * getRadius() * 100
 
 								* Math.cos(Math.toRadians(getOrientation())
 								+ pair.getKey())));
