@@ -26,8 +26,8 @@ public class GamePanel extends Panel {
 	private Font fnt = new Font("SansSerif", Font.BOLD, 12);
 	private Font fntBig = new Font("SansSerif", Font.BOLD + Font.ITALIC, 36);
 	private FontMetrics fmt; 
-	private int nFontWidth;
-	private int nFontHeight;
+	private int fontWidth;
+	private int fontHeight;
 	private String strDisplay = "";
 	
 
@@ -57,9 +57,9 @@ public class GamePanel extends Panel {
 		g.setColor(Color.white);
 		g.setFont(fnt);
 		if (CommandCenter.getInstance().getScore() != 0) {
-			g.drawString("SCORE :  " + CommandCenter.getInstance().getScore(), nFontWidth, nFontHeight);
+			g.drawString("SCORE :  " + CommandCenter.getInstance().getScore(), fontWidth, fontHeight);
 		} else {
-			g.drawString("NO SCORE", nFontWidth, nFontHeight);
+			g.drawString("NO SCORE", fontWidth, fontHeight);
 		}
 	}
 	
@@ -159,8 +159,8 @@ public class GamePanel extends Panel {
 		Graphics g = getGraphics();			// get the graphics context for the panel
 		g.setFont(fnt);						// take care of some simple font stuff
 		fmt = g.getFontMetrics();
-		nFontWidth = fmt.getMaxAdvance();
-		nFontHeight = fmt.getHeight();
+		fontWidth = fmt.getMaxAdvance();
+		fontHeight = fmt.getHeight();
 		g.setFont(fntBig);					// set font info
 	}
 	
@@ -174,41 +174,41 @@ public class GamePanel extends Panel {
 		strDisplay = "use the arrow keys to turn and thrust";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 40);
+						+ fontHeight + 40);
 
 		strDisplay = "use the space bar to fire";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 80);
+						+ fontHeight + 80);
 
 		strDisplay = "'S' to Start";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 120);
+						+ fontHeight + 120);
 
 		strDisplay = "'P' to Pause";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 160);
+						+ fontHeight + 160);
 
 		strDisplay = "'Q' to Quit";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 200);
+						+ fontHeight + 200);
 		strDisplay = "left pinkie on 'A' for Shield";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 240);
+						+ fontHeight + 240);
 
 		strDisplay = "left index finger on 'F' for Guided Missile";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 280);
+						+ fontHeight + 280);
 
 		strDisplay = "'Numeric-Enter' for Hyperspace";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 320);
+						+ fontHeight + 320);
 	}
 	
 

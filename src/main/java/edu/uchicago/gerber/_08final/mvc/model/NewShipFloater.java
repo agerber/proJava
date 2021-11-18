@@ -10,9 +10,6 @@ import java.util.List;
 public class NewShipFloater extends Sprite {
 
 
-	//one private member
-	private int spin;
-
 	public NewShipFloater() {
 
 		super();

@@ -87,7 +87,9 @@ public class Falcon extends Sprite {
 		//this is the size of the falcon
 		setRadius(35);
 
+		//Falcon uses fade.
 		setFadeValue(0);
+
 		//be sure to set object points last.
 		setObjectPoints(pntCs);
 	}
@@ -166,7 +168,6 @@ public class Falcon extends Sprite {
 	@Override
 	public void draw(Graphics g) {
 
-		//does the fading at the beginning or after hyperspace
 		Color colShip;
 		if (getFadeValue() == 255) {
 			colShip = Color.white;
@@ -175,7 +176,6 @@ public class Falcon extends Sprite {
 					getFadeValue(), 175), getFadeValue());
 		}
 
-		//todo use Pair here
 		 final double[] FLAME = { 23 * Math.PI / 24 + Math.PI / 2, Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2 };
 
 		 int[] nXFlames = new int[FLAME.length];
@@ -213,7 +213,6 @@ public class Falcon extends Sprite {
 
 			} //end for loop
 
-			//todo revisit this
 			for (int nC = 0; nC < FLAME.length; nC++) {
 				nXFlames[nC] = pntFlames[nC].x;
 				nYFlames[nC] = pntFlames[nC].y;

@@ -7,7 +7,7 @@ import javax.swing.*;
 public class GameFrame extends JFrame {
 
 	private JPanel contentPane;
-	private BorderLayout borderLayout1 = new BorderLayout();
+	private BorderLayout borderLayout = new BorderLayout();
 
 	public GameFrame() {
 		enableEvents(AWTEvent.WINDOW_EVENT_MASK);
@@ -21,7 +21,7 @@ public class GameFrame extends JFrame {
 	//Component initialization
 	private void initialize() throws Exception {
 		contentPane = (JPanel) this.getContentPane();
-		contentPane.setLayout(borderLayout1);
+		contentPane.setLayout(borderLayout);
 	}
 
 	@Override

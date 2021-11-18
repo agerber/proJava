@@ -180,6 +180,7 @@ public abstract class Sprite implements Movable {
 		return false;
 	}
 
+	//certain Sprites, such as Asteroid use this
 	protected Point[] polarToCartesian(List<Pair<Double,Double>> pairs) {
 
 		int nC = 0;
@@ -277,8 +278,9 @@ public abstract class Sprite implements Movable {
 						* Math.cos(Math.toRadians(getOrientation())
 						+ polars.get(nC).getKey())));
 
-			} else //even
-			{
+			}
+			//even
+			else {
 				adjPoints[nC] = new Point((int) (getCenter().x + polars.get(nC).getValue() * getRadius()
 
 						* Math.sin(Math.toRadians(getOrientation())
