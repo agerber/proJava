@@ -60,6 +60,7 @@ public abstract class Sprite implements Movable {
 			setExpire(getExpire() - 1);
 	}
 
+	@Override
 	public void move() {
 
 		Point pnt = getCenter();
@@ -126,12 +127,12 @@ public abstract class Sprite implements Movable {
 		orientation = n;
 	}
 
-	public void setDeltaX(double dSet) {
-		deltaX = dSet;
+	public void setDeltaX(double deltaX) {
+		this.deltaX = deltaX;
 	}
 
-	public void setDeltaY(double dSet) {
-		deltaY = dSet;
+	public void setDeltaY(double deltaY) {
+		this.deltaY = deltaY;
 	}
 
 	public double getDeltaY() {
@@ -142,16 +143,17 @@ public abstract class Sprite implements Movable {
 		return deltaX;
 	}
 
+	@Override
 	public int getRadius() {
 		return radius;
 	}
 
-	public void setRadius(int n) {
-		radius = n;
+	public void setRadius(int radius) {
+		this.radius = radius;
 
 	}
 
-
+	@Override
 	public Point getCenter() {
 		return pntCenter;
 	}
