@@ -152,26 +152,16 @@ public class Game implements Runnable, KeyListener {
 				//detect collision
 				if (pntFriendCenter.distance(pntFoeCenter) < (radFriend + radFoe)) {
 
-					//falcon
-					if ((movFriend instanceof Falcon) ){
-						if (!CommandCenter.getInstance().getFalcon().isProtected()){
-							CommandCenter.getInstance().getOpsList().enqueue(movFriend, CollisionOp.Operation.REMOVE);
-							CommandCenter.getInstance().spawnFalcon(false);
-
-						}
-					}
-					//not the falcon
-					else {
+					if (!movFriend.isProtected()){
 						CommandCenter.getInstance().getOpsList().enqueue(movFriend, CollisionOp.Operation.REMOVE);
-					}//end else
+					}
 					//kill the foe and if asteroid, then spawn new asteroids
 					killFoe(movFoe);
 					Sound.playSound("kapow.wav");
+				 }
 
 				}//end if 
 			}//end inner for
-		}//end outer for
-
 
 		//check for collisions between falcon and floaters
 		if (CommandCenter.getInstance().getFalcon() != null){
@@ -217,6 +207,8 @@ public class Game implements Runnable, KeyListener {
 						CommandCenter.getInstance().getMovFriends().add(mov);
 					} else {
 						CommandCenter.getInstance().getMovFriends().remove(mov);
+						if (mov instanceof Falcon)
+							CommandCenter.getInstance().spawnFalcon(false);
 					}
 					break;
 
