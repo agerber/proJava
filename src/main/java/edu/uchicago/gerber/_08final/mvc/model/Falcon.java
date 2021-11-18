@@ -115,7 +115,6 @@ public class Falcon extends Sprite {
 
 		//apply some thrust vectors using trig.
 		if (thrusting) {
-			//flame = true;
 			double adjustX = Math.cos(Math.toRadians(getOrientation()))
 					* THRUST;
 			double adjustY = Math.sin(Math.toRadians(getOrientation()))
