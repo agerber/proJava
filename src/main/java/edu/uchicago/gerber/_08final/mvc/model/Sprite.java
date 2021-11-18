@@ -7,7 +7,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public abstract class Sprite implements Movable {
 	//the center-point of this sprite
@@ -199,7 +201,6 @@ public abstract class Sprite implements Movable {
 	}
 
 	protected List<Pair<Double,Double>> convertToPolars(List<Point> pntCartesians){
-		List<Pair<Double,Double>> polars = new ArrayList<>();
 
 		//determine the largest hypotenuse
 		double hypotenuse = 0;
@@ -208,13 +209,19 @@ public abstract class Sprite implements Movable {
 				hypotenuse = hypot(pnt.x, pnt.y);
 
 
-		for (Point pnt : pntCartesians) {
-			polars.add(new Pair(
-					Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180,
-					hypot(pnt.x, pnt.y) / hypotenuse)
-			);
-		}
-		return polars;
+		BiFunction<Point, Double, Pair<Double,Double>> pointDoublePairBiFunction = (pnt, d) -> new Pair<>(
+				Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180,
+				hypot(pnt.x, pnt.y) / d);
+
+		//we must make hypotenuse final to pass into a stream.
+		final double h = hypotenuse;
+
+
+		return pntCartesians.stream()
+		     .map(p -> pointDoublePairBiFunction.apply(p, h))
+			 .collect(Collectors.toList());
+
+
 
 	}
 
