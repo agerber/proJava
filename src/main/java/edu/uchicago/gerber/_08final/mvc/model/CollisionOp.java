@@ -12,27 +12,24 @@ public class CollisionOp {
         ADD, REMOVE
     }
 
-    /*
-    todo use normal names, rather than m or s prefixes.
-     */
     //members
-    private Movable mMovable;
-    private Operation mOperation;
+    private Movable movable;
+    private Operation operation;
 
     //constructor
     public CollisionOp(Movable movable, Operation op) {
-        mMovable = movable;
-        mOperation = op;
+        this.movable = movable;
+        this.operation = op;
     }
 
 
     //getters
     public Movable getMovable() {
-        return mMovable;
+        return movable;
     }
 
     public Operation getOperation() {
-        return mOperation;
+        return operation;
     }
 
 }

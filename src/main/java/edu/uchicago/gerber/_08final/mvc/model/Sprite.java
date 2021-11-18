@@ -1,14 +1,12 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
-import javafx.geometry.Point2D;
 import javafx.util.Pair;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class Sprite implements Movable {
@@ -31,12 +29,8 @@ public abstract class Sprite implements Movable {
 	//some sprites spin, such as floaters and asteroids
 	private int spin;
 
-	//fade value for fading in and out
-	/*
-	todo use a long instead of nFade, and call it instantiateTime and set it to the
-	System.currentTimeMillis(). Calculate any fade that way.
-	 */
-	private int nFade;
+	//use for fade-in/fade-out
+	private int fade;
 
 	//these are used to draw the polygon. You don't usually need to interface with these
 	private Point[] pntCoords; //an array of points used to draw polygon
@@ -122,7 +116,6 @@ public abstract class Sprite implements Movable {
 		return 0;
 	}
 
-	//todo possible candidate for Movable interface
 	public int getExpire() {
 		return expiry;
 	}
@@ -183,6 +176,7 @@ public abstract class Sprite implements Movable {
 
 	@Override
 	public boolean isProtected() {
+		//by default, sprites are not protected
 		return false;
 	}
 
@@ -225,40 +219,31 @@ public abstract class Sprite implements Movable {
 
 	}
 
-	protected double[] convertToPolarDegs(List<Point> pntPoints) {
 
-	   double[] dDegs = new double[pntPoints.size()];
-
-		int nC = 0;
-		for (Point pnt : pntPoints) {
-			dDegs[nC++]=(Math.toDegrees(Math.atan2(pnt.y, pnt.x))) * Math.PI / 180 ;
-		}
-		return dDegs;
-	}
-	//utility function to convert to polar
-	protected double[] convertToPolarLens(List<Point> pntPoints) {
-
-		double[] dLens = new double[pntPoints.size()];
+	protected List<Pair<Double,Double>> convertToPolars(List<Point> pntPoints){
+		List<Pair<Double,Double>> polars = new ArrayList<>();
 
 		//determine the largest hypotenuse
-		double dL = 0;
+		double hypotenuse = 0;
 		for (Point pnt : pntPoints)
-			if (hypot(pnt.x, pnt.y) > dL)
-				dL = hypot(pnt.x, pnt.y);
+			if (hypot(pnt.x, pnt.y) > hypotenuse)
+				hypotenuse = hypot(pnt.x, pnt.y);
 
-		int nC = 0;
+
 		for (Point pnt : pntPoints) {
+			double len;
 			if (pnt.x == 0 && pnt.y > 0) {
-				dLens[nC] = hypot(pnt.x, pnt.y) / dL;
+				len = hypot(pnt.x, pnt.y) / hypotenuse;
 			} else if (pnt.x < 0 && pnt.y > 0) {
-				dLens[nC] = hypot(pnt.x, pnt.y) / dL;
+				len = hypot(pnt.x, pnt.y) / hypotenuse;
 			} else {
-				dLens[nC] = hypot(pnt.x, pnt.y) / dL;
+				len = hypot(pnt.x, pnt.y) / hypotenuse;
 			}
-			nC++;
-		}
 
-		return dLens;
+			polars.add(new Pair(Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180, len));
+
+		}
+		return polars;
 
 	}
 
@@ -279,37 +264,33 @@ public abstract class Sprite implements Movable {
 	}
 
 	private void render(Graphics g) {
+		//to render this Sprite, we need to adjust the original cartesian coords by calculating the orientation.
 		Point[] adjPoints = new Point[getObjectPoints().length];
-
-		//todo no parallel arrays, use Pair<Double,Double>
-		double[] radians = convertToPolarDegs(Arrays.asList(getObjectPoints()));
-		double[] rads = convertToPolarLens(Arrays.asList(getObjectPoints()));
-
+		List<Pair<Double,Double>> polars = convertToPolars(Arrays.asList(getObjectPoints()));
 
 		for (int nC = 0; nC < getObjectPoints().length; nC++) {
 			if (nC % 2 != 0) //odd
 			{
-				adjPoints[nC] = new Point((int) (getCenter().x + rads[nC] * getRadius()
+				adjPoints[nC] = new Point((int) (getCenter().x + polars.get(nC).getValue() * getRadius()
 						* Math.sin(Math.toRadians(getOrientation())
-						+ radians[nC])), (int) (getCenter().y - rads[nC] * getRadius()
+						+ polars.get(nC).getKey())), (int) (getCenter().y - polars.get(nC).getValue() * getRadius()
 						* Math.cos(Math.toRadians(getOrientation())
-						+ radians[nC])));
+						+ polars.get(nC).getKey())));
 
 			} else //even
 			{
-				adjPoints[nC] = new Point((int) (getCenter().x + rads[nC] * getRadius()
+				adjPoints[nC] = new Point((int) (getCenter().x + polars.get(nC).getValue() * getRadius()
 
 						* Math.sin(Math.toRadians(getOrientation())
-						+ radians[nC])),
-						(int) (getCenter().y - rads[nC] * getRadius()
+						+ polars.get(nC).getKey())),
+						(int) (getCenter().y - polars.get(nC).getValue() * getRadius()
 
 								* Math.cos(Math.toRadians(getOrientation())
-								+ radians[nC])));
+								+ polars.get(nC).getKey())));
 
 			} //end even/odd else
 
 		} //end for loop
-
 
 
 		g.drawPolygon(
@@ -332,10 +313,6 @@ public abstract class Sprite implements Movable {
 		//#########################################
 	}
 
-	protected int[] convertStreamToArray(Stream<Integer> stream) {
-		return stream.mapToInt(Integer::intValue).toArray();
-	}
-    
 
 	public Point[] getObjectPoints() {
 		return pntCoords;
@@ -356,11 +333,11 @@ public abstract class Sprite implements Movable {
 	}
 
 	public int getFadeValue() {
-		return nFade;
+		return fade;
 	}
 
 	public void setFadeValue(int n) {
-		nFade = n;
+		fade = n;
 	}
 
 }
