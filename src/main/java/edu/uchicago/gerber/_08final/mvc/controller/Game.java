@@ -24,13 +24,17 @@ public class Game implements Runnable, KeyListener {
 	private GamePanel gmpPanel;
 	//this is used throughout many classes.
 	public static Random R = new Random();
-	public final static int ANI_DELAY = 45; // milliseconds between screen
-											// updates (animation)
-	private Thread thrAnim;
-	private int nLevel = 1;
-	private int nTick = 0;
 
-	private boolean bMuted = true;
+	public final static int ANI_DELAY = 50; // milliseconds between screen
+											// updates (animation)
+
+	public final static int FRAMES_PER_SECOND = 1000 / ANI_DELAY;
+
+	private Thread animationThread;
+	private int level = 1;
+
+
+	private boolean muted = true;
 	
 
 	private final int PAUSE = 80, // p key
@@ -51,7 +55,8 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 1200;
+	//spawn every 30 seconds
+	private static final int SPAWN_NEW_SHIP_FLOATER = FRAMES_PER_SECOND * 30;
 
 
 
@@ -88,9 +93,9 @@ public class Game implements Runnable, KeyListener {
 	}
 
 	private void fireUpAnimThread() { // called initially
-		if (thrAnim == null) {
-			thrAnim = new Thread(this); // pass the thread a runnable object (this)
-			thrAnim.start();
+		if (animationThread == null) {
+			animationThread = new Thread(this); // pass the thread a runnable object (this)
+			animationThread.start();
 		}
 	}
 
@@ -99,15 +104,15 @@ public class Game implements Runnable, KeyListener {
 
 		// lower this thread's priority; let the "main" aka 'Event Dispatch'
 		// thread do what it needs to do first
-		thrAnim.setPriority(Thread.MIN_PRIORITY);
+		animationThread.setPriority(Thread.MIN_PRIORITY);
 
 		// and get the current time
 		long lStartTime = System.currentTimeMillis();
 
 		// this thread animates the scene
-		while (Thread.currentThread() == thrAnim) {
+		while (Thread.currentThread() == animationThread) {
 			//todo tick is redundant, use System.getCurrentMillis();
-			tick();
+
 			spawnNewShipFloater();
 			gmpPanel.update(gmpPanel.getGraphics()); // update takes the graphics context we must 
 														// surround the sleep() in a try/catch block
@@ -140,19 +145,18 @@ public class Game implements Runnable, KeyListener {
 
 
 		Point pntFriendCenter, pntFoeCenter;
-		//todo refactor the names of these local variables
-		int nFriendRadiux, nFoeRadiux;
+		int radFriend, radFoe;
 
 		for (Movable movFriend : CommandCenter.getInstance().getMovFriends()) {
 			for (Movable movFoe : CommandCenter.getInstance().getMovFoes()) {
 
 				pntFriendCenter = movFriend.getCenter();
 				pntFoeCenter = movFoe.getCenter();
-				nFriendRadiux = movFriend.getRadius();
-				nFoeRadiux = movFoe.getRadius();
+				radFriend = movFriend.getRadius();
+				radFoe = movFoe.getRadius();
 
 				//detect collision
-				if (pntFriendCenter.distance(pntFoeCenter) < (nFriendRadiux + nFoeRadiux)) {
+				if (pntFriendCenter.distance(pntFoeCenter) < (radFriend + radFoe)) {
 
 					//todo make protected() a method of the Movable interace. Sprite's protected() will return false,
 					// and Falcon's will return true if the fade calculation is in force, otherwise false.
@@ -247,12 +251,10 @@ public class Game implements Runnable, KeyListener {
 			}
 
 		}
-		//a request to the JVM is made every frame to garbage collect, however, the JVM will choose when and how to do this
-		//todo this .gc() call is not required. remove it.
-		System.gc();
 		
 	}//end meth
 
+	//todo refactor
 	private void killFoe(Movable movFoe) {
 		
 		if (movFoe instanceof Asteroid){
@@ -282,24 +284,11 @@ public class Game implements Runnable, KeyListener {
 
 	}
 
-	//todo use System.getCurrentMillis();
-	//some methods for timing events in the game,
-	//such as the appearance of UFOs, floaters (power-ups), etc. 
-	public void tick() {
-		if (nTick == Integer.MAX_VALUE)
-			nTick = 0;
-		else
-			nTick++;
-	}
-
-	public int getTick() {
-		return nTick;
-	}
-
 	private void spawnNewShipFloater() {
+		//System.out.println((System.currentTimeMillis() / ANI_DELAY));
 		//make the appearance of power-up dependent upon ticks and levels
 		//the higher the level the more frequent the appearance
-		if (nTick % (SPAWN_NEW_SHIP_FLOATER - nLevel * 7) == 0) {
+		if ((System.currentTimeMillis() / ANI_DELAY) % (SPAWN_NEW_SHIP_FLOATER - level * 7) == 0) {
 			//CommandCenter.getInstance().getMovFloaters().enqueue(new NewShipFloater());
 			CommandCenter.getInstance().getOpsList().enqueue(new NewShipFloater(), CollisionOp.Operation.ADD);
 		}
@@ -438,13 +427,13 @@ public class Game implements Runnable, KeyListener {
 				break;
 				
 			case MUTE:
-				if (!bMuted){
+				if (!muted){
 					stopLoopingSounds(clpMusicBackground);
-					bMuted = !bMuted;
+					muted = !muted;
 				} 
 				else {
 					clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
-					bMuted = !bMuted;
+					muted = !muted;
 				}
 				break;
 				
