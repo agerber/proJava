@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
+//the lombok @Data gives us automatic getters and setters on all members
 @Data
 public abstract class Sprite implements Movable {
 	//the center-point of this sprite

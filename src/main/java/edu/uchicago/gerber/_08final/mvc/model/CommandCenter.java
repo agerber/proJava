@@ -8,6 +8,7 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+//the lombok @Data gives us automatic getters and setters on all members
 @Data
 public class CommandCenter {
 
