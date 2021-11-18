@@ -22,7 +22,7 @@ public abstract class Sprite implements Movable {
 	private int orientation;
 	private int expiry; //natural mortality (short-living objects)
 	//the color of this sprite
-	private Color col;
+	private Color color;
 
 	//some sprites spin, such as floaters and asteroids
 	private int spin;
@@ -101,11 +101,11 @@ public abstract class Sprite implements Movable {
 	}
 
 	public Color getColor() {
-		return col;
+		return color;
 	}
 
-	public void setColor(Color col) {
-		this.col = col;
+	public void setColor(Color color) {
+		this.color = color;
 
 	}
 
