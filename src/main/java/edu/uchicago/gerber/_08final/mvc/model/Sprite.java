@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 public abstract class Sprite implements Movable {
 	//the center-point of this sprite
@@ -267,47 +268,33 @@ public abstract class Sprite implements Movable {
 	private void render(Graphics g) {
 		//to render this Sprite, we need to adjust the original cartesian coords by adjusting for both the center and
 		// orientation.
-		Point[] adjPoints = new Point[getCartesianPoints().length];
 		List<Pair<Double,Double>> polars = convertToPolars(Arrays.asList(getCartesianPoints()));
 
-		for (int nC = 0; nC < getCartesianPoints().length; nC++) {
-			if (nC % 2 != 0) //odd
-			{
-				adjPoints[nC] = new Point((int) (getCenter().x + polars.get(nC).getValue() * getRadius()
+		Function<Pair<Double,Double>,Point> adjustPointFunction =
+				pair -> new Point(
+				(int) (getCenter().x + pair.getValue() * getRadius()
 						* Math.sin(Math.toRadians(getOrientation())
-						+ polars.get(nC).getKey())), (int) (getCenter().y - polars.get(nC).getValue() * getRadius()
+						+ pair.getKey())),
+
+				(int) (getCenter().y - pair.getValue() * getRadius()
 						* Math.cos(Math.toRadians(getOrientation())
-						+ polars.get(nC).getKey())));
-
-			}
-			//even
-			else {
-				adjPoints[nC] = new Point((int) (getCenter().x + polars.get(nC).getValue() * getRadius()
-
-						* Math.sin(Math.toRadians(getOrientation())
-						+ polars.get(nC).getKey())),
-						(int) (getCenter().y - polars.get(nC).getValue() * getRadius()
-
-								* Math.cos(Math.toRadians(getOrientation())
-								+ polars.get(nC).getKey())));
-
-			} //end even/odd else
-
-		} //end for loop
+						+ pair.getKey())));
 
 
 		g.drawPolygon(
-				Arrays.stream(adjPoints)
+				polars.stream()
+						.map(adjustPointFunction)
 						.map(pnt -> pnt.x)
 						.mapToInt(Integer::intValue)
 						.toArray(),
 
-				Arrays.stream(adjPoints)
+				polars.stream()
+						.map(adjustPointFunction)
 						.map(pnt -> pnt.y)
 						.mapToInt(Integer::intValue)
 						.toArray(),
 
-				adjPoints.length);
+				polars.size());
 
 		//for debugging center-point. Feel free to remove these two lines.
 		//#########################################
