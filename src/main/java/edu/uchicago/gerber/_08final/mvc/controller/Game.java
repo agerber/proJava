@@ -154,7 +154,7 @@ public class Game implements Runnable, KeyListener {
 
 					//falcon
 					if ((movFriend instanceof Falcon) ){
-						if (!CommandCenter.getInstance().getFalcon().getProtected()){
+						if (!CommandCenter.getInstance().getFalcon().isProtected()){
 							CommandCenter.getInstance().getOpsList().enqueue(movFriend, CollisionOp.Operation.REMOVE);
 							CommandCenter.getInstance().spawnFalcon(false);
 
@@ -318,8 +318,6 @@ public class Game implements Runnable, KeyListener {
 		
 		if (isLevelClear() ){
 			if (CommandCenter.getInstance().getFalcon() !=null)
-				CommandCenter.getInstance().getFalcon().setProtected(true);
-
 			//more asteroids each level to increase difficulty
 			spawnAsteroids(CommandCenter.getInstance().getLevel() + 2);
 			CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);

@@ -16,6 +16,7 @@ public interface Movable {
 	Point getCenter();
 	int getRadius();
 	Team getTeam();
+	boolean isProtected();
 
 
 } //end Movable

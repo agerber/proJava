@@ -181,6 +181,10 @@ public abstract class Sprite implements Movable {
 		return randomNumber;
 	}
 
+	@Override
+	public boolean isProtected() {
+		return false;
+	}
 
 	protected Point[] polarToCartesian(List<Pair<Double,Double>> pairs) {
 
