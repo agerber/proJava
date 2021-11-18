@@ -109,9 +109,9 @@ public class GamePanel extends Panel {
 
 	
 	//for each movable array, process it.
-	private void iterateMovables(Graphics g, List<Movable>...movMovz){
+	private void iterateMovables(Graphics g, List<Movable>... arrayOfListMovables){
 		
-		for (List<Movable> movMovs : movMovz) {
+		for (List<Movable> movMovs : arrayOfListMovables) {
 			for (Movable mov : movMovs) {
 
 				mov.move();

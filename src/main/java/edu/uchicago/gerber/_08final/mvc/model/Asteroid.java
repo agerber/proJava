@@ -12,7 +12,7 @@ import javafx.util.Pair;
 public class Asteroid extends Sprite {
 
 	//radius of a large asteroid
-	private final int RAD = 100;
+	private final int LARGE_RADIUS = 100;
 	
 	//size determines if the Asteroid is Large (0), Medium (1), or Small (2)
 	//when you explode a Large asteroid, you should spawn 2 or 3 medium asteroids
@@ -39,9 +39,9 @@ public class Asteroid extends Sprite {
 		//an size of zero is a big asteroid
 		//a size of 1 or 2 is med or small asteroid respectively
 		if (size == 0)
-			setRadius(RAD);
+			setRadius(LARGE_RADIUS);
 		else
-			setRadius(RAD/(size * 2));
+			setRadius(LARGE_RADIUS/(size * 2));
 
 
 		//this method is in place of setting cartesean points
@@ -71,7 +71,7 @@ public class Asteroid extends Sprite {
 		setDeltaY(somePosNegValue(10 + newSmallerSize * 2));
 
 
-		setRadius(RAD/(newSmallerSize * 2));
+		setRadius(LARGE_RADIUS/(newSmallerSize * 2));
 		setCenter(astExploded.getCenter());
 		assignRandomShape();
 		
