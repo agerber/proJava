@@ -1,9 +1,14 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
+import javafx.util.Pair;
 
 public class Asteroid extends Sprite {
 
@@ -33,8 +38,7 @@ public class Asteroid extends Sprite {
 		//random delta-y
 		setDeltaY(somePosNegValue(10));
 
-		//todo redundant
-		assignRandomShape();
+
 		
 		//an nSize of zero is a big asteroid
 		//a nSize of 1 or 2 is med or small asteroid respectively
@@ -42,7 +46,9 @@ public class Asteroid extends Sprite {
 			setRadius(RAD);
 		else
 			setRadius(RAD/(nSize * 2));
-		
+
+
+		assignRandomShape();
 
 	}
 
@@ -116,44 +122,69 @@ public class Asteroid extends Sprite {
 	}
 	
 
-	  public void assignRandomShape ()
-	  {
-	    int nSide = Game.R.nextInt( 7 ) + 7;
-	    int nSidesTemp = nSide;
-
-	    int[] nSides = new int[nSide];
-	    for ( int nC = 0; nC < nSides.length; nC++ )
-	    {
-	      int n = nC * 48 / nSides.length - 4 + Game.R.nextInt( 8 );
-	      if ( n >= 48 || n < 0 )
-	      {
-	        n = 0;
-	        nSidesTemp--;
-	      }
-	      nSides[nC] = n;
-	    }
-
-	    Arrays.sort( nSides );
-
-
-
-	    double[]  dDegrees = new double[nSidesTemp];
-	    for ( int nC = 0; nC <dDegrees.length; nC++ )
-	    {
-	    	dDegrees[nC] = nSides[nC] * Math.PI / 24 + Math.PI / 2;
-	    }
-
-	   //setDegrees( dDegrees);
-
-		double[] dLengths = new double[dDegrees.length];
-			for (int nC = 0; nC < dDegrees.length; nC++) {
-				if(nC %3 == 0)
-				    dLengths[nC] = 1 - Game.R.nextInt(40)/100.0;
-				else
-					dLengths[nC] = 1;
-			}
+	  public void assignRandomShape (){
+//	  {
+//	    int nSide = Game.R.nextInt( 7 ) + 7;
+//	    int nSidesTemp = nSide;
+//
+//	    int[] nSides = new int[nSide];
+//	    for ( int nC = 0; nC < nSides.length; nC++ )
+//	    {
+//	      int n = nC * 48 / nSides.length - 4 + Game.R.nextInt( 8 );
+//	      if ( n >= 48 || n < 0 )
+//	      {
+//	        n = 0;
+//	        nSidesTemp--;
+//	      }
+//	      nSides[nC] = n;
+//	    }
+//
+//	    Arrays.sort( nSides );
+//
+//
+//
+//	    double[]  dDegrees = new double[nSidesTemp];
+//	    for ( int nC = 0; nC <dDegrees.length; nC++ )
+//	    {
+//	    	dDegrees[nC] = nSides[nC] * Math.PI / 24 + Math.PI / 2;
+//	    }
+//
+//	   //setDegrees( dDegrees);
+//
+//		double[] dLengths = new double[dDegrees.length];
+//			for (int nC = 0; nC < dDegrees.length; nC++) {
+//				if(nC %3 == 0)
+//				    dLengths[nC] = 1 - Game.R.nextInt(40)/100.0;
+//				else
+//					dLengths[nC] = 1;
+//			}
 		//setLengths(dLengths);
-		setObjectPoints(polarToCartesian(dDegrees, dLengths));
+
+
+		  //6.283 is the max radians
+		  final int MAX_RADIANS_X1000 =6283;
+
+		  //
+		  int nSide = Game.R.nextInt( 7 ) + 7;
+		  List<Pair<Double, Double>> pairs = new ArrayList<>();
+		  for ( int nC = 0; nC < nSide; nC++ ){
+		  	double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0;
+		  	double r = (800 + Game.R.nextInt(200)) / 1000.0;
+			  pairs.add(new Pair<>(theta,r));
+		  }
+
+		  List<Pair<Double, Double>> sortedPairs = pairs.stream()
+				  .sorted(new Comparator<Pair<Double, Double>>() {
+					  @Override
+					  public int compare(Pair<Double, Double> p1, Pair<Double, Double> p2) {
+						  return  p1.getKey().compareTo(p2.getKey());
+					  }
+				  })
+				  .collect(Collectors.toList());
+
+
+
+		 setObjectPoints(polarToCartesian(sortedPairs));
 
 	  }
 

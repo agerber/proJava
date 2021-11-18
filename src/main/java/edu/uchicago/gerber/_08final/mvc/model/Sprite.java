@@ -2,6 +2,7 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 import javafx.geometry.Point2D;
+import javafx.util.Pair;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -221,58 +222,113 @@ public abstract class Sprite implements Movable {
 		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
 	}
 
-	protected Point[] polarToCartesian(double[] radians, double[] rOutOfOne){
+	protected Point[] polarToCartesian(List<Pair<Double,Double>> pairs) {
 
 
+		int nC = 0;
+		Point[] pnts = new Point[pairs.size()];
 
-		Point[] pnts = new Point[radians.length];
-		for (int nC = 0; nC < radians.length; nC++) {
+//		int[] nXFlames = new int[pairs.size()];
+//		int[] nYFlames = new int[pairs.size()];
+
+
+		for (Pair<Double, Double> pair : pairs) {
+
+
+			if (nC % 2 != 0) //odd
+			{
+				pnts[nC] = new Point((int) (getCenter().x + pair.getValue() * getRadius()
+						* Math.sin(Math.toRadians(getOrientation())
+						+ pair.getKey())),
+
+						(int) (getCenter().y - pair.getValue() * getRadius()
+						* Math.cos(Math.toRadians(getOrientation())
+						+ pair.getKey())));
+
+			} else //even
+			{
+				pnts[nC] = new Point(
+						(int) (getCenter().x + pair.getValue() * getRadius()
+
+						* Math.sin(Math.toRadians(getOrientation())
+						+ pair.getKey())),
+
+
+						(int) (getCenter().y - pair.getValue() * getRadius()
+
+								* Math.cos(Math.toRadians(getOrientation())
+								+ pair.getKey())));
+
+			} //end even/odd else
+			nC++;
+
+		} //end for loop
+
+//		for (int nD = 0; nD < pairs.size(); nD++) {
+//			nXFlames[nD] = pnts[nD].x;
+//			nYFlames[nD] = pnts[nD].y;
+//
+//		} //end assign flame points
+
+
+	return pnts;
+			
+			
+			
+			
+			
+			
+			
+			
+
+
 			//double rRadius = rOutOfOne[nC] * getRadius();
 			//	double angleInRadians = Math.toRadians(degrees[nC]);
 			//int x = (int) (Math.round(lengths[nC] * Math.cos(angleInRadians) * 100f) / 100f);
 			//int y = (int) (Math.round(lengths[nC] * Math.sin(angleInRadians) * 100f) / 100f);
 			//double theta = rOutOfOne[nC]* getRadius();
-//			double x = (rOutOfOne[nC] * getRadius()) * Math.cos(Math.toDegrees(radians[nC]));
-//			double y = (rOutOfOne[nC] * getRadius()) * Math.sin(Math.toDegrees(radians[nC]));
-			//double[] vals = new double[]{radians[nC] * Math.cos(theta), radians[nC] * Math.sin(theta)};
+//			double x = (rOutOfOne[nC] * getRadius()) * Math.cos(Math.toDegrees(pair.getKey()));
+//			double y = (rOutOfOne[nC] * getRadius()) * Math.sin(Math.toDegrees(pair.getKey()));
+			//double[] vals = new double[]{pair.getKey() * Math.cos(theta), pair.getKey() * Math.sin(theta)};
 //			pnts[nC] = 		 new Point((int) (getCenter().x + 2
 //					* getRadius()
 //					* Math.sin(Math.toRadians(getOrientation())
-//					+ radians[nC])), (int) (getCenter().y - 2
+//					+ pair.getKey())), (int) (getCenter().y - 2
 //					* getRadius()
 //					* Math.cos(Math.toRadians(getOrientation())
-//					+ radians[nC])));
+//					+ pair.getKey())));
 
+//
+//			if (nC % 2 != 0) //odd
+//			{
+//				pnts[nC] = new Point(
+//
+//						(int) (getCenter().x + 2 * getRadius()
+//						* Math.sin(Math.toRadians(getOrientation())
+//						+ pair.getValue())),
+//
+//						(int) (getCenter().y - 2
+//						* getRadius()
+//						* Math.cos(Math.toRadians(getOrientation())
+//						+ pair.getKey())));
+//
+//			} else //even
+//			{
+//				pnts[nC] = new Point((int) (getCenter().x + getRadius()
+//						//* 1.1
+//						* Math.sin(Math.toRadians(getOrientation())
+//						+ pair.getValue())),
+//
+//						(int) (getCenter().y - getRadius()
+//								//* 1.1
+//								* Math.cos(Math.toRadians(getOrientation())
+//								+ pair.getKey())));
+//
+//
+//			}
+//			nC++;
+//		}
 
-			if (nC % 2 != 0) //odd
-			{
-				pnts[nC] = new Point(
-
-						(int) (getCenter().x + 2 * getRadius()
-						* Math.sin(Math.toRadians(getOrientation())
-						+ radians[nC])),
-
-						(int) (getCenter().y - 2
-						* getRadius()
-						* Math.cos(Math.toRadians(getOrientation())
-						+ radians[nC])));
-
-			} else //even
-			{
-				pnts[nC] = new Point((int) (getCenter().x + getRadius()
-						//* 1.1
-						* Math.sin(Math.toRadians(getOrientation())
-						+ radians[nC])),
-
-						(int) (getCenter().y - getRadius()
-								//* 1.1
-								* Math.cos(Math.toRadians(getOrientation())
-								+ radians[nC])));
-
-
-			}
-		}
-		return pnts;
 		
 	}
 	
