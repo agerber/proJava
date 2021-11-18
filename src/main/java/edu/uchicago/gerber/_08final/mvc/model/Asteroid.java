@@ -12,9 +12,7 @@ import javafx.util.Pair;
 
 public class Asteroid extends Sprite {
 
-	
-	private int nSpin;
-	
+
 	//radius of a large asteroid
 	private final int RAD = 100;
 	
@@ -52,12 +50,6 @@ public class Asteroid extends Sprite {
 
 	}
 
-	private int somePosNegValue(int seed) {
-		int randomNumber = Game.R.nextInt(seed);
-		if (randomNumber % 2 == 0)
-			randomNumber = -randomNumber;
-		return randomNumber;
-	}
 
 
 	public Asteroid(Asteroid astExploded){
@@ -111,16 +103,6 @@ public class Asteroid extends Sprite {
 		
 	}
 
-	//todo use Lombok for getters/setters
-	public int getSpin() {
-		return this.nSpin;
-	}
-	
-
-	public void setSpin(int nSpin) {
-		this.nSpin = nSpin;
-	}
-	
 
 	  public void assignRandomShape (){
 

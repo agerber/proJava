@@ -28,6 +28,9 @@ public abstract class Sprite implements Movable {
 	//the color of this sprite
 	private Color col;
 
+	//some sprites spin, such as floaters and asteroids
+	private int spin;
+
 	//fade value for fading in and out
 	/*
 	todo use a long instead of nFade, and call it instantiateTime and set it to the
@@ -48,6 +51,14 @@ public abstract class Sprite implements Movable {
 
 	public void setTeam(Team team){
 		this.team = team;
+	}
+
+	public int getSpin() {
+		return this.spin;
+	}
+
+	public void setSpin(int spin) {
+		this.spin = spin;
 	}
 
 	protected void expire(){
@@ -162,6 +173,14 @@ public abstract class Sprite implements Movable {
 	protected double hypot(double dX, double dY) {
 		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
 	}
+
+	protected int somePosNegValue(int seed) {
+		int randomNumber = Game.R.nextInt(seed);
+		if (randomNumber % 2 == 0)
+			randomNumber = -randomNumber;
+		return randomNumber;
+	}
+
 
 	protected Point[] polarToCartesian(List<Pair<Double,Double>> pairs) {
 
