@@ -139,6 +139,7 @@ public class Game implements Runnable, KeyListener {
 		Point pntFriendCenter, pntFoeCenter;
 		int radFriend, radFoe;
 
+		//This has order-of-growth of O(n^2), there is no way around this.
 		for (Movable movFriend : CommandCenter.getInstance().getMovFriends()) {
 			for (Movable movFoe : CommandCenter.getInstance().getMovFoes()) {
 
@@ -189,6 +190,7 @@ public class Game implements Runnable, KeyListener {
 
 	private void processGameOpsQueue() {
 		//we are dequeuing the opsList and performing operations in serial to avoid mutating the movable arraylists while iterating them above
+		//this is done AFTER we have completed our collision detection
 		while(!CommandCenter.getInstance().getOpsList().isEmpty()){
 			CollisionOp cop =  CommandCenter.getInstance().getOpsList().dequeue();
 			Movable mov = cop.getMovable();
@@ -263,7 +265,6 @@ public class Game implements Runnable, KeyListener {
 
 		//appears more often as your level increses.
 		if ((System.currentTimeMillis() / ANI_DELAY) % (SPAWN_NEW_SHIP_FLOATER - level * 7L) == 0) {
-			//CommandCenter.getInstance().getMovFloaters().enqueue(new NewShipFloater());
 			CommandCenter.getInstance().getOpsList().enqueue(new NewShipFloater(), CollisionOp.Operation.ADD);
 		}
 	}
@@ -304,7 +305,7 @@ public class Game implements Runnable, KeyListener {
 		
 		if (isLevelClear() ){
 			if (CommandCenter.getInstance().getFalcon() !=null)
-			//more asteroids each level to increase difficulty
+			//more asteroids at each level to increase difficulty
 			spawnAsteroids(CommandCenter.getInstance().getLevel() + 2);
 			CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);
 
@@ -329,7 +330,6 @@ public class Game implements Runnable, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		Falcon fal = CommandCenter.getInstance().getFalcon();
 		int nKey = e.getKeyCode();
-		// System.out.println(nKey);
 
 		if (nKey == START && !CommandCenter.getInstance().isPlaying())
 			startGame();
@@ -374,6 +374,7 @@ public class Game implements Runnable, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		Falcon fal = CommandCenter.getInstance().getFalcon();
 		int nKey = e.getKeyCode();
+		//show the key-code in the console
 		 System.out.println(nKey);
 
 		if (fal != null) {
@@ -414,7 +415,7 @@ public class Game implements Runnable, KeyListener {
 	}
 
 	@Override
-	// Just need it b/c of KeyListener implementation
+	// does nothing, but we need it b/c of KeyListener contract
 	public void keyTyped(KeyEvent e) {
 	}
 

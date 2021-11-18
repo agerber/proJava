@@ -22,6 +22,7 @@ public abstract class Sprite implements Movable {
 	//the radius of circumscribing circle
 	private int radius;
 
+	//orientation from 0-359
 	private int orientation;
 	private int expiry; //natural mortality (short-living objects)
 	//the color of this sprite
@@ -33,13 +34,12 @@ public abstract class Sprite implements Movable {
 	//use for fade-in/fade-out
 	private int fade;
 
-	//these are used to draw the polygon. You don't usually need to interface with these
-	private Point[] pntCoords; //an array of points used to draw polygon
+	//these are Cartesean points used to draw the polygon.
+	private Point[] pntCoords;
 
 
 	@Override
 	public Team getTeam() {
-		//default
 	  return team;
 
 	}
@@ -71,6 +71,7 @@ public abstract class Sprite implements Movable {
 		double newYPos = pnt.y + getDeltaY();
 		
 		//the following code block just keeps the sprite inside the bounds of the frame
+		//to ensure this behavior among all sprites in your game, make sure to call super.maove() in extending classes.
 		if (pnt.x > Game.DIM.width) {
 			setCenter(new Point(1, pnt.y));
 
