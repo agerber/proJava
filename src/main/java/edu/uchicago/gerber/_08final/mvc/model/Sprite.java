@@ -427,6 +427,10 @@ public abstract class Sprite implements Movable {
 
 		//g.setColor( Color.white );
 		g.drawPolygon(nXFlames, nYFlames, getObjectPoints().length);
+
+		//for debugging asteroids
+		g.setColor(Color.RED);
+		g.fillOval(getCenter().x, getCenter().y, 3,3);
 	}
 
 	protected int[] convertStreamToArray(Stream<Integer> stream) {
