@@ -79,6 +79,7 @@ public class Game implements Runnable, KeyListener {
 	// ===============================================
 
 	public static void main(String args[]) {
+		//typical Swing application main method
 		EventQueue.invokeLater(new Runnable() { // uses the Event dispatch thread from Java 5 (refactored)
 					public void run() {
 						try {
@@ -189,8 +190,9 @@ public class Game implements Runnable, KeyListener {
 	}//end meth
 
 	private void processGameOpsQueue() {
-		//we are dequeuing the opsList and performing operations in serial to avoid mutating the movable arraylists while iterating them above
-		//this is done AFTER we have completed our collision detection
+
+		//deferred mutation: these operations are done AFTER we have completed our collision detection to avoid
+		// mutating the movable arraylists while iterating them above
 		while(!CommandCenter.getInstance().getOpsList().isEmpty()){
 			CollisionOp cop =  CommandCenter.getInstance().getOpsList().dequeue();
 			Movable mov = cop.getMovable();
