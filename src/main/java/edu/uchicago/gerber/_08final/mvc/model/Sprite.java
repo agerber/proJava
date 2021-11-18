@@ -325,6 +325,7 @@ public abstract class Sprite implements Movable {
 		 pntCoords = pntPs;
 	}
 
+	//overloaded
 	public void setCartesianPoints(List<Point> pntPs) {
 		pntCoords = pntPs.stream()
 				.toArray(Point[]::new);
