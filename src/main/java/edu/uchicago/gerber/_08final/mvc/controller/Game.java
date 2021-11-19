@@ -343,8 +343,7 @@ public class Game implements Runnable, KeyListener {
 				CommandCenter.getInstance().setPaused(!CommandCenter.getInstance().isPaused());
 				if (CommandCenter.getInstance().isPaused())
 					stopLoopingSounds(clpMusicBackground, clpThrust);
-				else
-					clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
+
 				break;
 			case QUIT:
 				System.exit(0);
@@ -401,14 +400,12 @@ public class Game implements Runnable, KeyListener {
 			case MUTE:
 				if (!muted){
 					stopLoopingSounds(clpMusicBackground);
-					muted = !muted;
 				} 
 				else {
 					clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
-					muted = !muted;
 				}
+				muted = !muted;
 				break;
-				
 				
 			default:
 				break;
