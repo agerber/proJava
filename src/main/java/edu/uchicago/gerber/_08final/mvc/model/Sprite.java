@@ -84,7 +84,7 @@ public abstract class Sprite implements Movable {
 
 	}
 
-	protected double hypot(double dX, double dY) {
+	protected double hypotFunction(double dX, double dY) {
 		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
 	}
 
@@ -123,20 +123,20 @@ public abstract class Sprite implements Movable {
 		//determine the largest hypotenuse
 		double hypotenuse = 0;
 		for (Point pnt : pntCartesians)
-			if (hypot(pnt.x, pnt.y) > hypotenuse)
-				hypotenuse = hypot(pnt.x, pnt.y);
+			if (hypotFunction(pnt.x, pnt.y) > hypotenuse)
+				hypotenuse = hypotFunction(pnt.x, pnt.y);
 
 
-		BiFunction<Point, Double, Pair<Double,Double>> pointDoublePairBiFunction = (pnt, d) -> new Pair<>(
+		BiFunction<Point, Double, Pair<Double,Double>> pointDoublePairBiFunction = (pnt, dub) -> new Pair<>(
 				Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180,
-				hypot(pnt.x, pnt.y) / d);
+				hypotFunction(pnt.x, pnt.y) / dub);
 
 		//we must make hypotenuse final to pass into a stream.
-		final double h = hypotenuse;
+		final double hyp = hypotenuse;
 
 
 		return pntCartesians.stream()
-		     .map(p -> pointDoublePairBiFunction.apply(p, h))
+		     .map(pnt -> pointDoublePairBiFunction.apply(pnt, hyp))
 			 .collect(Collectors.toList());
 
 	}
