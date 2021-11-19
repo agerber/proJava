@@ -124,15 +124,14 @@ public class Falcon extends Sprite {
 		}
 		//rotate left
 		if (turningLeft) {
-
-			if (getOrientation() <= 0 && turningLeft) {
+			if (getOrientation() <= 0) {
 				setOrientation(360);
 			}
 			setOrientation(getOrientation() - DEGREE_STEP);
 		}
 		//rotate right
 		if (turningRight) {
-			if (getOrientation() >= 360 && turningRight) {
+			if (getOrientation() >= 360) {
 				setOrientation(0);
 			}
 			setOrientation(getOrientation() + DEGREE_STEP);
