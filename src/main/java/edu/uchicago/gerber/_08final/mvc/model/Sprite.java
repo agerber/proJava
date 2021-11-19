@@ -118,11 +118,11 @@ public abstract class Sprite implements Movable {
 
 	}
 
-	protected List<Pair<Double,Double>> carteseanToPolar(List<Point> pntCartesians){
+	protected List<Pair<Double,Double>> carteseanToPolar(List<Point> pntCarteseans){
 
 		//determine the largest hypotenuse
 		double hypotenuse = 0;
-		for (Point pnt : pntCartesians)
+		for (Point pnt : pntCarteseans)
 			if (hypot(pnt.x, pnt.y) > hypotenuse)
 				hypotenuse = hypot(pnt.x, pnt.y);
 
@@ -135,11 +135,9 @@ public abstract class Sprite implements Movable {
 		final double h = hypotenuse;
 
 
-		return pntCartesians.stream()
+		return pntCarteseans.stream()
 		     .map(p -> pointDoublePairBiFunction.apply(p, h))
 			 .collect(Collectors.toList());
-
-
 
 	}
 
@@ -160,10 +158,11 @@ public abstract class Sprite implements Movable {
 	}
 
 	private void render(Graphics g) {
-		//to render this Sprite, we need to adjust the original cartesian coords by adjusting for both the center and
-		// orientation.
+
 		List<Pair<Double,Double>> polars = carteseanToPolar(Arrays.asList(getCarteseans()));
 
+		//to render this Sprite, we need to adjust the original cartesian coords by adjusting for both the center and
+		// orientation.
 		Function<Pair<Double,Double>,Point> adjustPointFunction =
 				pair -> new Point(
 				(int) (getCenter().x + pair.getValue() * getRadius()
