@@ -34,7 +34,7 @@ public class NewShipFloater extends Sprite {
 		//random orientation 
 		setOrientation(Game.R.nextInt(360));
 
-		//always set cartesean points last
+		//always set cartesian points last
 		List<Point> pntCs = new ArrayList<Point>();
 		pntCs.add(new Point(5, 5));
 		pntCs.add(new Point(4,0));
@@ -45,7 +45,7 @@ public class NewShipFloater extends Sprite {
 		pntCs.add(new Point(-5, 5));
 		pntCs.add(new Point(0,4));
 
-		setCarteseans(pntCs);
+		setCartesians(pntCs);
 	}
 
 	@Override

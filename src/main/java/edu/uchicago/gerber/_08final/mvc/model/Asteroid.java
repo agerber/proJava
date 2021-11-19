@@ -44,7 +44,7 @@ public class Asteroid extends Sprite {
 			setRadius(LARGE_RADIUS/(size * 2));
 
 
-		//this method is in place of setting cartesean points
+		//this method is in place of setting cartesian points
 		assignRandomShape();
 
 	}
@@ -118,7 +118,7 @@ public class Asteroid extends Sprite {
 			polarPairs.add(new Pair<>(theta,r));
 		  }
 
-		 setCarteseans(polarToCartesian(
+		 setCartesians(polarToCartesian(
 
 		 		polarPairs.stream()
 				 .sorted(new Comparator<Pair<Double, Double>>() {

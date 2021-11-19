@@ -37,8 +37,8 @@ public abstract class Sprite implements Movable {
 	//use for fade-in/fade-out
 	private int fade;
 
-	//these are Cartesean points used to draw the polygon.
-	private Point[] carteseans;
+	//these are Cartesian points used to draw the polygon.
+	private Point[] cartesians;
 
 	protected void expire(){
 		if (getExpiry() == 0)
@@ -118,11 +118,11 @@ public abstract class Sprite implements Movable {
 
 	}
 
-	protected List<Pair<Double,Double>> carteseanToPolar(List<Point> pntCarteseans){
+	protected List<Pair<Double,Double>> cartesianToPolar(List<Point> pntCartesians){
 
 		//determine the largest hypotenuse
 		double hypotenuse = 0;
-		for (Point pnt : pntCarteseans)
+		for (Point pnt : pntCartesians)
 			if (hypot(pnt.x, pnt.y) > hypotenuse)
 				hypotenuse = hypot(pnt.x, pnt.y);
 
@@ -135,7 +135,7 @@ public abstract class Sprite implements Movable {
 		final double h = hypotenuse;
 
 
-		return pntCarteseans.stream()
+		return pntCartesians.stream()
 		     .map(p -> pointDoublePairBiFunction.apply(p, h))
 			 .collect(Collectors.toList());
 
@@ -159,7 +159,7 @@ public abstract class Sprite implements Movable {
 
 	private void render(Graphics g) {
 
-		List<Pair<Double,Double>> polars = carteseanToPolar(Arrays.asList(getCarteseans()));
+		List<Pair<Double,Double>> polars = cartesianToPolar(Arrays.asList(getCartesians()));
 
 		//to render this Sprite, we need to adjust the original cartesian coords by adjusting for both the center and
 		// orientation.
@@ -199,8 +199,8 @@ public abstract class Sprite implements Movable {
 
 	//in order to overload a lombok'ed method, we need to use the @Tolerate annotation
 	@Tolerate
-	public void setCarteseans(List<Point> pntPs) {
-		setCarteseans(pntPs.stream()
+	public void setCartesians(List<Point> pntPs) {
+		setCartesians(pntPs.stream()
 				.toArray(Point[]::new));
 
 	}

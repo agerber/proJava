@@ -94,7 +94,7 @@ public class Falcon extends Sprite {
 		pntCs.add(new Point(1,6));
 		pntCs.add(new Point(0,9));
 
-		setCarteseans(pntCs);
+		setCartesians(pntCs);
 	}
 
 	@Override

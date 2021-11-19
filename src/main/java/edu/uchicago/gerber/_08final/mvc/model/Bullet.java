@@ -33,7 +33,7 @@ public class Bullet extends Sprite {
         setOrientation(fal.getOrientation());
 
         //make sure to setCartesianPoints last
-        //defined the points on a cartesean grid
+        //defined the points on a cartesian grid
         List<Point> pntCs = new ArrayList<>();
 
         pntCs.add(new Point(0, 3)); //top point
@@ -41,7 +41,7 @@ public class Bullet extends Sprite {
         pntCs.add(new Point(1, -1));
         pntCs.add(new Point(0, -2));
         pntCs.add(new Point(-1, -1));
-        setCarteseans(pntCs);
+        setCartesians(pntCs);
 
 
     }

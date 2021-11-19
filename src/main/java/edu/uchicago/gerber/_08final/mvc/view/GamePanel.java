@@ -139,17 +139,17 @@ public class GamePanel extends Panel {
 		g.setColor(Color.white);
 
 		g.drawPolygon(
-					Arrays.stream(falcon.getCarteseans())
+					Arrays.stream(falcon.getCartesians())
 							.map(pnt -> pnt.x + Game.DIM.width - (20 * offSet))
 							.mapToInt(Integer::intValue)
 							.toArray(),
 
-					Arrays.stream(falcon.getCarteseans())
+					Arrays.stream(falcon.getCartesians())
 							.map(pnt -> pnt.y + Game.DIM.height - 40)
 							.mapToInt(Integer::intValue)
 							.toArray(),
 
-					falcon.getCarteseans().length);
+					falcon.getCartesians().length);
 
 
 
