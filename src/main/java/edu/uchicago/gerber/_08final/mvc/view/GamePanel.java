@@ -7,7 +7,10 @@ import edu.uchicago.gerber._08final.mvc.model.Movable;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.stream.Stream;
 
 
 public class GamePanel extends Panel {
@@ -110,17 +113,17 @@ public class GamePanel extends Panel {
 	
 	//for each movable array, process it.
 	@SafeVarargs
-	private final void iterateMovables(Graphics g, List<Movable>... arrayOfListMovables){
-		
-		for (List<Movable> movMovs : arrayOfListMovables) {
-			for (Movable mov : movMovs) {
+	private final void iterateMovables(final Graphics g, List<Movable>... arrayOfListMovables){
 
-				mov.move();
-				mov.draw(g);
+		BiConsumer<Graphics, Movable> moveDraw = (grp, mov) -> {
+			mov.move();
+			mov.draw(grp);
+		};
 
+		Arrays.stream(arrayOfListMovables)
+				.flatMap(Collection::stream)
+				.forEach(m -> moveDraw.accept(g, m));
 
-			}
-		}
 		
 	}
 
