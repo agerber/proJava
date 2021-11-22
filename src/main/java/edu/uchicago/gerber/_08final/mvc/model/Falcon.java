@@ -176,8 +176,12 @@ public class Falcon extends Sprite {
 		if (getFade() == 255) {
 			colShip = Color.white;
 		} else {
-			colShip = new Color(adjustColor(getFade(), 200), adjustColor(
-					getFade(), 175), getFade());
+			colShip = new Color(
+
+					adjustColor(getFade(), 200), //red
+					adjustColor(getFade(), 175), //green
+					getFade() //blue
+			);
 		}
 
 		//most Sprites do not have flames, but Falcon does
