@@ -114,13 +114,12 @@ public class Asteroid extends Sprite {
 		  int sides = Game.R.nextInt( 7 ) + 17;
 		  PolarPoint[] polarPairs = new PolarPoint[sides];
 		  for ( int nC = 0; nC < polarPairs.length; nC++ ){
-		  	double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0;
-		  	double r = (800 + Game.R.nextInt(200)) / 1000.0;
-			polarPairs[nC] = new PolarPoint(r,theta);
+			  double r = (800 + Game.R.nextInt(200)) / 1000.0;
+			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0;
+			  polarPairs[nC] = new PolarPoint(r,theta);
 		  }
 
 		 setCartesians(polarToCartesian(
-
 				 Arrays.stream(polarPairs)
 				 .sorted(new Comparator<PolarPoint>() {
 					 @Override
