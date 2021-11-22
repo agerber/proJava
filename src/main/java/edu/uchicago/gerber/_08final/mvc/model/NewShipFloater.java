@@ -35,7 +35,7 @@ public class NewShipFloater extends Sprite {
 		setOrientation(Game.R.nextInt(360));
 
 		//always set cartesian points last
-		List<Point> pntCs = new ArrayList<Point>();
+		List<Point> pntCs = new ArrayList<>();
 		pntCs.add(new Point(5, 5));
 		pntCs.add(new Point(4,0));
 		pntCs.add(new Point(5, -5));
