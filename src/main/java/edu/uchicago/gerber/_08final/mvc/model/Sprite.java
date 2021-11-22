@@ -101,17 +101,17 @@ public abstract class Sprite implements Movable {
 	}
 
 	//certain Sprites, such as Asteroid use this
-	protected Point[] polarToCartesian(List<PolarPoint> pairs) {
+	protected Point[] polarToCartesian(List<PolarPoint> polPolars) {
 
-		Function<PolarPoint, Point> polarToCartFunction = pair ->  new Point(
-				(int) (getCenter().x + pair.getR() * getRadius() * 100
+		Function<PolarPoint, Point> polarToCartFunction = pp ->  new Point(
+				(int) (getCenter().x + pp.getR() * getRadius() * 100
 						* Math.sin(Math.toRadians(getOrientation())
-						+ pair.getTheta())),
-				(int) (getCenter().y - pair.getR() * getRadius() * 100
+						+ pp.getTheta())),
+				(int) (getCenter().y - pp.getR() * getRadius() * 100
 						* Math.cos(Math.toRadians(getOrientation())
-						+ pair.getTheta())));
+						+ pp.getTheta())));
 
-		return pairs.stream()
+		return polPolars.stream()
 				.map(polarToCartFunction)
 				.toArray(Point[]::new);
 
