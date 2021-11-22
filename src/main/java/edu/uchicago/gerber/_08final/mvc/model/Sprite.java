@@ -120,19 +120,20 @@ public abstract class Sprite implements Movable {
 	protected List<PolarPoint> cartesianToPolar(List<Point> pntCartesians){
 
 		//determine the largest hypotenuse
-		double hypotenuse = 0;
+		double largestHypotenuse = 0;
 		for (Point pnt : pntCartesians)
-			if (hypotFunction(pnt.x, pnt.y) > hypotenuse)
-				hypotenuse = hypotFunction(pnt.x, pnt.y);
+			if (hypotFunction(pnt.x, pnt.y) > largestHypotenuse)
+				largestHypotenuse = hypotFunction(pnt.x, pnt.y);
 
 
+		//r is relative to the largestHypotenuse
 		BiFunction<Point, Double, PolarPoint> pointDoublePairBiFunction = (pnt, dub) -> new PolarPoint(
 				hypotFunction(pnt.x, pnt.y) / dub, //this is r from PolarPoint(r,theta)
 				Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180 //this is theta from PolarPoint(r,theta)
 		);
 
 		//we must make hypotenuse final to pass into a stream.
-		final double hyp = hypotenuse;
+		final double hyp = largestHypotenuse;
 
 
 		return pntCartesians.stream()
@@ -159,19 +160,19 @@ public abstract class Sprite implements Movable {
 
 	private void render(Graphics g) {
 
+		//to render this Sprite, we need to, 1: convert cartesians to polars, 2: adjust the polar coords
+		// by adjusting for both the center and orientation of sprite. 3: convert back to cartesians.
 		List<PolarPoint> polars = cartesianToPolar(Arrays.asList(getCartesians()));
 
-		//to render this Sprite, we need to adjust the original cartesian coords by adjusting for both the center and
-		// orientation.
 		Function<PolarPoint,Point> adjustPointFunction =
-				pair -> new Point(
-				(int) (getCenter().x + pair.getR() * getRadius()
+				pp -> new Point(
+				(int) (getCenter().x + pp.getR() * getRadius()
 						* Math.sin(Math.toRadians(getOrientation())
-						+ pair.getTheta())),
+						+ pp.getTheta())),
 
-				(int) (getCenter().y - pair.getR() * getRadius()
+				(int) (getCenter().y - pp.getR() * getRadius()
 						* Math.cos(Math.toRadians(getOrientation())
-						+ pair.getTheta())));
+						+ pp.getTheta())));
 
 
 		g.drawPolygon(
@@ -187,7 +188,7 @@ public abstract class Sprite implements Movable {
 						.mapToInt(Integer::intValue)
 						.toArray(),
 
-				polars.size());
+				getCartesians().length);
 
 		//for debugging center-point. Feel free to remove these two lines.
 		//#########################################
