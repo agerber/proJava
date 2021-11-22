@@ -1,7 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
-import javafx.util.Pair;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -102,15 +101,15 @@ public abstract class Sprite implements Movable {
 	}
 
 	//certain Sprites, such as Asteroid use this
-	protected Point[] polarToCartesian(List<Pair<Double,Double>> pairs) {
+	protected Point[] polarToCartesian(List<PolarPoint> pairs) {
 
-		Function<Pair<Double,Double>, Point> polarToCartFunction = pair ->  new Point(
-				(int) (getCenter().x + pair.getValue() * getRadius() * 100
+		Function<PolarPoint, Point> polarToCartFunction = pair ->  new Point(
+				(int) (getCenter().x + pair.getR() * getRadius() * 100
 						* Math.sin(Math.toRadians(getOrientation())
-						+ pair.getKey())),
-				(int) (getCenter().y - pair.getValue() * getRadius() * 100
+						+ pair.getTheta())),
+				(int) (getCenter().y - pair.getR() * getRadius() * 100
 						* Math.cos(Math.toRadians(getOrientation())
-						+ pair.getKey())));
+						+ pair.getTheta())));
 
 		return pairs.stream()
 				.map(polarToCartFunction)
@@ -118,7 +117,7 @@ public abstract class Sprite implements Movable {
 
 	}
 
-	protected List<Pair<Double,Double>> cartesianToPolar(List<Point> pntCartesians){
+	protected List<PolarPoint> cartesianToPolar(List<Point> pntCartesians){
 
 		//determine the largest hypotenuse
 		double hypotenuse = 0;
@@ -127,9 +126,10 @@ public abstract class Sprite implements Movable {
 				hypotenuse = hypotFunction(pnt.x, pnt.y);
 
 
-		BiFunction<Point, Double, Pair<Double,Double>> pointDoublePairBiFunction = (pnt, dub) -> new Pair<>(
-				Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180,
-				hypotFunction(pnt.x, pnt.y) / dub);
+		BiFunction<Point, Double, PolarPoint> pointDoublePairBiFunction = (pnt, dub) -> new PolarPoint(
+				hypotFunction(pnt.x, pnt.y) / dub, //this is r from PolarPoint(r,theta)
+				Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180 //this is theta from PolarPoint(r,theta)
+		);
 
 		//we must make hypotenuse final to pass into a stream.
 		final double hyp = hypotenuse;
@@ -159,19 +159,19 @@ public abstract class Sprite implements Movable {
 
 	private void render(Graphics g) {
 
-		List<Pair<Double,Double>> polars = cartesianToPolar(Arrays.asList(getCartesians()));
+		List<PolarPoint> polars = cartesianToPolar(Arrays.asList(getCartesians()));
 
 		//to render this Sprite, we need to adjust the original cartesian coords by adjusting for both the center and
 		// orientation.
-		Function<Pair<Double,Double>,Point> adjustPointFunction =
+		Function<PolarPoint,Point> adjustPointFunction =
 				pair -> new Point(
-				(int) (getCenter().x + pair.getValue() * getRadius()
+				(int) (getCenter().x + pair.getR() * getRadius()
 						* Math.sin(Math.toRadians(getOrientation())
-						+ pair.getKey())),
+						+ pair.getTheta())),
 
-				(int) (getCenter().y - pair.getValue() * getRadius()
+				(int) (getCenter().y - pair.getR() * getRadius()
 						* Math.cos(Math.toRadians(getOrientation())
-						+ pair.getKey())));
+						+ pair.getTheta())));
 
 
 		g.drawPolygon(

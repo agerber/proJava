@@ -2,12 +2,13 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
-import javafx.util.Pair;
+
 
 public class Asteroid extends Sprite {
 
@@ -111,20 +112,20 @@ public class Asteroid extends Sprite {
 		  final int MAX_RADIANS_X1000 =6283;
 
 		  int sides = Game.R.nextInt( 7 ) + 17;
-		  List<Pair<Double, Double>> polarPairs = new ArrayList<>();
-		  for ( int nC = 0; nC < sides; nC++ ){
+		  PolarPoint[] polarPairs = new PolarPoint[sides];
+		  for ( int nC = 0; nC < polarPairs.length; nC++ ){
 		  	double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0;
 		  	double r = (800 + Game.R.nextInt(200)) / 1000.0;
-			polarPairs.add(new Pair<>(theta,r));
+			polarPairs[nC] = new PolarPoint(r,theta);
 		  }
 
 		 setCartesians(polarToCartesian(
 
-		 		polarPairs.stream()
-				 .sorted(new Comparator<Pair<Double, Double>>() {
+				 Arrays.stream(polarPairs)
+				 .sorted(new Comparator<PolarPoint>() {
 					 @Override
-					 public int compare(Pair<Double, Double> p1, Pair<Double, Double> p2) {
-						 return  p1.getKey().compareTo(p2.getKey());
+					 public int compare(PolarPoint p1, PolarPoint p2) {
+						 return  p1.getTheta().compareTo(p2.getTheta());
 					 }
 				 })
 				 .collect(Collectors.toList()))
