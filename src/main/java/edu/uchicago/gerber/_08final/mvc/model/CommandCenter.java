@@ -51,11 +51,10 @@ public class CommandCenter {
 	}
 
 	public  void spawnFalcon() {
-		if (getNumFalcons() != 0) {
-			falcon = new Falcon();
-			opsList.enqueue(falcon, CollisionOp.Operation.ADD);
-			setNumFalcons(getNumFalcons() - 1);
-		}
+
+		falcon = new Falcon();
+		opsList.enqueue(falcon, CollisionOp.Operation.ADD);
+		setNumFalcons(getNumFalcons() - 1);
 		Sound.playSound("shipspawn.wav");
 
 	}
