@@ -94,8 +94,8 @@ public class Asteroid extends Sprite {
 		  int sides = Game.R.nextInt( 7 ) + 17;
 		  PolarPoint[] polPolars = new PolarPoint[sides];
 		  for ( int nC = 0; nC < polPolars.length; nC++ ){
-			  double r = (800 + Game.R.nextInt(200)) / 1000.0;
-			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0;
+			  double r = (800 + Game.R.nextInt(200)) / 1000.0; //number between 0.8 and 1.0
+			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0; // number between 0 and 6.283
 			  polPolars[nC] = new PolarPoint(r,theta);
 		  }
 
