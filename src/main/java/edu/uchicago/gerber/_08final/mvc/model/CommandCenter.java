@@ -6,6 +6,7 @@ import edu.uchicago.gerber._08final.mvc.controller.Sound;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 //the lombok @Data gives us automatic getters and setters on all members
@@ -20,10 +21,10 @@ public class CommandCenter {
 	private  Falcon falcon;
 	private  boolean paused;
 
-	private List<Movable> movDebris = new ArrayList<>();
-	private List<Movable> movFriends = new ArrayList<>();
-	private List<Movable> movFoes = new ArrayList<>();
-	private List<Movable> movFloaters = new ArrayList<>();
+	private List<Movable> movDebris = new LinkedList<>();
+	private List<Movable> movFriends = new LinkedList<>();
+	private List<Movable> movFoes = new LinkedList<>();
+	private List<Movable> movFloaters = new LinkedList<>();
 
 	private GameOpsList opsList = new GameOpsList();
 
