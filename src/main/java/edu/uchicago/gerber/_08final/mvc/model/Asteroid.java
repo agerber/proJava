@@ -54,6 +54,8 @@ public class Asteroid extends Sprite {
 
 	//overloaded so we can spawn smaller asteroids from an exploding one
 	public Asteroid(Asteroid astExploded){
+
+		//calls the other constructor: Asteroid(int size)
 		this(astExploded.getSize() + 1);
 		setCenter(astExploded.getCenter());
 
