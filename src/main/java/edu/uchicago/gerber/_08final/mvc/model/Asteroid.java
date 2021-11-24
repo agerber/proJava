@@ -54,30 +54,8 @@ public class Asteroid extends Sprite {
 
 	//overloaded so we can spawn smaller asteroids from an exploding one
 	public Asteroid(Asteroid astExploded){
-	
-
-		//call Sprite constructor
-		super();
-		setTeam(Team.FOE);
-		//the larger the number, the smaller the asteroid radius. See getSize() method below
-		int  newSmallerSize =	astExploded.getSize() + 1;
-
-		//the spin will be either plus or minus 0-9
-		setSpin(somePosNegValue(10));
-
-		//random delta-x - the smaller the asteroid the faster its possible speed
-		setDeltaX(somePosNegValue(10 + newSmallerSize * 2));
-
-		//random delta-y - the smaller the asteroid the faster its possible speed
-		setDeltaY(somePosNegValue(10 + newSmallerSize * 2));
-
-
-		setRadius(LARGE_RADIUS/(newSmallerSize * 2));
+		this(astExploded.getSize() + 1);
 		setCenter(astExploded.getCenter());
-		assignRandomShape();
-		
-		
-		
 
 	}
 
