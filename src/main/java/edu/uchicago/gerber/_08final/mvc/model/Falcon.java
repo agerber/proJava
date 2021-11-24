@@ -19,7 +19,7 @@ public class Falcon extends Sprite {
 	
 	private final double THRUST = .65;
 
-	final int DEGREE_STEP = 7;
+	final int DEGREE_STEP = 9;
 	
 	//private boolean shield = false;
 	private boolean thrusting = false;
