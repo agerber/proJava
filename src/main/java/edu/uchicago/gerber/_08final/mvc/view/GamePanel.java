@@ -79,7 +79,7 @@ public class GamePanel extends Panel {
 
 		drawScore(grpOff);
 		
-		if (!CommandCenter.getInstance().isPlaying()) {
+		if (CommandCenter.getInstance().isGameOver()) {
 			displayTextOnScreen();
 		} else if (CommandCenter.getInstance().isPaused()) {
 			strDisplay = "Game Paused";
@@ -91,18 +91,15 @@ public class GamePanel extends Panel {
 		else {
 
 			iterateMovables(grpOff,
-			CommandCenter.getInstance().getMovDebris(),
-			CommandCenter.getInstance().getMovFloaters(),
-			CommandCenter.getInstance().getMovFoes(),
-			CommandCenter.getInstance().getMovFriends());
+				CommandCenter.getInstance().getMovDebris(),
+				CommandCenter.getInstance().getMovFloaters(),
+				CommandCenter.getInstance().getMovFoes(),
+				CommandCenter.getInstance().getMovFriends());
 
 
 			drawNumberShipsLeft(grpOff);
 
 
-			if (CommandCenter.getInstance().isGameOver()) {
-				CommandCenter.getInstance().setPlaying(false);
-			}
 		}
 
 		//draw the double-Buffered Image to the graphics context of the panel

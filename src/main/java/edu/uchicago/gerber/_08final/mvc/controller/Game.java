@@ -122,6 +122,7 @@ public class Game implements Runnable, KeyListener {
 			checkCollisions();
 			checkNewLevel();
 
+
 			try {
 				// The total amount of time is guaranteed to be at least ANI_DELAY long.  If processing (update) 
 				// between frames takes longer than ANI_DELAY, then the difference between lStartTime - 
@@ -276,7 +277,6 @@ public class Game implements Runnable, KeyListener {
 		CommandCenter.getInstance().clearAll();
 		CommandCenter.getInstance().initGame();
 		CommandCenter.getInstance().setLevel(0);
-		CommandCenter.getInstance().setPlaying(true);
 		CommandCenter.getInstance().setPaused(false);
 
 	}
@@ -333,7 +333,7 @@ public class Game implements Runnable, KeyListener {
 		Falcon fal = CommandCenter.getInstance().getFalcon();
 		int nKey = e.getKeyCode();
 
-		if (nKey == START && !CommandCenter.getInstance().isPlaying())
+		if (nKey == START && CommandCenter.getInstance().isGameOver())
 			startGame();
 
 		if (fal != null) {
