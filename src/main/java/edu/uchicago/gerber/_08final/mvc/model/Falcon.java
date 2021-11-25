@@ -1,8 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
-import javafx.util.Pair;
-import lombok.Data;
 
 import java.awt.*;
 import java.util.ArrayList;
