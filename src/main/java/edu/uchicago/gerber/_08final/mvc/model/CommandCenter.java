@@ -31,10 +31,10 @@ public class CommandCenter {
 
 	private static CommandCenter instance = null;
 
-	// Constructor made private - static Utility class only
+	// Constructor made private
 	private CommandCenter() {}
 
-
+    //this class maintains game state - make this a singleton.
 	public static CommandCenter getInstance(){
 		if (instance == null){
 			instance = new CommandCenter();
