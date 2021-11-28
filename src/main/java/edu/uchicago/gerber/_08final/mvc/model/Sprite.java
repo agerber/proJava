@@ -128,10 +128,11 @@ public abstract class Sprite implements Movable {
 				largestHypotenuse = hypotFunction(pnt.x, pnt.y);
 
 
-		//r is relative to the largestHypotenuse
 		BiFunction<Point, Double, PolarPoint> pointDoublePairBiFunction = (pnt, dub) -> new PolarPoint(
-				hypotFunction(pnt.x, pnt.y) / dub, //this is r from PolarPoint(r,theta)
-				Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180 //this is theta from PolarPoint(r,theta)
+				//this is r from PolarPoint(r,theta).
+				hypotFunction(pnt.x, pnt.y) / dub, //r is relative to the largestHypotenuse a.k.a. dub in this method
+				//this is theta from PolarPoint(r,theta)
+				Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180
 		);
 
 		//we must make hypotenuse final to pass into a stream.
