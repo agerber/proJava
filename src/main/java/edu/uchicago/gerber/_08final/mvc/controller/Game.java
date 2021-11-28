@@ -193,7 +193,7 @@ public class Game implements Runnable, KeyListener {
 	private void processGameOpsQueue() {
 
 		//deferred mutation: these operations are done AFTER we have completed our collision detection to avoid
-		// mutating the movable arraylists while iterating them above
+		// mutating the movable linkedlists while iterating them above
 		while(!CommandCenter.getInstance().getOpsList().isEmpty()){
 			CollisionOp cop =  CommandCenter.getInstance().getOpsList().dequeue();
 			Movable mov = cop.getMovable();
