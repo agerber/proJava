@@ -33,7 +33,7 @@ public class GameOpsList extends LinkedList<CollisionOp> {
     public CollisionOp dequeue() {
         try {
             lock.lock();
-           return (CollisionOp) super.removeFirst();
+            return removeFirst();
         } finally {
             lock.unlock();
         }
