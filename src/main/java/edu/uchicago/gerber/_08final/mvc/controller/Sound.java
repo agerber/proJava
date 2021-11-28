@@ -2,7 +2,9 @@ package edu.uchicago.gerber._08final.mvc.controller;
 
 
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 
 import javax.sound.sampled.AudioInputStream;
@@ -21,9 +23,9 @@ public class Sound {
 	        try {
 	          Clip clp = AudioSystem.getClip();
 
-	          AudioInputStream aisStream = 
-	        		  AudioSystem.getAudioInputStream(Sound.class.getResourceAsStream("/sounds/" + strPath));
-     
+				InputStream audioSrc = Sound.class.getResourceAsStream("/sounds/" + strPath);
+				InputStream bufferedIn = new BufferedInputStream(audioSrc);
+				AudioInputStream aisStream = AudioSystem.getAudioInputStream(bufferedIn);
 	          
 	          clp.open(aisStream);
 	          clp.start(); 
@@ -41,8 +43,9 @@ public class Sound {
 
 		Clip clp = null;
 		try {
-			AudioInputStream aisStream =
-					  AudioSystem.getAudioInputStream(Sound.class.getResourceAsStream("/sounds/" + strPath));
+			InputStream audioSrc = Sound.class.getResourceAsStream("/sounds/" + strPath);
+			InputStream bufferedIn = new BufferedInputStream(audioSrc);
+			AudioInputStream aisStream = AudioSystem.getAudioInputStream(bufferedIn);
 			clp = AudioSystem.getClip();
 		    clp.open( aisStream );
 
