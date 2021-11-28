@@ -19,8 +19,6 @@ public class GameOpsList extends LinkedList<CollisionOp> {
     }
 
     public void enqueue(Movable mov, CollisionOp.Operation operation) {
-
-
        try {
             lock.lock();
             addLast(new CollisionOp(mov, operation));
