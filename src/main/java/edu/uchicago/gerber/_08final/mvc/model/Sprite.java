@@ -128,7 +128,7 @@ public abstract class Sprite implements Movable {
 				largestHypotenuse = hypotFunction(pnt.x, pnt.y);
 
 
-		BiFunction<Point, Double, PolarPoint> pointDoublePairBiFunction = (pnt, dub) -> new PolarPoint(
+		BiFunction<Point, Double, PolarPoint> pointDoublePolarPointBiFunction = (pnt, dub) -> new PolarPoint(
 				//this is r from PolarPoint(r,theta).
 				hypotFunction(pnt.x, pnt.y) / dub, //r is relative to the largestHypotenuse a.k.a. dub in this method
 				//this is theta from PolarPoint(r,theta)
@@ -140,7 +140,7 @@ public abstract class Sprite implements Movable {
 
 
 		return pntCartesians.stream()
-		     .map(pnt -> pointDoublePairBiFunction.apply(pnt, hyp))
+		     .map(pnt -> pointDoublePolarPointBiFunction.apply(pnt, hyp))
 			 .collect(Collectors.toList());
 
 	}
