@@ -166,12 +166,12 @@ public class Game implements Runnable, KeyListener {
 
 		//check for collisions between falcon and floaters
 		if (CommandCenter.getInstance().getFalcon() != null){
-			Point pntFalCenter = CommandCenter.getInstance().getFalcon().getCenter();
 
+			Point pntFalCenter = CommandCenter.getInstance().getFalcon().getCenter();
 			int radFalcon = CommandCenter.getInstance().getFalcon().getRadius();
+
 			Point pntFloaterCenter;
 			int radFloater;
-			
 			for (Movable movFloater : CommandCenter.getInstance().getMovFloaters()) {
 				pntFloaterCenter = movFloater.getCenter();
 				radFloater = movFloater.getRadius();
