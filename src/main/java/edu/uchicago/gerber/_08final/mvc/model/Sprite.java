@@ -103,11 +103,13 @@ public abstract class Sprite implements Movable {
 	//certain Sprites, such as Asteroid use this
 	protected Point[] polarToCartesian(List<PolarPoint> polPolars) {
 
+		//when casting from double to int, we truncate and lose precision, so best to be generous
+		final int PRECISION_MULTIPLIER = 1000;
 		Function<PolarPoint, Point> polarToCartFunction = pp ->  new Point(
-				(int) (getCenter().x + pp.getR() * getRadius() * 100
+				(int) (getCenter().x + pp.getR() * getRadius() * PRECISION_MULTIPLIER
 						* Math.sin(Math.toRadians(getOrientation())
 						+ pp.getTheta())),
-				(int) (getCenter().y - pp.getR() * getRadius() * 100
+				(int) (getCenter().y - pp.getR() * getRadius() * PRECISION_MULTIPLIER
 						* Math.cos(Math.toRadians(getOrientation())
 						+ pp.getTheta())));
 
