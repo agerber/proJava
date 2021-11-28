@@ -16,7 +16,7 @@ public class CommandCenter {
 	private  int numFalcons;
 	private  int level;
 	private  long score;
-	//the falcon is located in the movFriends array, but since we use this reference a lot, we keep track of it in a
+	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
 	//separate reference. See spawnFalcon() method below.
 	private  Falcon falcon;
 	private  boolean paused;
