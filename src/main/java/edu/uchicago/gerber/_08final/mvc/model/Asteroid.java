@@ -104,15 +104,17 @@ public class Asteroid extends Sprite {
 			  polPolars[nC] = new PolarPoint(r,theta);
 		  }
 
-		 setCartesians(polarToCartesian(
+		 setCartesians(
+		 	polarToCartesian(
 				 Arrays.stream(polPolars)
 				 .sorted(new Comparator<PolarPoint>() {
 					 @Override
-					 public int compare(PolarPoint p1, PolarPoint p2) {
-						 return  p1.getTheta().compareTo(p2.getTheta());
+					 public int compare(PolarPoint pp1, PolarPoint pp2) {
+						 return  pp1.getTheta().compareTo(pp2.getTheta());
 					 }
 				 })
-				 .collect(Collectors.toList()))
+				 .collect(Collectors.toList())
+			)
 		 );
 
 	  }
