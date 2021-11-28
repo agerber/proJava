@@ -282,8 +282,8 @@ public class Game implements Runnable, KeyListener {
 	}
 
 	//this method spawns new asteroids
-	private void spawnAsteroids(int nNum) {
-		for (int nC = 0; nC < nNum; nC++) {
+	private void spawnBigAsteroids(int nNum) {
+		while(nNum-- > 0) {
 			//Asteroids with size of zero are big
 			CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(0), CollisionOp.Operation.ADD);
 
@@ -308,7 +308,7 @@ public class Game implements Runnable, KeyListener {
 		if (isLevelClear() ){
 			if (CommandCenter.getInstance().getFalcon() !=null)
 			//more asteroids at each level to increase difficulty
-			spawnAsteroids(CommandCenter.getInstance().getLevel() + 2);
+			spawnBigAsteroids(CommandCenter.getInstance().getLevel() + 2);
 			CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);
 
 		}
