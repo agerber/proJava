@@ -113,21 +113,20 @@ public class Game implements Runnable, KeyListener {
 		// this thread animates the scene
 		while (Thread.currentThread() == animationThread) {
 
-			spawnNewShipFloater();
-			gmpPanel.update(gmpPanel.getGraphics()); // update takes the graphics context we must 
-														// surround the sleep() in a try/catch block
-														// this simply controls delay time between 
-														// the frames of the animation
-
+			gmpPanel.update(gmpPanel.getGraphics()); // see GamePanel class
 			checkCollisions();
 			checkNewLevel();
+			spawnNewShipFloater();
 
-
+			// surround the sleep() in a try/catch block
+			// this simply controls delay time between
+			// the frames of the animation
 			try {
 				// The total amount of time is guaranteed to be at least ANI_DELAY long.  If processing (update) 
 				// between frames takes longer than ANI_DELAY, then the difference between lStartTime - 
 				// System.currentTimeMillis() will be negative, then zero will be the sleep time
 				lStartTime += ANI_DELAY;
+
 				Thread.sleep(Math.max(0,
 						lStartTime - System.currentTimeMillis()));
 			} catch (InterruptedException e) {
