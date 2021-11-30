@@ -52,9 +52,15 @@ public class CommandCenter {
 
 	public  void spawnFalcon() {
 
+		//decrement the number of falcons first
+		setNumFalcons(getNumFalcons() - 1);
+		if (isGameOver()){
+			Sound.playSound("pacman_death.wav");
+			return;
+		}
+
 		falcon = new Falcon();
 		opsList.enqueue(falcon, CollisionOp.Operation.ADD);
-		setNumFalcons(getNumFalcons() - 1);
 		Sound.playSound("shipspawn.wav");
 
 	}
