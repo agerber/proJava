@@ -50,14 +50,15 @@ public class CommandCenter {
 		spawnFalcon();
 	}
 
+	public  boolean isGameOver() {		//if the number of falcons is zero, then game over
+		return getNumFalcons() == 0;
+	}
+
 	public  void spawnFalcon() {
 
 		//decrement the number of falcons first
 		setNumFalcons(getNumFalcons() - 1);
-		if (isGameOver()){
-			Sound.playSound("pacman_death.wav");
-			return;
-		}
+		if (isGameOver()) return;
 
 		falcon = new Falcon();
 		opsList.enqueue(falcon, CollisionOp.Operation.ADD);
@@ -72,10 +73,6 @@ public class CommandCenter {
 		movFloaters.clear();
 	}
 
-
-	public  boolean isGameOver() {		//if the number of falcons is zero, then game over
-		return getNumFalcons() == 0;
-	}
 
 
 

@@ -350,7 +350,7 @@ public class Game implements Runnable, KeyListener {
 				break;
 			case UP:
 				fal.thrustOn();
-				if (!CommandCenter.getInstance().isPaused())
+				if (!CommandCenter.getInstance().isPaused() && !CommandCenter.getInstance().isGameOver())
 					clpThrust.loop(Clip.LOOP_CONTINUOUSLY);
 				break;
 			case LEFT:
