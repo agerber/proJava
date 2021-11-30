@@ -305,11 +305,11 @@ public class Game implements Runnable, KeyListener {
 	
 	private void checkNewLevel(){
 		
-		if (isLevelClear() ){
-			if (CommandCenter.getInstance().getFalcon() !=null)
+		if (isLevelClear() && CommandCenter.getInstance().getFalcon() != null) {
 			//more asteroids at each level to increase difficulty
 			spawnBigAsteroids(CommandCenter.getInstance().getLevel() + 2);
 			CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);
+			CommandCenter.getInstance().getFalcon().setFade(30);
 
 		}
 	}
