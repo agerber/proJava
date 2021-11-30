@@ -18,6 +18,8 @@ public class Falcon extends Sprite {
 	private final double THRUST = .65;
 
 	final int DEGREE_STEP = 9;
+	//must be multiple of 3
+	public static final int FADE_INITIAL_VALUE = 51;
 	
 	//private boolean shield = false;
 	private boolean thrusting = false;
@@ -46,7 +48,7 @@ public class Falcon extends Sprite {
 		setRadius(35);
 
 		//Falcon uses fade.
-		setFade(0);
+		setFade(FADE_INITIAL_VALUE);
 
 		//be sure to set cartesian points last.
 		List<Point> pntCs = new ArrayList<>();

@@ -309,7 +309,7 @@ public class Game implements Runnable, KeyListener {
 			//more asteroids at each level to increase difficulty
 			spawnBigAsteroids(CommandCenter.getInstance().getLevel() + 2);
 			CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);
-			CommandCenter.getInstance().getFalcon().setFade(30);
+			CommandCenter.getInstance().getFalcon().setFade(Falcon.FADE_INITIAL_VALUE);
 
 		}
 	}
