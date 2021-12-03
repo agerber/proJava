@@ -58,7 +58,7 @@ public class CommandCenter {
 	}
 
 
-	public void decrementFalcon(){
+	public void decrementFalcons(){
 		setNumFalcons(getNumFalcons() - 1);
 		if (isGameOver()) return;
 		Sound.playSound("shipspawn.wav");
