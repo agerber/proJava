@@ -34,21 +34,9 @@ public class Falcon extends Sprite {
 	public Falcon() {
 		super();
 		setTeam(Team.FRIEND);
-
-
 		setColor(Color.white);
-		
-		//put falcon in the middle.
-		setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
-		
-		//with random orientation
-		setOrientation(Game.R.nextInt(360));
-		
 		//this is the size (radius) of the falcon
 		setRadius(35);
-
-		//Falcon uses fade.
-		setFade(FADE_INITIAL_VALUE);
 
 		//be sure to set cartesian points last.
 		List<Point> pntCs = new ArrayList<>();
