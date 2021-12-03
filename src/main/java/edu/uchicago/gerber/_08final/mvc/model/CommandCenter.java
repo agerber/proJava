@@ -64,6 +64,7 @@ public class CommandCenter {
 		if (isGameOver()) return;
 		Sound.playSound("shipspawn.wav");
 		falcon.setFade(Falcon.FADE_INITIAL_VALUE);
+		//put falcon in the middle of the game-space
 		falcon.setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 		falcon.setOrientation(Game.R.nextInt(360));
 		falcon.setDeltaX(0);
