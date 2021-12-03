@@ -48,6 +48,7 @@ public class CommandCenter {
 		setLevel(1);
 		setScore(0);
 		falcon = new Falcon();
+		//set to one greater than number of falcons lives in your game as initFalconAndDecrementNum() also decrements
 		setNumFalcons(4);
 		initFalconAndDecrementFalconNum();
 		opsList.enqueue(falcon, CollisionOp.Operation.ADD);
