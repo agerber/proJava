@@ -18,7 +18,7 @@ public class CommandCenter {
 	private  int level;
 	private  long score;
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
-	//separate reference. See spawnFalcon() method below.
+	//separate reference.
 	private  Falcon falcon;
 	private  boolean paused;
 
