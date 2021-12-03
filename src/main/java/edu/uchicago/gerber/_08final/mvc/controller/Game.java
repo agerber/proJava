@@ -213,9 +213,11 @@ public class Game implements Runnable, KeyListener {
 					if (operation == CollisionOp.Operation.ADD){
 						CommandCenter.getInstance().getMovFriends().add(mov);
 					} else {
-						CommandCenter.getInstance().getMovFriends().remove(mov);
-						if (mov instanceof Falcon)
-							CommandCenter.getInstance().spawnFalcon();
+						if (mov instanceof Falcon) {
+							CommandCenter.getInstance().decrementFalcon();
+						} else {
+							CommandCenter.getInstance().getMovFriends().remove(mov);
+						}
 					}
 					break;
 

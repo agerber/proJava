@@ -2,9 +2,11 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 
 
+import edu.uchicago.gerber._08final.mvc.controller.Game;
 import edu.uchicago.gerber._08final.mvc.controller.Sound;
 import lombok.Data;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,24 +48,24 @@ public class CommandCenter {
 	public  void initGame(){
 		setLevel(1);
 		setScore(0);
-		setNumFalcons(4);
-		spawnFalcon();
+		setNumFalcons(3);
+		falcon = new Falcon();
+		opsList.enqueue(falcon, CollisionOp.Operation.ADD);
 	}
 
 	public  boolean isGameOver() {		//if the number of falcons is zero, then game over
 		return getNumFalcons() == 0;
 	}
 
-	public  void spawnFalcon() {
 
-		//decrement the number of falcons first
+	public void decrementFalcon(){
 		setNumFalcons(getNumFalcons() - 1);
 		if (isGameOver()) return;
-
-		falcon = new Falcon();
-		opsList.enqueue(falcon, CollisionOp.Operation.ADD);
 		Sound.playSound("shipspawn.wav");
-
+		falcon.setFade(Falcon.FADE_INITIAL_VALUE);
+		falcon.setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
+		falcon.setDeltaX(0);
+		falcon.setDeltaY(0);
 	}
 
 	public  void clearAll(){
