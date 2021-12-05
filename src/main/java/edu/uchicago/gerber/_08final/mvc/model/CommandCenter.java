@@ -6,6 +6,7 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 import edu.uchicago.gerber._08final.mvc.controller.Sound;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
@@ -42,6 +43,8 @@ public class CommandCenter {
 	@Setter(value = AccessLevel.NONE)
 	private final GameOpsList opsList = new GameOpsList();
 
+	@Setter(value = AccessLevel.NONE)
+	@Getter(value = AccessLevel.NONE)
 	private static CommandCenter instance = null;
 
 	// Constructor made private
