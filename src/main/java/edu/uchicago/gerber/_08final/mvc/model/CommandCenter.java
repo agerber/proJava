@@ -19,19 +19,24 @@ public class CommandCenter {
 	private  int numFalcons;
 	private  int level;
 	private  long score;
+	private  boolean paused;
+
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
 	//separate reference. Use final to ensure that the falcon ref always points to the falcon object.
 	@Setter(value = AccessLevel.NONE)
 	private final Falcon falcon  = new Falcon();
-	private  boolean paused;
 
-	private List<Movable> movDebris = new LinkedList<>();
-	private List<Movable> movFriends = new LinkedList<>();
-	private List<Movable> movFoes = new LinkedList<>();
-	private List<Movable> movFloaters = new LinkedList<>();
+	@Setter(value = AccessLevel.NONE)
+	private final List<Movable> movDebris = new LinkedList<>();
+	@Setter(value = AccessLevel.NONE)
+	private final  List<Movable> movFriends = new LinkedList<>();
+	@Setter(value = AccessLevel.NONE)
+	private final List<Movable> movFoes = new LinkedList<>();
+	@Setter(value = AccessLevel.NONE)
+	private final List<Movable> movFloaters = new LinkedList<>();
 
-	private GameOpsList opsList = new GameOpsList();
-
+	@Setter(value = AccessLevel.NONE)
+	private final GameOpsList opsList = new GameOpsList();
 
 	private static CommandCenter instance = null;
 
