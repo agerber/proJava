@@ -22,7 +22,7 @@ public class CommandCenter {
 	private  boolean paused;
 
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
-	//separate reference. Use final to ensure that the falcon ref always points to the falcon object.
+	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap
 	//the @Setter(value = AccessLevel.NONE) tells Lombok NOT to include a setter for this member.
 	@Setter(value = AccessLevel.NONE)
 	private final Falcon falcon  = new Falcon();
