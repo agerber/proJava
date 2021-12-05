@@ -27,10 +27,6 @@ public class NewShipFloater extends Sprite {
 		//set random spin
 		setSpin(somePosNegValue(10));
 
-		//random point on the screen
-		setCenter(new Point(Game.R.nextInt(Game.DIM.width),
-				Game.R.nextInt(Game.DIM.height)));
-
 		//random orientation 
 		setOrientation(Game.R.nextInt(360));
 
