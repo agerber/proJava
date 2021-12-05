@@ -18,8 +18,8 @@ public class CommandCenter {
 	private  int level;
 	private  long score;
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
-	//separate reference.
-	private  Falcon falcon;
+	//separate reference. Use final to ensure that the falcon ref always points to the falcon object.
+	private final Falcon falcon  = new Falcon();
 	private  boolean paused;
 
 	private List<Movable> movDebris = new LinkedList<>();
@@ -47,7 +47,6 @@ public class CommandCenter {
 	public  void initGame(){
 		setLevel(1);
 		setScore(0);
-		falcon = new Falcon();
 		//set to one greater than number of falcons lives in your game as initFalconAndDecrementNum() also decrements
 		setNumFalcons(4);
 		initFalconAndDecrementFalconNum();
