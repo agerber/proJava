@@ -4,7 +4,9 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 import edu.uchicago.gerber._08final.mvc.controller.Sound;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -19,6 +21,7 @@ public class CommandCenter {
 	private  long score;
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
 	//separate reference. Use final to ensure that the falcon ref always points to the falcon object.
+	@Setter(value = AccessLevel.NONE)
 	private final Falcon falcon  = new Falcon();
 	private  boolean paused;
 
