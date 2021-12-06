@@ -274,11 +274,6 @@ public class Game implements Runnable, KeyListener {
 		}
 	}
 
-	// Called when user presses 's'
-	private void startGame() {
-		CommandCenter.getInstance().initGame();
-	}
-
 	//this method spawns new asteroids
 	private void spawnBigAsteroids(int nNum) {
 		while(nNum-- > 0) {
@@ -333,7 +328,7 @@ public class Game implements Runnable, KeyListener {
 		int nKey = e.getKeyCode();
 
 		if (nKey == START && CommandCenter.getInstance().isGameOver())
-			startGame();
+			CommandCenter.getInstance().initGame();
 
 		if (fal != null) {
 
