@@ -164,8 +164,7 @@ public class Game implements Runnable, KeyListener {
 				}//end if 
 			}//end inner for
 
-		//check for collisions between falcon and floaters
-		if (CommandCenter.getInstance().getFalcon() != null){
+		    //check for collisions between falcon and floaters
 
 			Point pntFalCenter = CommandCenter.getInstance().getFalcon().getCenter();
 			int radFalcon = CommandCenter.getInstance().getFalcon().getRadius();
@@ -183,8 +182,7 @@ public class Game implements Runnable, KeyListener {
 					Sound.playSound("pacman_eatghost.wav");
 	
 				}//end if 
-			}//end inner for
-		}//end if not null
+			}//end for
 
 		processGameOpsQueue();
 
@@ -298,7 +296,7 @@ public class Game implements Runnable, KeyListener {
 	
 	private void checkNewLevel(){
 		
-		if (isLevelClear() && CommandCenter.getInstance().getFalcon() != null) {
+		if (isLevelClear()) {
 			//more asteroids at each level to increase difficulty
 			spawnBigAsteroids(CommandCenter.getInstance().getLevel() + 2);
 			CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);
