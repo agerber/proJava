@@ -101,6 +101,7 @@ public class Game implements Runnable, KeyListener {
 	}
 
 	// implements runnable - must have run method
+	@Override
 	public void run() {
 
 		// lower this thread's priority; let the "main" aka 'Event Dispatch'
@@ -275,11 +276,7 @@ public class Game implements Runnable, KeyListener {
 
 	// Called when user presses 's'
 	private void startGame() {
-		CommandCenter.getInstance().clearAll();
 		CommandCenter.getInstance().initGame();
-		CommandCenter.getInstance().setLevel(0);
-		CommandCenter.getInstance().setPaused(false);
-
 	}
 
 	//this method spawns new asteroids

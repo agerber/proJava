@@ -59,9 +59,11 @@ public class CommandCenter {
 	}
 
 
-	public  void initGame(){
-		setLevel(1);
+	public void initGame(){
+		clearAll();
+		setLevel(0);
 		setScore(0);
+		setPaused(false);
 		//set to one greater than number of falcons lives in your game as initFalconAndDecrementNum() also decrements
 		setNumFalcons(4);
 		initFalconAndDecrementFalconNum();
@@ -69,7 +71,7 @@ public class CommandCenter {
 
 	}
 
-	public  boolean isGameOver() {		//if the number of falcons is zero, then game over
+	public boolean isGameOver() {		//if the number of falcons is zero, then game over
 		return getNumFalcons() == 0;
 	}
 
@@ -86,7 +88,7 @@ public class CommandCenter {
 		falcon.setDeltaY(0);
 	}
 
-	public  void clearAll(){
+	private void clearAll(){
 		movDebris.clear();
 		movFriends.clear();
 		movFoes.clear();
