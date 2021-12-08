@@ -164,7 +164,7 @@ public class Falcon extends Sprite {
 		if (getFade() == 255) {
 			colShip = Color.white;
 		}
-		//flash to warn user of impending non-protection
+		//flash to warn player of impending non-protection
 		else if (getFade() > 220 && getFade() % 9 == 0 ){
 			colShip = new Color(0, 32, 128); //dark blue
 		}
@@ -184,7 +184,6 @@ public class Falcon extends Sprite {
 
 		//thrusting
 		if (thrusting) {
-			g.setColor(colShip);
 			//the flame
 			for (int nC = 0; nC < flames.length; nC++) {
 				if (nC % 2 != 0) //odd
@@ -212,6 +211,7 @@ public class Falcon extends Sprite {
 				} //end even/odd else
 			} //end for loop
 
+			g.setColor(colShip); //flames same color as ship
 			g.fillPolygon(
 					Arrays.stream(pntFlames)
 							.map(pnt -> pnt.x)
