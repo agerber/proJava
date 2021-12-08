@@ -163,7 +163,13 @@ public class Falcon extends Sprite {
 		Color colShip;
 		if (getFade() == 255) {
 			colShip = Color.white;
-		} else {
+		}
+		//flash to warn user of impending non-protection
+		else if (getFade() > 220 && getFade() % 9 == 0 ){
+			colShip = new Color(0, 32, 128); //dark blue
+		}
+		//some increasingly lighter shade of blue
+		else {
 			colShip = new Color(
 
 					adjustColor(getFade(), 200), //red
