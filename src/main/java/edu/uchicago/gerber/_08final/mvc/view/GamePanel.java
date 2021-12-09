@@ -19,8 +19,8 @@ public class GamePanel extends Panel {
 	// FIELDS 
 	// ============================================================== 
 	 
-	// The following "off" vars are used for the off-screen double-bufferred image. 
-	private Dimension dimOff;
+	// The following "off" vars are used for the off-screen double-buffered image.
+	//private Dimension dimOff;
 	private Image imgOff;
 	private Graphics grpOff;
 	
@@ -67,13 +67,12 @@ public class GamePanel extends Panel {
 	
 	@SuppressWarnings("unchecked")
 	public void update(Graphics g) {
-		if (grpOff == null || Game.DIM.width != dimOff.width
-				|| Game.DIM.height != dimOff.height) {
-			dimOff = Game.DIM;
-			imgOff = createImage(Game.DIM.width, Game.DIM.height);
-			grpOff = imgOff.getGraphics();
-		}
-		// Fill in background with black.
+		//create an image off-screen
+		imgOff = createImage(Game.DIM.width, Game.DIM.height);
+		//get its graphics context
+		grpOff = imgOff.getGraphics();
+
+		//Fill the off-screen image background with black.
 		grpOff.setColor(Color.black);
 		grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
 
@@ -102,7 +101,9 @@ public class GamePanel extends Panel {
 
 		}
 
-		//draw the double-Buffered Image to the graphics context of the panel
+		//after drawing all the movables on the offscreen-image, copy it in one fell-swoop to graphics context
+		// of the game panel, and show it for ~50ms. If you attempt to draw directly on the gamePanel, e.g. without
+		// the use of a double-buffered off-screen image, you will see flickering.
 		g.drawImage(imgOff, 0, 0, this);
 	} 
 
