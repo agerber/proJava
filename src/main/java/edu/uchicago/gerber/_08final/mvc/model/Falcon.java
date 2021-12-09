@@ -162,7 +162,7 @@ public class Falcon extends Sprite {
 
 		Color colShip;
 		if (getFade() == 255) {
-			colShip = Color.white;
+			colShip = getColor(); //get native color of the sprite
 		}
 		//flash to warn player of impending non-protection
 		else if (getFade() > 220 && getFade() % 9 == 0 ){
