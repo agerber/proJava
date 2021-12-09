@@ -70,6 +70,10 @@ public class Game implements Runnable, KeyListener {
 		gmpPanel.addKeyListener(this);
 		clpThrust = Sound.clipForLoopFactory("whitenoise.wav");
 		clpMusicBackground = Sound.clipForLoopFactory("music-background.wav");
+
+		//fire up the animation thread
+		animationThread = new Thread(this); // pass the thread a runnable object, the Game object
+		animationThread.start();
 	
 
 	}
@@ -79,28 +83,11 @@ public class Game implements Runnable, KeyListener {
 	// ===============================================
 
 	public static void main(String args[]) {
-		//typical Swing application main method
-		EventQueue.invokeLater(new Runnable() { // uses the Event dispatch thread from Java 5 (refactored)
-					public void run() {
-						try {
-							Game game = new Game(); // construct itself
-							game.fireUpAnimThread();
-
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
+		//call the constructor of Game
+		EventQueue.invokeLater(Game::new);
 	}
 
-	private void fireUpAnimThread() { // called initially
-		if (animationThread == null) {
-			animationThread = new Thread(this); // pass the thread a runnable object (this)
-			animationThread.start();
-		}
-	}
-
-	// implements runnable - must have run method
+	// Game implements runnable, and must have run method
 	@Override
 	public void run() {
 
