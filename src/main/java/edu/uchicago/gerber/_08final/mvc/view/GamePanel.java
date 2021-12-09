@@ -137,7 +137,7 @@ public class GamePanel extends Panel {
 	private void drawOneShipLeft(Graphics g, int offSet) {
 		Falcon falcon = CommandCenter.getInstance().getFalcon();
 
-		g.setColor(Color.white);
+		g.setColor(falcon.getColor());
 
 		g.drawPolygon(
 					Arrays.stream(falcon.getCartesians())

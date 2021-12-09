@@ -69,11 +69,11 @@ public class Asteroid extends Sprite {
 	public int getSize(){
 
 		switch (getRadius()) {
-			case 100:
+			case LARGE_RADIUS: //large Ast 100
 				return 0;
-			case 50:
+			case LARGE_RADIUS /2: //medium Ast 50
 				return 1;
-			case 25:
+			case LARGE_RADIUS /4: //small Ast 25
 				return 2;
 			default:
 				return 0;
