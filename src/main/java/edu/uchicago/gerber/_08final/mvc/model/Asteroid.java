@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.awt.*;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 
@@ -36,7 +37,7 @@ public class Asteroid extends Sprite {
 
 
 		
-		//an size of zero is a big asteroid
+		//a size of zero is a big asteroid
 		//a size of 1 or 2 is med or small asteroid respectively
 		if (size == 0)
 			setRadius(LARGE_RADIUS);
@@ -44,8 +45,8 @@ public class Asteroid extends Sprite {
 			setRadius(LARGE_RADIUS/(size * 2));
 
 
-		//this method is in place of setting cartesian points
-		genRandomShape();
+
+		setCartesians(genRandomPoints());
 
 	}
 
@@ -90,7 +91,7 @@ public class Asteroid extends Sprite {
 	}
 
 
-	  public void genRandomShape(){
+	  private Point[] genRandomPoints(){
 
 		  //6.283 is the max radians
 		  final int MAX_RADIANS_X1000 =6283;
@@ -104,8 +105,7 @@ public class Asteroid extends Sprite {
 		 //random number of sides between 17 and 23
 		 final int sides = Game.R.nextInt( 7 ) + 17;
 
-		 setCartesians(
-		 	polarToCartesian(
+		 return polarToCartesian(
 				Stream.generate(polarPointSupplier)
 				 .limit(sides)
 				 .sorted(new Comparator<PolarPoint>() {
@@ -115,8 +115,7 @@ public class Asteroid extends Sprite {
 							}
 						})
 				 .collect(Collectors.toList())
-			) //end polarToCartesian
-		 ); //end setCartesians
+			);
 
 	  }
 
