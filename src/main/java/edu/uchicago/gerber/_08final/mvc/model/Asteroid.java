@@ -20,30 +20,23 @@ public class Asteroid extends Sprite {
 	//same for medium asteroid, you should spawn small asteroids
 	//small asteroids get blasted into debris, but do not spawn anything
 	public Asteroid(int size){
-		
 		//call Sprite constructor
 		super();
-
 		setTeam(Team.FOE);
 
 		//the spin will be either plus or minus 0-9
 		setSpin(somePosNegValue(10));
-
 		//random delta-x
 		setDeltaX(somePosNegValue(10));
-
 		//random delta-y
 		setDeltaY(somePosNegValue(10));
 
-
-		
 		//a size of zero is a big asteroid
 		//a size of 1 or 2 is med or small asteroid respectively
 		if (size == 0)
 			setRadius(LARGE_RADIUS);
 		else
 			setRadius(LARGE_RADIUS/(size * 2));
-
 
 
 		setCartesians(genRandomPoints());
@@ -54,7 +47,6 @@ public class Asteroid extends Sprite {
 
 	//overloaded so we can spawn smaller asteroids from an exploding one
 	public Asteroid(Asteroid astExploded){
-
 		//calls the other constructor: Asteroid(int size)
 		this(astExploded.getSize() + 1);
 		setCenter(astExploded.getCenter());
@@ -67,7 +59,6 @@ public class Asteroid extends Sprite {
 	}
 
 	public int getSize(){
-
 		switch (getRadius()) {
 			case LARGE_RADIUS: //large Ast 100
 				return 0;
@@ -84,15 +75,12 @@ public class Asteroid extends Sprite {
 	@Override
 	public void move(){
 		super.move();
-		
 		//an asteroid spins, so you need to adjust the orientation at each move()
 		setOrientation(getOrientation() + getSpin());
-		
 	}
 
 
 	  private Point[] genRandomPoints(){
-
 		  //6.283 is the max radians
 		  final int MAX_RADIANS_X1000 =6283;
 
@@ -102,12 +90,12 @@ public class Asteroid extends Sprite {
 		  	  return new PolarPoint(r,theta);
 		  };
 
-		 //random number of sides between 17 and 23
-		 final int sides = Game.R.nextInt( 7 ) + 17;
+		 //random number of vertices between 17 and 23
+		 final int vertices = Game.R.nextInt( 7 ) + 17;
 
 		 return polarToCartesian(
 				Stream.generate(polarPointSupplier)
-				 .limit(sides)
+				 .limit(vertices)
 				 .sorted(new Comparator<PolarPoint>() {
 							@Override
 							public int compare(PolarPoint pp1, PolarPoint pp2) {
