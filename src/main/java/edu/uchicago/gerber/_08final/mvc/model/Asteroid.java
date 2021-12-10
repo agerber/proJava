@@ -32,7 +32,7 @@ public class Asteroid extends Sprite {
 		setDeltaY(somePosNegValue(10));
 
 		//a size of zero is a big asteroid
-		//a size of 1 or 2 is med or small asteroid respectively
+		//a size of 1 or 2 is med or small asteroid respectively. See getSize() method.
 		if (size == 0)
 			setRadius(LARGE_RADIUS);
 		else
