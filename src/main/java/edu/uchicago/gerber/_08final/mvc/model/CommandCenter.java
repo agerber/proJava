@@ -24,27 +24,18 @@ public class CommandCenter {
 
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap
-	//the @Setter(value = AccessLevel.NONE) tells Lombok NOT to include a setter for this member.
-	@Setter(value = AccessLevel.NONE)
+	//Lombok will not provide setter methods on final members
 	private final Falcon falcon  = new Falcon();
 
-	@Setter(value = AccessLevel.NONE)
+	//lists containing our movables
 	private final List<Movable> movDebris = new LinkedList<>();
-
-	@Setter(value = AccessLevel.NONE)
-	private final  List<Movable> movFriends = new LinkedList<>();
-
-	@Setter(value = AccessLevel.NONE)
+	private final List<Movable> movFriends = new LinkedList<>();
 	private final List<Movable> movFoes = new LinkedList<>();
-
-	@Setter(value = AccessLevel.NONE)
 	private final List<Movable> movFloaters = new LinkedList<>();
 
-	@Setter(value = AccessLevel.NONE)
 	private final GameOpsList opsList = new GameOpsList();
 
-	@Setter(value = AccessLevel.NONE)
-	@Getter(value = AccessLevel.NONE)
+	//singleton
 	private static CommandCenter instance = null;
 
 	// Constructor made private
