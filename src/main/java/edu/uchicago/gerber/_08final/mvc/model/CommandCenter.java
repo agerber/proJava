@@ -71,10 +71,6 @@ public class CommandCenter {
 
 	}
 
-	public boolean isGameOver() {		//if the number of falcons is zero, then game over
-		return getNumFalcons() == 0;
-	}
-
 
 	public void initFalconAndDecrementFalconNum(){
 		setNumFalcons(getNumFalcons() - 1);
@@ -95,9 +91,9 @@ public class CommandCenter {
 		movFloaters.clear();
 	}
 
-
-
-
+	public boolean isGameOver() {		//if the number of falcons is zero, then game over
+		return getNumFalcons() == 0;
+	}
 
 
 
