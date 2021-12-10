@@ -1,11 +1,10 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 
@@ -46,7 +45,7 @@ public class Asteroid extends Sprite {
 
 
 		//this method is in place of setting cartesian points
-		assignRandomShape();
+		genRandomShape();
 
 	}
 
@@ -91,31 +90,33 @@ public class Asteroid extends Sprite {
 	}
 
 
-	  public void assignRandomShape (){
+	  public void genRandomShape(){
 
 		  //6.283 is the max radians
 		  final int MAX_RADIANS_X1000 =6283;
 
-		  int sides = Game.R.nextInt( 7 ) + 17;
-		  PolarPoint[] polPolars = new PolarPoint[sides];
-		  for ( int nC = 0; nC < polPolars.length; nC++ ){
+		  Supplier<PolarPoint> polarPointSupplier = () -> {
 			  double r = (800 + Game.R.nextInt(200)) / 1000.0; //number between 0.8 and 1.0
 			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0; // number between 0 and 6.283
-			  polPolars[nC] = new PolarPoint(r,theta);
-		  }
+		  	  return new PolarPoint(r,theta);
+		  };
+
+		 //random number of sides between 17 and 23
+		 final int sides = Game.R.nextInt( 7 ) + 17;
 
 		 setCartesians(
 		 	polarToCartesian(
-				 Arrays.stream(polPolars)
+				Stream.generate(polarPointSupplier)
+				 .limit(sides)
 				 .sorted(new Comparator<PolarPoint>() {
-					 @Override
-					 public int compare(PolarPoint pp1, PolarPoint pp2) {
-						 return  pp1.getTheta().compareTo(pp2.getTheta());
-					 }
-				 })
+							@Override
+							public int compare(PolarPoint pp1, PolarPoint pp2) {
+								return  pp1.getTheta().compareTo(pp2.getTheta());
+							}
+						})
 				 .collect(Collectors.toList())
-			)
-		 );
+			) //end polarToCartesian
+		 ); //end setCartesians
 
 	  }
 
