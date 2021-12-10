@@ -34,7 +34,7 @@ public class Falcon extends Sprite {
 	public Falcon() {
 		super();
 		setTeam(Team.FRIEND);
-		setColor(Color.white);
+
 		//this is the size (radius) of the falcon
 		setRadius(35);
 
@@ -87,7 +87,7 @@ public class Falcon extends Sprite {
 
 	@Override
 	public boolean isProtected() {
-		return getFade() != 255;
+		return getFade() < 255;
 	}
 
 	// ==============================================================
