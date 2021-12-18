@@ -52,7 +52,7 @@ public class CommandCenter {
 
 	public void initGame(){
 		clearAll();
-		setLevel(0);
+		setLevel(1);
 		setScore(0);
 		setPaused(false);
 		//set to one greater than number of falcons lives in your game as initFalconAndDecrementNum() also decrements
