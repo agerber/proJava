@@ -148,28 +148,27 @@ public class Game implements Runnable, KeyListener {
 					Sound.playSound("kapow.wav");
 				 }
 
-				}//end if 
 			}//end inner for
+		}//end outer for
 
-		    //check for collisions between falcon and floaters
+		//check for collisions between falcon and floaters
+		Point pntFalCenter = CommandCenter.getInstance().getFalcon().getCenter();
+		int radFalcon = CommandCenter.getInstance().getFalcon().getRadius();
 
-			Point pntFalCenter = CommandCenter.getInstance().getFalcon().getCenter();
-			int radFalcon = CommandCenter.getInstance().getFalcon().getRadius();
-
-			Point pntFloaterCenter;
-			int radFloater;
-			for (Movable movFloater : CommandCenter.getInstance().getMovFloaters()) {
-				pntFloaterCenter = movFloater.getCenter();
-				radFloater = movFloater.getRadius();
+		Point pntFloaterCenter;
+		int radFloater;
+		for (Movable movFloater : CommandCenter.getInstance().getMovFloaters()) {
+			pntFloaterCenter = movFloater.getCenter();
+			radFloater = movFloater.getRadius();
 	
-				//detect collision
-				if (pntFalCenter.distance(pntFloaterCenter) < (radFalcon + radFloater)) {
+			//detect collision
+			if (pntFalCenter.distance(pntFloaterCenter) < (radFalcon + radFloater)) {
 
-					CommandCenter.getInstance().getOpsList().enqueue(movFloater, CollisionOp.Operation.REMOVE);
-					Sound.playSound("pacman_eatghost.wav");
+				CommandCenter.getInstance().getOpsList().enqueue(movFloater, CollisionOp.Operation.REMOVE);
+				Sound.playSound("pacman_eatghost.wav");
 	
-				}//end if 
-			}//end for
+			}//end if
+		}//end for
 
 		processGameOpsQueue();
 
@@ -239,7 +238,7 @@ public class Game implements Runnable, KeyListener {
 				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
 
 			} 
-			//medium size aseroid exploded
+			//medium size asteroid exploded
 			else if(originalAsteroid.getSize() == 1){
 				//spawn three small Asteroids
 				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
@@ -253,7 +252,7 @@ public class Game implements Runnable, KeyListener {
 
 	private void spawnNewShipFloater() {
 
-		//appears more often as your level increses.
+		//appears more often as your level increases.
 		if ((System.currentTimeMillis() / ANI_DELAY) % (SPAWN_NEW_SHIP_FLOATER - level * 7L) == 0) {
 			CommandCenter.getInstance().getOpsList().enqueue(new NewShipFloater(), CollisionOp.Operation.ADD);
 		}

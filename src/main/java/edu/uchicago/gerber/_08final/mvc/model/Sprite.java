@@ -54,7 +54,7 @@ public abstract class Sprite implements Movable {
 		double newYPos = pnt.y + getDeltaY();
 		
 		//the following code block just keeps the sprite inside the bounds of the frame
-		//to ensure this behavior among all sprites in your game, make sure to call super.maove() in extending classes.
+		//to ensure this behavior among all sprites in your game, make sure to call super.move() in extending classes.
 		if (pnt.x > Game.DIM.width) {
 			setCenter(new Point(1, pnt.y));
 
