@@ -231,23 +231,13 @@ public class Game implements Runnable, KeyListener {
 
 	private void spawnSmallerAsteroids(Asteroid originalAsteroid) {
 
-			//big asteroid 
-			if(originalAsteroid.getSize() == 0){
-				//spawn two medium Asteroids
+		    int nSize = originalAsteroid.getSize();
+		    if (nSize > 1) return;
+		    //for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
+			for (int nC = 0; nC < nSize + 2; nC++) {
 				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
-
-			} 
-			//medium size asteroid exploded
-			else if(originalAsteroid.getSize() == 1){
-				//spawn three small Asteroids
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
-
 			}
 
-			//if it's a small asteroid, do nothing.
 	}
 
 	private void spawnNewShipFloater() {
