@@ -67,12 +67,12 @@ public class Game implements Runnable, KeyListener {
 	public Game() {
 
 		gmpPanel = new GamePanel(DIM);
-		gmpPanel.addKeyListener(this);
+		gmpPanel.addKeyListener(this); //Game object implements KeyListener
 		clpThrust = Sound.clipForLoopFactory("whitenoise.wav");
 		clpMusicBackground = Sound.clipForLoopFactory("music-background.wav");
 
 		//fire up the animation thread
-		animationThread = new Thread(this); // pass the thread a runnable object, the Game object
+		animationThread = new Thread(this); // pass the animation thread a runnable object, the Game object
 		animationThread.start();
 	
 
@@ -83,7 +83,7 @@ public class Game implements Runnable, KeyListener {
 	// ===============================================
 
 	public static void main(String args[]) {
-		//call the constructor of Game
+		//typical Swing application start; we pass EventQueue a Runnable object.
 		EventQueue.invokeLater(Game::new);
 	}
 
@@ -91,8 +91,8 @@ public class Game implements Runnable, KeyListener {
 	@Override
 	public void run() {
 
-		// lower this thread's priority; let the "main" aka 'Event Dispatch'
-		// thread do what it needs to do first
+		// lower animation thread's priority, thereby yielding to the "main" aka 'Event Dispatch'
+		// thread which listens to keystrokes
 		animationThread.setPriority(Thread.MIN_PRIORITY);
 
 		// and get the current time
