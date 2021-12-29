@@ -229,17 +229,6 @@ public class Game implements Runnable, KeyListener {
 	}
 
 
-	private void spawnSmallerAsteroids(Asteroid originalAsteroid) {
-
-		    int nSize = originalAsteroid.getSize();
-		    if (nSize > 1) return;
-		    //for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
-			for (int nC = 0; nC < nSize + 2; nC++) {
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
-			}
-
-	}
-
 	private void spawnNewShipFloater() {
 
 		//appears more often as your level increases.
@@ -248,7 +237,8 @@ public class Game implements Runnable, KeyListener {
 		}
 	}
 
-	//this method spawns new asteroids
+
+	//this method spawns new Large (0) Asteroids
 	private void spawnBigAsteroids(int nNum) {
 		while(nNum-- > 0) {
 			//Asteroids with size of zero are big
@@ -256,7 +246,22 @@ public class Game implements Runnable, KeyListener {
 
 		}
 	}
-	
+
+	private void spawnSmallerAsteroids(Asteroid originalAsteroid) {
+
+		    int nSize = originalAsteroid.getSize();
+		    if (nSize > 1) return; //return if Small (2) Asteroid
+
+		    //for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
+		    nSize +=2;
+			while (nSize-- > 0) {
+				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
+			}
+
+	}
+
+
+
 	
 	private boolean isLevelClear(){
 		//if there are no more Asteroids on the screen
