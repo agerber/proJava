@@ -49,24 +49,25 @@ public abstract class Sprite implements Movable {
 	@Override
 	public void move() {
 
-		Point pnt = getCenter();
-		double newXPos = pnt.x + getDeltaX();
-		double newYPos = pnt.y + getDeltaY();
-		
-		//the following code block just keeps the sprite inside the bounds of the frame
+        //the following code block just keeps the sprite inside the bounds of the frame
 		//to ensure this behavior among all sprites in your game, make sure to call super.move() in extending classes.
-		if (pnt.x > Game.DIM.width) {
-			setCenter(new Point(1, pnt.y));
-
-		} else if (pnt.x < 0) {
-			setCenter(new Point(Game.DIM.width - 1, pnt.y));
-		} else if (pnt.y > Game.DIM.height) {
-			setCenter(new Point(pnt.x, 1));
-
-		} else if (pnt.y < 0) {
-			setCenter(new Point(pnt.x, Game.DIM.height - 1));
+		Point center = getCenter();
+		//right-bounds reached
+		if (center.x > Game.DIM.width) {
+			setCenter(new Point(1, center.y));
+		//left-bounds reached
+		} else if (center.x < 0) {
+			setCenter(new Point(Game.DIM.width - 1, center.y));
+		//bottom-bounds	reached
+		} else if (center.y > Game.DIM.height) {
+			setCenter(new Point(center.x, 1));
+		//top-bounds reached
+		} else if (center.y < 0) {
+			setCenter(new Point(center.x, Game.DIM.height - 1));
+		//in-bounds
 		} else {
-
+			double newXPos = center.x + getDeltaX();
+			double newYPos = center.y + getDeltaY();
 			setCenter(new Point((int) newXPos, (int) newYPos));
 		}
 

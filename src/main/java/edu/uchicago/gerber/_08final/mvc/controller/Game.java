@@ -187,7 +187,7 @@ public class Game implements Runnable, KeyListener {
 				case FOE:
 					if (operation == CollisionOp.Operation.ADD){
 						CommandCenter.getInstance().getMovFoes().add(mov);
-					} else { //REMOVE
+					} else { //CollisionOp.Operation.REMOVE
 						CommandCenter.getInstance().getMovFoes().remove(mov);
 						if (mov instanceof Asteroid)
 							spawnSmallerAsteroids((Asteroid) mov);
@@ -197,7 +197,7 @@ public class Game implements Runnable, KeyListener {
 				case FRIEND:
 					if (operation == CollisionOp.Operation.ADD){
 						CommandCenter.getInstance().getMovFriends().add(mov);
-					} else { //REMOVE
+					} else { //CollisionOp.Operation.REMOVE
 						if (mov instanceof Falcon) {
 							CommandCenter.getInstance().initFalconAndDecrementFalconNum();
 						} else {
@@ -209,7 +209,7 @@ public class Game implements Runnable, KeyListener {
 				case FLOATER:
 					if (operation == CollisionOp.Operation.ADD){
 						CommandCenter.getInstance().getMovFloaters().add(mov);
-					} else { //REMOVE
+					} else { //CollisionOp.Operation.REMOVE
 						CommandCenter.getInstance().getMovFloaters().remove(mov);
 					}
 					break;
@@ -217,7 +217,7 @@ public class Game implements Runnable, KeyListener {
 				case DEBRIS:
 					if (operation == CollisionOp.Operation.ADD){
 						CommandCenter.getInstance().getMovDebris().add(mov);
-					} else { //REMOVE
+					} else { //CollisionOp.Operation.REMOVE
 						CommandCenter.getInstance().getMovDebris().remove(mov);
 					}
 					break;
