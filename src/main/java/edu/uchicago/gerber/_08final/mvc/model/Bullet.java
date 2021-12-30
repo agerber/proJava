@@ -23,24 +23,25 @@ public class Bullet extends Sprite {
 
 
         //everything is relative to the falcon ship that fired the bullet
-        setDeltaX(fal.getDeltaX() +
-                Math.cos(Math.toRadians(fal.getOrientation())) * FIRE_POWER);
-        setDeltaY(fal.getDeltaY() +
-                Math.sin(Math.toRadians(fal.getOrientation())) * FIRE_POWER);
         setCenter(fal.getCenter());
 
         //set the bullet orientation to the falcon (ship) orientation
         setOrientation(fal.getOrientation());
 
+        setDeltaX(fal.getDeltaX() +
+                Math.cos(Math.toRadians(fal.getOrientation())) * FIRE_POWER);
+        setDeltaY(fal.getDeltaY() +
+                Math.sin(Math.toRadians(fal.getOrientation())) * FIRE_POWER);
+
+
         //make sure to setCartesianPoints last
         //defined the points on a cartesian grid
         List<Point> pntCs = new ArrayList<>();
-
         pntCs.add(new Point(0, 3)); //top point
-
         pntCs.add(new Point(1, -1));
         pntCs.add(new Point(0, -2));
         pntCs.add(new Point(-1, -1));
+
         setCartesians(pntCs);
 
 

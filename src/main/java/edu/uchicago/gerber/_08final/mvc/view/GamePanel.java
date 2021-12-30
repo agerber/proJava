@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.stream.Stream;
+
 
 
 public class GamePanel extends Panel {
@@ -47,7 +47,7 @@ public class GamePanel extends Panel {
 		gmf.setTitle("Game Base");
 		gmf.setResizable(false);
 		gmf.setVisible(true);
-		this.setFocusable(true);
+		setFocusable(true);
 	}
 	
 	

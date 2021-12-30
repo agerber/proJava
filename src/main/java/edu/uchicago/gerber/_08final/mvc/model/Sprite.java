@@ -16,7 +16,7 @@ import lombok.experimental.Tolerate;
 public abstract class Sprite implements Movable {
 	//the center-point of this sprite
 	private Point center;
-	//this causes movement; change in x and change in y
+	//this causes movement; change-in-x and change-in-y
 	private double deltaX, deltaY;
 
 	//every sprite has a team: friend, foe, floater, or debris.
@@ -26,7 +26,7 @@ public abstract class Sprite implements Movable {
 
 	//orientation from 0-359
 	private int orientation;
-	private int expiry; //natural mortality (short-living objects)
+	private int expiry; //natural mortality (short-lived sprites only)
 	//the color of this sprite
 	private Color color;
 
@@ -39,7 +39,21 @@ public abstract class Sprite implements Movable {
 	//these are Cartesian points used to draw the polygon.
 	private Point[] cartesians;
 
+	//constructor
+	public Sprite() {
+
+		//default sprite color
+		setColor(Color.WHITE);
+		//place the sprite at some random location in the frame at instantiation
+		setCenter(new Point(Game.R.nextInt(Game.DIM.width),
+				Game.R.nextInt(Game.DIM.height)));
+
+
+	}
+
 	protected void expire(){
+		//if a short-lived sprite has an expiry of zero, it commits suicide by enqueuing itself onto the
+		//opsList with an operation of REMOVE.
 		if (getExpiry() == 0)
 			CommandCenter.getInstance().getOpsList().enqueue(this, CollisionOp.Operation.REMOVE);
 		else
@@ -49,8 +63,8 @@ public abstract class Sprite implements Movable {
 	@Override
 	public void move() {
 
-        //the following code block just keeps the sprite inside the bounds of the frame
-		//to ensure this behavior among all sprites in your game, make sure to call super.move() in extending classes.
+        //The following code block just keeps the sprite inside the bounds of the frame.
+		//To ensure this behavior among all sprites in your game, make sure to call super.move() in extending classes.
 		Point center = getCenter();
 		//right-bounds reached
 		if (center.x > Game.DIM.width) {
@@ -73,16 +87,7 @@ public abstract class Sprite implements Movable {
 
 	}
 
-	public Sprite() {
 
-		//default sprite color
-		setColor(Color.white);
-		//place the sprite at some random location in the frame at instantiation
-		setCenter(new Point(Game.R.nextInt(Game.DIM.width),
-				Game.R.nextInt(Game.DIM.height)));
-
-
-	}
 
 	protected double hypotFunction(double dX, double dY) {
 		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
