@@ -109,7 +109,7 @@ public class GamePanel extends Panel {
 
 
 	
-	//for each movable array, process it.
+
 	@SafeVarargs
 	private final void iterateMovables(final Graphics g, List<Movable>... arrayOfListMovables){
 
@@ -118,8 +118,9 @@ public class GamePanel extends Panel {
 			mov.draw(grp);
 		};
 
-		Arrays.stream(arrayOfListMovables)
-				.flatMap(Collection::stream)
+		//we use flatMap to flatten the List<Movable>[] passed-in above into a single stream of Movables
+		Arrays.stream(arrayOfListMovables) //Stream<List<Movable>>
+				.flatMap(Collection::stream) //Stream<Movable>
 				.forEach(m -> moveDraw.accept(g, m));
 
 		
