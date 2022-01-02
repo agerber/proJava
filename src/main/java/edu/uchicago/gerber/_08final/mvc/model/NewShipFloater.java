@@ -14,7 +14,7 @@ public class NewShipFloater extends Sprite {
 		super();
 		setTeam(Team.FLOATER);
 
-		setExpiry(250);
+		setExpiry(251);
 		setRadius(50);
 		setColor(Color.BLUE);
 
@@ -49,8 +49,6 @@ public class NewShipFloater extends Sprite {
 		super.move();
 		//a newShipFloater spins
 		setOrientation(getOrientation() + getSpin());
-		//and it also expires
-		expire();
 
 	}
 

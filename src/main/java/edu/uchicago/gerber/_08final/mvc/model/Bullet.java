@@ -17,8 +17,8 @@ public class Bullet extends Sprite {
         setTeam(Team.FRIEND);
 
 
-        //a bullet expires after 20 frames
-        setExpiry(20);
+        //a bullet expires after 20 frames. set to one more than frame expiration
+        setExpiry(21);
         setRadius(6);
 
 
@@ -50,7 +50,6 @@ public class Bullet extends Sprite {
     @Override
     public void move() {
         super.move();
-        expire();
 
     }
 

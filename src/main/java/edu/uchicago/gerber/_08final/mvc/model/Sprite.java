@@ -51,14 +51,6 @@ public abstract class Sprite implements Movable {
 
 	}
 
-	protected void expire(){
-		//if a short-lived sprite has an expiry of zero, it commits suicide by enqueuing itself onto the
-		//opsList with an operation of REMOVE.
-		if (getExpiry() == 0)
-			CommandCenter.getInstance().getOpsList().enqueue(this, CollisionOp.Operation.REMOVE);
-		else
-			setExpiry(getExpiry() - 1);
-	}
 
 	@Override
 	public void move() {
@@ -83,6 +75,17 @@ public abstract class Sprite implements Movable {
 			double newXPos = center.x + getDeltaX();
 			double newYPos = center.y + getDeltaY();
 			setCenter(new Point((int) newXPos, (int) newYPos));
+		}
+
+		//the default value of expiry is zero, so this block will not apply to non-expiring sprites
+		if (getExpiry() > 0){
+			//if a short-lived sprite has an expiry of one, it commits suicide by enqueuing itself onto the
+			//opsList with an operation of REMOVE
+			if (getExpiry() == 1) {
+				CommandCenter.getInstance().getOpsList().enqueue(this, CollisionOp.Operation.REMOVE);
+			}
+			//and then decrements in all cases where getExpiry() > 0
+			setExpiry(getExpiry() - 1);
 		}
 
 	}
