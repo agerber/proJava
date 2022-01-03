@@ -136,19 +136,20 @@ public abstract class Sprite implements Movable {
 
     protected List<PolarPoint> cartesianToPolar(List<Point> pntCartesians) {
 
-        //determine the largest hypotenuse
-        double largestHypotenuse = 0;
-        for (Point pnt : pntCartesians)
-            if (hypotFunction(pnt.x, pnt.y) > largestHypotenuse)
-                largestHypotenuse = hypotFunction(pnt.x, pnt.y);
-
-
         BiFunction<Point, Double, PolarPoint> cartToPolarTransform = (pnt, dub) -> new PolarPoint(
                 //this is r from PolarPoint(r,theta).
                 hypotFunction(pnt.x, pnt.y) / dub, //r is relative to the largestHypotenuse a.k.a. dub in this method
                 //this is theta from PolarPoint(r,theta)
                 Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180
         );
+
+
+        //determine the largest hypotenuse
+        double largestHypotenuse = 0;
+        for (Point pnt : pntCartesians)
+            if (hypotFunction(pnt.x, pnt.y) > largestHypotenuse)
+                largestHypotenuse = hypotFunction(pnt.x, pnt.y);
+
 
         //we must make hypotenuse final to pass into a stream.
         final double hyp = largestHypotenuse;
