@@ -85,8 +85,8 @@ public class Asteroid extends Sprite {
 		  final int MAX_RADIANS_X1000 =6283;
 
 		  Supplier<PolarPoint> polarPointSupplier = () -> {
-			  double r = (800 + Game.R.nextInt(200)) / 1000.0; //number between 0.8 and 1.0
-			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0; // number between 0 and 6.283
+			  double r = (800 + Game.R.nextInt(200)) / 1000.0; //number between 0.8 and 0.999
+			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0; // number between 0 and 6.282
 		  	  return new PolarPoint(r,theta);
 		  };
 
