@@ -62,19 +62,20 @@ public abstract class Sprite implements Movable {
         //To ensure this behavior among all sprites in your game, make sure to call super.move() in extending classes
         // where you need to override the move() method.
         Point center = getCenter();
+
         //right-bounds reached
         if (center.x > Game.DIM.width) {
             setCenter(new Point(1, center.y));
-            //left-bounds reached
+        //left-bounds reached
         } else if (center.x < 0) {
             setCenter(new Point(Game.DIM.width - 1, center.y));
-            //bottom-bounds	reached
+        //bottom-bounds reached
         } else if (center.y > Game.DIM.height) {
             setCenter(new Point(center.x, 1));
-            //top-bounds reached
+        //top-bounds reached
         } else if (center.y < 0) {
             setCenter(new Point(center.x, Game.DIM.height - 1));
-            //in-bounds
+        //in-bounds
         } else {
             double newXPos = center.x + getDeltaX();
             double newYPos = center.y + getDeltaY();
