@@ -11,7 +11,6 @@ public class NewShipFloater extends Sprite {
 
 	public NewShipFloater() {
 
-		super();
 		setTeam(Team.FLOATER);
 
 		setExpiry(251);

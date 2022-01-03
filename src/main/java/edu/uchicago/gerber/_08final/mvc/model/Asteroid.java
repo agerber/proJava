@@ -20,8 +20,8 @@ public class Asteroid extends Sprite {
 	//same for medium asteroid, you should spawn small asteroids
 	//small asteroids get blasted into debris, but do not spawn anything
 	public Asteroid(int size){
-		//call Sprite constructor
-		super();
+
+		//Asteroid is FOE
 		setTeam(Team.FOE);
 
 		//the spin will be either plus or minus 0-9

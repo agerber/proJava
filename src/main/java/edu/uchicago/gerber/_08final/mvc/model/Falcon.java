@@ -32,7 +32,7 @@ public class Falcon extends Sprite {
 	// ==============================================================
 	
 	public Falcon() {
-		super();
+
 		setTeam(Team.FRIEND);
 
 		//this is the size (radius) of the falcon

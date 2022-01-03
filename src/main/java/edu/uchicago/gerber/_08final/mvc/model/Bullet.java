@@ -13,9 +13,7 @@ public class Bullet extends Sprite {
 
     public Bullet(Falcon fal) {
 
-        super();
         setTeam(Team.FRIEND);
-
 
         //a bullet expires after 20 frames. set to one more than frame expiration
         setExpiry(21);
@@ -47,10 +45,6 @@ public class Bullet extends Sprite {
 
     }
 
-    @Override
-    public void move() {
-        super.move();
 
-    }
 
 }
