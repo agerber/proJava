@@ -14,7 +14,7 @@ public class Asteroid extends Sprite {
 
 	//radius of a large asteroid
 	private final int LARGE_RADIUS = 100;
-	
+
 	//size determines if the Asteroid is Large (0), Medium (1), or Small (2)
 	//when you explode a Large asteroid, you should spawn 2 or 3 medium asteroids
 	//same for medium asteroid, you should spawn small asteroids
@@ -60,11 +60,11 @@ public class Asteroid extends Sprite {
 
 	public int getSize(){
 		switch (getRadius()) {
-			case 100:
+			case LARGE_RADIUS:
 				return 0;
-			case 50:
+			case LARGE_RADIUS / 2:
 				return 1;
-			case 25:
+			case LARGE_RADIUS / 4:
 				return 2;
 			default:
 				return 0;

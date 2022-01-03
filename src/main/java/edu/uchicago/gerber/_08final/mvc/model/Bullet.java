@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Bullet extends Sprite {
 
-    private final double FIRE_POWER = 35.0;
 
 
     public Bullet(Falcon fal) {
@@ -26,6 +25,7 @@ public class Bullet extends Sprite {
         //set the bullet orientation to the falcon (ship) orientation
         setOrientation(fal.getOrientation());
 
+        final double FIRE_POWER = 35.0;
         setDeltaX(fal.getDeltaX() +
                 Math.cos(Math.toRadians(fal.getOrientation())) * FIRE_POWER);
         setDeltaY(fal.getDeltaY() +
