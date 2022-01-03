@@ -39,6 +39,7 @@ public abstract class Sprite implements Movable {
     private int fade;
 
     //these are Cartesian points used to draw the polygon.
+    //once set, their values do not change. It's the job of the render() method to adjust for orientation and location.
     private Point[] cartesians;
 
     //constructor
@@ -197,8 +198,9 @@ public abstract class Sprite implements Movable {
                                 * Math.cos(Math.toRadians(getOrientation())
                                 + pp.getTheta())));
 
-        //adjust for the location (center-point) of the sprite.
-        //the reason we subtract the y-value has to do with the way Java plots the vertical axis (from top to bottom)
+        // adjust for the location (center-point) of the sprite.
+        // the reason we subtract the y-value has to do with how Java plots the vertical axis for
+        // graphics (from top to bottom)
         Function<Point, Point> adjustForLocation =
                 p -> new Point(
                          getCenter().x + p.x,
