@@ -151,7 +151,7 @@ public class Game implements Runnable, KeyListener {
 			}//end inner for
 		}//end outer for
 
-		//check for collisions between falcon and floaters
+		//check for collisions between falcon and floaters. Order of growth of O(n) where n is number of floaters
 		Point pntFalCenter = CommandCenter.getInstance().getFalcon().getCenter();
 		int radFalcon = CommandCenter.getInstance().getFalcon().getRadius();
 
@@ -253,7 +253,7 @@ public class Game implements Runnable, KeyListener {
 		    if (nSize > 1) return; //return if Small (2) Asteroid
 
 		    //for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
-		    nSize +=2;
+		    nSize += 2;
 			while (nSize-- > 0) {
 				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), CollisionOp.Operation.ADD);
 			}
@@ -279,8 +279,8 @@ public class Game implements Runnable, KeyListener {
 		
 		if (isLevelClear()) {
 			//more asteroids at each level to increase difficulty
-			spawnBigAsteroids(CommandCenter.getInstance().getLevel() + 1);
 			CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);
+			spawnBigAsteroids(CommandCenter.getInstance().getLevel());
 			//setFade e.g. protect the falcon so that player has time to avoid newly spawned asteroids.
 			CommandCenter.getInstance().getFalcon().setFade(Falcon.FADE_INITIAL_VALUE);
 
