@@ -26,10 +26,7 @@ public class NewShipFloater extends Sprite {
 		//set random spin
 		setSpin(somePosNegValue(10));
 
-		//random orientation 
-		setOrientation(Game.R.nextInt(360));
-
-		//always set cartesian points last
+		//cartesian points which define the shape of the polygon
 		List<Point> pntCs = new ArrayList<>();
 		pntCs.add(new Point(5, 5));
 		pntCs.add(new Point(4,0));

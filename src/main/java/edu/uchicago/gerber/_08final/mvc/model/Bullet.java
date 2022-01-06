@@ -12,6 +12,8 @@ public class Bullet extends Sprite {
 
     public Bullet(Falcon fal) {
 
+
+
         setTeam(Team.FRIEND);
 
         //a bullet expires after 20 frames. set to one more than frame expiration
@@ -32,7 +34,6 @@ public class Bullet extends Sprite {
                 Math.sin(Math.toRadians(fal.getOrientation())) * FIRE_POWER);
 
 
-        //make sure to setCartesianPoints last
         //defined the points on a cartesian grid
         List<Point> pntCs = new ArrayList<>();
         pntCs.add(new Point(0, 3)); //top point
@@ -41,6 +42,7 @@ public class Bullet extends Sprite {
         pntCs.add(new Point(-1, -1));
 
         setCartesians(pntCs);
+
 
 
     }

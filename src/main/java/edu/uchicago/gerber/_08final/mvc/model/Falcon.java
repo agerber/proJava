@@ -38,7 +38,7 @@ public class Falcon extends Sprite {
 		//this is the size (radius) of the falcon
 		setRadius(35);
 
-		//be sure to set cartesian points last.
+
 		List<Point> pntCs = new ArrayList<>();
 		// Robert Alef's awesome falcon design
 		pntCs.add(new Point(0,9));
@@ -47,13 +47,11 @@ public class Falcon extends Sprite {
 		pntCs.add(new Point(-4, 1));
 		pntCs.add(new Point(4,1));
 		pntCs.add(new Point(-4,1));
-
 		pntCs.add(new Point(-4, -2));
 		pntCs.add(new Point(-1, -2));
 		pntCs.add(new Point(-1, -9));
 		pntCs.add(new Point(-1, -2));
 		pntCs.add(new Point(-4, -2));
-
 		pntCs.add(new Point(-10, -8));
 		pntCs.add(new Point(-5, -9));
 		pntCs.add(new Point(-7, -11));
@@ -71,12 +69,10 @@ public class Falcon extends Sprite {
 		pntCs.add(new Point(5, -9));
 		pntCs.add(new Point(10, -8));
 		pntCs.add(new Point(4, -2));
-
 		pntCs.add(new Point(1, -2));
 		pntCs.add(new Point(1, -9));
 		pntCs.add(new Point(1, -2));
 		pntCs.add(new Point(4,-2));
-
 		pntCs.add(new Point(4, 1));
 		pntCs.add(new Point(1, 3));
 		pntCs.add(new Point(1,6));
