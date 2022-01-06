@@ -31,7 +31,6 @@ public class Game implements Runnable, KeyListener {
 	public final static int FRAMES_PER_SECOND = 1000 / ANI_DELAY;
 
 	private Thread animationThread;
-	private int level = 1;
 
 
 	private boolean muted = true;
@@ -232,7 +231,7 @@ public class Game implements Runnable, KeyListener {
 	private void spawnNewShipFloater() {
 
 		//appears more often as your level increases.
-		if ((System.currentTimeMillis() / ANI_DELAY) % (SPAWN_NEW_SHIP_FLOATER - level * 7L) == 0) {
+		if ((System.currentTimeMillis() / ANI_DELAY) % (SPAWN_NEW_SHIP_FLOATER - CommandCenter.getInstance().getLevel() * 7L) == 0) {
 			CommandCenter.getInstance().getOpsList().enqueue(new NewShipFloater(), CollisionOp.Operation.ADD);
 		}
 	}
