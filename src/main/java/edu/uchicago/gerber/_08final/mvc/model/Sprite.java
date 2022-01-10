@@ -164,13 +164,6 @@ public abstract class Sprite implements Movable {
 
     }
 
-    public void draw(Graphics g, Color color) {
-        //set custom color
-        g.setColor(color);
-        render(g);
-
-    }
-
     @Override
     public void draw(Graphics g) {
         //set the native color of the sprite
@@ -179,9 +172,16 @@ public abstract class Sprite implements Movable {
 
     }
 
+    public void draw(Graphics g, Color color) {
+        //set custom color
+        g.setColor(color);
+        render(g);
+
+    }
+
     private void render(Graphics g) {
 
-        // to render this Sprite, we need to, 1: convert raw cartesians to polars, 2: adjust polars
+        // to render this Sprite, we need to, 1: convert raw cartesians to raw polars, 2: adjust polars
         // for orientation of sprite. Convert back to cartesians 3: adjust for center-point (location).
         // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to drawPolygon().
 

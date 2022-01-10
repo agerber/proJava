@@ -20,7 +20,6 @@ public class GamePanel extends Panel {
 	// ============================================================== 
 	 
 	// The following "off" vars are used for the off-screen double-buffered image.
-	//private Dimension dimOff;
 	private Image imgOff;
 	private Graphics grpOff;
 	
