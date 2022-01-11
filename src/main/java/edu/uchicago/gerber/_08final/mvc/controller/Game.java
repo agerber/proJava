@@ -43,13 +43,12 @@ public class Game implements Runnable, KeyListener {
 			UP = 38, // thrust; up arrow
 			START = 83, // s key
 			FIRE = 32, // space key
-			MUTE = 77, // m-key mute
+			MUTE = 77; // m-key mute
 
 	// for possible future use
-	// HYPER = 68, 					// d key
-	// SHIELD = 65, 				// a key arrow
-	// NUM_ENTER = 10, 				// hyp
-	 SPECIAL = 70; 					// fire special weapon;  F key
+	// HYPER = 68, 					// D key
+	// SHIELD = 65, 				// A key
+	// SPECIAL = 70; 					// fire special weapon;  F key
 
 	private Clip clpThrust;
 	private Clip clpMusicBackground;

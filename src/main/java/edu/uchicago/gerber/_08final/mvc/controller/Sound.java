@@ -49,9 +49,9 @@ public class Sound {
 			clp = AudioSystem.getClip();
 		    clp.open( aisStream );
 
-		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException exp) {
-			exp.printStackTrace();
-		} //the next three lines were added to catch all exceptions generated
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			e.printStackTrace();
+		}
 
 		return clp;
 
