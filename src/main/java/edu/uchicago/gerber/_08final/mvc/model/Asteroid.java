@@ -52,9 +52,9 @@ public class Asteroid extends Sprite {
 		setCenter(astExploded.getCenter());
 		int newSmallerSize = astExploded.getSize() + 1;
 		//random delta-x : inertia + the smaller the asteroid, the faster its possible speed
-		setDeltaX(astExploded.getDeltaX() + somePosNegValue( 3 + newSmallerSize * 2));
+		setDeltaX(astExploded.getDeltaX() / 1.5 + somePosNegValue( 5 + newSmallerSize * 2));
 		//random delta-y : inertia + the smaller the asteroid, the faster its possible speed
-		setDeltaY(astExploded.getDeltaY() + somePosNegValue( 3 + newSmallerSize * 2));
+		setDeltaY(astExploded.getDeltaY() / 1.5 + somePosNegValue( 5 + newSmallerSize * 2));
 
 	}
 
