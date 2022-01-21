@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 //the lombok @AllArgsConstructor gives us an All-Args-Constructor :)
 @AllArgsConstructor
-public class CollisionOp {
+public class GameOp {
     //this could also be a boolean, but we want to be explicit about what we're doing
     public enum Operation {
         ADD, REMOVE

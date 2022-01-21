@@ -4,10 +4,7 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 import edu.uchicago.gerber._08final.mvc.controller.Sound;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -58,7 +55,7 @@ public class CommandCenter {
 		//set to one greater than number of falcons lives in your game as initFalconAndDecrementNum() also decrements
 		setNumFalcons(4);
 		initFalconAndDecrementFalconNum();
-		opsList.enqueue(falcon, CollisionOp.Operation.ADD);
+		opsList.enqueue(falcon, GameOp.Operation.ADD);
 
 	}
 
