@@ -13,11 +13,11 @@ import lombok.Data;
 @AllArgsConstructor
 public class GameOp {
     //this could also be a boolean, but we want to be explicit about what we're doing
-    public enum Operation {
+    public enum Action {
         ADD, REMOVE
     }
     //members
     private Movable movable;
-    private Operation operation;
+    private Action action;
 
 }

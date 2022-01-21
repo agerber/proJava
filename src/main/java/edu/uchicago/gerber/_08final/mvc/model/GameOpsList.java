@@ -18,10 +18,10 @@ public class GameOpsList extends LinkedList<GameOp> {
         this.lock =   new ReentrantLock();
     }
 
-    public void enqueue(Movable mov, GameOp.Operation operation) {
+    public void enqueue(Movable mov, GameOp.Action action) {
        try {
             lock.lock();
-            addLast(new GameOp(mov, operation));
+            addLast(new GameOp(mov, action));
         } finally {
             lock.unlock();
         }
