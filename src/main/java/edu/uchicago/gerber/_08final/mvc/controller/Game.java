@@ -32,7 +32,7 @@ public class Game implements Runnable, KeyListener {
 
 	private Thread animationThread;
 
-
+	//todo this is state: move to CommandCenter
 	private boolean muted = true;
 	
 
@@ -177,9 +177,9 @@ public class Game implements Runnable, KeyListener {
 		//deferred mutation: these operations are done AFTER we have completed our collision detection to avoid
 		// mutating the movable linkedlists while iterating them above
 		while(!CommandCenter.getInstance().getOpsList().isEmpty()){
-			GameOp cop =  CommandCenter.getInstance().getOpsList().dequeue();
-			Movable mov = cop.getMovable();
-			GameOp.Action action = cop.getAction();
+			GameOp gameOp =  CommandCenter.getInstance().getOpsList().dequeue();
+			Movable mov = gameOp.getMovable();
+			GameOp.Action action = gameOp.getAction();
 
 			switch (mov.getTeam()){
 				case FOE:
