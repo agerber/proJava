@@ -25,7 +25,7 @@ public class Game implements Runnable, KeyListener {
 	//this is used throughout many classes.
 	public static Random R = new Random();
 
-	public final static int ANI_DELAY = 50; // milliseconds between screen
+	public final static int ANI_DELAY = 40; // milliseconds between screen
 											// updates (animation)
 
 	public final static int FRAMES_PER_SECOND = 1000 / ANI_DELAY;

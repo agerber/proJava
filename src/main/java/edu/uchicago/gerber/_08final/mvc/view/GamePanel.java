@@ -101,7 +101,7 @@ public class GamePanel extends Panel {
 		}
 
 		//after drawing all the movables or text on the offscreen-image, copy it in one fell-swoop to graphics context
-		// of the game panel, and show it for ~50ms. If you attempt to draw sprites directly on the gamePanel, e.g.
+		// of the game panel, and show it for ~40ms. If you attempt to draw sprites directly on the gamePanel, e.g.
 		// without the use of a double-buffered off-screen image, you will see flickering.
 		g.drawImage(imgOff, 0, 0, this);
 	} 
