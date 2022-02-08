@@ -30,7 +30,7 @@ public class CommandCenter {
 	private final List<Movable> movFoes = new LinkedList<>();
 	private final List<Movable> movFloaters = new LinkedList<>();
 
-	private final GameOpsList opsList = new GameOpsList();
+	private final GameOpsQueue opsQueue = new GameOpsQueue();
 
 	//singleton
 	private static CommandCenter instance = null;
@@ -55,7 +55,7 @@ public class CommandCenter {
 		//set to one greater than number of falcons lives in your game as initFalconAndDecrementNum() also decrements
 		setNumFalcons(4);
 		initFalconAndDecrementFalconNum();
-		opsList.enqueue(falcon, GameOp.Action.ADD);
+		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 
 	}
 

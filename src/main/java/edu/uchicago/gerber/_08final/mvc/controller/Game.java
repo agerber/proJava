@@ -139,10 +139,10 @@ public class Game implements Runnable, KeyListener {
 				if (pntFriendCenter.distance(pntFoeCenter) < (radFriend + radFoe)) {
 					//remove the friend (so long as he is not protected)
 					if (!movFriend.isProtected()){
-						CommandCenter.getInstance().getOpsList().enqueue(movFriend, GameOp.Action.REMOVE);
+						CommandCenter.getInstance().getOpsQueue().enqueue(movFriend, GameOp.Action.REMOVE);
 					}
 					//remove the foe
-					CommandCenter.getInstance().getOpsList().enqueue(movFoe, GameOp.Action.REMOVE);
+					CommandCenter.getInstance().getOpsQueue().enqueue(movFoe, GameOp.Action.REMOVE);
 					Sound.playSound("kapow.wav");
 				 }
 
@@ -162,7 +162,7 @@ public class Game implements Runnable, KeyListener {
 			//detect collision
 			if (pntFalCenter.distance(pntFloaterCenter) < (radFalcon + radFloater)) {
 
-				CommandCenter.getInstance().getOpsList().enqueue(movFloater, GameOp.Action.REMOVE);
+				CommandCenter.getInstance().getOpsQueue().enqueue(movFloater, GameOp.Action.REMOVE);
 				Sound.playSound("pacman_eatghost.wav");
 	
 			}//end if
@@ -176,8 +176,8 @@ public class Game implements Runnable, KeyListener {
 
 		//deferred mutation: these operations are done AFTER we have completed our collision detection to avoid
 		// mutating the movable linkedlists while iterating them above
-		while(!CommandCenter.getInstance().getOpsList().isEmpty()){
-			GameOp gameOp =  CommandCenter.getInstance().getOpsList().dequeue();
+		while(!CommandCenter.getInstance().getOpsQueue().isEmpty()){
+			GameOp gameOp =  CommandCenter.getInstance().getOpsQueue().dequeue();
 			Movable mov = gameOp.getMovable();
 			GameOp.Action action = gameOp.getAction();
 
@@ -185,7 +185,7 @@ public class Game implements Runnable, KeyListener {
 				case FOE:
 					if (action == GameOp.Action.ADD){
 						CommandCenter.getInstance().getMovFoes().add(mov);
-					} else { //CollisionOp.Operation.REMOVE
+					} else { //GameOp.Operation.REMOVE
 						CommandCenter.getInstance().getMovFoes().remove(mov);
 						if (mov instanceof Asteroid)
 							spawnSmallerAsteroids((Asteroid) mov);
@@ -195,7 +195,7 @@ public class Game implements Runnable, KeyListener {
 				case FRIEND:
 					if (action == GameOp.Action.ADD){
 						CommandCenter.getInstance().getMovFriends().add(mov);
-					} else { //CollisionOp.Operation.REMOVE
+					} else { //GameOp.Operation.REMOVE
 						if (mov instanceof Falcon) {
 							CommandCenter.getInstance().initFalconAndDecrementFalconNum();
 						} else {
@@ -207,7 +207,7 @@ public class Game implements Runnable, KeyListener {
 				case FLOATER:
 					if (action == GameOp.Action.ADD){
 						CommandCenter.getInstance().getMovFloaters().add(mov);
-					} else { //CollisionOp.Operation.REMOVE
+					} else { //GameOp.Operation.REMOVE
 						CommandCenter.getInstance().getMovFloaters().remove(mov);
 					}
 					break;
@@ -215,7 +215,7 @@ public class Game implements Runnable, KeyListener {
 				case DEBRIS:
 					if (action == GameOp.Action.ADD){
 						CommandCenter.getInstance().getMovDebris().add(mov);
-					} else { //CollisionOp.Operation.REMOVE
+					} else { //GameOp.Operation.REMOVE
 						CommandCenter.getInstance().getMovDebris().remove(mov);
 					}
 					break;
@@ -231,7 +231,7 @@ public class Game implements Runnable, KeyListener {
 
 		//appears more often as your level increases.
 		if ((System.currentTimeMillis() / ANI_DELAY) % (SPAWN_NEW_SHIP_FLOATER - CommandCenter.getInstance().getLevel() * 7L) == 0) {
-			CommandCenter.getInstance().getOpsList().enqueue(new NewShipFloater(), GameOp.Action.ADD);
+			CommandCenter.getInstance().getOpsQueue().enqueue(new NewShipFloater(), GameOp.Action.ADD);
 		}
 	}
 
@@ -240,7 +240,7 @@ public class Game implements Runnable, KeyListener {
 	private void spawnBigAsteroids(int nNum) {
 		while(nNum-- > 0) {
 			//Asteroids with size of zero are big
-			CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(0), GameOp.Action.ADD);
+			CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(0), GameOp.Action.ADD);
 
 		}
 	}
@@ -253,7 +253,7 @@ public class Game implements Runnable, KeyListener {
 		    //for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
 		    nSize += 2;
 			while (nSize-- > 0) {
-				CommandCenter.getInstance().getOpsList().enqueue(new Asteroid(originalAsteroid), GameOp.Action.ADD);
+				CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(originalAsteroid), GameOp.Action.ADD);
 			}
 
 	}
@@ -352,7 +352,7 @@ public class Game implements Runnable, KeyListener {
 		if (fal != null) {
 			switch (nKey) {
 			case FIRE:
-				CommandCenter.getInstance().getOpsList().enqueue(new Bullet(fal), GameOp.Action.ADD);
+				CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(fal), GameOp.Action.ADD);
 				Sound.playSound("laser.wav");
 				break;
 				
