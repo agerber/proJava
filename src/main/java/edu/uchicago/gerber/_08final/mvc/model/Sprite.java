@@ -139,9 +139,9 @@ public abstract class Sprite implements Movable {
 
     protected List<PolarPoint> cartesianToPolar(List<Point> pntCartesians) {
 
-        BiFunction<Point, Double, PolarPoint> cartToPolarTransform = (pnt, dub) -> new PolarPoint(
+        BiFunction<Point, Double, PolarPoint> cartToPolarTransform = (pnt, hyp) -> new PolarPoint(
                 //this is r from PolarPoint(r,theta).
-                hypotFunction(pnt.x, pnt.y) / dub, //r is relative to the largestHypotenuse a.k.a. dub in this method
+                hypotFunction(pnt.x, pnt.y) / hyp, //r is relative to the largestHypotenuse
                 //this is theta from PolarPoint(r,theta)
                 Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180
         );
