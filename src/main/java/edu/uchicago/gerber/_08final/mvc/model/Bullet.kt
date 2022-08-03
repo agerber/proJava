@@ -2,6 +2,7 @@ package edu.uchicago.gerber._08final.mvc.model
 
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Point
+import java.util.*
 
 class Bullet(fal: Falcon) : Sprite() {
     init {
@@ -10,7 +11,6 @@ class Bullet(fal: Falcon) : Sprite() {
         //a bullet expires after 20 frames. set to one more than frame expiration
         expiry = 21
         radius = 6
-
 
         //everything is relative to the falcon ship that fired the bullet
         center = fal.center
@@ -23,13 +23,12 @@ class Bullet(fal: Falcon) : Sprite() {
         deltaY = fal.deltaY +
                 Math.sin(Math.toRadians(fal.orientation.toDouble())) * FIRE_POWER
 
-
         //defined the points on a cartesian grid
-        val pntCs: MutableList<Point> = ArrayList()
+        val pntCs = ArrayList<Point>()
         pntCs.add(Point(0, 3)) //top point
         pntCs.add(Point(1, -1))
         pntCs.add(Point(0, -2))
         pntCs.add(Point(-1, -1))
-        setCartesians(pntCs)
+        cartesians = pntCs
     }
 }

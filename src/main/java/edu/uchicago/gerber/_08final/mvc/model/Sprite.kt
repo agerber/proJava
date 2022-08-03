@@ -29,7 +29,7 @@ abstract class Sprite : Movable {
     val color: Color = Color.WHITE
 
     //will be initialized in subclass
-    lateinit var cartesians: Array<Point>
+    lateinit var cartesians: ArrayList<Point>
 
     init {
         center = (Point(Game.R.nextInt(Game.DIM.width),
