@@ -7,14 +7,10 @@ import javax.swing.Action
 /**
  * Created by ag on 6/17/2015.
  */
-//the lombok @Data gives us automatic getters and setters
-@Data //the lombok @AllArgsConstructor gives us an All-Args-Constructor :)
-@AllArgsConstructor
-data class GameOp(
 
-    //members
-    val movable: Movable? = null,
-    val action: Action? = null
+data class GameOp(
+    val movable: Movable,
+    val action: Action
 ){
     //this could also be a boolean, but we want to be explicit about what we're doing
     enum class Action {
