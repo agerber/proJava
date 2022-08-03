@@ -17,7 +17,7 @@ class Bullet(fal: Falcon) : Sprite() {
 
         //set the bullet orientation to the falcon (ship) orientation
         orientation = fal.orientation
-        val FIRE_POWER = 35.0
+
         deltaX = fal.deltaX +
                 Math.cos(Math.toRadians(fal.orientation.toDouble())) * FIRE_POWER
         deltaY = fal.deltaY +
@@ -30,5 +30,8 @@ class Bullet(fal: Falcon) : Sprite() {
         pntCs.add(Point(0, -2))
         pntCs.add(Point(-1, -1))
         cartesians = pntCs
+    }
+    companion object {
+        const val FIRE_POWER = 35.0
     }
 }
