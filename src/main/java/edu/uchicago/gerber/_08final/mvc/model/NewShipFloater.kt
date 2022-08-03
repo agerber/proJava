@@ -31,7 +31,7 @@ class NewShipFloater : Sprite() {
         pntCs.add(Point(-4, 0))
         pntCs.add(Point(-5, 5))
         pntCs.add(Point(0, 4))
-       cartesians = pntCs
+        cartesians = pntCs
     }
 
     override fun move() {

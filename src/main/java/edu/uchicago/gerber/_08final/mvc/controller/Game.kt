@@ -47,8 +47,8 @@ class Game : Runnable, KeyListener {
     // HYPER = 68, 					// D key
     // SHIELD = 65, 				// A key
     // SPECIAL = 70; 					// fire special weapon;  F key
-    private val clpThrust: Clip
-    private val clpMusicBackground: Clip
+   // private val clpThrust: Clip
+   // private val clpMusicBackground: Clip
 
     // ===============================================
     // ==CONSTRUCTOR
@@ -56,8 +56,8 @@ class Game : Runnable, KeyListener {
     init {
         gmpPanel = GamePanel(DIM)
         gmpPanel.addKeyListener(this) //Game object implements KeyListener
-        clpThrust = Sound.clipForLoopFactory("whitenoise.wav")
-        clpMusicBackground = Sound.clipForLoopFactory("music-background.wav")
+       // clpThrust = Sound.clipForLoopFactory("whitenoise.wav")
+       // clpMusicBackground = Sound.clipForLoopFactory("music-background.wav")
 
         //fire up the animation thread
         animationThread = Thread(this) // pass the animation thread a runnable object, the Game object
@@ -119,7 +119,7 @@ class Game : Runnable, KeyListener {
                     }
                     //remove the foe
                     CommandCenter.opsQueue.enqueue(movFoe, GameOp.Action.REMOVE)
-                    Sound.playSound("kapow.wav")
+                  //  Sound.playSound("kapow.wav")
                 }
             } //end inner for
         } //end outer for
@@ -136,7 +136,7 @@ class Game : Runnable, KeyListener {
             //detect collision
             if (pntFalCenter.distance(pntFloaterCenter) < radFalcon + radFloater) {
                 CommandCenter.opsQueue.enqueue(movFloater, GameOp.Action.REMOVE)
-                Sound.playSound("pacman_eatghost.wav")
+               // Sound.playSound("pacman_eatghost.wav")
             } //end if
         } //end for
         processGameOpsQueue()
@@ -248,13 +248,13 @@ class Game : Runnable, KeyListener {
             when (nKey) {
                 PAUSE -> {
                     CommandCenter.paused = !CommandCenter.paused
-                    if (CommandCenter.paused) stopLoopingSounds(clpMusicBackground, clpThrust)
+                   // if (CommandCenter.paused) stopLoopingSounds(clpMusicBackground, clpThrust)
                 }
 
                 QUIT -> System.exit(0)
                 UP -> {
                     fal.thrustOn()
-                    if (!CommandCenter.paused && !CommandCenter.isGameOver) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
+                  //  if (!CommandCenter.paused && !CommandCenter.isGameOver) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
                 }
 
                 LEFT -> fal.rotateLeft()
@@ -273,21 +273,21 @@ class Game : Runnable, KeyListener {
             when (nKey) {
                 FIRE -> {
                     CommandCenter.opsQueue.enqueue(Bullet(fal), GameOp.Action.ADD)
-                    Sound.playSound("laser.wav")
+                 //   Sound.playSound("laser.wav")
                 }
 
                 LEFT -> fal.stopRotating()
                 RIGHT -> fal.stopRotating()
                 UP -> {
                     fal.thrustOff()
-                    clpThrust.stop()
+                  //  clpThrust.stop()
                 }
 
                 MUTE -> {
                     if (!muted) {
-                        stopLoopingSounds(clpMusicBackground)
+                     //   stopLoopingSounds(clpMusicBackground)
                     } else {
-                        clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY)
+                     //   clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY)
                     }
                     muted = !muted
                 }

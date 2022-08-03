@@ -19,7 +19,6 @@ class Asteroid(size: Int) : Sprite() {
 
         //Asteroid is FOE
         team = Team.FOE
-
         //the spin will be either plus or minus 0-9
         spin = somePosNegValue(10)
         //random delta-x

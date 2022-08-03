@@ -1,7 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model
 
 import edu.uchicago.gerber._08final.mvc.controller.Game
-import edu.uchicago.gerber._08final.mvc.controller.Sound.playSound
 import lombok.Data
 import java.awt.Point
 import java.util.*
@@ -36,7 +35,7 @@ object CommandCenter {
     fun initFalconAndDecrementFalconNum() {
         numFalcons -= 1
         if (isGameOver) return
-        playSound("shipspawn.wav")
+        //playSound("shipspawn.wav")
         falcon.fade = Falcon.FADE_INITIAL_VALUE
         //put falcon in the middle of the game-space
         falcon.center = (Point(Game.DIM.width / 2, Game.DIM.height / 2))
