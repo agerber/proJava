@@ -20,30 +20,14 @@ abstract class Sprite : Movable {
 
     //team
     lateinit var team: Team
-    override fun getTeam(): Team {
-        return team
-    }
-    fun setTeam(team: Team){
-        this.team = team
-    }
 
     //radius
     var radius: Int = 0
-    override fun getRadius(): Int {
-        return radius
-    }
-    fun setRadius(radius: Int){
-        this.radius = radius
-    }
+
 
     //center
     private var center: Point
-    override fun getCenter(): Point {
-        return center
-    }
-    fun setCenter(center: Point){
-        this.center = center
-    }
+
 
     var orientation: Int = 0
     var expiry: Int = 0
@@ -66,25 +50,25 @@ abstract class Sprite : Movable {
         //The following code block just keeps the sprite inside the bounds of the frame.
         //To ensure this behavior among all sprites in your game, make sure to call super.move() in extending classes
         // where you need to override the move() method.
-        val center: Point = getCenter()
+
 
         //right-bounds reached
         if (center.x > Game.DIM.width) {
-            setCenter(Point(1, center.y))
+            center = (Point(1, center.y))
             //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(Point(Game.DIM.width - 1, center.y))
+            center = (Point(Game.DIM.width - 1, center.y))
             //bottom-bounds reached
         } else if (center.y > Game.DIM.height) {
-            setCenter(Point(center.x, 1))
+            center = (Point(center.x, 1))
             //top-bounds reached
         } else if (center.y < 0) {
-            setCenter(Point(center.x, Game.DIM.height - 1))
+            center = (Point(center.x, Game.DIM.height - 1))
             //in-bounds
         } else {
             val newXPos: Double = center.x + deltaX
             val newYPos: Double = center.y + deltaY
-            setCenter(Point(newXPos.toInt(), newYPos.toInt()))
+            center = (Point(newXPos.toInt(), newYPos.toInt()))
         }
 
         //expire (decrement expiry) on short-lived objects only
@@ -126,9 +110,9 @@ abstract class Sprite : Movable {
         //when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
         val PRECISION_MULTIPLIER = 1000
         val polarToCartTransform = Function { (r, theta): PolarPoint ->
-            Point((getCenter().x + (r * getRadius() * PRECISION_MULTIPLIER
+            Point((center.x + (r * radius * PRECISION_MULTIPLIER
                     * Math.sin(Math.toRadians(orientation.toDouble())
-                    + theta!!))).toInt(), (getCenter().y - (r * getRadius() * PRECISION_MULTIPLIER
+                    + theta!!))).toInt(), (center.y - (r * radius * PRECISION_MULTIPLIER
                     * Math.cos(Math.toRadians(orientation.toDouble())
                     + theta))).toInt())
         }
@@ -161,7 +145,7 @@ abstract class Sprite : Movable {
 
     override fun draw(g: Graphics?) {
         //set the native color of the sprite
-        g!!.color = getColor()
+        g!!.color = color
         render(g)
     }
 
@@ -182,9 +166,9 @@ abstract class Sprite : Movable {
 
         //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
         val adjustForOrientation = Function { (r, theta): PolarPoint ->
-            Point((r * getRadius()
+            Point((r * radius
                     * Math.sin(Math.toRadians(orientation.toDouble())
-                    + theta!!)).toInt(), (r * getRadius()
+                    + theta!!)).toInt(), (r * radius
                     * Math.cos(Math.toRadians(orientation.toDouble())
                     + theta)).toInt())
         }
@@ -194,8 +178,8 @@ abstract class Sprite : Movable {
         // graphics (from top to bottom)
         val adjustForLocation = Function { p: Point ->
             Point(
-                    getCenter().x + p.x,
-                    getCenter().y - p.y)
+                    center.x + p.x,
+                    center.y - p.y)
         }
         g!!.drawPolygon(
                 polars.stream()
@@ -215,7 +199,7 @@ abstract class Sprite : Movable {
         //for debugging center-point. Feel free to remove these two lines.
         //#########################################
         g.color = Color.ORANGE
-        g.fillOval(getCenter().x - 1, getCenter().y - 1, 2, 2)
+        g.fillOval(center.x - 1, center.y - 1, 2, 2)
         //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
         //#########################################
     }

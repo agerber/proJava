@@ -33,7 +33,8 @@ object Sound {
     fun clipForLoopFactory(strPath: String): Clip {
         var clp: Clip? = null
         try {
-            val audioSrc = Sound::class.java.getResourceAsStream("/sounds/$strPath")
+            val audioSrc = Sound::class.getResourceAsStream("/sounds/$strPath")
+
             val bufferedIn: InputStream = BufferedInputStream(audioSrc)
             val aisStream = AudioSystem.getAudioInputStream(bufferedIn)
             clp = AudioSystem.getClip()

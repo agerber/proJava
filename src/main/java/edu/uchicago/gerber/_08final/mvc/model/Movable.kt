@@ -13,8 +13,8 @@ interface Movable {
     fun draw(g: Graphics?)
 
     //for collision detection
-    fun getCenter(): Point
-    fun getRadius(): Int
-    fun getTeam(): Team
+    fun myCenter(): Point
+    fun myRadius(): Int
+    fun myTeam(): Team
     fun isProtected(): Boolean
 } //end Movable
