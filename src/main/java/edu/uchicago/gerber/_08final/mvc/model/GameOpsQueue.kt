@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock
 /**
  * Created by ag on 6/17/2015.
  */
-class GameOpsQueue : LinkedList<GameOp?>() {
+class GameOpsQueue : LinkedList<GameOp>() {
     //this data structure is in contention by the "Event Dispatch" thread aka main-swing-thread, and the animation
     // thread. We must restrict access to it by one thread at a time by using a Lock.
     private val lock: Lock
@@ -16,7 +16,7 @@ class GameOpsQueue : LinkedList<GameOp?>() {
         lock = ReentrantLock()
     }
 
-    fun enqueue(mov: Movable?, action: GameOp.Action?) {
+    fun enqueue(mov: Movable, action: GameOp.Action) {
         try {
             lock.lock()
             addLast(GameOp(mov, action))

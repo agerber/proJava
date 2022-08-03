@@ -1,5 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.controller
 
+import lombok.Synchronized
 import java.io.BufferedInputStream
 import java.io.IOException
 import java.io.InputStream
@@ -11,9 +12,8 @@ import javax.sound.sampled.UnsupportedAudioFileException
 object Sound {
     //for individual wav sounds (not looped)
     //http://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
-    @JvmStatic
-	@Synchronized
     fun playSound(strPath: String) {
+        //use coroutines here on the io dispatcher
         Thread {
             try {
                 val clp = AudioSystem.getClip()

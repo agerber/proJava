@@ -14,46 +14,23 @@ import java.util.function.Function
 import java.util.function.IntFunction
 import java.util.stream.Collectors
 
-//the lombok @Data gives us automatic getters and setters on all members
-abstract class Sprite : Movable {
-    //the center-point of this sprite
-    override var center: Point? = null
+abstract class Sprite(
+    val deltaX: Double = 0.0,
+    val deltaY: Double = 0.0,
+    override var team: Team,
+    override var radius: Int = 0,
+    val orientation: Int = 0,
+    val expiry: Int = 0,
+    var color: Color = Color.WHITE,
+    val spin: Int = 0,
+    val fade: Int = 0
 
-    //this causes movement; change-in-x and change-in-y
-    private val deltaX = 0.0
-    private val deltaY = 0.0
+    ) : Movable {
 
-    //every sprite has a team: friend, foe, floater, or debris.
-    override var team: Team? = null
-
-    //the radius of circumscribing circle
-    override var radius = 0
-
-    //orientation from 0-359
-    private val orientation = 0
-
-    //natural mortality (short-lived sprites only)
-    private val expiry = 0
-
-    //the color of this sprite
-    private var color: Color? = null
-
-    //some sprites spin, such as floaters and asteroids
-    private val spin = 0
-
-    //use for fade-in/fade-out
-    private val fade = 0
-
-    //these are Cartesian points used to draw the polygon.
-    //once set, their values do not change. It's the job of the render() method to adjust for orientation and location.
     lateinit var cartesians: Array<Point>
+    override lateinit var center: Point
 
-    //constructor
     init {
-
-        //default sprite color
-        color = Color.white
-        //place the sprite at some random location in the frame at instantiation
         center = (Point(Game.R.nextInt(Game.DIM.width),
                 Game.R.nextInt(Game.DIM.height)))
     }
@@ -90,6 +67,8 @@ abstract class Sprite : Movable {
         //the default value of expiry is zero, so this block will only apply to expiring sprites
         if (getExpiry() > 0) expire()
     }
+
+
 
     private fun expire() {
 
