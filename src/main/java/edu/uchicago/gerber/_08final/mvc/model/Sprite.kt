@@ -24,7 +24,7 @@ abstract class Sprite : Movable {
 
     var orientation: Int = 0
     var expiry: Int = 0
-    val spin: Int = 0
+    var spin: Int = 0
     var fade: Int = 0
     val color: Color = Color.WHITE
 
@@ -34,6 +34,18 @@ abstract class Sprite : Movable {
     init {
         center = (Point(Game.R.nextInt(Game.DIM.width),
                 Game.R.nextInt(Game.DIM.height)))
+    }
+
+    override fun myCenter(): Point {
+      return  center
+    }
+
+    override fun myRadius(): Int {
+       return  radius
+    }
+
+    override fun myTeam(): Team {
+      return  team
     }
 
 
