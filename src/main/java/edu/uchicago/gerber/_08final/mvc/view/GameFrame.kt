@@ -20,7 +20,6 @@ class GameFrame : JFrame() {
     }
 
     //Component initialization
-    @Throws(Exception::class)
     private fun initialize() {
         contentPane = getContentPane() as JPanel
         contentPane!!.layout = borderLayout

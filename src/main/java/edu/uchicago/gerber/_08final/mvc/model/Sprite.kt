@@ -1,7 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model
 
 import edu.uchicago.gerber._08final.mvc.controller.Game
-import edu.uchicago.gerber._08final.mvc.model.CommandCenter.Companion.instance
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import lombok.Data
 import lombok.experimental.Tolerate
@@ -47,7 +46,7 @@ abstract class Sprite : Movable {
     }
 
     var orientation: Int = 0
-    val expiry: Int = 0
+    var expiry: Int = 0
     val spin: Int = 0
     var fade: Int = 0
     val color: Color = Color.WHITE
@@ -100,10 +99,10 @@ abstract class Sprite : Movable {
         //if a short-lived sprite has an expiry of one, it commits suicide by enqueuing itself (this) onto the
         //opsList with an operation of REMOVE
         if (expiry == 1) {
-            instance.getOpsQueue().enqueue(this, GameOp.Action.REMOVE)
+            CommandCenter.opsQueue.enqueue(this, GameOp.Action.REMOVE)
         }
         //and then decrements in all cases
-        setExpiry(getExpiry() - 1)
+        expiry--
     }
 
     protected fun hypotFunction(dX: Double, dY: Double): Double {
@@ -117,9 +116,9 @@ abstract class Sprite : Movable {
     }
 
     //by default, sprites are not protected
-    override val isProtected: Boolean
-        get() =//by default, sprites are not protected
-            false
+    override  fun isProtected(): Boolean {
+        return  false
+    }
 
     //certain Sprites, such as Asteroid use this
     protected fun polarToCartesian(polPolars: List<PolarPoint>): Array<Point> {
@@ -128,14 +127,14 @@ abstract class Sprite : Movable {
         val PRECISION_MULTIPLIER = 1000
         val polarToCartTransform = Function { (r, theta): PolarPoint ->
             Point((getCenter().x + (r * getRadius() * PRECISION_MULTIPLIER
-                    * Math.sin(Math.toRadians(getOrientation().toDouble())
+                    * Math.sin(Math.toRadians(orientation.toDouble())
                     + theta!!))).toInt(), (getCenter().y - (r * getRadius() * PRECISION_MULTIPLIER
-                    * Math.cos(Math.toRadians(getOrientation().toDouble())
+                    * Math.cos(Math.toRadians(orientation.toDouble())
                     + theta))).toInt())
         }
         return polPolars.stream()
                 .map(polarToCartTransform)
-                .toArray { _Dummy_.__Array__() }
+                .toArray()
     }
 
     protected fun cartesianToPolar(pntCartesians: List<Point>): List<PolarPoint> {
@@ -179,14 +178,14 @@ abstract class Sprite : Movable {
         // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to drawPolygon().
 
         //convert raw cartesians to raw polars
-        val polars = cartesianToPolar(Arrays.asList(*getCartesians()))
+        val polars = cartesianToPolar(Arrays.asList(cartesians))
 
         //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
         val adjustForOrientation = Function { (r, theta): PolarPoint ->
             Point((r * getRadius()
-                    * Math.sin(Math.toRadians(getOrientation().toDouble())
+                    * Math.sin(Math.toRadians(orientation.toDouble())
                     + theta!!)).toInt(), (r * getRadius()
-                    * Math.cos(Math.toRadians(getOrientation().toDouble())
+                    * Math.cos(Math.toRadians(orientation.toDouble())
                     + theta)).toInt())
         }
 

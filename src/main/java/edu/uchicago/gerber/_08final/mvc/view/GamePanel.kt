@@ -43,8 +43,8 @@ class GamePanel(dim: Dimension?) : Panel() {
     private fun drawScore(g: Graphics?) {
         g!!.color = Color.white
         g.font = fnt
-        if (CommandCenter.instance.score != 0L) {
-            g.drawString("SCORE :  " + CommandCenter.instance.score, fontWidth, fontHeight)
+        if (CommandCenter.score != 0L) {
+            g.drawString("SCORE :  " + CommandCenter.score, fontWidth, fontHeight)
         } else {
             g.drawString("NO SCORE", fontWidth, fontHeight)
         }
@@ -60,18 +60,18 @@ class GamePanel(dim: Dimension?) : Panel() {
         grpOff!!.setColor(Color.black)
         grpOff!!.fillRect(0, 0, Game.DIM.width, Game.DIM.height)
         drawScore(grpOff)
-        if (CommandCenter.instance.isGameOver) {
+        if (CommandCenter.isGameOver) {
             displayTextOnScreen()
-        } else if (CommandCenter.instance.isPaused) {
+        } else if (CommandCenter.paused) {
             strDisplay = "Game Paused"
             grpOff!!.drawString(strDisplay,
                     (Game.DIM.width - fmt!!.stringWidth(strDisplay)) / 2, Game.DIM.height / 4)
         } else {
             iterateMovables(grpOff,
-                    CommandCenter.instance.movDebris,
-                    CommandCenter.instance.movFloaters,
-                    CommandCenter.instance.movFoes,
-                    CommandCenter.instance.movFriends)
+                    CommandCenter.movDebris,
+                    CommandCenter.movFloaters,
+                    CommandCenter.movFoes,
+                    CommandCenter.movFriends)
             drawNumberShipsLeft(grpOff)
         }
 
@@ -95,7 +95,7 @@ class GamePanel(dim: Dimension?) : Panel() {
     }
 
     private fun drawNumberShipsLeft(g: Graphics?) {
-        var numFalcons = CommandCenter.instance.numFalcons
+        var numFalcons = CommandCenter.numFalcons
         while (numFalcons > 0) {
             drawOneShipLeft(g, numFalcons--)
         }
@@ -103,7 +103,7 @@ class GamePanel(dim: Dimension?) : Panel() {
 
     // Draw the number of falcons left on the bottom-right of the screen. Upside-down, but ok.
     private fun drawOneShipLeft(g: Graphics?, offSet: Int) {
-        val falcon = CommandCenter.instance.falcon
+        val falcon = CommandCenter.falcon
         g!!.color = falcon.color
         g.drawPolygon(
                 Arrays.stream(falcon.cartesians)
