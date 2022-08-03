@@ -3,12 +3,13 @@ package edu.uchicago.gerber._08final.mvc.model
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Color
 import java.awt.Point
+import java.util.*
 
 class NewShipFloater : Sprite() {
     init {
-        setTeam(Team.FLOATER)
+        team = Team.FLOATER
         expiry = 251
-        setRadius(50)
+        radius = 50
         color = Color.BLUE
 
         //set random DeltaX
@@ -21,7 +22,7 @@ class NewShipFloater : Sprite() {
         spin = somePosNegValue(10)
 
         //cartesian points which define the shape of the polygon
-        val pntCs: MutableList<Point> = ArrayList()
+        val pntCs = ArrayList<Point>()
         pntCs.add(Point(5, 5))
         pntCs.add(Point(4, 0))
         pntCs.add(Point(5, -5))
@@ -30,7 +31,7 @@ class NewShipFloater : Sprite() {
         pntCs.add(Point(-4, 0))
         pntCs.add(Point(-5, 5))
         pntCs.add(Point(0, 4))
-        setCartesians(pntCs)
+       cartesians = pntCs
     }
 
     override fun move() {

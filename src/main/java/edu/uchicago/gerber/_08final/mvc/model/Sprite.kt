@@ -16,19 +16,16 @@ abstract class Sprite : Movable {
 
     var deltaX: Double = 0.0
     var deltaY: Double = 0.0
-
-    lateinit var team: Team
     var radius: Int = 0
     var center: Point
-
-
     var orientation: Int = 0
     var expiry: Int = 0
     var spin: Int = 0
     var fade: Int = 0
-    val color: Color = Color.WHITE
+    var color: Color = Color.WHITE
+    var team: Team = Team.FOE
 
-    //will be initialized in subclass
+    //this will be initialized in the subclasses
     lateinit var cartesians: ArrayList<Point>
 
     init {
@@ -36,6 +33,7 @@ abstract class Sprite : Movable {
                 Game.R.nextInt(Game.DIM.height)))
     }
 
+    //contract methods of interface
     override fun myCenter(): Point {
       return  center
     }
@@ -48,14 +46,11 @@ abstract class Sprite : Movable {
       return  team
     }
 
-
-
     override fun move() {
 
         //The following code block just keeps the sprite inside the bounds of the frame.
         //To ensure this behavior among all sprites in your game, make sure to call super.move() in extending classes
         // where you need to override the move() method.
-
 
         //right-bounds reached
         if (center.x > Game.DIM.width) {
