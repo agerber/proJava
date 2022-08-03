@@ -97,7 +97,7 @@ class GamePanel(dim: Dimension?) : Panel() {
     private fun drawNumberShipsLeft(g: Graphics?) {
         var numFalcons = CommandCenter.numFalcons
         while (numFalcons > 0) {
-            //drawOneShipLeft(g, numFalcons--)
+            drawOneShipLeft(g, numFalcons--)
         }
     }
 
