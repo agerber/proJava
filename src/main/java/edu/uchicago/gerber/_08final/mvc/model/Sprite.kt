@@ -105,7 +105,7 @@ abstract class Sprite : Movable {
     }
 
     //certain Sprites, such as Asteroid use this
-    protected fun polarToCartesian(polPolars: List<PolarPoint>): Array<Point> {
+    protected fun polarToCartesian(polPolars: List<PolarPoint>): Array<out Any> {
 
         //when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
         val PRECISION_MULTIPLIER = 1000
@@ -118,7 +118,7 @@ abstract class Sprite : Movable {
         }
         return polPolars.stream()
                 .map(polarToCartTransform)
-                .toArray() as Array<Point>
+                .toArray()
     }
 
     protected fun cartesianToPolar(pntCartesians: List<Point>): List<PolarPoint> {

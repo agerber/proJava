@@ -11,6 +11,10 @@ import java.awt.event.KeyListener
 import java.util.*
 import javax.sound.sampled.Clip
 
+fun main(args: Array<String>) {
+    //typical Swing application start; we pass EventQueue a Runnable object.
+    EventQueue.invokeLater(Game())
+}
 // ===============================================
 // == This Game class is the CONTROLLER
 // ===============================================
@@ -64,10 +68,7 @@ class Game : Runnable, KeyListener {
         animationThread.start()
     }
 
-    fun main(args: Array<String>) {
-        //typical Swing application start; we pass EventQueue a Runnable object.
-        EventQueue.invokeLater(Game())
-    }
+
 
 
     // Game implements runnable, and must have run method

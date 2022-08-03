@@ -62,7 +62,7 @@ class Asteroid(size: Int) : Sprite() {
 
 
 
-    private fun genRandomPoints(): Array<Point> {
+    private fun genRandomPoints(): Array<out Any> {
         //6.283 is the max radians
         val MAX_RADIANS_X1000 = 6283
         val polarPointSupplier = Supplier {
