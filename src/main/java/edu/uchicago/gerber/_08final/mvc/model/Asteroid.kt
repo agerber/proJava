@@ -3,6 +3,7 @@ package edu.uchicago.gerber._08final.mvc.model
 import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Point
+import java.util.*
 import java.util.function.Supplier
 import java.util.stream.Collectors
 import java.util.stream.Stream
@@ -29,7 +30,7 @@ class Asteroid(size: Int) : Sprite() {
         //a size of zero is a big asteroid
         //a size of 1 or 2 is med or small asteroid respectively. See getSize() method.
         radius = if (size == 0) LARGE_RADIUS else LARGE_RADIUS / (size * 2)
-      //  cartesians = genRandomPoints()
+        cartesians = Arrays.asList(genRandomPoints())
     }
 
     //overloaded so we can spawn smaller asteroids from an exploding one
@@ -59,7 +60,7 @@ class Asteroid(size: Int) : Sprite() {
 
 
 
-    private fun genRandomPoints(): Array<out Any> {
+    private fun genRandomPoints(): Array<Point> {
         //6.283 is the max radians
         val MAX_RADIANS_X1000 = 6283
         val polarPointSupplier = Supplier {
@@ -75,6 +76,7 @@ class Asteroid(size: Int) : Sprite() {
                         .limit(vertices.toLong())
                         .sorted { pp1, pp2 -> pp1.theta.compareTo(pp2.theta) }
                         .collect(Collectors.toList())
+
         )
     }
 }

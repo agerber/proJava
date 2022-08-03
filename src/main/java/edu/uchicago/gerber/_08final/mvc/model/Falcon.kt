@@ -17,9 +17,9 @@ class Falcon : Sprite() {
     }
 
     //private boolean shield = false;
-    private var thrusting = false
-    private var turningRight = false
-    private var turningLeft = false
+     var thrusting = false
+     var turningRight = false
+     var turningLeft = false
 
     // ==============================================================
     // CONSTRUCTOR 
@@ -134,65 +134,65 @@ class Falcon : Sprite() {
         return Math.max(colorNum - adjust, 0)
     }
 
-//    override fun draw(g: Graphics?) {
-//        val colShip: Color
-//        colShip = if (fade == 255) {
-//            color //get native color of the sprite
-//        } else if (fade > 220 && fade % 9 == 0) {
-//            Color(0, 32, 128) //dark blue
-//        } else {
-//            Color(
-//                    adjustColor(fade, 200),  //red
-//                    adjustColor(fade, 175),  //green
-//                    fade //blue
-//            )
-//        }
-//
-//        //most Sprites do not have flames, but Falcon does
-//        val flames = doubleArrayOf(23 * Math.PI / 24 + Math.PI / 2, Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2)
-//        val pntFlames = arrayOfNulls<Point>(flames.size)
-//
-//        //thrusting
-//        if (thrusting) {
-//            //the flame
-//            for (nC in flames.indices) {
-//                if (nC % 2 != 0) //odd
-//                {
-//                    //adjust the position so that the flame is off-center
-//                    pntFlames[nC] = Point((center.x + (2
-//                            * radius
-//                            * Math.sin(Math.toRadians(orientation.toDouble())
-//                            + flames[nC]))).toInt(), (center.y - (2
-//                            * radius
-//                            * Math.cos(Math.toRadians(orientation.toDouble())
-//                            + flames[nC]))).toInt())
-//                } else  //even
-//                {
-//                    pntFlames[nC] = Point((center.x + (radius
-//                            * 1.1
-//                            * Math.sin(Math.toRadians(orientation.toDouble())
-//                            + flames[nC]))).toInt(), (center.y - (radius
-//                            * 1.1
-//                            * Math.cos(Math.toRadians(orientation.toDouble())
-//                            + flames[nC]))).toInt())
-//                } //end even/odd else
-//            } //end for loop
-//            g.color = colShip //flames same color as ship
-//            g.fillPolygon(
-//                    Arrays.stream(pntFlames)
-//                            .map { pnt: Point? -> pnt!!.x }
-//                            .mapToInt { obj: Int -> obj }
-//                            .toArray(),
-//                    Arrays.stream(pntFlames)
-//                            .map { pnt: Point? -> pnt!!.y }
-//                            .mapToInt { obj: Int -> obj }
-//                            .toArray(),
-//                    flames.size)
-//        } //end if flame
-//        if (g != null) {
-//            draw(g, colShip)
-//        }
-//    } //end draw()
+    override fun draw(g: Graphics?) {
+        val colShip: Color
+        colShip = if (fade == 255) {
+            color //get native color of the sprite
+        } else if (fade > 220 && fade % 9 == 0) {
+            Color(0, 32, 128) //dark blue
+        } else {
+            Color(
+                    adjustColor(fade, 200),  //red
+                    adjustColor(fade, 175),  //green
+                    fade //blue
+            )
+        }
+
+        //most Sprites do not have flames, but Falcon does
+        val flames = doubleArrayOf(23 * Math.PI / 24 + Math.PI / 2, Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2)
+        val pntFlames = arrayOfNulls<Point>(flames.size)
+
+        //thrusting
+        if (thrusting) {
+            //the flame
+            for (nC in flames.indices) {
+                if (nC % 2 != 0) //odd
+                {
+                    //adjust the position so that the flame is off-center
+                    pntFlames[nC] = Point((center.x + (2
+                            * radius
+                            * Math.sin(Math.toRadians(orientation.toDouble())
+                            + flames[nC]))).toInt(), (center.y - (2
+                            * radius
+                            * Math.cos(Math.toRadians(orientation.toDouble())
+                            + flames[nC]))).toInt())
+                } else  //even
+                {
+                    pntFlames[nC] = Point((center.x + (radius
+                            * 1.1
+                            * Math.sin(Math.toRadians(orientation.toDouble())
+                            + flames[nC]))).toInt(), (center.y - (radius
+                            * 1.1
+                            * Math.cos(Math.toRadians(orientation.toDouble())
+                            + flames[nC]))).toInt())
+                } //end even/odd else
+            } //end for loop
+            g.color = colShip //flames same color as ship
+            g.fillPolygon(
+                    Arrays.stream(pntFlames)
+                            .map { pnt: Point? -> pnt!!.x }
+                            .mapToInt { obj: Int -> obj }
+                            .toArray(),
+                    Arrays.stream(pntFlames)
+                            .map { pnt: Point? -> pnt!!.y }
+                            .mapToInt { obj: Int -> obj }
+                            .toArray(),
+                    flames.size)
+        } //end if flame
+        if (g != null) {
+            draw(g, colShip)
+        }
+    } //end draw()
 
 
 } //end class

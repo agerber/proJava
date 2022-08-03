@@ -44,7 +44,7 @@ object CommandCenter {
         falcon.deltaY = 0.0
     }
 
-    private fun clearAll() {
+     fun clearAll() {
         movDebris.clear()
         movFriends.clear()
         movFoes.clear()
