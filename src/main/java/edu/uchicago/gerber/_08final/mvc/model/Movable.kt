@@ -13,8 +13,8 @@ interface Movable {
     fun draw(g: Graphics?)
 
     //for collision detection
-    val center: Point?
-    val radius: Int
-    val team: Team?
-    val isProtected: Boolean
+    fun getCenter(): Point
+    fun getRadius(): Int
+    fun getTeam(): Team
+    fun isProtected(): Boolean
 } //end Movable
