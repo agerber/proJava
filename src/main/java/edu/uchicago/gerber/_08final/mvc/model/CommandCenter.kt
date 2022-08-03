@@ -6,26 +6,22 @@ import lombok.Data
 import java.awt.Point
 import java.util.*
 
-//the lombok @Data gives us automatic getters and setters on all members
-@Data
-class CommandCenter  // Constructor made private
-private constructor() {
-    private var numFalcons = 0
-    private var level = 0
-    private var score: Long = 0
-    private var paused = false
 
-    //the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
-    //separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap
-    //Lombok will not provide setter methods on final members
-    private val falcon = Falcon()
+object CommandCenter {
+
+     var numFalcons = 0
+     var level = 0
+     var score: Long = 0
+     var paused = false
+     var falcon = Falcon()
 
     //lists containing our movables
-    private val movDebris: MutableList<Movable> = LinkedList()
-    private val movFriends: MutableList<Movable> = LinkedList()
-    private val movFoes: MutableList<Movable> = LinkedList()
-    private val movFloaters: MutableList<Movable> = LinkedList()
-    private val opsQueue = GameOpsQueue()
+     val movDebris: MutableList<Movable> = LinkedList()
+     val movFriends: MutableList<Movable> = LinkedList()
+     val movFoes: MutableList<Movable> = LinkedList()
+     val movFloaters: MutableList<Movable> = LinkedList()
+     val opsQueue = GameOpsQueue()
+
     fun initGame() {
         clearAll()
         level = 1
@@ -58,20 +54,7 @@ private constructor() {
 
     //if the number of falcons is zero, then game over
     val isGameOver: Boolean
-        get() =//if the number of falcons is zero, then game over
-            numFalcons <= 0
+        get() = numFalcons <= 0
 
-    companion object {
-        //this class maintains game state - make this a singleton.
-        //singleton
-		@JvmStatic
-		var instance: CommandCenter? = null
-            get() {
-                if (field == null) {
-                    field = CommandCenter()
-                }
-                return field
-            }
-            private set
-    }
+
 }

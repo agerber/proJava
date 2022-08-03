@@ -19,6 +19,7 @@ abstract class Sprite : Movable {
     var deltaX: Double = 0.0
     var deltaY: Double = 0.0
 
+    //team
     private lateinit var team: Team
     override fun getTeam(): Team {
         return team
@@ -27,6 +28,7 @@ abstract class Sprite : Movable {
         this.team = team
     }
 
+    //radius
     private var radius: Int = 0
     override fun getRadius(): Int {
         return radius
@@ -35,6 +37,7 @@ abstract class Sprite : Movable {
         this.radius = radius
     }
 
+    //center
     private var center: Point
     override fun getCenter(): Point {
         return center
@@ -43,15 +46,14 @@ abstract class Sprite : Movable {
         this.center = center
     }
 
-    val orientation: Int = 0
+    var orientation: Int = 0
     val expiry: Int = 0
-    var color: Color = Color.WHITE
     val spin: Int = 0
-    val fade: Int = 0
+    var fade: Int = 0
+    val color: Color = Color.WHITE
 
+    //will be initialized in subclass
     lateinit var cartesians: Array<Point>
-
-
 
     init {
         center = (Point(Game.R.nextInt(Game.DIM.width),
@@ -81,14 +83,14 @@ abstract class Sprite : Movable {
             setCenter(Point(center.x, Game.DIM.height - 1))
             //in-bounds
         } else {
-            val newXPos: Double = center.x + getDeltaX()
-            val newYPos: Double = center.y + getDeltaY()
+            val newXPos: Double = center.x + deltaX
+            val newYPos: Double = center.y + deltaY
             setCenter(Point(newXPos.toInt(), newYPos.toInt()))
         }
 
         //expire (decrement expiry) on short-lived objects only
         //the default value of expiry is zero, so this block will only apply to expiring sprites
-        if (getExpiry() > 0) expire()
+        if (expiry > 0) expire()
     }
 
 
@@ -97,7 +99,7 @@ abstract class Sprite : Movable {
 
         //if a short-lived sprite has an expiry of one, it commits suicide by enqueuing itself (this) onto the
         //opsList with an operation of REMOVE
-        if (getExpiry() == 1) {
+        if (expiry == 1) {
             instance.getOpsQueue().enqueue(this, GameOp.Action.REMOVE)
         }
         //and then decrements in all cases
