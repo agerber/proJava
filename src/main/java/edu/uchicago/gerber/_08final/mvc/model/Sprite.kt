@@ -16,10 +16,33 @@ import java.util.stream.Collectors
 
 abstract class Sprite : Movable {
 
-    val deltaX: Double = 0.0
-    val deltaY: Double = 0.0
-    override lateinit var team: Team
-    override var radius: Int = 0
+    var deltaX: Double = 0.0
+    var deltaY: Double = 0.0
+
+    private lateinit var team: Team
+    override fun getTeam(): Team {
+        return team
+    }
+    fun setTeam(team: Team){
+        this.team = team
+    }
+
+    private var radius: Int = 0
+    override fun getRadius(): Int {
+        return radius
+    }
+    fun setRadius(radius: Int){
+        this.radius = radius
+    }
+
+    private var center: Point
+    override fun getCenter(): Point {
+        return center
+    }
+    fun setCenter(center: Point){
+        this.center = center
+    }
+
     val orientation: Int = 0
     val expiry: Int = 0
     var color: Color = Color.WHITE
@@ -27,7 +50,8 @@ abstract class Sprite : Movable {
     val fade: Int = 0
 
     lateinit var cartesians: Array<Point>
-    override lateinit var center: Point
+
+
 
     init {
         center = (Point(Game.R.nextInt(Game.DIM.width),
