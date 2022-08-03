@@ -19,7 +19,7 @@ abstract class Sprite : Movable {
     var deltaY: Double = 0.0
 
     //team
-    private lateinit var team: Team
+    lateinit var team: Team
     override fun getTeam(): Team {
         return team
     }
@@ -28,7 +28,7 @@ abstract class Sprite : Movable {
     }
 
     //radius
-    private var radius: Int = 0
+    var radius: Int = 0
     override fun getRadius(): Int {
         return radius
     }

@@ -104,38 +104,38 @@ class Game : Runnable, KeyListener {
         var radFoe: Int
 
         //This has order-of-growth of O(n^2), there is no way around this.
-        for (movFriend in CommandCenter.instance.movFriends) {
-            for (movFoe in CommandCenter.instance.movFoes) {
-                pntFriendCenter = movFriend.center
-                pntFoeCenter = movFoe.center
-                radFriend = movFriend.radius
-                radFoe = movFoe.radius
+        for (movFriend in CommandCenter.movFriends) {
+            for (movFoe in CommandCenter.movFoes) {
+                pntFriendCenter = movFriend.getCenter()
+                pntFoeCenter = movFoe.getCenter()
+                radFriend = movFriend.getRadius()
+                radFoe = movFoe.getRadius()
 
                 //detect collision
                 if (pntFriendCenter.distance(pntFoeCenter) < radFriend + radFoe) {
                     //remove the friend (so long as he is not protected)
-                    if (!movFriend.isProtected) {
-                        CommandCenter.instance.opsQueue.enqueue(movFriend, GameOp.Action.REMOVE)
+                    if (!movFriend.isProtected()) {
+                        CommandCenter.opsQueue.enqueue(movFriend, GameOp.Action.REMOVE)
                     }
                     //remove the foe
-                    CommandCenter.instance.opsQueue.enqueue(movFoe, GameOp.Action.REMOVE)
+                    CommandCenter.opsQueue.enqueue(movFoe, GameOp.Action.REMOVE)
                     Sound.playSound("kapow.wav")
                 }
             } //end inner for
         } //end outer for
 
         //check for collisions between falcon and floaters. Order of growth of O(n) where n is number of floaters
-        val pntFalCenter = CommandCenter.instance.falcon.center
-        val radFalcon = CommandCenter.instance.falcon.radius
+        val pntFalCenter = CommandCenter.falcon.getCenter()
+        val radFalcon = CommandCenter.falcon.getRadius()
         var pntFloaterCenter: Point
         var radFloater: Int
-        for (movFloater in CommandCenter.instance.movFloaters) {
-            pntFloaterCenter = movFloater.center
-            radFloater = movFloater.radius
+        for (movFloater in CommandCenter.movFloaters) {
+            pntFloaterCenter = movFloater.getCenter()
+            radFloater = movFloater.getRadius()
 
             //detect collision
             if (pntFalCenter.distance(pntFloaterCenter) < radFalcon + radFloater) {
-                CommandCenter.instance.opsQueue.enqueue(movFloater, GameOp.Action.REMOVE)
+                CommandCenter.opsQueue.enqueue(movFloater, GameOp.Action.REMOVE)
                 Sound.playSound("pacman_eatghost.wav")
             } //end if
         } //end for
@@ -146,38 +146,40 @@ class Game : Runnable, KeyListener {
 
         //deferred mutation: these operations are done AFTER we have completed our collision detection to avoid
         // mutating the movable linkedlists while iterating them above
-        while (!CommandCenter.instance.opsQueue.isEmpty()) {
-            val gameOp = CommandCenter.instance.opsQueue.dequeue()
-            val mov = gameOp.movable
-            val action = gameOp.action
-            when (mov.team) {
-                Team.FOE -> if (action == GameOp.Action.ADD) {
-                    CommandCenter.instance.movFoes.add(mov)
-                } else { //GameOp.Operation.REMOVE
-                    CommandCenter.instance.movFoes.remove(mov)
-                    if (mov is Asteroid) spawnSmallerAsteroids(mov)
-                }
-
-                Team.FRIEND -> if (action == GameOp.Action.ADD) {
-                    CommandCenter.instance.movFriends.add(mov)
-                } else { //GameOp.Operation.REMOVE
-                    if (mov is Falcon) {
-                        CommandCenter.instance.initFalconAndDecrementFalconNum()
-                    } else {
-                        CommandCenter.instance.movFriends.remove(mov)
+        while (!CommandCenter.opsQueue.isEmpty()) {
+            val gameOp = CommandCenter.opsQueue.dequeue()
+            val mov = gameOp?.movable
+            val action = gameOp?.action
+            if (mov != null) {
+                when (mov.getTeam()) {
+                    Team.FOE -> if (action == GameOp.Action.ADD) {
+                        CommandCenter.movFoes.add(mov)
+                    } else { //GameOp.Operation.REMOVE
+                        CommandCenter.movFoes.remove(mov)
+                        if (mov is Asteroid) spawnSmallerAsteroids(mov)
                     }
-                }
 
-                Team.FLOATER -> if (action == GameOp.Action.ADD) {
-                    CommandCenter.instance.movFloaters.add(mov)
-                } else { //GameOp.Operation.REMOVE
-                    CommandCenter.instance.movFloaters.remove(mov)
-                }
+                    Team.FRIEND -> if (action == GameOp.Action.ADD) {
+                        CommandCenter.movFriends.add(mov)
+                    } else { //GameOp.Operation.REMOVE
+                        if (mov is Falcon) {
+                            CommandCenter.initFalconAndDecrementFalconNum()
+                        } else {
+                            CommandCenter.movFriends.remove(mov)
+                        }
+                    }
 
-                Team.DEBRIS -> if (action == GameOp.Action.ADD) {
-                    CommandCenter.instance.movDebris.add(mov)
-                } else { //GameOp.Operation.REMOVE
-                    CommandCenter.instance.movDebris.remove(mov)
+                    Team.FLOATER -> if (action == GameOp.Action.ADD) {
+                        CommandCenter.movFloaters.add(mov)
+                    } else { //GameOp.Operation.REMOVE
+                        CommandCenter.movFloaters.remove(mov)
+                    }
+
+                    Team.DEBRIS -> if (action == GameOp.Action.ADD) {
+                        CommandCenter.movDebris.add(mov)
+                    } else { //GameOp.Operation.REMOVE
+                        CommandCenter.movDebris.remove(mov)
+                    }
                 }
             }
         }
@@ -186,8 +188,8 @@ class Game : Runnable, KeyListener {
     private fun spawnNewShipFloater() {
 
         //appears more often as your level increases.
-        if (System.currentTimeMillis() / ANI_DELAY % (SPAWN_NEW_SHIP_FLOATER - CommandCenter.instance.level * 7L) == 0L) {
-            CommandCenter.instance.opsQueue.enqueue(NewShipFloater(), GameOp.Action.ADD)
+        if (System.currentTimeMillis() / ANI_DELAY % (SPAWN_NEW_SHIP_FLOATER - CommandCenter.level * 7L) == 0L) {
+            CommandCenter.opsQueue.enqueue(NewShipFloater(), GameOp.Action.ADD)
         }
     }
 
@@ -196,7 +198,7 @@ class Game : Runnable, KeyListener {
         var nNum = nNum
         while (nNum-- > 0) {
             //Asteroids with size of zero are big
-            CommandCenter.instance.opsQueue.enqueue(Asteroid(0), GameOp.Action.ADD)
+            CommandCenter.opsQueue.enqueue(Asteroid(0), GameOp.Action.ADD)
         }
     }
 
@@ -207,7 +209,7 @@ class Game : Runnable, KeyListener {
         //for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
         nSize += 2
         while (nSize-- > 0) {
-            CommandCenter.instance.opsQueue.enqueue(Asteroid(originalAsteroid), GameOp.Action.ADD)
+            CommandCenter.opsQueue.enqueue(Asteroid(originalAsteroid), GameOp.Action.ADD)
         }
     }
 
@@ -216,7 +218,7 @@ class Game : Runnable, KeyListener {
         private get() {
             //if there are no more Asteroids on the screen
             var asteroidFree = true
-            for (movFoe in CommandCenter.instance.movFoes) {
+            for (movFoe in CommandCenter.movFoes) {
                 if (movFoe is Asteroid) {
                     asteroidFree = false
                     break
@@ -228,10 +230,10 @@ class Game : Runnable, KeyListener {
     private fun checkNewLevel() {
         if (isLevelClear) {
             //more asteroids at each level to increase difficulty
-            CommandCenter.instance.level = CommandCenter.instance.level + 1
-            spawnBigAsteroids(CommandCenter.instance.level)
+            CommandCenter.level = CommandCenter.level + 1
+            spawnBigAsteroids(CommandCenter.level)
             //setFade e.g. protect the falcon so that player has time to avoid newly spawned asteroids.
-            CommandCenter.instance.falcon.fade = Falcon.FADE_INITIAL_VALUE
+            CommandCenter.falcon.fade = Falcon.FADE_INITIAL_VALUE
         }
     }
 
@@ -239,20 +241,20 @@ class Game : Runnable, KeyListener {
     // KEYLISTENER METHODS
     // ===============================================
     override fun keyPressed(e: KeyEvent) {
-        val fal = CommandCenter.instance.falcon
+        val fal = CommandCenter.falcon
         val nKey = e.keyCode
-        if (nKey == START && CommandCenter.instance.isGameOver) CommandCenter.instance.initGame()
+        if (nKey == START && CommandCenter.isGameOver) CommandCenter.initGame()
         if (fal != null) {
             when (nKey) {
                 PAUSE -> {
-                    CommandCenter.instance.isPaused = !CommandCenter.instance.isPaused
-                    if (CommandCenter.instance.isPaused) stopLoopingSounds(clpMusicBackground, clpThrust)
+                    CommandCenter.paused = !CommandCenter.paused
+                    if (CommandCenter.paused) stopLoopingSounds(clpMusicBackground, clpThrust)
                 }
 
                 QUIT -> System.exit(0)
                 UP -> {
                     fal.thrustOn()
-                    if (!CommandCenter.instance.isPaused && !CommandCenter.instance.isGameOver) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
+                    if (!CommandCenter.paused && !CommandCenter.isGameOver) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
                 }
 
                 LEFT -> fal.rotateLeft()
@@ -263,14 +265,14 @@ class Game : Runnable, KeyListener {
     }
 
     override fun keyReleased(e: KeyEvent) {
-        val fal = CommandCenter.instance.falcon
+        val fal = CommandCenter.falcon
         val nKey = e.keyCode
         //show the key-code in the console
-        println(nKey)
+        //println(nKey)
         if (fal != null) {
             when (nKey) {
                 FIRE -> {
-                    CommandCenter.instance.opsQueue.enqueue(Bullet(fal), GameOp.Action.ADD)
+                    CommandCenter.opsQueue.enqueue(Bullet(fal), GameOp.Action.ADD)
                     Sound.playSound("laser.wav")
                 }
 
@@ -302,11 +304,11 @@ class Game : Runnable, KeyListener {
         // ===============================================
         // FIELDS
         // ===============================================
-		@JvmField
+
 		val DIM = Dimension(1100, 900) //the dimension of the game.
 
         //this is used throughout many classes.
-		@JvmField
+
 		var R = Random()
         const val ANI_DELAY = 40 // milliseconds between screen
 
@@ -319,7 +321,7 @@ class Game : Runnable, KeyListener {
         // ===============================================
         // ==METHODS
         // ===============================================
-        @JvmStatic
+
         fun main(args: Array<String>) {
             //typical Swing application start; we pass EventQueue a Runnable object.
             EventQueue.invokeLater { Game() }

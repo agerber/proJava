@@ -30,7 +30,7 @@ object Sound {
 
     //for looping wav clips
     //http://stackoverflow.com/questions/4875080/music-loop-in-java
-    fun clipForLoopFactory(strPath: String): Clip? {
+    fun clipForLoopFactory(strPath: String): Clip {
         var clp: Clip? = null
         try {
             val audioSrc = Sound::class.java.getResourceAsStream("/sounds/$strPath")
