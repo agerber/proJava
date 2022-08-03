@@ -195,8 +195,8 @@ class Game : Runnable, KeyListener {
 
     //this method spawns new Large (0) Asteroids
     private fun spawnBigAsteroids(nNum: Int) {
-        var nNum = nNum
-        while (nNum-- > 0) {
+        var localNum = nNum
+        while (localNum-- > 0) {
             //Asteroids with size of zero are big
             CommandCenter.opsQueue.enqueue(Asteroid(0), GameOp.Action.ADD)
         }
@@ -215,7 +215,7 @@ class Game : Runnable, KeyListener {
 
     //if there are no more Asteroids on the screen
     private val isLevelClear: Boolean
-        private get() {
+        get() {
             //if there are no more Asteroids on the screen
             var asteroidFree = true
             for (movFoe in CommandCenter.movFoes) {
@@ -244,23 +244,21 @@ class Game : Runnable, KeyListener {
         val fal = CommandCenter.falcon
         val nKey = e.keyCode
         if (nKey == START && CommandCenter.isGameOver) CommandCenter.initGame()
-        if (fal != null) {
-            when (nKey) {
-                PAUSE -> {
-                    CommandCenter.paused = !CommandCenter.paused
-                   // if (CommandCenter.paused) stopLoopingSounds(clpMusicBackground, clpThrust)
-                }
-
-                QUIT -> System.exit(0)
-                UP -> {
-                    fal.thrustOn()
-                  //  if (!CommandCenter.paused && !CommandCenter.isGameOver) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
-                }
-
-                LEFT -> fal.rotateLeft()
-                RIGHT -> fal.rotateRight()
-                else -> {}
+        when (nKey) {
+            PAUSE -> {
+                CommandCenter.paused = !CommandCenter.paused
+               // if (CommandCenter.paused) stopLoopingSounds(clpMusicBackground, clpThrust)
             }
+
+            QUIT -> System.exit(0)
+            UP -> {
+                fal.thrustOn()
+              //  if (!CommandCenter.paused && !CommandCenter.isGameOver) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
+            }
+
+            LEFT -> fal.rotateLeft()
+            RIGHT -> fal.rotateRight()
+            else -> {}
         }
     }
 
@@ -269,31 +267,29 @@ class Game : Runnable, KeyListener {
         val nKey = e.keyCode
         //show the key-code in the console
         //println(nKey)
-        if (fal != null) {
-            when (nKey) {
-                FIRE -> {
-                    CommandCenter.opsQueue.enqueue(Bullet(fal), GameOp.Action.ADD)
-                 //   Sound.playSound("laser.wav")
-                }
-
-                LEFT -> fal.stopRotating()
-                RIGHT -> fal.stopRotating()
-                UP -> {
-                    fal.thrustOff()
-                  //  clpThrust.stop()
-                }
-
-                MUTE -> {
-                    if (!muted) {
-                     //   stopLoopingSounds(clpMusicBackground)
-                    } else {
-                     //   clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY)
-                    }
-                    muted = !muted
-                }
-
-                else -> {}
+        when (nKey) {
+            FIRE -> {
+                CommandCenter.opsQueue.enqueue(Bullet(fal), GameOp.Action.ADD)
+             //   Sound.playSound("laser.wav")
             }
+
+            LEFT -> fal.stopRotating()
+            RIGHT -> fal.stopRotating()
+            UP -> {
+                fal.thrustOff()
+              //  clpThrust.stop()
+            }
+
+            MUTE -> {
+                if (!muted) {
+                 //   stopLoopingSounds(clpMusicBackground)
+                } else {
+                 //   clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY)
+                }
+                muted = !muted
+            }
+
+            else -> {}
         }
     }
 
