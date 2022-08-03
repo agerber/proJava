@@ -14,18 +14,17 @@ import java.util.function.Function
 import java.util.function.IntFunction
 import java.util.stream.Collectors
 
-abstract class Sprite(
-    val deltaX: Double = 0.0,
-    val deltaY: Double = 0.0,
-    override var team: Team,
-    override var radius: Int = 0,
-    val orientation: Int = 0,
-    val expiry: Int = 0,
-    var color: Color = Color.WHITE,
-    val spin: Int = 0,
-    val fade: Int = 0
+abstract class Sprite : Movable {
 
-    ) : Movable {
+    val deltaX: Double = 0.0
+    val deltaY: Double = 0.0
+    override lateinit var team: Team
+    override var radius: Int = 0
+    val orientation: Int = 0
+    val expiry: Int = 0
+    var color: Color = Color.WHITE
+    val spin: Int = 0
+    val fade: Int = 0
 
     lateinit var cartesians: Array<Point>
     override lateinit var center: Point
