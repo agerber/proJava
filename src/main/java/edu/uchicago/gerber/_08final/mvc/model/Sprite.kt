@@ -15,7 +15,6 @@ import java.util.function.IntFunction
 import java.util.stream.Collectors
 
 //the lombok @Data gives us automatic getters and setters on all members
-@Data
 abstract class Sprite : Movable {
     //the center-point of this sprite
     override var center: Point? = null
