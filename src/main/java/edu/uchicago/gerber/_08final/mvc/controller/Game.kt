@@ -64,6 +64,12 @@ class Game : Runnable, KeyListener {
         animationThread.start()
     }
 
+    fun main(args: Array<String>) {
+        //typical Swing application start; we pass EventQueue a Runnable object.
+        EventQueue.invokeLater(Game())
+    }
+
+
     // Game implements runnable, and must have run method
     override fun run() {
 
@@ -247,13 +253,13 @@ class Game : Runnable, KeyListener {
         when (nKey) {
             PAUSE -> {
                 CommandCenter.paused = !CommandCenter.paused
-               // if (CommandCenter.paused) stopLoopingSounds(clpMusicBackground, clpThrust)
+                if (CommandCenter.paused) stopLoopingSounds(clpMusicBackground, clpThrust)
             }
 
             QUIT -> System.exit(0)
             UP -> {
                 fal.thrustOn()
-              //  if (!CommandCenter.paused && !CommandCenter.isGameOver) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
+                if (!CommandCenter.paused && !CommandCenter.isGameOver) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
             }
 
             LEFT -> fal.rotateLeft()
@@ -277,14 +283,14 @@ class Game : Runnable, KeyListener {
             RIGHT -> fal.stopRotating()
             UP -> {
                 fal.thrustOff()
-              //  clpThrust.stop()
+                clpThrust.stop()
             }
 
             MUTE -> {
                 if (!muted) {
-                 //   stopLoopingSounds(clpMusicBackground)
+                    stopLoopingSounds(clpMusicBackground)
                 } else {
-                 //   clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY)
+                    clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY)
                 }
                 muted = !muted
             }
