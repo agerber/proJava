@@ -177,8 +177,8 @@ class Falcon : Sprite() {
                             + flames[nC]))).toInt())
                 } //end even/odd else
             } //end for loop
-            g.color = colShip //flames same color as ship
-            g.fillPolygon(
+            g?.color = colShip //flames same color as ship
+            g?.fillPolygon(
                     Arrays.stream(pntFlames)
                             .map { pnt: Point? -> pnt!!.x }
                             .mapToInt { obj: Int -> obj }

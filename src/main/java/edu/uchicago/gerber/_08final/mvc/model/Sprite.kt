@@ -121,7 +121,7 @@ abstract class Sprite : Movable {
                 .toArray() as Array<Point>
     }
 
-    protected fun cartesianToPolar(pntCartesians: MutableList<Array<Point>>): List<PolarPoint> {
+    protected fun cartesianToPolar(pntCartesians: List<Point>): List<PolarPoint> {
 
 
 
@@ -167,7 +167,8 @@ abstract class Sprite : Movable {
         // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to drawPolygon().
 
         //convert raw cartesians to raw polars
-     //   val polars = cartesianToPolar(Arrays.asList(cartesians))
+//        val polars = cartesianToPolar(Arrays.asList(cartesians))
+        val polars = cartesianToPolar(cartesians)
 
         //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
         val adjustForOrientation = Function { (r, theta): PolarPoint ->

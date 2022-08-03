@@ -7,6 +7,7 @@ import java.util.*
 import java.util.function.Supplier
 import java.util.stream.Collectors
 import java.util.stream.Stream
+import kotlin.collections.ArrayList
 
 class Asteroid(size: Int) : Sprite() {
     //radius of a large asteroid
@@ -30,7 +31,8 @@ class Asteroid(size: Int) : Sprite() {
         //a size of zero is a big asteroid
         //a size of 1 or 2 is med or small asteroid respectively. See getSize() method.
         radius = if (size == 0) LARGE_RADIUS else LARGE_RADIUS / (size * 2)
-        cartesians = Arrays.asList(genRandomPoints())
+//        cartesians = Arrays.asList(genRandomPoints())
+        cartesians = genRandomPoints().toList() as java.util.ArrayList<Point>
     }
 
     //overloaded so we can spawn smaller asteroids from an exploding one
