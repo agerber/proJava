@@ -106,10 +106,10 @@ class Game : Runnable, KeyListener {
         //This has order-of-growth of O(n^2), there is no way around this.
         for (movFriend in CommandCenter.movFriends) {
             for (movFoe in CommandCenter.movFoes) {
-                pntFriendCenter = movFriend.getCenter()
-                pntFoeCenter = movFoe.getCenter()
-                radFriend = movFriend.getRadius()
-                radFoe = movFoe.getRadius()
+                pntFriendCenter = movFriend.myCenter()
+                pntFoeCenter = movFoe.myCenter()
+                radFriend = movFriend.myRadius()
+                radFoe = movFoe.myRadius()
 
                 //detect collision
                 if (pntFriendCenter.distance(pntFoeCenter) < radFriend + radFoe) {
@@ -125,13 +125,13 @@ class Game : Runnable, KeyListener {
         } //end outer for
 
         //check for collisions between falcon and floaters. Order of growth of O(n) where n is number of floaters
-        val pntFalCenter = CommandCenter.falcon.getCenter()
-        val radFalcon = CommandCenter.falcon.getRadius()
+        val pntFalCenter = CommandCenter.falcon.myCenter()
+        val radFalcon = CommandCenter.falcon.myRadius()
         var pntFloaterCenter: Point
         var radFloater: Int
         for (movFloater in CommandCenter.movFloaters) {
-            pntFloaterCenter = movFloater.getCenter()
-            radFloater = movFloater.getRadius()
+            pntFloaterCenter = movFloater.myCenter()
+            radFloater = movFloater.myRadius()
 
             //detect collision
             if (pntFalCenter.distance(pntFloaterCenter) < radFalcon + radFloater) {
@@ -151,7 +151,7 @@ class Game : Runnable, KeyListener {
             val mov = gameOp?.movable
             val action = gameOp?.action
             if (mov != null) {
-                when (mov.getTeam()) {
+                when (mov.myTeam()) {
                     Team.FOE -> if (action == GameOp.Action.ADD) {
                         CommandCenter.movFoes.add(mov)
                     } else { //GameOp.Operation.REMOVE

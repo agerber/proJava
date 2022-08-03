@@ -39,7 +39,7 @@ object CommandCenter {
         playSound("shipspawn.wav")
         falcon.fade = Falcon.FADE_INITIAL_VALUE
         //put falcon in the middle of the game-space
-        falcon.setCenter(Point(Game.DIM.width / 2, Game.DIM.height / 2))
+        falcon.center = (Point(Game.DIM.width / 2, Game.DIM.height / 2))
         falcon.orientation = Game.R.nextInt(360)
         falcon.deltaX = 0.0
         falcon.deltaY = 0.0
