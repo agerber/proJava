@@ -102,20 +102,20 @@ class GamePanel(dim: Dimension?) : Panel() {
     }
 
     // Draw the number of falcons left on the bottom-right of the screen. Upside-down, but ok.
-//    private fun drawOneShipLeft(g: Graphics?, offSet: Int) {
-//        val falcon = CommandCenter.falcon
-//        g!!.color = falcon.color
-//        g.drawPolygon(
-//                Arrays.stream(falcon.cartesians)
-//                        .map { pnt: Point -> pnt.x + Game.DIM.width - 20 * offSet }
-//                        .mapToInt { obj: Int -> obj }
-//                        .toArray(),
-//                Arrays.stream(falcon.cartesians)
-//                        .map { pnt: Point -> pnt.y + Game.DIM.height - 40 }
-//                        .mapToInt { obj: Int -> obj }
-//                        .toArray(),
-//                falcon.cartesians.size)
-//    }
+    private fun drawOneShipLeft(g: Graphics?, offSet: Int) {
+        val falcon = CommandCenter.falcon
+        g!!.color = falcon.color
+        g.drawPolygon(
+                Arrays.stream(falcon.cartesians)
+                        .map { pnt: Point -> pnt.x + Game.DIM.width - 20 * offSet }
+                        .mapToInt { obj: Int -> obj }
+                        .toArray(),
+                Arrays.stream(falcon.cartesians)
+                        .map { pnt: Point -> pnt.y + Game.DIM.height - 40 }
+                        .mapToInt { obj: Int -> obj }
+                        .toArray(),
+                falcon.cartesians.size)
+    }
 
     private fun initView() {
         val g = graphics // get the graphics context for the panel

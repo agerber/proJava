@@ -121,32 +121,32 @@ abstract class Sprite : Movable {
                 .toArray() as Array<Point>
     }
 
-   // protected fun cartesianToPolar(pntCartesians: MutableList<Array<Point>>): List<PolarPoint> {
+    protected fun cartesianToPolar(pntCartesians: MutableList<Array<Point>>): List<PolarPoint> {
 
 
 
-//        val cartToPolarTransform = BiFunction { pnt: Point, hyp: Double ->
-//            PolarPoint( //this is r from PolarPoint(r,theta).
-//                    hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) / hyp,  //r is relative to the largestHypotenuse
-//                    //this is theta from PolarPoint(r,theta)
-//                    Math.toDegrees(Math.atan2(pnt.y.toDouble(), pnt.x.toDouble())) * Math.PI / 180
-//            )
-//        }
-//
-//
-//        //determine the largest hypotenuse
-//        var largestHypotenuse = 0.0
-//        for (pnt in pntCartesians){
-//            if (hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) > largestHypotenuse) largestHypotenuse = hypotFunction(pnt.x.toDouble(), pnt.y.toDouble())
-//        }
-//
-//
-//        //we must make hypotenuse final to pass into a stream.
-//        val hyp = largestHypotenuse
-//        return pntCartesians.stream()
-//                .map { pnt: Point -> cartToPolarTransform.apply(pnt, hyp) }
-//                .collect(Collectors.toList())
-  //  }
+        val cartToPolarTransform = BiFunction { pnt: Point, hyp: Double ->
+            PolarPoint( //this is r from PolarPoint(r,theta).
+                    hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) / hyp,  //r is relative to the largestHypotenuse
+                    //this is theta from PolarPoint(r,theta)
+                    Math.toDegrees(Math.atan2(pnt.y.toDouble(), pnt.x.toDouble())) * Math.PI / 180
+            )
+        }
+
+
+        //determine the largest hypotenuse
+        var largestHypotenuse = 0.0
+        for (pnt in pntCartesians){
+            if (hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) > largestHypotenuse) largestHypotenuse = hypotFunction(pnt.x.toDouble(), pnt.y.toDouble())
+        }
+
+
+        //we must make hypotenuse final to pass into a stream.
+        val hyp = largestHypotenuse
+        return pntCartesians.stream()
+                .map { pnt: Point -> cartToPolarTransform.apply(pnt, hyp) }
+                .collect(Collectors.toList())
+    }
 
     override fun draw(g: Graphics?) {
         //set the native color of the sprite
@@ -186,25 +186,25 @@ abstract class Sprite : Movable {
                     center.x + p.x,
                     center.y - p.y)
         }
-//        g!!.drawPolygon(
-//                polars.stream()
-//                        .map(adjustForOrientation)
-//                        .map(adjustForLocation)
-//                        .map { pnt: Point -> pnt.x }
-//                        .mapToInt { obj: Int -> obj }
-//                        .toArray(),
-//                polars.stream()
-//                        .map(adjustForOrientation)
-//                        .map(adjustForLocation)
-//                        .map { pnt: Point -> pnt.y }
-//                        .mapToInt { obj: Int -> obj }
-//                        .toArray(),
-//                cartesians.size)
+        g!!.drawPolygon(
+                polars.stream()
+                        .map(adjustForOrientation)
+                        .map(adjustForLocation)
+                        .map { pnt: Point -> pnt.x }
+                        .mapToInt { obj: Int -> obj }
+                        .toArray(),
+                polars.stream()
+                        .map(adjustForOrientation)
+                        .map(adjustForLocation)
+                        .map { pnt: Point -> pnt.y }
+                        .mapToInt { obj: Int -> obj }
+                        .toArray(),
+                cartesians.size)
 
         //for debugging center-point. Feel free to remove these two lines.
         //#########################################
-//        g.color = Color.ORANGE
-//        g.fillOval(center.x - 1, center.y - 1, 2, 2)
+        g.color = Color.ORANGE
+        g.fillOval(center.x - 1, center.y - 1, 2, 2)
         //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
         //#########################################
     }
