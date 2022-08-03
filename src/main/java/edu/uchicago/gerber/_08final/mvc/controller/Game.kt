@@ -11,7 +11,7 @@ import java.awt.event.KeyListener
 import java.util.*
 import javax.sound.sampled.Clip
 
-fun main(args: Array<String>) {
+fun main() {
     //typical Swing application start; we pass EventQueue a Runnable object.
     EventQueue.invokeLater(Game())
 }
