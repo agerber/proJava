@@ -106,11 +106,11 @@ class GamePanel(dim: Dimension?) : Panel() {
         val falcon = CommandCenter.falcon
         g!!.color = falcon.color
         g.drawPolygon(
-                Arrays.stream(falcon.cartesians)
+                Arrays.stream(falcon.cartesians.toTypedArray())
                         .map { pnt: Point -> pnt.x + Game.DIM.width - 20 * offSet }
                         .mapToInt { obj: Int -> obj }
                         .toArray(),
-                Arrays.stream(falcon.cartesians)
+                Arrays.stream(falcon.cartesians.toTypedArray())
                         .map { pnt: Point -> pnt.y + Game.DIM.height - 40 }
                         .mapToInt { obj: Int -> obj }
                         .toArray(),
