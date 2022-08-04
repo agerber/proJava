@@ -12,12 +12,13 @@ class GamePanel(dim: Dimension?) : Panel() {
     // FIELDS 
     // ============================================================== 
     // The following "off" vars are used for the off-screen double-buffered image.
-    private var imgOff: Image? = null
-    private var grpOff: Graphics? = null
+    private var imgOff: Image
+    private var grpOff: Graphics
     private val gmf: GameFrame
-    private val fnt = Font("SansSerif", Font.BOLD, 12)
-    private val fntBig = Font("SansSerif", Font.BOLD + Font.ITALIC, 36)
-    private var fmt: FontMetrics? = null
+    private val fnt: Font
+    private val fntBig: Font
+    private var fmt: FontMetrics
+
     private var fontWidth = 0
     private var fontHeight = 0
     private var strDisplay = ""
@@ -35,13 +36,21 @@ class GamePanel(dim: Dimension?) : Panel() {
         gmf.isResizable = false
         gmf.isVisible = true
         isFocusable = true
+
+        imgOff = createImage(Game.DIM.width, Game.DIM.height)
+        grpOff = imgOff.getGraphics()
+        fnt = Font("SansSerif", Font.BOLD, 12)
+        fntBig = Font("SansSerif", Font.BOLD + Font.ITALIC, 36)
+       // val g = graphics // get the graphics context for the panel
+        graphics.font = fnt // take care of some simple font stuff
+        fmt = graphics.fontMetrics
     }
 
     // ==============================================================
     // METHODS 
     // ==============================================================
-    private fun drawScore(g: Graphics?) {
-        g!!.color = Color.white
+    private fun drawScore(g: Graphics) {
+        g.color = Color.white
         g.font = fnt
         if (CommandCenter.score != 0L) {
             g.drawString("SCORE :  " + CommandCenter.score, fontWidth, fontHeight)
@@ -54,18 +63,18 @@ class GamePanel(dim: Dimension?) : Panel() {
         //create an image off-screen
         imgOff = createImage(Game.DIM.width, Game.DIM.height)
         //get its graphics context
-        grpOff = imgOff!!.getGraphics()
+        grpOff = imgOff.getGraphics()
 
         //Fill the off-screen image background with black.
-        grpOff!!.setColor(Color.black)
-        grpOff!!.fillRect(0, 0, Game.DIM.width, Game.DIM.height)
+        grpOff.setColor(Color.black)
+        grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height)
         drawScore(grpOff)
         if (CommandCenter.isGameOver()) {
             displayTextOnScreen()
         } else if (CommandCenter.paused) {
             strDisplay = "Game Paused"
-            grpOff!!.drawString(strDisplay,
-                    (Game.DIM.width - fmt!!.stringWidth(strDisplay)) / 2, Game.DIM.height / 4)
+            grpOff.drawString(strDisplay,
+                    (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4)
         } else {
             iterateMovables(grpOff,
                     CommandCenter.movDebris,
@@ -82,11 +91,11 @@ class GamePanel(dim: Dimension?) : Panel() {
     }
 
     @SafeVarargs
-    private fun iterateMovables(g: Graphics?, vararg arrayOfListMovables: List<Movable>) {
+    private fun iterateMovables(g: Graphics, vararg arrayOfListMovables: List<Movable>) {
 
-        val moveDraw = BiConsumer { grp: Graphics?, mov: Movable ->
+        val moveDraw = BiConsumer { grp: Graphics, mov: Movable ->
             mov.move()
-            grp?.let { mov.draw(it) }
+             mov.draw(grp) 
         }
 
         //we use flatMap to flatten the List<Movable>[] passed-in above into a single stream of Movables
@@ -95,7 +104,7 @@ class GamePanel(dim: Dimension?) : Panel() {
                 .forEach { m: Movable -> moveDraw.accept(g, m) }
     }
 
-    private fun drawNumberShipsLeft(g: Graphics?) {
+    private fun drawNumberShipsLeft(g: Graphics) {
         var numFalcons = CommandCenter.numFalcons
         while (numFalcons > 0) {
             drawOneShipLeft(g, numFalcons--)
@@ -103,9 +112,9 @@ class GamePanel(dim: Dimension?) : Panel() {
     }
 
     // Draw the number of falcons left on the bottom-right of the screen. Upside-down, but ok.
-    private fun drawOneShipLeft(g: Graphics?, offSet: Int) {
+    private fun drawOneShipLeft(g: Graphics, offSet: Int) {
         val falcon = CommandCenter.falcon
-        g!!.color = falcon.color
+        g.color = falcon.color
         g.drawPolygon(
                 Arrays.stream(falcon.cartesians.toTypedArray())
                         .map { pnt: Point -> pnt.x + Game.DIM.width - 20 * offSet }
@@ -122,36 +131,36 @@ class GamePanel(dim: Dimension?) : Panel() {
         val g = graphics // get the graphics context for the panel
         g.font = fnt // take care of some simple font stuff
         fmt = g.fontMetrics
-        fontWidth = fmt!!.getMaxAdvance()
-        fontHeight = fmt!!.getHeight()
+        fontWidth = fmt.getMaxAdvance()
+        fontHeight = fmt.getHeight()
         g.font = fntBig // set font info
     }
 
     // This method draws some text to the middle of the screen before/after a game
     private fun displayTextOnScreen() {
         strDisplay = "GAME OVER"
-        grpOff!!.drawString(strDisplay,
-                (Game.DIM.width - fmt!!.stringWidth(strDisplay)) / 2, Game.DIM.height / 4)
+        grpOff.drawString(strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4)
         strDisplay = "use the arrow keys to turn and thrust"
-        grpOff!!.drawString(strDisplay,
-                (Game.DIM.width - fmt!!.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 40)
+        grpOff.drawString(strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 40)
         strDisplay = "use the space bar to fire"
-        grpOff!!.drawString(strDisplay,
-                (Game.DIM.width - fmt!!.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 80)
+        grpOff.drawString(strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 80)
         strDisplay = "'S' to Start"
-        grpOff!!.drawString(strDisplay,
-                (Game.DIM.width - fmt!!.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 120)
+        grpOff.drawString(strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 120)
         strDisplay = "'P' to Pause"
-        grpOff!!.drawString(strDisplay,
-                (Game.DIM.width - fmt!!.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 160)
+        grpOff.drawString(strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 160)
         strDisplay = "'Q' to Quit"
-        grpOff!!.drawString(strDisplay,
-                (Game.DIM.width - fmt!!.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 200)
+        grpOff.drawString(strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 200)
         strDisplay = "left pinkie on 'A' for Shield"
-        grpOff!!.drawString(strDisplay,
-                (Game.DIM.width - fmt!!.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 240)
+        grpOff.drawString(strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 240)
         strDisplay = "'Numeric-Enter' for Hyperspace"
-        grpOff!!.drawString(strDisplay,
-                (Game.DIM.width - fmt!!.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 280)
+        grpOff.drawString(strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 280)
     }
 }
