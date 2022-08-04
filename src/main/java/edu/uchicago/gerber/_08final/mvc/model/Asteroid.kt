@@ -11,7 +11,9 @@ import kotlin.collections.ArrayList
 
 class Asteroid(size: Int) : Sprite() {
     //radius of a large asteroid
-    private val LARGE_RADIUS = 100
+    companion object {
+        private const val LARGE_RADIUS = 100
+    }
 
     //size determines if the Asteroid is Large (0), Medium (1), or Small (2)
     //when you explode a Large asteroid, you should spawn 2 or 3 medium asteroids
@@ -31,7 +33,6 @@ class Asteroid(size: Int) : Sprite() {
         //a size of zero is a big asteroid
         //a size of 1 or 2 is med or small asteroid respectively. See getSize() method.
         radius = if (size == 0) LARGE_RADIUS else LARGE_RADIUS / (size * 2)
-//        cartesians = Arrays.asList(genRandomPoints())
         cartesians = genRandomPoints().toList() as java.util.ArrayList<Point>
     }
 
