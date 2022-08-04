@@ -221,8 +221,7 @@ class Game : Runnable, KeyListener {
     }
 
     //if there are no more Asteroids on the screen
-    private val isLevelClear: Boolean
-        get() {
+    fun isLevelClear(): Boolean {
             //if there are no more Asteroids on the screen
             var asteroidFree = true
             for (movFoe in CommandCenter.movFoes) {
@@ -232,10 +231,10 @@ class Game : Runnable, KeyListener {
                 }
             }
             return asteroidFree
-        }
+    }
 
     private fun checkNewLevel() {
-        if (isLevelClear) {
+        if (isLevelClear()) {
             //more asteroids at each level to increase difficulty
             CommandCenter.level = CommandCenter.level + 1
             spawnBigAsteroids(CommandCenter.level)
@@ -325,10 +324,7 @@ class Game : Runnable, KeyListener {
         // ==METHODS
         // ===============================================
 
-        fun main(args: Array<String>) {
-            //typical Swing application start; we pass EventQueue a Runnable object.
-            EventQueue.invokeLater { Game() }
-        }
+
 
         // Varargs for stopping looping-music-clips
         private fun stopLoopingSounds(vararg clpClips: Clip) {
