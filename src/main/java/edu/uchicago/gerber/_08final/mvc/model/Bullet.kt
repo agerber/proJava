@@ -5,6 +5,11 @@ import java.awt.Point
 import java.util.*
 
 class Bullet(fal: Falcon) : Sprite() {
+
+    companion object {
+        const val FIRE_POWER = 35.0
+    }
+
     init {
         team = Team.FRIEND
 
@@ -31,7 +36,5 @@ class Bullet(fal: Falcon) : Sprite() {
         pntCs.add(Point(-1, -1))
         cartesians = pntCs
     }
-    companion object {
-        const val FIRE_POWER = 35.0
-    }
+
 }

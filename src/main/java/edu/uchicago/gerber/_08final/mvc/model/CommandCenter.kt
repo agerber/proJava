@@ -11,13 +11,16 @@ object CommandCenter {
      var level = 0
      var score: Long = 0L
      var paused = false
-     var falcon = Falcon()
+
+    //the falcon should always point to this object on the heap
+     val falcon = Falcon()
 
     //lists containing our movables
      val movDebris: MutableList<Movable> = LinkedList()
      val movFriends: MutableList<Movable> = LinkedList()
      val movFoes: MutableList<Movable> = LinkedList()
      val movFloaters: MutableList<Movable> = LinkedList()
+
      val opsQueue = GameOpsQueue()
 
     fun initGame() {
@@ -31,13 +34,13 @@ object CommandCenter {
         opsQueue.enqueue(falcon, GameOp.Action.ADD)
     }
 
-    fun initFalconAndDecrementFalconNum() {
+     fun initFalconAndDecrementFalconNum() {
         numFalcons -= 1
         if (isGameOver()) return
         //playSound("shipspawn.wav")
         falcon.fade = Falcon.FADE_INITIAL_VALUE
         //put falcon in the middle of the game-space
-        falcon.center = (Point(Game.DIM.width / 2, Game.DIM.height / 2))
+        falcon.center = Point(Game.DIM.width / 2, Game.DIM.height / 2)
         falcon.orientation = Game.R.nextInt(360)
         falcon.deltaX = 0.0
         falcon.deltaY = 0.0

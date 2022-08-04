@@ -83,9 +83,10 @@ class GamePanel(dim: Dimension?) : Panel() {
 
     @SafeVarargs
     private fun iterateMovables(g: Graphics?, vararg arrayOfListMovables: List<Movable>) {
+
         val moveDraw = BiConsumer { grp: Graphics?, mov: Movable ->
             mov.move()
-            mov.draw(grp)
+            grp?.let { mov.draw(it) }
         }
 
         //we use flatMap to flatten the List<Movable>[] passed-in above into a single stream of Movables

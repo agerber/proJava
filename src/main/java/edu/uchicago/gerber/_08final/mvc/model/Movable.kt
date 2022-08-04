@@ -10,7 +10,7 @@ interface Movable {
 
     //for the game to move and draw movable objects
     fun move()
-    fun draw(g: Graphics?)
+    fun draw(g: Graphics)
 
     //for collision detection
     fun myCenter(): Point

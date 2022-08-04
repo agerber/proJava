@@ -23,17 +23,18 @@ abstract class Sprite : Movable {
     var spin: Int = 0
     var fade: Int = 0
     var color: Color = Color.WHITE
-    var team: Team = Team.FOE
 
-    //this will be initialized in the subclasses
-    lateinit var cartesians: ArrayList<Point>
+    //these will be initialized in the subclasses and have no default values
+    lateinit var cartesians: List<Point>
+    lateinit var team: Team
 
     init {
         center = (Point(Game.R.nextInt(Game.DIM.width),
                 Game.R.nextInt(Game.DIM.height)))
     }
 
-    //contract methods of interface
+    //contract methods of interface used for collission detection. We can not use getCenter or getRadius etc. b/c that
+    //would conflict with kotlin's automatic assignment of getters and setters, so we use myCenter() and myRadius()
     override fun myCenter(): Point {
       return  center
     }
@@ -117,13 +118,11 @@ abstract class Sprite : Movable {
                     + theta))).toInt())
         }
         return polPolars.stream()
-                .map(polarToCartTransform)
-                .toArray()
+            .map(polarToCartTransform)
+            .toArray()
     }
 
     protected fun cartesianToPolar(pntCartesians: List<Point>): List<PolarPoint> {
-
-
 
         val cartToPolarTransform = BiFunction { pnt: Point, hyp: Double ->
             PolarPoint( //this is r from PolarPoint(r,theta).
@@ -148,33 +147,32 @@ abstract class Sprite : Movable {
                 .collect(Collectors.toList())
     }
 
-    override fun draw(g: Graphics?) {
+    override fun draw(g: Graphics) {
         //set the native color of the sprite
-        g!!.color = color
+        g.color = color
         render(g)
     }
 
-    fun draw(g: Graphics, color: Color?) {
+    fun draw(g: Graphics, color: Color) {
         //set custom color
         g.color = color
         render(g)
     }
 
-    private fun render(g: Graphics?) {
+    private fun render(g: Graphics) {
 
         // to render this Sprite, we need to, 1: convert raw cartesians to raw polars, 2: adjust polars
         // for orientation of sprite. Convert back to cartesians 3: adjust for center-point (location).
         // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to drawPolygon().
 
         //convert raw cartesians to raw polars
-//        val polars = cartesianToPolar(Arrays.asList(cartesians))
         val polars = cartesianToPolar(cartesians)
 
         //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
         val adjustForOrientation = Function { (r, theta): PolarPoint ->
             Point((r * radius
                     * Math.sin(Math.toRadians(orientation.toDouble())
-                    + theta!!)).toInt(), (r * radius
+                    + theta)).toInt(), (r * radius
                     * Math.cos(Math.toRadians(orientation.toDouble())
                     + theta)).toInt())
         }
@@ -187,7 +185,7 @@ abstract class Sprite : Movable {
                     center.x + p.x,
                     center.y - p.y)
         }
-        g!!.drawPolygon(
+        g.drawPolygon(
                 polars.stream()
                         .map(adjustForOrientation)
                         .map(adjustForLocation)
@@ -209,8 +207,5 @@ abstract class Sprite : Movable {
         //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
         //#########################################
     }
-
-    //in order to overload a lombok'ed method, we need to use the @Tolerate annotation
-    //this overloaded method allows us to pass-in either a List<Point> or Point[] (lombok'ed method) to setCartesians()
 
 }
