@@ -52,7 +52,7 @@ object CommandCenter {
 
     //if the number of falcons is zero, then game over
     fun isGameOver(): Boolean {
-        return (numFalcons <= 0)
+        return numFalcons <= 0
     }
 
 }

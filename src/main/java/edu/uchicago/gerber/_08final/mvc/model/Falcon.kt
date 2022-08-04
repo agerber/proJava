@@ -16,7 +16,6 @@ class Falcon : Sprite() {
         const val FADE_INITIAL_VALUE = 51
     }
 
-    //private boolean shield = false;
      var thrusting = false
      var turningRight = false
      var turningLeft = false
@@ -26,7 +25,6 @@ class Falcon : Sprite() {
     // ==============================================================
     init {
         team = Team.FRIEND
-
         //this is the size (radius) of the falcon
         radius = 35
         val pntCs = ArrayList<Point>()
