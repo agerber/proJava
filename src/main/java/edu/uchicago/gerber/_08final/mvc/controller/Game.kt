@@ -14,6 +14,7 @@ import javax.sound.sampled.Clip
 fun main() {
     //typical Swing application start; we pass EventQueue a Runnable object.
     EventQueue.invokeLater(Game())
+    CommandCenter.initGame()
 }
 // ===============================================
 // == This Game class is the CONTROLLER
