@@ -14,7 +14,7 @@ import javax.sound.sampled.Clip
 fun main() {
     //typical Swing application start; we pass EventQueue a Runnable object.
     EventQueue.invokeLater(Game())
-    CommandCenter.initGame()
+    //CommandCenter.initGame()
 }
 // ===============================================
 // == This Game class is the CONTROLLER
@@ -251,7 +251,7 @@ class Game : Runnable, KeyListener {
     override fun keyPressed(e: KeyEvent) {
         val fal = CommandCenter.falcon
         val nKey = e.keyCode
-        if (nKey == START && CommandCenter.isGameOver) CommandCenter.initGame()
+        if (nKey == START && CommandCenter.isGameOver()) CommandCenter.initGame()
         when (nKey) {
             PAUSE -> {
                 CommandCenter.paused = !CommandCenter.paused
@@ -261,7 +261,7 @@ class Game : Runnable, KeyListener {
             QUIT -> System.exit(0)
             UP -> {
                 fal.thrustOn()
-                if (!CommandCenter.paused && !CommandCenter.isGameOver) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
+                if (!CommandCenter.paused && !CommandCenter.isGameOver()) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
             }
 
             LEFT -> fal.rotateLeft()

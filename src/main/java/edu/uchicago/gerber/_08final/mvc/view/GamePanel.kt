@@ -60,7 +60,7 @@ class GamePanel(dim: Dimension?) : Panel() {
         grpOff!!.setColor(Color.black)
         grpOff!!.fillRect(0, 0, Game.DIM.width, Game.DIM.height)
         drawScore(grpOff)
-        if (CommandCenter.isGameOver) {
+        if (CommandCenter.isGameOver()) {
             displayTextOnScreen()
         } else if (CommandCenter.paused) {
             strDisplay = "Game Paused"

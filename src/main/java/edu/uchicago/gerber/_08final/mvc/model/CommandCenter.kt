@@ -5,12 +5,11 @@ import lombok.Data
 import java.awt.Point
 import java.util.*
 
-
 object CommandCenter {
 
      var numFalcons = 0
      var level = 0
-     var score: Long = 0
+     var score: Long = 0L
      var paused = false
      var falcon = Falcon()
 
@@ -34,7 +33,7 @@ object CommandCenter {
 
     fun initFalconAndDecrementFalconNum() {
         numFalcons -= 1
-        if (isGameOver) return
+        if (isGameOver()) return
         //playSound("shipspawn.wav")
         falcon.fade = Falcon.FADE_INITIAL_VALUE
         //put falcon in the middle of the game-space
@@ -52,8 +51,9 @@ object CommandCenter {
     }
 
     //if the number of falcons is zero, then game over
-    val isGameOver: Boolean
-        get() = numFalcons <= 0
-
+    fun isGameOver(): Boolean {
+        return (numFalcons <= 0)
+    }
 
 }
+
