@@ -6,6 +6,11 @@ There are also some simple examples in this project. Each package (e.g. _01contr
 ## the master branch
 
 The master branch is the branch that your graders will grade. No other branch will be graded.
+You may develop _08final (the video game) in kotlin. I have translated the java source to kotlin for the
+game only. To develop in kotlin, do the following:
+1/ stay on the master branch and delete the mvc directory completely.
+2/ commit the deletion of the mvc with this command $git commit -m "deleted mvc dir"
+3/ issue this command $git merge kotlin
 
 ## Access
 
