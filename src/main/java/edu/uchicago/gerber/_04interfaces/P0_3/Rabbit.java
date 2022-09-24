@@ -13,16 +13,16 @@ import java.util.Random;
  */
 public class Rabbit implements Raceable {
 
-    private int mStride;
+    private int string;
     private final int FEET = 3;
-    private final double mSpeed = .81;
-    private Random mRandom;
-    private String mAscii;
+    private final double speed = .81;
+    private Random random;
+    private String ascii;
 
 
     public Rabbit() {
-        mStride = 0;
-        mRandom = new Random();
+        string = 0;
+        random = new Random();
         setAscii(FileOps.convertFileToString("//src//P0_3//rabbit.txt"));
     }
 
@@ -30,11 +30,11 @@ public class Rabbit implements Raceable {
     public void stride() {
 
 
-        if (mRandom.nextInt(100) * mSpeed > 4) {
-            mStride += FEET;
+        if (random.nextInt(100) * speed > 4) {
+            string += FEET;
         }
         System.out.print("Rabbit   >");
-        for (int nC = 0; nC < mStride; nC++) {
+        for (int nC = 0; nC < string; nC++) {
             System.out.print("*");
         }
         System.out.println();
@@ -43,7 +43,7 @@ public class Rabbit implements Raceable {
 
     @Override
     public boolean isFinished() {
-        return  mStride >= FINISH;
+        return  string >= FINISH;
     }
 
     @Override
@@ -59,15 +59,15 @@ public class Rabbit implements Raceable {
 
     @Override
     public void reset() {
-        mStride = 0;
+        string = 0;
     }
 
     public String getAscii() {
-        return mAscii;
+        return ascii;
     }
 
     public void setAscii(String ascii) {
-        mAscii = ascii;
+        this.ascii = ascii;
     }
 
 }

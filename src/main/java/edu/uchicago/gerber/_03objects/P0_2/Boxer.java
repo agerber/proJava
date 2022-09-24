@@ -8,70 +8,70 @@ public class Boxer {
     private static final int MAX_HIT_POINTS = 100;
     private static final String[] EXCLAMS = {"I'm the greatest", "Float like a butterfly, sting like a bee", "Victory is mine", "Haahaahahaha.", "Adrian!"};
     //Each boxer has the following properties; accuracy, strength, hit-points, name, exclamation.
-    private double mAccuracy;   //percentage
-    private int mStrength;      //how strong is the fighter, as in much does it sting when he connects  1-5
-    private int mHitPoints;     //initialize to 100
-    private String mName;  //fighters name
-    private Random mRandom;
+    private double accuracy;   //percentage
+    private int strength;      //how strong is the fighter, as in much does it sting when he connects  1-5
+    private int hitpoints;     //initialize to 100
+    private String name;  //fighters name
+    private Random random;
 
 
     public Boxer(String name, int strength, double accuracy) {
-        mName = name;
-        mStrength = strength;
-        mAccuracy = accuracy;
-        mHitPoints = MAX_HIT_POINTS;
-        mRandom = new Random();
+        this.name = name;
+        this.strength = strength;
+        this.accuracy = accuracy;
+        hitpoints = MAX_HIT_POINTS;
+        random = new Random();
     }
 
 
     public void swing(Boxer boxPunchee){
 
-      if ((mRandom.nextInt(10) + 1) * mAccuracy > 5){
-          boxPunchee.setHitPoints(boxPunchee.getHitPoints() - mStrength);
+      if ((random.nextInt(10) + 1) * accuracy > 5){
+          boxPunchee.setHitPoints(boxPunchee.getHitPoints() - strength);
       }
 
     }
 
     public boolean isKO(){
-        return mHitPoints <= 0;
+        return hitpoints <= 0;
     }
 
     public String meWin(){
-        return mName + " wins: " + EXCLAMS[mRandom.nextInt(EXCLAMS.length)];
+        return name + " wins: " + EXCLAMS[random.nextInt(EXCLAMS.length)];
     }
 
 
     //getters and setters
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String name) {
-        mName = name;
+        this.name = name;
     }
 
     public int getHitPoints() {
-        return mHitPoints;
+        return hitpoints;
     }
 
     public void setHitPoints(int hitPoints) {
-        mHitPoints = hitPoints;
+        hitpoints = hitPoints;
     }
 
     public int getStrength() {
-        return mStrength;
+        return strength;
     }
 
     public void setStrength(int strength) {
-        mStrength = strength;
+        this.strength = strength;
     }
 
     public double getAccuracy() {
-        return mAccuracy;
+        return accuracy;
     }
 
     public void setAccuracy(double accuracy) {
-        mAccuracy = accuracy;
+        this.accuracy = accuracy;
     }
 }
 

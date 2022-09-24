@@ -14,28 +14,28 @@ import java.util.Random;
 public class Godzilla implements Raceable {
 
 
-    private int mStride;
+    private int stride;
     private final int FEET = 15;     //2
-    private final double mSpeed = .05;   //percentage  //.80
-    private Random mRandom;
-    private String mAscii;
+    private final double speed = .05;   //percentage  //.80
+    private Random random;
+    private String ascii;
 
 
     public Godzilla() {
-        mStride = 0;
-        mRandom = new Random();
+        stride = 0;
+        random = new Random();
         setAscii(FileOps.convertFileToString("//src//P0_3//godzilla.txt"));
     }
 
     @Override
     public void stride() {
 
-        if (mRandom.nextInt(100) * mSpeed > 4) {
-            mStride += FEET;
+        if (random.nextInt(100) * speed > 4) {
+            stride += FEET;
         }
 
         System.out.print("Godzilla >");
-        for (int nC = 0; nC < mStride; nC++) {
+        for (int nC = 0; nC < stride; nC++) {
             System.out.print("@");
         }
         System.out.println();
@@ -43,7 +43,7 @@ public class Godzilla implements Raceable {
 
     @Override
     public boolean isFinished() {
-        return  mStride >= FINISH;
+        return  stride >= FINISH;
     }
 
     @Override
@@ -60,15 +60,15 @@ public class Godzilla implements Raceable {
 
     @Override
     public void reset() {
-        mStride = 0;
+        stride = 0;
     }
 
     public String getAscii() {
-        return mAscii;
+        return ascii;
     }
 
     public void setAscii(String ascii) {
-        mAscii = ascii;
+        this.ascii = ascii;
     }
 }
 
