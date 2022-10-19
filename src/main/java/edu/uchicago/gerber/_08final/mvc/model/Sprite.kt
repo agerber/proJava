@@ -136,7 +136,8 @@ abstract class Sprite : Movable {
         //determine the largest hypotenuse
         var largestHypotenuse = 0.0
         for (pnt in pntCartesians){
-            if (hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) > largestHypotenuse) largestHypotenuse = hypotFunction(pnt.x.toDouble(), pnt.y.toDouble())
+            if (hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) > largestHypotenuse)
+                largestHypotenuse = hypotFunction(pnt.x.toDouble(), pnt.y.toDouble())
         }
 
 
