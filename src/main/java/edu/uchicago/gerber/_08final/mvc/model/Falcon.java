@@ -6,7 +6,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class Falcon extends Sprite {
@@ -23,6 +24,7 @@ public class Falcon extends Sprite {
 	
 	//private boolean shield = false;
 	private boolean thrusting = false;
+	private boolean breaking = false;
 	private boolean turningRight = false;
 	private boolean turningLeft = false;
 
@@ -86,12 +88,29 @@ public class Falcon extends Sprite {
 		return getFade() < 255;
 	}
 
+	private void accelerateDecelerate(boolean forward, List<Movable>... movableLists){
+
+		for (List<Movable> movList : movableLists) {
+			for (Movable movable : movList) {
+				Sprite sprite = (Sprite) movable;
+				if (forward){
+					sprite.setDeltaY(sprite.getDeltaY() + 0.5);
+				}
+				else {
+
+					sprite.setDeltaY(sprite.getDeltaY() - 0.5);
+				}
+			}
+
+		}
+	}
+
 	// ==============================================================
 	// METHODS 
 	// ==============================================================
 	@Override
 	public void move() {
-		super.move();
+		//super.move();
 
 		if (isProtected()) {
 			setFade(getFade() + 3);
@@ -99,26 +118,47 @@ public class Falcon extends Sprite {
 
 		//apply some thrust vectors using trig.
 		if (thrusting) {
-			double adjustX = Math.cos(Math.toRadians(getOrientation()))
-					* THRUST;
-			double adjustY = Math.sin(Math.toRadians(getOrientation()))
-					* THRUST;
-			setDeltaX(getDeltaX() + adjustX);
-			setDeltaY(getDeltaY() + adjustY);
+
+			//get all foes
+			accelerateDecelerate(true,
+					CommandCenter.getInstance().getMovFoes(),
+					CommandCenter.getInstance().getMovFloaters(),
+					CommandCenter.getInstance().getMovDebris()
+			);
 		}
+
+		if (breaking){
+			accelerateDecelerate(false,
+					CommandCenter.getInstance().getMovFoes(),
+					CommandCenter.getInstance().getMovFloaters(),
+					CommandCenter.getInstance().getMovDebris()
+			);
+		}
+
+
+
+//			double adjustX = Math.cos(Math.toRadians(getOrientation()))
+//					* THRUST;
+//			double adjustY = Math.sin(Math.toRadians(getOrientation()))
+//					* THRUST;
+//			setDeltaX(getDeltaX() + adjustX);
+//			setDeltaY(getDeltaY() + adjustY);
+
 		//rotate left
 		if (turningLeft) {
-			if (getOrientation() <= 0) {
-				setOrientation(360);
-			}
-			setOrientation(getOrientation() - DEGREE_STEP);
+//			if (getOrientation() <= 0) {
+//				setOrientation(360);
+//			}
+//			setOrientation(getOrientation() - DEGREE_STEP);
+			getCenter().move(getCenter().x - 5, getCenter().y);
 		}
 		//rotate right
 		if (turningRight) {
-			if (getOrientation() >= 360) {
-				setOrientation(0);
-			}
-			setOrientation(getOrientation() + DEGREE_STEP);
+//			if (getOrientation() >= 360) {
+//				setOrientation(0);
+//			}
+//			setOrientation(getOrientation() + DEGREE_STEP);
+			getCenter().move(getCenter().x + 5, getCenter().y);
 		}
 
 	} //end move
@@ -147,6 +187,14 @@ public class Falcon extends Sprite {
 		thrusting = false;
 	}
 
+
+	public void breakOn() {
+		breaking = true;
+	}
+
+	public void breakOff() {
+		breaking = false;
+	}
 
 
 	private int adjustColor(int colorNum, int adjust) {

@@ -48,8 +48,7 @@ public abstract class Sprite implements Movable {
         //default sprite color
         setColor(Color.WHITE);
         //place the sprite at some random location in the frame at instantiation
-        setCenter(new Point(Game.R.nextInt(Game.DIM.width),
-                Game.R.nextInt(Game.DIM.height)));
+        setCenter(new Point(Game.R.nextInt(Game.DIM.width), Game.DIM.height));
 
 
     }
@@ -65,10 +64,13 @@ public abstract class Sprite implements Movable {
 
         //right-bounds reached
         if (center.x > Game.DIM.width) {
-            setCenter(new Point(1, center.y));
+            setCenter(new Point(Game.DIM.width -1, center.y));
+            setDeltaX(-getDeltaX());
         //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(new Point(Game.DIM.width - 1, center.y));
+          //  setCenter(new Point(Game.DIM.width - 1, center.y));
+            setCenter(new Point(1, center.y));
+            setDeltaX(-getDeltaX());
         //bottom-bounds reached
         } else if (center.y > Game.DIM.height) {
             setCenter(new Point(center.x, 1));
@@ -110,6 +112,11 @@ public abstract class Sprite implements Movable {
         if (randomNumber % 2 == 0)
             randomNumber = -randomNumber;
         return randomNumber;
+    }
+
+    protected int somePosValue(int seed) {
+        return Game.R.nextInt(seed);
+
     }
 
     @Override

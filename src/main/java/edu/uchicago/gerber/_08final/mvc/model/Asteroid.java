@@ -29,7 +29,7 @@ public class Asteroid extends Sprite {
 		//random delta-x
 		setDeltaX(somePosNegValue(10));
 		//random delta-y
-		setDeltaY(somePosNegValue(10));
+		setDeltaY(somePosValue(10));
 
 		//a size of zero is a big asteroid
 		//a size of 1 or 2 is med or small asteroid respectively. See getSize() method.
@@ -54,7 +54,7 @@ public class Asteroid extends Sprite {
 		//random delta-x : inertia + the smaller the asteroid, the faster its possible speed
 		setDeltaX(astExploded.getDeltaX() / 1.5 + somePosNegValue( 5 + newSmallerSize * 2));
 		//random delta-y : inertia + the smaller the asteroid, the faster its possible speed
-		setDeltaY(astExploded.getDeltaY() / 1.5 + somePosNegValue( 5 + newSmallerSize * 2));
+		setDeltaY(astExploded.getDeltaY() / 1.5 + somePosValue( 5 + newSmallerSize * 2));
 
 	}
 
