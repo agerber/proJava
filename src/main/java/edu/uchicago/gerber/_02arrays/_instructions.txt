@@ -5,6 +5,8 @@ has 101 total points offered out of a possible 100.  If you score 101/100, you g
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 Review Exercises: 3 points each. Place your answers in ReviewExercises.txt located in the root of this project.
+Each of your solutions requires a Driver class. A Driver class is the one with the
+public static void main(String[] args) method, and it's where your execution starts.
 
 R5.6 Parameters and return values
 R5.8 Pseudocode
