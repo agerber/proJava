@@ -23,7 +23,7 @@ public class Game implements Runnable, KeyListener {
 	public static final Dimension DIM = new Dimension(1100, 900); //the dimension of the game.
 	private GamePanel gmpPanel;
 	//this is used throughout many classes.
-	public static Random R = new Random();
+	public static final Random R = new Random();
 
 	public final static int ANI_DELAY = 40; // milliseconds between screen
 											// updates (animation)
