@@ -34,9 +34,5 @@ class NewShipFloater : Sprite() {
         cartesians = pntCs
     }
 
-    override fun move() {
-        super.move()
-        //a newShipFloater spins
-        orientation = orientation + spin
-    }
+
 }

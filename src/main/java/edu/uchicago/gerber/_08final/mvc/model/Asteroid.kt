@@ -55,13 +55,6 @@ class Asteroid(size: Int) : Sprite() {
             else -> 0
         }
 
-    override fun move() {
-        super.move()
-        //an asteroid spins, so you need to adjust the orientation at each move()
-        orientation += spin
-    }
-
-
 
     private fun genRandomPoints(): Array<out Any> {
         //6.283 is the max radians

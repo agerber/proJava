@@ -11,8 +11,8 @@ class Falcon : Sprite() {
     // FIELDS 
     // ==============================================================
     companion object {
-        const val THRUST = .65
-        const val DEGREE_STEP = 9
+        private const val THRUST = .65
+        private const val DEGREE_STEP = 9
         const val FADE_INITIAL_VALUE = 51
     }
 

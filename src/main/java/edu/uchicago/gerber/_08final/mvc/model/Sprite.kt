@@ -75,6 +75,10 @@ abstract class Sprite : Movable {
         //expire (decrement expiry) on short-lived objects only
         //the default value of expiry is zero, so this block will only apply to expiring sprites
         if (expiry > 0) expire()
+
+        //if spin is not zero, adjust the orientation accordingly
+        //the default value of spin is zero, therefore this block will only be called on spinning objects
+        if (spin != 0) orientation += spin
     }
 
 
