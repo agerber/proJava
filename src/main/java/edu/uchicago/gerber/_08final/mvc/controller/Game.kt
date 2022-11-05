@@ -306,8 +306,8 @@ class Game : Runnable, KeyListener {
 		val DIM = Dimension(1100, 900) //the dimension of the game.
 
         //this is used throughout many classes.
+		val R = Random()
 
-		var R = Random()
         const val ANI_DELAY = 40 // milliseconds between screen
 
         // updates (animation)
