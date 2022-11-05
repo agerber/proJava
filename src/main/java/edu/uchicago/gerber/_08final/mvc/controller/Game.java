@@ -21,7 +21,7 @@ public class Game implements Runnable, KeyListener {
 	// ===============================================
 
 	public static final Dimension DIM = new Dimension(1100, 900); //the dimension of the game.
-	private GamePanel gmpPanel;
+	private final GamePanel gmpPanel;
 	//this is used throughout many classes.
 	public static final Random R = new Random();
 
@@ -30,7 +30,7 @@ public class Game implements Runnable, KeyListener {
 
 	public final static int FRAMES_PER_SECOND = 1000 / ANI_DELAY;
 
-	private Thread animationThread;
+	private final Thread animationThread;
 
 
 	private final int PAUSE = 80, // p key
@@ -47,8 +47,8 @@ public class Game implements Runnable, KeyListener {
 	// SHIELD = 65, 				// A key
 	// SPECIAL = 70; 					// fire special weapon;  F key
 
-	private Clip clpThrust;
-	private Clip clpMusicBackground;
+	private final Clip clpThrust;
+	private final Clip clpMusicBackground;
 
 	//spawn every 30 seconds
 	private static final int SPAWN_NEW_SHIP_FLOATER = FRAMES_PER_SECOND * 30;
