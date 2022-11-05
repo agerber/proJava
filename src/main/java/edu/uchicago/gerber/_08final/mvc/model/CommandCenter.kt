@@ -11,6 +11,7 @@ object CommandCenter {
      var level = 0
      var score: Long = 0L
      var paused = false
+     var muted = true
 
     //the falcon should always point to this object on the heap
      val falcon = Falcon()

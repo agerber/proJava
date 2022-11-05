@@ -22,30 +22,25 @@ class Game : Runnable, KeyListener {
     private val gmpPanel: GamePanel
     private val animationThread: Thread
 
-    //todo this is state: move to CommandCenter
-    private var muted = true
-    private val PAUSE = 80
-
     // p key
+    private val PAUSE = 80
+    // q key
     private val QUIT = 81
 
-    // q key
-    private val LEFT = 37
-
     // rotate left; left arrow
-    private val RIGHT = 39
-
+    private val LEFT = 37
     // rotate right; right arrow
+    private val RIGHT = 39
+    // thrust; up arrow
     private val UP = 38
 
-    // thrust; up arrow
+    // s key
     private val START = 83
 
-    // s key
-    private val FIRE = 32
-
     // space key
-    private val MUTE = 77 // m-key mute
+    private val FIRE = 32
+    // m-key mute
+    private val MUTE = 77
 
     // for possible future use
     // HYPER = 68, 					// D key
@@ -287,12 +282,12 @@ class Game : Runnable, KeyListener {
             }
 
             MUTE -> {
-                if (!muted) {
+                if (!CommandCenter.muted) {
                     stopLoopingSounds(clpMusicBackground)
                 } else {
                     clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY)
                 }
-                muted = !muted
+                CommandCenter.muted = !CommandCenter.muted
             }
 
             else -> {}
