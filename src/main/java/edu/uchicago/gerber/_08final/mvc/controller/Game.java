@@ -32,9 +32,6 @@ public class Game implements Runnable, KeyListener {
 
 	private Thread animationThread;
 
-	//todo this is state: move to CommandCenter
-	private boolean muted = true;
-	
 
 	private final int PAUSE = 80, // p key
 			QUIT = 81, // q key
@@ -369,13 +366,14 @@ public class Game implements Runnable, KeyListener {
 				break;
 				
 			case MUTE:
-				if (!muted){
+				CommandCenter.getInstance().setMuted(!CommandCenter.getInstance().isMuted());
+
+				if (!CommandCenter.getInstance().isMuted()){
 					stopLoopingSounds(clpMusicBackground);
 				} 
 				else {
 					clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
 				}
-				muted = !muted;
 				break;
 				
 			default:
