@@ -282,12 +282,13 @@ class Game : Runnable, KeyListener {
             }
 
             MUTE -> {
+                CommandCenter.muted = !CommandCenter.muted
                 if (!CommandCenter.muted) {
                     stopLoopingSounds(clpMusicBackground)
                 } else {
                     clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY)
                 }
-                CommandCenter.muted = !CommandCenter.muted
+
             }
 
             else -> {}
