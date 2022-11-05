@@ -86,6 +86,12 @@ public abstract class Sprite implements Movable {
         //the default value of expiry is zero, so this block will only apply to expiring sprites
         if (getExpiry() > 0) expire();
 
+        //if a sprite spins, adjust its orientation
+        //the default value of spin is zero, therefore non-spinning objects will not call this block.
+        if (getSpin() != 0) {
+            setOrientation(getOrientation() + getSpin());
+        }
+
     }
 
     private void expire() {

@@ -15,9 +15,8 @@ public class Falcon extends Sprite {
 	// FIELDS 
 	// ==============================================================
 	
-	private final double THRUST = .65;
-
-	final int DEGREE_STEP = 9;
+	private static final double THRUST = .65;
+	private final static int DEGREE_STEP = 9;
 	//must be multiple of 3
 	public static final int FADE_INITIAL_VALUE = 51;
 	

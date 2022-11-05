@@ -72,13 +72,6 @@ public class Asteroid extends Sprite {
 	}
 
 
-	@Override
-	public void move(){
-		super.move();
-		//an asteroid spins, so you need to adjust the orientation at each move()
-		setOrientation(getOrientation() + getSpin());
-	}
-
 
 	  private Point[] genRandomPoints(){
 		  //6.283 is the max radians

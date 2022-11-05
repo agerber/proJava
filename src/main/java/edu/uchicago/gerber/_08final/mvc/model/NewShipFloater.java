@@ -40,13 +40,7 @@ public class NewShipFloater extends Sprite {
 		setCartesians(pntCs);
 	}
 
-	@Override
-	public void move() {
-		super.move();
-		//a newShipFloater spins
-		setOrientation(getOrientation() + getSpin());
 
-	}
 
 
 }
