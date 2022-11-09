@@ -164,48 +164,26 @@ public class GamePanel extends Panel {
 		fontHeight = fmt.getHeight();
 		g.setFont(fntBig);					// set font info
 	}
-	
+
+
 	// This method draws some text to the middle of the screen before/after a game
 	private void displayTextOnScreen() {
 
-		strDisplay = "GAME OVER";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4);
+		placeString(grpOff, "GAME OVER", 0);
+		placeString(grpOff, "use the arrow keys to turn and thrust", 40);
+		placeString(grpOff, "use the space bar to fire", 80);
+		placeString(grpOff, "'S' to Start", 120);
+		placeString(grpOff, "'P' to Pause", 160);
+		placeString(grpOff, "'Q' to Quit", 200);
+		placeString(grpOff, "left pinkie on 'A' for Shield", 240);
+		placeString(grpOff, "'Numeric-Enter' for Hyperspace", 280);
 
-		strDisplay = "use the arrow keys to turn and thrust";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 40);
-
-		strDisplay = "use the space bar to fire";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 80);
-
-		strDisplay = "'S' to Start";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 120);
-
-		strDisplay = "'P' to Pause";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 160);
-
-		strDisplay = "'Q' to Quit";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 200);
-		strDisplay = "left pinkie on 'A' for Shield";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 240);
-
-		strDisplay = "'Numeric-Enter' for Hyperspace";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ fontHeight + 280);
 	}
-	
+
+	private void placeString(Graphics grp, String str, int height){
+		grp.drawString(str, (Game.DIM.width - fmt.stringWidth(str)) / 2, Game.DIM.height / 4 + fontHeight + height);
+	}
+
+
 
 }
