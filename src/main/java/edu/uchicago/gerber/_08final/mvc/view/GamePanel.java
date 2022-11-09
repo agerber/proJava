@@ -177,7 +177,7 @@ public class GamePanel extends Panel {
     // This method draws some text to the middle of the screen before/after a game
     private void displayTextOnScreen(final Graphics graphics, String... lines) {
 
-        AtomicInteger spacer = new AtomicInteger(40);
+        AtomicInteger spacer = new AtomicInteger(0);
         Arrays.stream(lines)
                 .forEach(s -> {
                             graphics.drawString(s, (Game.DIM.width - fmt.stringWidth(s)) / 2,
