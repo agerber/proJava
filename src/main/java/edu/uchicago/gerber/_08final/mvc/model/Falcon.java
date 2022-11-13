@@ -5,7 +5,10 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -87,21 +90,25 @@ public class Falcon extends Sprite {
 		return getFade() < 255;
 	}
 
-	private void accelerateDecelerate(boolean forward, List<Movable>... movableLists){
+	@SafeVarargs
+	private final void accelerateDecelerate(boolean forward, List<Movable>... movableLists){
 
-		for (List<Movable> movList : movableLists) {
-			for (Movable movable : movList) {
-				Sprite sprite = (Sprite) movable;
-				if (forward){
-					sprite.setDeltaY(sprite.getDeltaY() + 0.5);
-				}
-				else {
 
-					sprite.setDeltaY(sprite.getDeltaY() - 0.5);
-				}
-			}
+		BiConsumer<Sprite, Boolean> slowerOrFaster =  (sprite, fwd) -> {
 
-		}
+			double forwardOrBack = fwd ? 0.5 : -0.5;
+			sprite.setDeltaY(sprite.getDeltaY() + forwardOrBack);
+
+		};
+
+		//convert Stream<List<Movable>> to a single Stream<Movable> using flatmap, then map Movable (widen aperture) to
+		// Sprite, then apply logic above
+		Arrays.stream(movableLists)
+				.flatMap(Collection::stream)
+				.map(m -> (Sprite) m)
+				.forEach(s -> slowerOrFaster.accept(s, forward));
+
+
 	}
 
 	// ==============================================================
