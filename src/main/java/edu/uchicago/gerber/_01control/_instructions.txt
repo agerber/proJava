@@ -19,8 +19,11 @@ R4.14 Calendar problem
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 Programming Exercises: 7 points each. Create a Java class file for each of the following Programming Exercises from the
-textbook, Big Java. Name your source files according to its Programming Exercise identifier, except replace the period with an
-underscore.  For example, if the Programming Exercise identifier is P1.15 or E2.4 then name your java source file P1_15.java or E2_4.java
+textbook, Big Java. Each of your solutions requires a Driver class. A Driver class is the one with the
+public static void main(String[] args) method, and it's where your execution starts.
+ Name your source files according to its Programming Exercise identifier, except replace the period
+ with an underscore.  For example, if the Programming Exercise identifier is P1.15 or E2.4 then name your java source
+ file P1_15.java or E2_4.java
 respecitvely. See P0_0.java for an example.
 
 E2.4 Print integers from CLI

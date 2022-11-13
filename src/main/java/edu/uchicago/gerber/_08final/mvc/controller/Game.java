@@ -21,20 +21,17 @@ public class Game implements Runnable, KeyListener {
 	// ===============================================
 
 	public static final Dimension DIM = new Dimension(1100, 900); //the dimension of the game.
-	private GamePanel gmpPanel;
+	private final GamePanel gmpPanel;
 	//this is used throughout many classes.
-	public static Random R = new Random();
+	public static final Random R = new Random();
 
 	public final static int ANI_DELAY = 40; // milliseconds between screen
 											// updates (animation)
 
 	public final static int FRAMES_PER_SECOND = 1000 / ANI_DELAY;
 
-	private Thread animationThread;
+	private final Thread animationThread;
 
-	//todo this is state: move to CommandCenter
-	private boolean muted = true;
-	
 
 	private final int PAUSE = 80, // p key
 			QUIT = 81, // q key
@@ -51,8 +48,8 @@ public class Game implements Runnable, KeyListener {
 	// SHIELD = 65, 				// A key
 	// SPECIAL = 70; 					// fire special weapon;  F key
 
-	private Clip clpThrust;
-	private Clip clpMusicBackground;
+	private final Clip clpThrust;
+	private final Clip clpMusicBackground;
 
 	//spawn every 30 seconds
 	private static final int SPAWN_NEW_SHIP_FLOATER = FRAMES_PER_SECOND * 30;
@@ -377,13 +374,14 @@ public class Game implements Runnable, KeyListener {
 					break;
 
 			case MUTE:
-				if (!muted){
+				CommandCenter.getInstance().setMuted(!CommandCenter.getInstance().isMuted());
+
+				if (!CommandCenter.getInstance().isMuted()){
 					stopLoopingSounds(clpMusicBackground);
 				} 
 				else {
 					clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
 				}
-				muted = !muted;
 				break;
 				
 			default:

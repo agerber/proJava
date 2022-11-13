@@ -5,6 +5,10 @@ proStreams: Streams and Recursion
 Review Exercises: 3 points each. Starting on page 619 of textbook Big Java. Place your answers in
 ReviewExercises.txt located in the root of this project.
 
+Each of your solutions requires a Driver class. A Driver class is the one with the
+public static void main(String[] args) method, and it's where your execution starts.
+
+
 R13.1 Terms
 R13.2 Smallest value
 R13.4 Sort array of numbers

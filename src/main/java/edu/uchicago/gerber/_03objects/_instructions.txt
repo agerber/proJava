@@ -5,6 +5,9 @@ score 101, you get 1 point extra-credit.
 
 Review Exercises: 3 points each. Starting on page 405 of textbook Big Java. Place your answers in
 ReviewExercises.txt located in the root of this project.
+Each of your solutions requires a Driver class. A Driver class is the one with the
+public static void main(String[] args) method, and it's where your execution starts.
+
 
 R8.1 Encapsulation
 R8.4 Public interface

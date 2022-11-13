@@ -3,8 +3,15 @@ proDesign: Object-Oriented Analysis and Design
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 Review Exercises: 3 points each. Place your answers in
-ReviewExercises.txt located in the root of this project. No need to draw CRC cards, just create a text version of the CRC
-card and put answers in ReviewExercises. For UML, sse the UML tool in IntelliJ. Indicate to the grader where this is located.
+ReviewExercises.txt located in the root of this project.
+
+Each of your solutions requires a Driver class. A Driver class is the one with the
+public static void main(String[] args) method, and it's where your execution starts.
+
+No need to draw CRC cards, just create a text version of the CRC
+card and put answers in ReviewExercises.txt. For UML, use the UML tool in IntelliJ (right-click the package ||
+Diagrams menu || Show Diagram...) and save those uml diagrams in the _06design directory or appropriate
+subdirectories.
 
 R12.1 OO Analysis and Design
 R12.2 OO Analysis and Design

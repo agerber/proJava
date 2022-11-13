@@ -18,6 +18,7 @@ public class CommandCenter {
 	private  int level;
 	private  long score;
 	private  boolean paused;
+	private  boolean muted;
 
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap
