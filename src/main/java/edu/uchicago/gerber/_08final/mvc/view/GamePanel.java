@@ -1,9 +1,7 @@
 package edu.uchicago.gerber._08final.mvc.view;
 
 import edu.uchicago.gerber._08final.mvc.controller.Game;
-import edu.uchicago.gerber._08final.mvc.model.CommandCenter;
-import edu.uchicago.gerber._08final.mvc.model.Falcon;
-import edu.uchicago.gerber._08final.mvc.model.Movable;
+import edu.uchicago.gerber._08final.mvc.model.*;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -12,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 
 public class GamePanel extends Panel {
@@ -148,13 +147,29 @@ public class GamePanel extends Panel {
 
         g.setColor(falcon.getColor());
 
+
+        //rotate raw polars given the orientation, Then convert back to cartesians.
+        Function<PolarPoint, Point> rotateFalcon90 =
+                pp -> new Point(
+                        (int)  (pp.getR() * 10
+                                * Math.sin(Math.toRadians(90)
+                                + pp.getTheta())),
+
+                        (int)  (pp.getR() * 10
+                                * Math.cos(Math.toRadians(90)
+                                + pp.getTheta())));
+
+
         g.drawPolygon(
-                Arrays.stream(falcon.getCartesians())
+
+                Sprite.cartesianToPolar(Arrays.asList(falcon.getCartesians())).stream()
+                        .map(rotateFalcon90)
                         .map(pnt -> pnt.x + Game.DIM.width - (20 * offSet))
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                Arrays.stream(falcon.getCartesians())
+                Sprite.cartesianToPolar(Arrays.asList(falcon.getCartesians())).stream()
+                        .map(rotateFalcon90)
                         .map(pnt -> pnt.y + Game.DIM.height - 40)
                         .mapToInt(Integer::intValue)
                         .toArray(),
