@@ -109,7 +109,7 @@ public abstract class Sprite implements Movable {
     }
 
 
-    protected double hypotFunction(double dX, double dY) {
+    private static double hypotFunction(double dX, double dY) {
         return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
     }
 
@@ -150,7 +150,8 @@ public abstract class Sprite implements Movable {
 
     }
 
-    protected List<PolarPoint> cartesianToPolar(List<Point> pntCartesians) {
+    //made static so that GamePanel can use this to render num ships left
+    public static List<PolarPoint> cartesianToPolar(List<Point> pntCartesians) {
 
         BiFunction<Point, Double, PolarPoint> cartToPolarTransform = (pnt, hyp) -> new PolarPoint(
                 //this is r from PolarPoint(r,theta).
