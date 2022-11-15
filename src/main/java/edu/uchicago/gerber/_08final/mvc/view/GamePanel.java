@@ -18,18 +18,11 @@ public class GamePanel extends Panel {
     // ==============================================================
     // FIELDS
     // ==============================================================
-
-    // The following "off" vars are used for the off-screen double-buffered image.
-    private Image imgOff;
-    private Graphics grpOff;
-
-    private GameFrame gmf;
-    private Font fnt = new Font("SansSerif", Font.BOLD, 12);
-    private Font fntBig = new Font("SansSerif", Font.BOLD + Font.ITALIC, 36);
+    private final Font fnt = new Font("SansSerif", Font.BOLD, 12);
+    private final Font fntBig = new Font("SansSerif", Font.BOLD + Font.ITALIC, 36);
     private FontMetrics fmt;
     private int fontWidth;
     private int fontHeight;
-    private String strDisplay = "";
 
 
     // ==============================================================
@@ -37,7 +30,7 @@ public class GamePanel extends Panel {
     // ==============================================================
 
     public GamePanel(Dimension dim) {
-        gmf = new GameFrame();
+        GameFrame gmf = new GameFrame();
         gmf.getContentPane().add(this);
         gmf.pack();
         initView();
@@ -67,9 +60,10 @@ public class GamePanel extends Panel {
     @SuppressWarnings("unchecked")
     public void update(Graphics g) {
         //create an image off-screen
-        imgOff = createImage(Game.DIM.width, Game.DIM.height);
+        // The following "off" vars are used for the off-screen double-buffered image.
+        Image imgOff = createImage(Game.DIM.width, Game.DIM.height);
         //get its graphics context
-        grpOff = imgOff.getGraphics();
+        Graphics grpOff = imgOff.getGraphics();
 
         //Fill the off-screen image background with black.
         grpOff.setColor(Color.black);
@@ -90,9 +84,9 @@ public class GamePanel extends Panel {
 
             );
         } else if (CommandCenter.getInstance().isPaused()) {
-            strDisplay = "Game Paused";
-            grpOff.drawString(strDisplay,
-                    (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4);
+
+            displayTextOnScreen(grpOff, "Game Paused");
+
         }
 
         //playing and not paused!
@@ -141,36 +135,36 @@ public class GamePanel extends Panel {
         }
     }
 
-    // Draw the number of falcons left on the bottom-right of the screen. Upside-down, but ok.
+    // Draw the number of falcons left on the bottom-right of the screen.
     private void drawOneShipLeft(Graphics g, int offSet) {
-        Falcon falcon = CommandCenter.getInstance().getFalcon();
 
-        g.setColor(falcon.getColor());
+        g.setColor(Color.WHITE);
 
-
+        final int SIZE = 15, DEGREES = 90, X_POS = 27, Y_POS = 45;
         //rotate raw polars given the orientation, Then convert back to cartesians.
         Function<PolarPoint, Point> rotateFalcon90 =
                 pp -> new Point(
-                        (int)  (pp.getR() * 10
-                                * Math.sin(Math.toRadians(90)
+                        (int)  (pp.getR() * SIZE
+                                * Math.sin(Math.toRadians(DEGREES)
                                 + pp.getTheta())),
 
-                        (int)  (pp.getR() * 10
-                                * Math.cos(Math.toRadians(90)
+                        (int)  (pp.getR() * SIZE
+                                * Math.cos(Math.toRadians(DEGREES)
                                 + pp.getTheta())));
 
+        Falcon falcon = CommandCenter.getInstance().getFalcon();
 
         g.drawPolygon(
 
                 Sprite.cartesianToPolar(Arrays.asList(falcon.getCartesians())).stream()
                         .map(rotateFalcon90)
-                        .map(pnt -> pnt.x + Game.DIM.width - (20 * offSet))
+                        .map(pnt -> pnt.x + Game.DIM.width - (X_POS * offSet))
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
                 Sprite.cartesianToPolar(Arrays.asList(falcon.getCartesians())).stream()
                         .map(rotateFalcon90)
-                        .map(pnt -> pnt.y + Game.DIM.height - 40)
+                        .map(pnt -> pnt.y + Game.DIM.height - Y_POS)
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
@@ -192,12 +186,12 @@ public class GamePanel extends Panel {
     // This method draws some text to the middle of the screen before/after a game
     private void displayTextOnScreen(final Graphics graphics, String... lines) {
 
-        AtomicInteger spacer = new AtomicInteger(0);
+        final AtomicInteger spacer = new AtomicInteger(0);
         Arrays.stream(lines)
-                .forEach(s -> {
+                .forEach(s ->
                             graphics.drawString(s, (Game.DIM.width - fmt.stringWidth(s)) / 2,
-                                    Game.DIM.height / 4 + fontHeight + spacer.getAndAdd(40));
-                        }
+                                    Game.DIM.height / 4 + fontHeight + spacer.getAndAdd(40))
+
                 );
 
 
