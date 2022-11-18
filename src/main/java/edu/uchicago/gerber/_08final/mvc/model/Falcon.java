@@ -22,8 +22,10 @@ public class Falcon extends Sprite {
 	
 	//private boolean shield = false;
 	private boolean thrusting = false;
-	private boolean turningRight = false;
-	private boolean turningLeft = false;
+	public enum TurnState {
+		IDLE, LEFT, RIGHT
+	}
+	private TurnState turnState = TurnState.IDLE;
 
 
 	// ==============================================================
@@ -106,14 +108,14 @@ public class Falcon extends Sprite {
 			setDeltaY(getDeltaY() + adjustY);
 		}
 		//rotate left
-		if (turningLeft) {
+		if (turnState.equals(TurnState.LEFT)) {
 			if (getOrientation() <= 0) {
 				setOrientation(360);
 			}
 			setOrientation(getOrientation() - DEGREE_STEP);
 		}
 		//rotate right
-		if (turningRight) {
+		if (turnState.equals(TurnState.RIGHT)) {
 			if (getOrientation() >= 360) {
 				setOrientation(0);
 			}
@@ -126,16 +128,16 @@ public class Falcon extends Sprite {
 
 	//methods for moving the falcon
 	public void rotateLeft() {
-		turningLeft = true;
+		turnState = TurnState.LEFT;
 	}
 
 	public void rotateRight() {
-		turningRight = true;
+		turnState = TurnState.RIGHT;
 	}
 
 	public void stopRotating() {
-		turningRight = false;
-		turningLeft = false;
+		turnState = TurnState.IDLE;
+
 	}
 
 	public void thrustOn() {
