@@ -107,19 +107,23 @@ public class Falcon extends Sprite {
 			setDeltaX(getDeltaX() + adjustX);
 			setDeltaY(getDeltaY() + adjustY);
 		}
-		//rotate left
-		if (turnState.equals(TurnState.LEFT)) {
-			if (getOrientation() <= 0) {
-				setOrientation(360);
-			}
-			setOrientation(getOrientation() - DEGREE_STEP);
-		}
-		//rotate right
-		if (turnState.equals(TurnState.RIGHT)) {
-			if (getOrientation() >= 360) {
-				setOrientation(0);
-			}
-			setOrientation(getOrientation() + DEGREE_STEP);
+
+		switch (turnState){
+			case LEFT:
+				if (getOrientation() <= 0) {
+					setOrientation(360);
+				}
+				setOrientation(getOrientation() - DEGREE_STEP);
+				break;
+			case RIGHT:
+				if (getOrientation() >= 360) {
+					setOrientation(0);
+				}
+				setOrientation(getOrientation() + DEGREE_STEP);
+				break;
+			default:
+				//do nothing
+
 		}
 
 	} //end move
