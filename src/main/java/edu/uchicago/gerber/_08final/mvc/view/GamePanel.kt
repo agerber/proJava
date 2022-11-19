@@ -6,6 +6,12 @@ import edu.uchicago.gerber._08final.mvc.model.Movable
 import java.awt.*
 import java.util.*
 import java.util.function.BiConsumer
+import java.util.Arrays
+import java.util.concurrent.atomic.AtomicInteger
+import java.awt.Graphics
+
+
+
 
 class GamePanel(dim: Dimension?) : Panel() {
     // ==============================================================
@@ -70,7 +76,16 @@ class GamePanel(dim: Dimension?) : Panel() {
         grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height)
         drawScore(grpOff)
         if (CommandCenter.isGameOver()) {
-            displayTextOnScreen()
+            displayTextOnScreen(grpOff,
+                "GAME OVER",
+                "use the arrow keys to turn and thrust",
+                "use the space bar to fire",
+                "'S' to Start",
+                "'P' to Pause",
+                "'Q' to Quit",
+                "left pinkie on 'A' for Shield",
+                "'Numeric-Enter' for Hyperspace")
+
         } else if (CommandCenter.paused) {
             strDisplay = "Game Paused"
             grpOff.drawString(strDisplay,
@@ -95,7 +110,7 @@ class GamePanel(dim: Dimension?) : Panel() {
 
         val moveDraw = BiConsumer { grp: Graphics, mov: Movable ->
             mov.move()
-             mov.draw(grp) 
+            mov.draw(grp)
         }
 
         //we use flatMap to flatten the List<Movable>[] passed-in above into a single stream of Movables
@@ -136,31 +151,16 @@ class GamePanel(dim: Dimension?) : Panel() {
         g.font = fntBig // set font info
     }
 
-    // This method draws some text to the middle of the screen before/after a game
-    private fun displayTextOnScreen() {
-        strDisplay = "GAME OVER"
-        grpOff.drawString(strDisplay,
-                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4)
-        strDisplay = "use the arrow keys to turn and thrust"
-        grpOff.drawString(strDisplay,
-                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 40)
-        strDisplay = "use the space bar to fire"
-        grpOff.drawString(strDisplay,
-                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 80)
-        strDisplay = "'S' to Start"
-        grpOff.drawString(strDisplay,
-                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 120)
-        strDisplay = "'P' to Pause"
-        grpOff.drawString(strDisplay,
-                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 160)
-        strDisplay = "'Q' to Quit"
-        grpOff.drawString(strDisplay,
-                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 200)
-        strDisplay = "left pinkie on 'A' for Shield"
-        grpOff.drawString(strDisplay,
-                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 240)
-        strDisplay = "'Numeric-Enter' for Hyperspace"
-        grpOff.drawString(strDisplay,
-                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4 + fontHeight + 280)
+    private fun displayTextOnScreen(graphics: Graphics, vararg lines: String){
+
+        val spacer = AtomicInteger(0)
+        Arrays.stream(lines)
+            .forEach { s: String ->
+                graphics.drawString(
+                    s, (Game.DIM.width - fmt.stringWidth(s)) / 2,
+                    Game.DIM.height / 4 + fontHeight + spacer.getAndAdd(40))
+            }
     }
+
+
 }
