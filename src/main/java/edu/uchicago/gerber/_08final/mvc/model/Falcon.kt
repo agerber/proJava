@@ -17,8 +17,11 @@ class Falcon : Sprite() {
     }
 
      var thrusting = false
-     var turningRight = false
-     var turningLeft = false
+
+     enum class TurnState {
+        IDLE, LEFT, RIGHT
+    }
+    var turnState = TurnState.IDLE
 
     // ==============================================================
     // CONSTRUCTOR 
@@ -90,34 +93,39 @@ class Falcon : Sprite() {
             deltaX = deltaX + adjustX
             deltaY = deltaY + adjustY
         }
-        //rotate left
-        if (turningLeft) {
-            if (orientation <= 0) {
-                orientation = 360
+
+        when (turnState){
+            TurnState.LEFT -> {
+                if (orientation <= 0) {
+                    orientation = 360
+                }
+                orientation = orientation - DEGREE_STEP
             }
-            orientation = orientation - DEGREE_STEP
-        }
-        //rotate right
-        if (turningRight) {
-            if (orientation >= 360) {
-                orientation = 0
+            TurnState.RIGHT -> {
+                if (orientation >= 360) {
+                    orientation = 0
+                }
+                orientation = orientation + DEGREE_STEP
             }
-            orientation = orientation + DEGREE_STEP
+            else -> {
+                //do nothing
+            }
+
         }
+
     } //end move
 
     //methods for moving the falcon
     fun rotateLeft() {
-        turningLeft = true
+        turnState = TurnState.LEFT
     }
 
     fun rotateRight() {
-        turningRight = true
+        turnState = TurnState.RIGHT
     }
 
     fun stopRotating() {
-        turningRight = false
-        turningLeft = false
+        turnState = TurnState.IDLE
     }
 
     fun thrustOn() {
