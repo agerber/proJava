@@ -4,7 +4,6 @@ import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.model.CommandCenter
 import edu.uchicago.gerber._08final.mvc.model.Movable
 import java.awt.*
-import java.util.*
 import java.util.function.BiConsumer
 import java.util.Arrays
 import java.util.concurrent.atomic.AtomicInteger
@@ -91,7 +90,7 @@ class GamePanel(dim: Dimension?) : Panel() {
             grpOff.drawString(strDisplay,
                     (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4)
         } else {
-            iterateMovables(grpOff,
+            processMovables(grpOff,
                     CommandCenter.movDebris,
                     CommandCenter.movFloaters,
                     CommandCenter.movFoes,
@@ -105,8 +104,9 @@ class GamePanel(dim: Dimension?) : Panel() {
         g.drawImage(imgOff, 0, 0, this)
     }
 
+    //this method causes all sprites to move and draw themselves
     @SafeVarargs
-    private fun iterateMovables(g: Graphics, vararg arrayOfListMovables: List<Movable>) {
+    private fun processMovables(g: Graphics, vararg arrayOfListMovables: List<Movable>) {
 
         val moveDraw = BiConsumer { grp: Graphics, mov: Movable ->
             mov.move()
