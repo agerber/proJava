@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 
@@ -92,7 +91,7 @@ public class GamePanel extends Panel {
         //playing and not paused!
         else {
 
-            iterateMovables(grpOff,
+            processMovables(grpOff,
                     CommandCenter.getInstance().getMovDebris(),
                     CommandCenter.getInstance().getMovFloaters(),
                     CommandCenter.getInstance().getMovFoes(),
@@ -111,8 +110,9 @@ public class GamePanel extends Panel {
     }
 
 
+    //this method causes all sprites to move and draw themselves
     @SafeVarargs
-    private final void iterateMovables(final Graphics g, List<Movable>... arrayOfListMovables) {
+    private final void processMovables(final Graphics g, List<Movable>... arrayOfListMovables) {
 
         BiConsumer<Graphics, Movable> moveDraw = (grp, mov) -> {
             mov.move();
@@ -152,23 +152,23 @@ public class GamePanel extends Panel {
                                 * Math.cos(Math.toRadians(DEGREES)
                                 + pp.getTheta())));
 
-        Falcon falcon = CommandCenter.getInstance().getFalcon();
+        final Point[] pntFalCarts =  CommandCenter.getInstance().getFalcon().getCartesians();
 
         g.drawPolygon(
 
-                Sprite.cartesianToPolar(Arrays.asList(falcon.getCartesians())).stream()
+                Sprite.cartesianToPolar(Arrays.asList(pntFalCarts)).stream()
                         .map(rotateFalcon90)
                         .map(pnt -> pnt.x + Game.DIM.width - (X_POS * offSet))
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                Sprite.cartesianToPolar(Arrays.asList(falcon.getCartesians())).stream()
+                Sprite.cartesianToPolar(Arrays.asList(pntFalCarts)).stream()
                         .map(rotateFalcon90)
                         .map(pnt -> pnt.y + Game.DIM.height - Y_POS)
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                falcon.getCartesians().length);
+                pntFalCarts.length);
 
 
     }
