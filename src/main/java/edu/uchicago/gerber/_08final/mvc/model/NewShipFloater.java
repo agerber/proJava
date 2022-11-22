@@ -27,17 +27,17 @@ public class NewShipFloater extends Sprite {
 		setSpin(somePosNegValue(10));
 
 		//cartesian points which define the shape of the polygon
-		List<Point> pntCs = new ArrayList<>();
-		pntCs.add(new Point(5, 5));
-		pntCs.add(new Point(4,0));
-		pntCs.add(new Point(5, -5));
-		pntCs.add(new Point(0,-4));
-		pntCs.add(new Point(-5, -5));
-		pntCs.add(new Point(-4,0));
-		pntCs.add(new Point(-5, 5));
-		pntCs.add(new Point(0,4));
+		List<Point> listPoints = new ArrayList<>();
+		listPoints.add(new Point(5, 5));
+		listPoints.add(new Point(4,0));
+		listPoints.add(new Point(5, -5));
+		listPoints.add(new Point(0,-4));
+		listPoints.add(new Point(-5, -5));
+		listPoints.add(new Point(-4,0));
+		listPoints.add(new Point(-5, 5));
+		listPoints.add(new Point(0,4));
 
-		setCartesians(pointsListToArray(pntCs));
+		setCartesians(pointsListToArray(listPoints));
 
 	}
 

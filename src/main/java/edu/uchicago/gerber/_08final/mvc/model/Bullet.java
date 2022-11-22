@@ -35,13 +35,13 @@ public class Bullet extends Sprite {
 
 
         //defined the points on a cartesian grid
-        List<Point> pntCs = new ArrayList<>();
-        pntCs.add(new Point(0, 3)); //top point
-        pntCs.add(new Point(1, -1));
-        pntCs.add(new Point(0, -2));
-        pntCs.add(new Point(-1, -1));
+        List<Point> listPoints = new ArrayList<>();
+        listPoints.add(new Point(0, 3)); //top point
+        listPoints.add(new Point(1, -1));
+        listPoints.add(new Point(0, -2));
+        listPoints.add(new Point(-1, -1));
 
-        setCartesians(pointsListToArray(pntCs));
+        setCartesians(pointsListToArray(listPoints));
 
 
 
