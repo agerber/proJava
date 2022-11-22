@@ -77,7 +77,7 @@ public class Game implements Runnable, KeyListener {
 	// ==METHODS
 	// ===============================================
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		//typical Swing application start; we pass EventQueue a Runnable object.
 		EventQueue.invokeLater(Game::new);
 	}
