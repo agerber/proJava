@@ -3,11 +3,10 @@ package edu.uchicago.gerber._08final.mvc.model
 import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Point
-import java.util.*
+import java.util.function.BiFunction
 import java.util.function.Supplier
 import java.util.stream.Collectors
 import java.util.stream.Stream
-import kotlin.collections.ArrayList
 
 class Asteroid(size: Int) : Sprite() {
     //radius of a large asteroid
@@ -59,20 +58,41 @@ class Asteroid(size: Int) : Sprite() {
     private fun genRandomPoints(): Array<out Any> {
         //6.283 is the max radians
         val MAX_RADIANS_X1000 = 6283
+        //when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
+        val PRECISION_MULTIPLIER = 1000;
+
         val polarPointSupplier = Supplier {
             val r = (800 + Game.R.nextInt(200)) / 1000.0 //number between 0.8 and 0.999
             val theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0 // number between 0 and 6.282
             PolarPoint(r, theta)
         }
 
-        //random number of vertices between 17 and 23
-        val vertices = Game.R.nextInt(7) + 17
-        return polarToCartesian(
-                Stream.generate(polarPointSupplier)
-                        .limit(vertices.toLong())
-                        .sorted { pp1, pp2 -> pp1.theta.compareTo(pp2.theta) }
-                        .collect(Collectors.toList())
+        val transformer = BiFunction { spr: Sprite, pp: PolarPoint ->
+            Point(
+                (spr.center.x + pp.r * spr.radius * PRECISION_MULTIPLIER
+                        * Math.sin(
+                    Math.toRadians(spr.orientation.toDouble())
+                            + pp.theta
+                )).toInt(),
+                (spr.center.y + pp.r * spr.radius * PRECISION_MULTIPLIER
+                        * Math.cos(
+                    Math.toRadians(spr.orientation.toDouble())
+                            + pp.theta
+                )).toInt()
+            )
+        }
 
-        )
+
+        //random number of vertices between 17 and 23
+        val VERTICES = Game.R.nextInt(7) + 17
+        return Stream.generate(polarPointSupplier)
+            .limit(VERTICES.toLong())
+            .sorted { pp1, pp2 -> pp1.theta.compareTo(pp2.theta) }
+            .map { pp: PolarPoint -> transformer.apply(this, pp) }
+            .toArray()
+
+
     }
+
+
 }

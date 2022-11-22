@@ -4,6 +4,8 @@ import edu.uchicago.gerber._08final.mvc.controller.Game
 import lombok.Data
 import java.awt.Point
 import java.util.*
+import java.util.function.BiFunction
+import java.util.stream.Collectors
 
 object CommandCenter {
 
@@ -58,6 +60,41 @@ object CommandCenter {
     fun isGameOver(): Boolean {
         return numFalcons <= 0
     }
+
+
+    //Utility method for transforming cartesian points to polar points
+     fun cartesianToPolar(pntCartesians: List<Point>): List<PolarPoint> {
+
+        val cartToPolarTransform = BiFunction { pnt: Point, hyp: Double ->
+            PolarPoint( //this is r from PolarPoint(r,theta).
+                hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) / hyp,  //r is relative to the largestHypotenuse
+                //this is theta from PolarPoint(r,theta)
+                Math.toDegrees(Math.atan2(pnt.y.toDouble(), pnt.x.toDouble())) * Math.PI / 180
+            )
+        }
+
+
+        //determine the largest hypotenuse
+        var largestHypotenuse = 0.0
+        for (pnt in pntCartesians){
+            if (hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) > largestHypotenuse)
+                largestHypotenuse = hypotFunction(pnt.x.toDouble(), pnt.y.toDouble())
+        }
+
+
+        //we must make hypotenuse final to pass into a stream.
+        val hyp = largestHypotenuse
+        return pntCartesians.stream()
+            .map { pnt: Point -> cartToPolarTransform.apply(pnt, hyp) }
+            .collect(Collectors.toList())
+    }
+
+    //private helper method
+    private fun hypotFunction(dX: Double, dY: Double): Double {
+        return Math.sqrt(Math.pow(dX, 2.0) + Math.pow(dY, 2.0))
+    }
+
+
 
 }
 

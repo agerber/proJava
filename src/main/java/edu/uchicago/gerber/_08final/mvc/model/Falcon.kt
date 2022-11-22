@@ -25,6 +25,7 @@ class Falcon : Sprite() { //end class
 
     var turnState = TurnState.IDLE
 
+    //used to toggle between the two shapes of this sprite
     var pntAlien: List<Point>
     var pntShip: List<Point>
 
@@ -135,7 +136,7 @@ class Falcon : Sprite() { //end class
         listAlien.add(Point(-1, 2))
         listAlien.add(Point(0, 2))
 
-        //we need to create members for these points (unlike other Sprites) because we are morphing to alien
+        //we need to create members for these points (unlike other Sprites) because we are morphing between ship/alien
         pntAlien = listAlien
         pntShip = listShip
 

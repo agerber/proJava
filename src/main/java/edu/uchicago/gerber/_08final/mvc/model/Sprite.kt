@@ -92,9 +92,6 @@ abstract class Sprite : Movable {
         expiry--
     }
 
-    protected fun hypotFunction(dX: Double, dY: Double): Double {
-        return Math.sqrt(Math.pow(dX, 2.0) + Math.pow(dY, 2.0))
-    }
 
     protected fun somePosNegValue(seed: Int): Int {
         var randomNumber = Game.R.nextInt(seed)
@@ -107,48 +104,6 @@ abstract class Sprite : Movable {
         return  false
     }
 
-    //certain Sprites, such as Asteroid use this
-    protected fun polarToCartesian(polPolars: List<PolarPoint>): Array<out Any> {
-
-        //when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
-        val PRECISION_MULTIPLIER = 1000
-        val polarToCartTransform = Function { (r, theta): PolarPoint ->
-            Point((center.x + (r * radius * PRECISION_MULTIPLIER
-                    * Math.sin(Math.toRadians(orientation.toDouble())
-                    + theta))).toInt(), (center.y - (r * radius * PRECISION_MULTIPLIER
-                    * Math.cos(Math.toRadians(orientation.toDouble())
-                    + theta))).toInt())
-        }
-        return polPolars.stream()
-            .map(polarToCartTransform)
-            .toArray()
-    }
-
-    protected fun cartesianToPolar(pntCartesians: List<Point>): List<PolarPoint> {
-
-        val cartToPolarTransform = BiFunction { pnt: Point, hyp: Double ->
-            PolarPoint( //this is r from PolarPoint(r,theta).
-                    hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) / hyp,  //r is relative to the largestHypotenuse
-                    //this is theta from PolarPoint(r,theta)
-                    Math.toDegrees(Math.atan2(pnt.y.toDouble(), pnt.x.toDouble())) * Math.PI / 180
-            )
-        }
-
-
-        //determine the largest hypotenuse
-        var largestHypotenuse = 0.0
-        for (pnt in pntCartesians){
-            if (hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) > largestHypotenuse)
-                largestHypotenuse = hypotFunction(pnt.x.toDouble(), pnt.y.toDouble())
-        }
-
-
-        //we must make hypotenuse final to pass into a stream.
-        val hyp = largestHypotenuse
-        return pntCartesians.stream()
-                .map { pnt: Point -> cartToPolarTransform.apply(pnt, hyp) }
-                .collect(Collectors.toList())
-    }
 
     override fun draw(g: Graphics) {
         //set the native color of the sprite
@@ -169,7 +124,7 @@ abstract class Sprite : Movable {
         // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to drawPolygon().
 
         //convert raw cartesians to raw polars
-        val polars = cartesianToPolar(cartesians)
+        val polars = CommandCenter.cartesianToPolar(cartesians)
 
         //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
         val adjustForOrientation = Function { (r, theta): PolarPoint ->
