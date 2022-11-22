@@ -7,7 +7,7 @@ import java.awt.Point
 import java.util.*
 
 
-class Falcon : Sprite() {
+class Falcon : Sprite() { //end class
     // ==============================================================
     // FIELDS 
     // ==============================================================
@@ -17,11 +17,12 @@ class Falcon : Sprite() {
         const val FADE_INITIAL_VALUE = 51
     }
 
-     var thrusting = false
+    var thrusting = false
 
-     enum class TurnState {
+    enum class TurnState {
         IDLE, LEFT, RIGHT
     }
+
     var turnState = TurnState.IDLE
 
     var pntAlien: List<Point>
@@ -134,11 +135,23 @@ class Falcon : Sprite() {
         listAlien.add(Point(-1, 2))
         listAlien.add(Point(0, 2))
 
-       pntAlien = listAlien
-       pntShip = listShip
+        //we need to create members for these points (unlike other Sprites) because we are morphing to alien
+        pntAlien = listAlien
+        pntShip = listShip
 
-       cartesians = listShip
+        //default value of cartesians is ship
+        cartesians = listShip
     }
+
+    //has no functional value, but demonstrates how to morph a sprite
+    fun toggleAlien(alien: Boolean) {
+        if (alien) {
+            cartesians = pntAlien
+        } else {
+            cartesians = pntShip
+        }
+    }
+
 
     override fun isProtected(): Boolean {
         return fade < 255
@@ -163,19 +176,21 @@ class Falcon : Sprite() {
             deltaY = deltaY + adjustY
         }
 
-        when (turnState){
+        when (turnState) {
             TurnState.LEFT -> {
                 if (orientation <= 0) {
                     orientation = 360
                 }
                 orientation = orientation - DEGREE_STEP
             }
+
             TurnState.RIGHT -> {
                 if (orientation >= 360) {
                     orientation = 0
                 }
                 orientation = orientation + DEGREE_STEP
             }
+
             else -> {
                 //do nothing
             }
@@ -217,14 +232,15 @@ class Falcon : Sprite() {
             Color(0, 32, 128) //dark blue
         } else {
             Color(
-                    adjustColor(fade, 200),  //red
-                    adjustColor(fade, 175),  //green
-                    fade //blue
+                adjustColor(fade, 200),  //red
+                adjustColor(fade, 175),  //green
+                fade //blue
             )
         }
 
         //most Sprites do not have flames, but Falcon does
-        val flames = doubleArrayOf(23 * Math.PI / 24 + Math.PI / 2, Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2)
+        val flames =
+            doubleArrayOf(23 * Math.PI / 24 + Math.PI / 2, Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2)
         val pntFlames = arrayOfNulls<Point>(flames.size)
 
         //thrusting
@@ -234,41 +250,53 @@ class Falcon : Sprite() {
                 if (nC % 2 != 0) //odd
                 {
                     //adjust the position so that the flame is off-center
-                    pntFlames[nC] = Point((center.x + (2
-                            * radius
-                            * Math.sin(Math.toRadians(orientation.toDouble())
-                            + flames[nC]))).toInt(), (center.y - (2
-                            * radius
-                            * Math.cos(Math.toRadians(orientation.toDouble())
-                            + flames[nC]))).toInt())
+                    pntFlames[nC] = Point(
+                        (center.x + (2
+                                * radius
+                                * Math.sin(
+                            Math.toRadians(orientation.toDouble())
+                                    + flames[nC]
+                        ))).toInt(), (center.y - (2
+                                * radius
+                                * Math.cos(
+                            Math.toRadians(orientation.toDouble())
+                                    + flames[nC]
+                        ))).toInt()
+                    )
                 } else  //even
                 {
-                    pntFlames[nC] = Point((center.x + (radius
-                            * 1.1
-                            * Math.sin(Math.toRadians(orientation.toDouble())
-                            + flames[nC]))).toInt(), (center.y - (radius
-                            * 1.1
-                            * Math.cos(Math.toRadians(orientation.toDouble())
-                            + flames[nC]))).toInt())
+                    pntFlames[nC] = Point(
+                        (center.x + (radius
+                                * 1.1
+                                * Math.sin(
+                            Math.toRadians(orientation.toDouble())
+                                    + flames[nC]
+                        ))).toInt(), (center.y - (radius
+                                * 1.1
+                                * Math.cos(
+                            Math.toRadians(orientation.toDouble())
+                                    + flames[nC]
+                        ))).toInt()
+                    )
                 } //end even/odd else
             } //end for loop
 
 
             g.color = colShip //flames same color as ship
             g.fillPolygon(
-                    Arrays.stream(pntFlames)
-                            .map { pnt: Point? -> pnt!!.x }
-                            .mapToInt { obj: Int -> obj }
-                            .toArray(),
-                    Arrays.stream(pntFlames)
-                            .map { pnt: Point? -> pnt!!.y }
-                            .mapToInt { obj: Int -> obj }
-                            .toArray(),
-                    flames.size)
+                Arrays.stream(pntFlames)
+                    .map { pnt: Point? -> pnt!!.x }
+                    .mapToInt { obj: Int -> obj }
+                    .toArray(),
+                Arrays.stream(pntFlames)
+                    .map { pnt: Point? -> pnt!!.y }
+                    .mapToInt { obj: Int -> obj }
+                    .toArray(),
+                flames.size)
         } //end if flame
         draw(g, colShip)
 
     } //end draw()
 
 
-} //end class
+}

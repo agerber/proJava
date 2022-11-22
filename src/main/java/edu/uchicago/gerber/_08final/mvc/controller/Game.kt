@@ -44,7 +44,7 @@ class Game : Runnable, KeyListener {
 
     // for possible future use
     // HYPER = 68, 					// D key
-    // SHIELD = 65, 				// A key
+    private val ALIEN = 65 				// A key
     // SPECIAL = 70; 					// fire special weapon;  F key
     private val clpThrust: Clip
     private val clpMusicBackground: Clip
@@ -259,6 +259,7 @@ class Game : Runnable, KeyListener {
 
             LEFT -> fal.rotateLeft()
             RIGHT -> fal.rotateRight()
+            ALIEN -> fal.toggleAlien(true)
             else -> {}
         }
     }
@@ -290,6 +291,7 @@ class Game : Runnable, KeyListener {
                 }
 
             }
+            ALIEN -> fal.toggleAlien(false)
 
             else -> {}
         }
