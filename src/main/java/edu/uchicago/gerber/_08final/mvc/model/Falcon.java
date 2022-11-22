@@ -82,7 +82,7 @@ public class Falcon extends Sprite {
 
 
 
-		//Danica Gutierrez' Alien
+		//Danica Gutierrez' crazy Alien
 		List<Point> listAlien = new ArrayList<>();
 		listAlien.add(new Point(0,2));
 		listAlien.add(new Point(1,2));
@@ -146,6 +146,7 @@ public class Falcon extends Sprite {
 
 		//create an alternative shape for alien
 		pntAlien = pointsListToArray(listAlien);
+		//we need to store the default points as member (unlike other sprites) because we toggle alien
 		pntShip = pointsListToArray(listShip);
 		//set initial default to normal (ship) points
 		setCartesians(pntShip);
