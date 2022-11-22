@@ -23,7 +23,7 @@ public class GamePanel extends Panel {
     private int fontWidth;
     private int fontHeight;
 
-    private final Point[] numShipLeftPoints;
+    private final Point[] pntShipsRemaining;
 
 
     // ==============================================================
@@ -34,7 +34,7 @@ public class GamePanel extends Panel {
         GameFrame gmf = new GameFrame();
         gmf.getContentPane().add(this);
         Point[] pntFalCarts =  CommandCenter.getInstance().getFalcon().getCartesians();
-        numShipLeftPoints = Arrays.copyOf(pntFalCarts, pntFalCarts.length);
+        pntShipsRemaining = Arrays.copyOf(pntFalCarts, pntFalCarts.length);
 
         gmf.pack();
         initView();
@@ -160,19 +160,19 @@ public class GamePanel extends Panel {
 
         g.drawPolygon(
 
-                CommandCenter.cartesianToPolar(Arrays.asList(numShipLeftPoints)).stream()
+                CommandCenter.cartesianToPolar(Arrays.asList(pntShipsRemaining)).stream()
                         .map(rotateFalcon90)
                         .map(pnt -> pnt.x + Game.DIM.width - (X_POS * offSet))
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                CommandCenter.cartesianToPolar(Arrays.asList(numShipLeftPoints)).stream()
+                CommandCenter.cartesianToPolar(Arrays.asList(pntShipsRemaining)).stream()
                         .map(rotateFalcon90)
                         .map(pnt -> pnt.y + Game.DIM.height - Y_POS)
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                numShipLeftPoints.length);
+                pntShipsRemaining.length);
 
 
     }

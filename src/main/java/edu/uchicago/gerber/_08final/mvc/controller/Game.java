@@ -40,11 +40,11 @@ public class Game implements Runnable, KeyListener {
 			UP = 38, // thrust; up arrow
 			START = 83, // s key
 			FIRE = 32, // space key
-			MUTE = 77; // m-key mute
+			MUTE = 77, // m-key mute
 
 	// for possible future use
 	// HYPER = 68, 					// D key
-	// SHIELD = 65, 				// A key
+	        ALIEN = 65; 				// A key
 	// SPECIAL = 70; 					// fire special weapon;  F key
 
 	private final Clip clpThrust;
@@ -327,6 +327,9 @@ public class Game implements Runnable, KeyListener {
 			case RIGHT:
 				fal.rotateRight();
 				break;
+			case ALIEN:
+				fal.toggleAlien(true);
+				break;
 
 			// possible future use
 			// case KILL:
@@ -375,7 +378,9 @@ public class Game implements Runnable, KeyListener {
 					clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
 				}
 				break;
-				
+			case ALIEN:
+				fal.toggleAlien(false);
+				break;
 			default:
 				break;
 			}

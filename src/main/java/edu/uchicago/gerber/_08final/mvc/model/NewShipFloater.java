@@ -37,7 +37,8 @@ public class NewShipFloater extends Sprite {
 		pntCs.add(new Point(-5, 5));
 		pntCs.add(new Point(0,4));
 
-		setCartesians(pntCs);
+		setCartesians(pointsListToArray(pntCs));
+
 	}
 
 

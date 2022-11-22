@@ -41,7 +41,8 @@ public class Bullet extends Sprite {
         pntCs.add(new Point(0, -2));
         pntCs.add(new Point(-1, -1));
 
-        setCartesians(pntCs);
+        setCartesians(pointsListToArray(pntCs));
+
 
 
 

@@ -5,9 +5,7 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import lombok.Data;
 import lombok.experimental.Tolerate;
@@ -198,12 +196,9 @@ public abstract class Sprite implements Movable {
     }
 
 
-    //in order to overload a lombok'ed method, we need to use the @Tolerate annotation
-    //this overloaded method allows us to pass-in either a List<Point> or Point[] (lombok'ed method) to setCartesians()
-    @Tolerate
-    public void setCartesians(List<Point> pntPs) {
-        setCartesians(pntPs.stream()
-                .toArray(Point[]::new));
+    public Point[] pointsListToArray(List<Point> pntPs) {
+        return pntPs.stream()
+                .toArray(Point[]::new);
 
     }
 
