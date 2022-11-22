@@ -29,12 +29,12 @@ class Bullet(fal: Falcon) : Sprite() {
                 Math.sin(Math.toRadians(fal.orientation.toDouble())) * FIRE_POWER
 
         //defined the points on a cartesian grid
-        val pntCs = ArrayList<Point>()
-        pntCs.add(Point(0, 3)) //top point
-        pntCs.add(Point(1, -1))
-        pntCs.add(Point(0, -2))
-        pntCs.add(Point(-1, -1))
-        cartesians = pntCs
+        val listPoint = ArrayList<Point>()
+        listPoint.add(Point(0, 3)) //top point
+        listPoint.add(Point(1, -1))
+        listPoint.add(Point(0, -2))
+        listPoint.add(Point(-1, -1))
+        cartesians = listPoint
     }
 
 }

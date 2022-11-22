@@ -22,16 +22,16 @@ class NewShipFloater : Sprite() {
         spin = somePosNegValue(10)
 
         //cartesian points which define the shape of the polygon
-        val pntCs = ArrayList<Point>()
-        pntCs.add(Point(5, 5))
-        pntCs.add(Point(4, 0))
-        pntCs.add(Point(5, -5))
-        pntCs.add(Point(0, -4))
-        pntCs.add(Point(-5, -5))
-        pntCs.add(Point(-4, 0))
-        pntCs.add(Point(-5, 5))
-        pntCs.add(Point(0, 4))
-        cartesians = pntCs
+        val listPoint = ArrayList<Point>()
+        listPoint.add(Point(5, 5))
+        listPoint.add(Point(4, 0))
+        listPoint.add(Point(5, -5))
+        listPoint.add(Point(0, -4))
+        listPoint.add(Point(-5, -5))
+        listPoint.add(Point(-4, 0))
+        listPoint.add(Point(-5, 5))
+        listPoint.add(Point(0, 4))
+        cartesians = listPoint
     }
 
 
