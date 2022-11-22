@@ -5,11 +5,11 @@ import edu.uchicago.gerber._08final.mvc.model.CommandCenter
 import edu.uchicago.gerber._08final.mvc.model.Movable
 import java.awt.*
 import java.util.function.BiConsumer
+import java.util.function.Function
 import java.util.Arrays
 import java.util.concurrent.atomic.AtomicInteger
 import java.awt.Graphics
-
-
+import edu.uchicago.gerber._08final.mvc.model.PolarPoint
 
 
 class GamePanel(dim: Dimension?) : Panel() {
@@ -50,7 +50,7 @@ class GamePanel(dim: Dimension?) : Panel() {
         grpOff = imgOff.getGraphics()
         fnt = Font("SansSerif", Font.BOLD, 12)
         fntBig = Font("SansSerif", Font.BOLD + Font.ITALIC, 36)
-       // val g = graphics // get the graphics context for the panel
+        // val g = graphics // get the graphics context for the panel
         graphics.font = fnt // take care of some simple font stuff
         fmt = graphics.fontMetrics
     }
@@ -79,7 +79,8 @@ class GamePanel(dim: Dimension?) : Panel() {
         grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height)
         drawScore(grpOff)
         if (CommandCenter.isGameOver()) {
-            displayTextOnScreen(grpOff,
+            displayTextOnScreen(
+                grpOff,
                 "GAME OVER",
                 "use the arrow keys to turn and thrust",
                 "use the space bar to fire",
@@ -87,18 +88,23 @@ class GamePanel(dim: Dimension?) : Panel() {
                 "'P' to Pause",
                 "'Q' to Quit",
                 "left pinkie on 'A' for Shield",
-                "'Numeric-Enter' for Hyperspace")
+                "'Numeric-Enter' for Hyperspace"
+            )
 
         } else if (CommandCenter.paused) {
             strDisplay = "Game Paused"
-            grpOff.drawString(strDisplay,
-                    (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4)
+            grpOff.drawString(
+                strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
+            )
         } else {
-            processMovables(grpOff,
-                    CommandCenter.movDebris,
-                    CommandCenter.movFloaters,
-                    CommandCenter.movFoes,
-                    CommandCenter.movFriends)
+            processMovables(
+                grpOff,
+                CommandCenter.movDebris,
+                CommandCenter.movFloaters,
+                CommandCenter.movFoes,
+                CommandCenter.movFriends
+            )
             drawNumberShipsLeft(grpOff)
         }
 
@@ -119,8 +125,8 @@ class GamePanel(dim: Dimension?) : Panel() {
 
         //we use flatMap to flatten the List<Movable>[] passed-in above into a single stream of Movables
         Arrays.stream(arrayOfListMovables) //Stream<List<Movable>>
-                .flatMap { obj: List<Movable> -> obj.stream() } //Stream<Movable>
-                .forEach { m: Movable -> moveDraw.accept(g, m) }
+            .flatMap { obj: List<Movable> -> obj.stream() } //Stream<Movable>
+            .forEach { m: Movable -> moveDraw.accept(g, m) }
     }
 
     private fun drawNumberShipsLeft(g: Graphics) {
@@ -132,17 +138,40 @@ class GamePanel(dim: Dimension?) : Panel() {
 
     // Draw the number of falcons left on the bottom-right of the screen. Upside-down, but ok.
     private fun drawOneShipLeft(g: Graphics, offSet: Int) {
-        val falcon = CommandCenter.falcon
-        g.color = falcon.color
+
+        g.color = Color.WHITE
+
+        val SIZE = 15
+        val DEGREES = 90.0
+        val X_POS = 27
+        val Y_POS = 45
+
+        val rotateFalcon90 = Function { pp: PolarPoint ->
+            Point(
+                (pp.r * SIZE
+                        * Math.sin(
+                    Math.toRadians(DEGREES)
+                            + pp.theta
+                )).toInt(),
+                (pp.r * SIZE
+                        * Math.cos(
+                    Math.toRadians(DEGREES)
+                            + pp.theta
+                )).toInt()
+            )
+        }
+
         g.drawPolygon(
-                Arrays.stream(pntShip.toTypedArray())
-                        .map { pnt: Point -> pnt.x + Game.DIM.width - 20 * offSet }
-                        .mapToInt { obj: Int -> obj }
-                        .toArray(),
-                Arrays.stream(pntShip.toTypedArray())
-                        .map { pnt: Point -> pnt.y + Game.DIM.height - 40 }
-                        .mapToInt { obj: Int -> obj }
-                        .toArray(),
+            CommandCenter.cartesianToPolar(pntShip).stream()
+                .map(rotateFalcon90)
+                .map { pnt: Point -> pnt.x + Game.DIM.width - X_POS * offSet }
+                .mapToInt { obj: Int -> obj }
+                .toArray(),
+            CommandCenter.cartesianToPolar(pntShip).stream()
+                .map(rotateFalcon90)
+                .map { pnt: Point -> pnt.y + Game.DIM.height - Y_POS }
+                .mapToInt { obj: Int -> obj }
+                .toArray(),
             pntShip.size)
     }
 
@@ -155,14 +184,15 @@ class GamePanel(dim: Dimension?) : Panel() {
         g.font = fntBig // set font info
     }
 
-    private fun displayTextOnScreen(graphics: Graphics, vararg lines: String){
+    private fun displayTextOnScreen(graphics: Graphics, vararg lines: String) {
 
         val spacer = AtomicInteger(0)
         Arrays.stream(lines)
             .forEach { s: String ->
                 graphics.drawString(
                     s, (Game.DIM.width - fmt.stringWidth(s)) / 2,
-                    Game.DIM.height / 4 + fontHeight + spacer.getAndAdd(40))
+                    Game.DIM.height / 4 + fontHeight + spacer.getAndAdd(40)
+                )
             }
     }
 
