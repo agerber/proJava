@@ -107,9 +107,7 @@ public abstract class Sprite implements Movable {
     }
 
 
-    private static double hypotFunction(double dX, double dY) {
-        return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
-    }
+
 
     protected int somePosNegValue(int seed) {
         int randomNumber = Game.R.nextInt(seed);
@@ -125,51 +123,9 @@ public abstract class Sprite implements Movable {
     }
 
     //certain Sprites, such as Asteroid use this
-    protected Point[] polarToCartesian(List<PolarPoint> polPolars) {
-
-        //when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
-        final int PRECISION_MULTIPLIER = 1000;
-        Function<PolarPoint, Point> polarToCartTransform = pp -> new Point(
-                (int) (getCenter().x + pp.getR() * getRadius() * PRECISION_MULTIPLIER
-                        * Math.sin(Math.toRadians(getOrientation())
-                        + pp.getTheta())),
-                (int) (getCenter().y - pp.getR() * getRadius() * PRECISION_MULTIPLIER
-                        * Math.cos(Math.toRadians(getOrientation())
-                        + pp.getTheta())));
-
-        return polPolars.stream()
-                .map(polarToCartTransform)
-                .toArray(Point[]::new);
-
-    }
 
     //made static so that GamePanel can use this to render num ships left
-    public static List<PolarPoint> cartesianToPolar(List<Point> pntCartesians) {
 
-        BiFunction<Point, Double, PolarPoint> cartToPolarTransform = (pnt, hyp) -> new PolarPoint(
-                //this is r from PolarPoint(r,theta).
-                hypotFunction(pnt.x, pnt.y) / hyp, //r is relative to the largestHypotenuse
-                //this is theta from PolarPoint(r,theta)
-                Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180
-        );
-
-
-        //determine the largest hypotenuse
-        double largestHypotenuse = 0;
-        for (Point pnt : pntCartesians)
-            if (hypotFunction(pnt.x, pnt.y) > largestHypotenuse)
-                largestHypotenuse = hypotFunction(pnt.x, pnt.y);
-
-
-        //we must make hypotenuse final to pass into a stream.
-        final double hyp = largestHypotenuse;
-
-
-        return pntCartesians.stream()
-                .map(pnt -> cartToPolarTransform.apply(pnt, hyp))
-                .collect(Collectors.toList());
-
-    }
 
     @Override
     public void draw(Graphics g) {
@@ -193,7 +149,7 @@ public abstract class Sprite implements Movable {
         // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to drawPolygon().
 
         //convert raw cartesians to raw polars
-        List<PolarPoint> polars = cartesianToPolar(Arrays.asList(getCartesians()));
+        List<PolarPoint> polars = CommandCenter.cartesianToPolar(Arrays.asList(getCartesians()));
 
         //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
         Function<PolarPoint, Point> adjustForOrientation =

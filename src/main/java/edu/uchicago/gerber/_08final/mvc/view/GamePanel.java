@@ -23,6 +23,8 @@ public class GamePanel extends Panel {
     private int fontWidth;
     private int fontHeight;
 
+    private final Point[] numShipLeftPoints;
+
 
     // ==============================================================
     // CONSTRUCTOR
@@ -31,9 +33,11 @@ public class GamePanel extends Panel {
     public GamePanel(Dimension dim) {
         GameFrame gmf = new GameFrame();
         gmf.getContentPane().add(this);
+        Point[] pntFalCarts =  CommandCenter.getInstance().getFalcon().getCartesians();
+        numShipLeftPoints = Arrays.copyOf(pntFalCarts, pntFalCarts.length);
+
         gmf.pack();
         initView();
-
         gmf.setSize(dim);
         gmf.setTitle("Game Base");
         gmf.setResizable(false);
@@ -152,23 +156,23 @@ public class GamePanel extends Panel {
                                 * Math.cos(Math.toRadians(DEGREES)
                                 + pp.getTheta())));
 
-        final Point[] pntFalCarts =  CommandCenter.getInstance().getFalcon().getCartesians();
+
 
         g.drawPolygon(
 
-                Sprite.cartesianToPolar(Arrays.asList(pntFalCarts)).stream()
+                CommandCenter.cartesianToPolar(Arrays.asList(numShipLeftPoints)).stream()
                         .map(rotateFalcon90)
                         .map(pnt -> pnt.x + Game.DIM.width - (X_POS * offSet))
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                Sprite.cartesianToPolar(Arrays.asList(pntFalCarts)).stream()
+                CommandCenter.cartesianToPolar(Arrays.asList(numShipLeftPoints)).stream()
                         .map(rotateFalcon90)
                         .map(pnt -> pnt.y + Game.DIM.height - Y_POS)
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                pntFalCarts.length);
+                numShipLeftPoints.length);
 
 
     }

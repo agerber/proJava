@@ -9,6 +9,9 @@ import lombok.Data;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 //the lombok @Data gives us automatic getters and setters on all members
 @Data
@@ -84,6 +87,61 @@ public class CommandCenter {
 		return getNumFalcons() <= 0;
 	}
 
+
+
+	////////////////////////////////////////////////////////////////////
+	//Utility methods for transforming cartesian2Polar and vice versa
+	////////////////////////////////////////////////////////////////////
+	public static List<PolarPoint> cartesianToPolar(List<Point> pntCartesians) {
+
+		BiFunction<Point, Double, PolarPoint> cartToPolarTransform = (pnt, hyp) -> new PolarPoint(
+				//this is r from PolarPoint(r,theta).
+				hypotFunction(pnt.x, pnt.y) / hyp, //r is relative to the largestHypotenuse
+				//this is theta from PolarPoint(r,theta)
+				Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180
+		);
+
+
+		//determine the largest hypotenuse
+		double largestHypotenuse = 0;
+		for (Point pnt : pntCartesians)
+			if (hypotFunction(pnt.x, pnt.y) > largestHypotenuse)
+				largestHypotenuse = hypotFunction(pnt.x, pnt.y);
+
+
+		//we must make hypotenuse final to pass into a stream.
+		final double hyp = largestHypotenuse;
+
+
+		return pntCartesians.stream()
+				.map(pnt -> cartToPolarTransform.apply(pnt, hyp))
+				.collect(Collectors.toList());
+
+	}
+
+
+	public static Point[] polarToCartesian(Sprite sprite, List<PolarPoint> polPolars) {
+
+		//when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
+		final int PRECISION_MULTIPLIER = 1000;
+		Function<PolarPoint, Point> polarToCartTransform = pp -> new Point(
+				(int) (sprite.getCenter().x + pp.getR() * sprite.getRadius() * PRECISION_MULTIPLIER
+						* Math.sin(Math.toRadians(sprite.getOrientation())
+						+ pp.getTheta())),
+				(int) (sprite.getCenter().y - pp.getR() * sprite.getRadius() * PRECISION_MULTIPLIER
+						* Math.cos(Math.toRadians(sprite.getOrientation())
+						+ pp.getTheta())));
+
+		return polPolars.stream()
+				.map(polarToCartTransform)
+				.toArray(Point[]::new);
+
+	}
+
+
+	private static double hypotFunction(double dX, double dY) {
+		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
+	}
 
 
 }

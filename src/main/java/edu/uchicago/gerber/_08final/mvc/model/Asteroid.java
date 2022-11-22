@@ -86,7 +86,7 @@ public class Asteroid extends Sprite {
 		 //random number of vertices between 17 and 23
 		 final int vertices = Game.R.nextInt( 7 ) + 17;
 
-		 return polarToCartesian(
+		 return CommandCenter.polarToCartesian(this,
 				Stream.generate(polarPointSupplier)
 				 .limit(vertices)
 				 .sorted(new Comparator<PolarPoint>() {
