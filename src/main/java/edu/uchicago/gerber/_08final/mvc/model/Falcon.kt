@@ -6,6 +6,7 @@ import java.awt.Graphics
 import java.awt.Point
 import java.util.*
 
+
 class Falcon : Sprite() {
     // ==============================================================
     // FIELDS 
@@ -23,6 +24,10 @@ class Falcon : Sprite() {
     }
     var turnState = TurnState.IDLE
 
+    var pntAlien: List<Point>
+    var pntShip: List<Point>
+
+
     // ==============================================================
     // CONSTRUCTOR 
     // ==============================================================
@@ -30,45 +35,109 @@ class Falcon : Sprite() {
         team = Team.FRIEND
         //this is the size (radius) of the falcon
         radius = 35
-        val pntCs = ArrayList<Point>()
+        val listShip = ArrayList<Point>()
         // Robert Alef's awesome falcon design
-        pntCs.add(Point(0, 9))
-        pntCs.add(Point(-1, 6))
-        pntCs.add(Point(-1, 3))
-        pntCs.add(Point(-4, 1))
-        pntCs.add(Point(4, 1))
-        pntCs.add(Point(-4, 1))
-        pntCs.add(Point(-4, -2))
-        pntCs.add(Point(-1, -2))
-        pntCs.add(Point(-1, -9))
-        pntCs.add(Point(-1, -2))
-        pntCs.add(Point(-4, -2))
-        pntCs.add(Point(-10, -8))
-        pntCs.add(Point(-5, -9))
-        pntCs.add(Point(-7, -11))
-        pntCs.add(Point(-4, -11))
-        pntCs.add(Point(-2, -9))
-        pntCs.add(Point(-2, -10))
-        pntCs.add(Point(-1, -10))
-        pntCs.add(Point(-1, -9))
-        pntCs.add(Point(1, -9))
-        pntCs.add(Point(1, -10))
-        pntCs.add(Point(2, -10))
-        pntCs.add(Point(2, -9))
-        pntCs.add(Point(4, -11))
-        pntCs.add(Point(7, -11))
-        pntCs.add(Point(5, -9))
-        pntCs.add(Point(10, -8))
-        pntCs.add(Point(4, -2))
-        pntCs.add(Point(1, -2))
-        pntCs.add(Point(1, -9))
-        pntCs.add(Point(1, -2))
-        pntCs.add(Point(4, -2))
-        pntCs.add(Point(4, 1))
-        pntCs.add(Point(1, 3))
-        pntCs.add(Point(1, 6))
-        pntCs.add(Point(0, 9))
-        cartesians = pntCs
+        listShip.add(Point(0, 9))
+        listShip.add(Point(-1, 6))
+        listShip.add(Point(-1, 3))
+        listShip.add(Point(-4, 1))
+        listShip.add(Point(4, 1))
+        listShip.add(Point(-4, 1))
+        listShip.add(Point(-4, -2))
+        listShip.add(Point(-1, -2))
+        listShip.add(Point(-1, -9))
+        listShip.add(Point(-1, -2))
+        listShip.add(Point(-4, -2))
+        listShip.add(Point(-10, -8))
+        listShip.add(Point(-5, -9))
+        listShip.add(Point(-7, -11))
+        listShip.add(Point(-4, -11))
+        listShip.add(Point(-2, -9))
+        listShip.add(Point(-2, -10))
+        listShip.add(Point(-1, -10))
+        listShip.add(Point(-1, -9))
+        listShip.add(Point(1, -9))
+        listShip.add(Point(1, -10))
+        listShip.add(Point(2, -10))
+        listShip.add(Point(2, -9))
+        listShip.add(Point(4, -11))
+        listShip.add(Point(7, -11))
+        listShip.add(Point(5, -9))
+        listShip.add(Point(10, -8))
+        listShip.add(Point(4, -2))
+        listShip.add(Point(1, -2))
+        listShip.add(Point(1, -9))
+        listShip.add(Point(1, -2))
+        listShip.add(Point(4, -2))
+        listShip.add(Point(4, 1))
+        listShip.add(Point(1, 3))
+        listShip.add(Point(1, 6))
+        listShip.add(Point(0, 9))
+
+        //Danica Gutierrez' Alien
+        val listAlien: MutableList<Point> = ArrayList()
+        listAlien.add(Point(0, 2))
+        listAlien.add(Point(1, 2))
+        listAlien.add(Point(1, 3))
+        listAlien.add(Point(2, 3))
+        listAlien.add(Point(2, 4))
+        listAlien.add(Point(3, 4))
+        listAlien.add(Point(3, 3))
+        listAlien.add(Point(2, 3))
+        listAlien.add(Point(2, 2))
+        listAlien.add(Point(3, 2))
+        listAlien.add(Point(3, 1))
+        listAlien.add(Point(4, 1))
+        listAlien.add(Point(4, 0))
+        listAlien.add(Point(5, 0))
+        //bottom right
+        listAlien.add(Point(5, 0))
+        listAlien.add(Point(5, -3))
+        listAlien.add(Point(4, -3))
+        listAlien.add(Point(4, -1))
+        listAlien.add(Point(3, -1))
+        listAlien.add(Point(3, -3))
+        listAlien.add(Point(2, -3))
+        listAlien.add(Point(2, -4))
+        listAlien.add(Point(1, -4))
+        listAlien.add(Point(1, -3))
+        listAlien.add(Point(2, -3))
+        listAlien.add(Point(2, -2))
+        listAlien.add(Point(1, -2))
+        listAlien.add(Point(0, -2))
+        //bottom left quadrant
+        listAlien.add(Point(-2, -2))
+        listAlien.add(Point(-2, -3))
+        listAlien.add(Point(-1, -3))
+        listAlien.add(Point(-1, -4))
+        listAlien.add(Point(-2, -4))
+        listAlien.add(Point(-2, -3))
+        listAlien.add(Point(-3, -3))
+        listAlien.add(Point(-3, -1))
+        listAlien.add(Point(-4, -1))
+        listAlien.add(Point(-4, -3))
+        listAlien.add(Point(-5, -3))
+        listAlien.add(Point(-5, 0))
+        //top left quadrant
+        listAlien.add(Point(-5, 0))
+        listAlien.add(Point(-4, 0))
+        listAlien.add(Point(-4, 1))
+        listAlien.add(Point(-3, 1))
+        listAlien.add(Point(-3, 2))
+        listAlien.add(Point(-2, 2))
+        listAlien.add(Point(-2, 3))
+        listAlien.add(Point(-3, 3))
+        listAlien.add(Point(-3, 4))
+        listAlien.add(Point(-2, 4))
+        listAlien.add(Point(-2, 3))
+        listAlien.add(Point(-1, 3))
+        listAlien.add(Point(-1, 2))
+        listAlien.add(Point(0, 2))
+
+       pntAlien = listAlien
+       pntShip = listShip
+
+       cartesians = listShip
     }
 
     override fun isProtected(): Boolean {

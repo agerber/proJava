@@ -2,14 +2,12 @@ package edu.uchicago.gerber._08final.mvc.model
 
 import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
-import lombok.experimental.Tolerate
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.Point
 import java.util.*
 import java.util.function.BiFunction
 import java.util.function.Function
-import java.util.function.IntFunction
 import java.util.stream.Collectors
 
 abstract class Sprite : Movable {
@@ -211,6 +209,11 @@ abstract class Sprite : Movable {
         g.fillOval(center.x - 1, center.y - 1, 2, 2)
         //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
         //#########################################
+    }
+
+   fun pointsListToArray(pntPs: List<Point?>): Array<out Any> {
+        return pntPs.stream()
+            .toArray();
     }
 
 }
