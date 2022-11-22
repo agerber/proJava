@@ -136,7 +136,7 @@ class GamePanel(dim: Dimension?) : Panel() {
         }
     }
 
-    // Draw the number of falcons left on the bottom-right of the screen. Upside-down, but ok.
+    // Draw the number of falcons left on the bottom-right of the screen.
     private fun drawOneShipLeft(g: Graphics, offSet: Int) {
 
         g.color = Color.WHITE
