@@ -144,7 +144,8 @@ public class GamePanel extends Panel {
 
         g.setColor(Color.WHITE);
 
-        final int SIZE = 15, DEGREES = 90, X_POS = 27, Y_POS = 45;
+        final double DEGREES = 90.0;
+        final int SIZE = 15, X_POS = 27, Y_POS = 45;
         //rotate raw polars given the orientation, Then convert back to cartesians.
         Function<PolarPoint, Point> rotateFalcon90 =
                 pp -> new Point(
