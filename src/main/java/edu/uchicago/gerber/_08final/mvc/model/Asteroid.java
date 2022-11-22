@@ -89,19 +89,20 @@ public class Asteroid extends Sprite {
 		  	  return new PolarPoint(r,theta);
 		  };
 
-		  BiFunction<PolarPoint, Asteroid, Point> polarToCartTransform = (pp, a) -> new Point(
-				  (int) (a.getCenter().x + pp.getR() * a.getRadius() * PRECISION_MULTIPLIER
-						  * Math.sin(Math.toRadians(a.getOrientation())
+		  BiFunction<PolarPoint, Sprite, Point> polarToCartTransform = (pp, spr) -> new Point(
+				  (int) (spr.getCenter().x + pp.getR() * spr.getRadius() * PRECISION_MULTIPLIER
+						  * Math.sin(Math.toRadians(spr.getOrientation())
 						  + pp.getTheta())),
-				  (int) (a.getCenter().y - pp.getR() * a.getRadius() * PRECISION_MULTIPLIER
-						  * Math.cos(Math.toRadians(a.getOrientation())
+				  (int) (spr.getCenter().y - pp.getR() * spr.getRadius() * PRECISION_MULTIPLIER
+						  * Math.cos(Math.toRadians(spr.getOrientation())
 						  + pp.getTheta())));
 
 		 //random number of vertices between 17 and 23
-		 final int vertices = Game.R.nextInt( 7 ) + 17;
+		 final int VERTICES = Game.R.nextInt( 7 ) + 17;
 
 		 return Stream.generate(polarPointSupplier)
-				 .limit(vertices)
+				 .limit(VERTICES)
+				 //I used the 'new' keyword to generate the anon-inner class; you can convert to lambda.
 				 .sorted(new Comparator<PolarPoint>() {
 							@Override
 							public int compare(PolarPoint pp1, PolarPoint pp2) {
