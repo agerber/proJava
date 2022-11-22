@@ -28,12 +28,16 @@ class GamePanel(dim: Dimension?) : Panel() {
     private var fontHeight = 0
     private var strDisplay = ""
 
+    private val pntShip: List<Point>
+
     // ==============================================================
     // CONSTRUCTOR 
     // ==============================================================
     init {
         gmf = GameFrame()
         gmf.contentPane.add(this)
+        //clone it
+        pntShip = ArrayList(CommandCenter.falcon.cartesians)
         gmf.pack()
         initView()
         gmf.size = dim
@@ -131,15 +135,15 @@ class GamePanel(dim: Dimension?) : Panel() {
         val falcon = CommandCenter.falcon
         g.color = falcon.color
         g.drawPolygon(
-                Arrays.stream(falcon.cartesians.toTypedArray())
+                Arrays.stream(pntShip.toTypedArray())
                         .map { pnt: Point -> pnt.x + Game.DIM.width - 20 * offSet }
                         .mapToInt { obj: Int -> obj }
                         .toArray(),
-                Arrays.stream(falcon.cartesians.toTypedArray())
+                Arrays.stream(pntShip.toTypedArray())
                         .map { pnt: Point -> pnt.y + Game.DIM.height - 40 }
                         .mapToInt { obj: Int -> obj }
                         .toArray(),
-                falcon.cartesians.size)
+            pntShip.size)
     }
 
     private fun initView() {
