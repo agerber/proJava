@@ -196,8 +196,8 @@ public abstract class Sprite implements Movable {
     }
 
 
-    public Point[] pointsListToArray(List<Point> pntPs) {
-        return pntPs.stream()
+    public Point[] pointsListToArray(List<Point> listPoints) {
+        return listPoints.stream()
                 .toArray(Point[]::new);
 
     }

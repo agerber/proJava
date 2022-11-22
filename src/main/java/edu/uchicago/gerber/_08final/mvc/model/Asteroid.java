@@ -2,6 +2,9 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -74,8 +77,11 @@ public class Asteroid extends Sprite {
 
 
 	  private Point[] genRandomPoints(){
+
 		  //6.283 is the max radians
 		  final int MAX_RADIANS_X1000 =6283;
+		  //when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
+		  final int PRECISION_MULTIPLIER = 1000;
 
 		  Supplier<PolarPoint> polarPointSupplier = () -> {
 			  double r = (800 + Game.R.nextInt(200)) / 1000.0; //number between 0.8 and 0.999
@@ -83,11 +89,18 @@ public class Asteroid extends Sprite {
 		  	  return new PolarPoint(r,theta);
 		  };
 
+		  BiFunction<PolarPoint, Asteroid, Point> polarToCartTransform = (pp, a) -> new Point(
+				  (int) (a.getCenter().x + pp.getR() * a.getRadius() * PRECISION_MULTIPLIER
+						  * Math.sin(Math.toRadians(a.getOrientation())
+						  + pp.getTheta())),
+				  (int) (a.getCenter().y - pp.getR() * a.getRadius() * PRECISION_MULTIPLIER
+						  * Math.cos(Math.toRadians(a.getOrientation())
+						  + pp.getTheta())));
+
 		 //random number of vertices between 17 and 23
 		 final int vertices = Game.R.nextInt( 7 ) + 17;
 
-		 return CommandCenter.polarToCartesian(this,
-				Stream.generate(polarPointSupplier)
+		 return Stream.generate(polarPointSupplier)
 				 .limit(vertices)
 				 .sorted(new Comparator<PolarPoint>() {
 							@Override
@@ -95,9 +108,12 @@ public class Asteroid extends Sprite {
 								return  pp1.getTheta().compareTo(pp2.getTheta());
 							}
 						})
-				 .collect(Collectors.toList())
-			);
+				 .map(pp -> polarToCartTransform.apply(pp, this))
+				 .toArray(Point[]::new);
+
 
 	  }
+
+
 
 }

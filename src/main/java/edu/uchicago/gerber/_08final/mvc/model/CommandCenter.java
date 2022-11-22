@@ -90,7 +90,7 @@ public class CommandCenter {
 
 
 	////////////////////////////////////////////////////////////////////
-	//Utility methods for transforming cartesian2Polar and vice versa
+	//Utility method for transforming cartesian2Polar
 	////////////////////////////////////////////////////////////////////
 	public static List<PolarPoint> cartesianToPolar(List<Point> pntCartesians) {
 
@@ -119,26 +119,7 @@ public class CommandCenter {
 
 	}
 
-
-	public static Point[] polarToCartesian(Sprite sprite, List<PolarPoint> polPolars) {
-
-		//when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
-		final int PRECISION_MULTIPLIER = 1000;
-		Function<PolarPoint, Point> polarToCartTransform = pp -> new Point(
-				(int) (sprite.getCenter().x + pp.getR() * sprite.getRadius() * PRECISION_MULTIPLIER
-						* Math.sin(Math.toRadians(sprite.getOrientation())
-						+ pp.getTheta())),
-				(int) (sprite.getCenter().y - pp.getR() * sprite.getRadius() * PRECISION_MULTIPLIER
-						* Math.cos(Math.toRadians(sprite.getOrientation())
-						+ pp.getTheta())));
-
-		return polPolars.stream()
-				.map(polarToCartTransform)
-				.toArray(Point[]::new);
-
-	}
-
-
+	//private helper method
 	private static double hypotFunction(double dX, double dY) {
 		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
 	}

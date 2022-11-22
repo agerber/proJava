@@ -1,7 +1,5 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
-import edu.uchicago.gerber._08final.mvc.controller.Game;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +25,7 @@ public class Falcon extends Sprite {
 	}
 	private TurnState turnState = TurnState.IDLE;
 
-	private final Point[] pntShip, pntAlternate;
+	private final Point[] pntShip, pntAlien;
 
 
 
@@ -43,112 +41,112 @@ public class Falcon extends Sprite {
 		setRadius(35);
 
 
-		List<Point> pntNormal = new ArrayList<>();
+		List<Point> listShip = new ArrayList<>();
 		// Robert Alef's awesome falcon design
-		pntNormal.add(new Point(0,9));
-		pntNormal.add(new Point(-1, 6));
-		pntNormal.add(new Point(-1,3));
-		pntNormal.add(new Point(-4, 1));
-		pntNormal.add(new Point(4,1));
-		pntNormal.add(new Point(-4,1));
-		pntNormal.add(new Point(-4, -2));
-		pntNormal.add(new Point(-1, -2));
-		pntNormal.add(new Point(-1, -9));
-		pntNormal.add(new Point(-1, -2));
-		pntNormal.add(new Point(-4, -2));
-		pntNormal.add(new Point(-10, -8));
-		pntNormal.add(new Point(-5, -9));
-		pntNormal.add(new Point(-7, -11));
-		pntNormal.add(new Point(-4, -11));
-		pntNormal.add(new Point(-2, -9));
-		pntNormal.add(new Point(-2, -10));
-		pntNormal.add(new Point(-1, -10));
-		pntNormal.add(new Point(-1, -9));
-		pntNormal.add(new Point(1, -9));
-		pntNormal.add(new Point(1, -10));
-		pntNormal.add(new Point(2, -10));
-		pntNormal.add(new Point(2, -9));
-		pntNormal.add(new Point(4, -11));
-		pntNormal.add(new Point(7, -11));
-		pntNormal.add(new Point(5, -9));
-		pntNormal.add(new Point(10, -8));
-		pntNormal.add(new Point(4, -2));
-		pntNormal.add(new Point(1, -2));
-		pntNormal.add(new Point(1, -9));
-		pntNormal.add(new Point(1, -2));
-		pntNormal.add(new Point(4,-2));
-		pntNormal.add(new Point(4, 1));
-		pntNormal.add(new Point(1, 3));
-		pntNormal.add(new Point(1,6));
-		pntNormal.add(new Point(0,9));
+		listShip.add(new Point(0,9));
+		listShip.add(new Point(-1, 6));
+		listShip.add(new Point(-1,3));
+		listShip.add(new Point(-4, 1));
+		listShip.add(new Point(4,1));
+		listShip.add(new Point(-4,1));
+		listShip.add(new Point(-4, -2));
+		listShip.add(new Point(-1, -2));
+		listShip.add(new Point(-1, -9));
+		listShip.add(new Point(-1, -2));
+		listShip.add(new Point(-4, -2));
+		listShip.add(new Point(-10, -8));
+		listShip.add(new Point(-5, -9));
+		listShip.add(new Point(-7, -11));
+		listShip.add(new Point(-4, -11));
+		listShip.add(new Point(-2, -9));
+		listShip.add(new Point(-2, -10));
+		listShip.add(new Point(-1, -10));
+		listShip.add(new Point(-1, -9));
+		listShip.add(new Point(1, -9));
+		listShip.add(new Point(1, -10));
+		listShip.add(new Point(2, -10));
+		listShip.add(new Point(2, -9));
+		listShip.add(new Point(4, -11));
+		listShip.add(new Point(7, -11));
+		listShip.add(new Point(5, -9));
+		listShip.add(new Point(10, -8));
+		listShip.add(new Point(4, -2));
+		listShip.add(new Point(1, -2));
+		listShip.add(new Point(1, -9));
+		listShip.add(new Point(1, -2));
+		listShip.add(new Point(4,-2));
+		listShip.add(new Point(4, 1));
+		listShip.add(new Point(1, 3));
+		listShip.add(new Point(1,6));
+		listShip.add(new Point(0,9));
 
 
 
 		//Danica Gutierrez' Alien
-		List<Point> pntAlien = new ArrayList<>();
-		pntAlien.add(new Point(0,2));
-		pntAlien.add(new Point(1,2));
-		pntAlien.add(new Point(1,3));
-		pntAlien.add(new Point(2,3));
-		pntAlien.add(new Point(2,4));
-		pntAlien.add(new Point(3,4));
-		pntAlien.add(new Point(3,3));
-		pntAlien.add(new Point(2, 3));
-		pntAlien.add(new Point(2,2));
-		pntAlien.add(new Point(3, 2));
-		pntAlien.add(new Point(3,1));
-		pntAlien.add(new Point(4, 1));
-		pntAlien.add(new Point(4,0));
-		pntAlien.add(new Point(5, 0));
+		List<Point> listAlien = new ArrayList<>();
+		listAlien.add(new Point(0,2));
+		listAlien.add(new Point(1,2));
+		listAlien.add(new Point(1,3));
+		listAlien.add(new Point(2,3));
+		listAlien.add(new Point(2,4));
+		listAlien.add(new Point(3,4));
+		listAlien.add(new Point(3,3));
+		listAlien.add(new Point(2, 3));
+		listAlien.add(new Point(2,2));
+		listAlien.add(new Point(3, 2));
+		listAlien.add(new Point(3,1));
+		listAlien.add(new Point(4, 1));
+		listAlien.add(new Point(4,0));
+		listAlien.add(new Point(5, 0));
 		//bottom right
-		pntAlien.add(new Point(5, 0));
-		pntAlien.add(new Point(5,-3));
-		pntAlien.add(new Point(4, -3));
-		pntAlien.add(new Point(4,-1));
-		pntAlien.add(new Point(3, -1));
-		pntAlien.add(new Point(3,-3));
-		pntAlien.add(new Point(2, -3));
-		pntAlien.add(new Point(2,-4));
-		pntAlien.add(new Point(1,-4));
-		pntAlien.add(new Point(1,-3));
-		pntAlien.add(new Point(2,-3));
-		pntAlien.add(new Point(2,-2));
-		pntAlien.add(new Point(1,-2));
-		pntAlien.add(new Point(0,-2));
+		listAlien.add(new Point(5, 0));
+		listAlien.add(new Point(5,-3));
+		listAlien.add(new Point(4, -3));
+		listAlien.add(new Point(4,-1));
+		listAlien.add(new Point(3, -1));
+		listAlien.add(new Point(3,-3));
+		listAlien.add(new Point(2, -3));
+		listAlien.add(new Point(2,-4));
+		listAlien.add(new Point(1,-4));
+		listAlien.add(new Point(1,-3));
+		listAlien.add(new Point(2,-3));
+		listAlien.add(new Point(2,-2));
+		listAlien.add(new Point(1,-2));
+		listAlien.add(new Point(0,-2));
 		//bottom left quadrant
-		pntAlien.add(new Point(-2,-2));
-		pntAlien.add(new Point(-2,-3));
-		pntAlien.add(new Point(-1,-3));
-		pntAlien.add(new Point(-1,-4));
-		pntAlien.add(new Point(-2,-4));
-		pntAlien.add(new Point(-2, -3));
-		pntAlien.add(new Point(-3,-3));
-		pntAlien.add(new Point(-3, -1));
-		pntAlien.add(new Point(-4,-1));
-		pntAlien.add(new Point(-4, -3));
-		pntAlien.add(new Point(-5,-3));
-		pntAlien.add(new Point(-5, 0));
+		listAlien.add(new Point(-2,-2));
+		listAlien.add(new Point(-2,-3));
+		listAlien.add(new Point(-1,-3));
+		listAlien.add(new Point(-1,-4));
+		listAlien.add(new Point(-2,-4));
+		listAlien.add(new Point(-2, -3));
+		listAlien.add(new Point(-3,-3));
+		listAlien.add(new Point(-3, -1));
+		listAlien.add(new Point(-4,-1));
+		listAlien.add(new Point(-4, -3));
+		listAlien.add(new Point(-5,-3));
+		listAlien.add(new Point(-5, 0));
 		//top left quadrant
-		pntAlien.add(new Point(-5, 0));
-		pntAlien.add(new Point(-4,0));
-		pntAlien.add(new Point(-4, 1));
-		pntAlien.add(new Point(-3,1));
-		pntAlien.add(new Point(-3, 2));
-		pntAlien.add(new Point(-2,2));
-		pntAlien.add(new Point(-2, 3));
-		pntAlien.add(new Point(-3,3));
-		pntAlien.add(new Point(-3,4));
-		pntAlien.add(new Point(-2,4));
-		pntAlien.add(new Point(-2,3));
-		pntAlien.add(new Point(-1,3));
-		pntAlien.add(new Point(-1,2));
-		pntAlien.add(new Point(0,2));
+		listAlien.add(new Point(-5, 0));
+		listAlien.add(new Point(-4,0));
+		listAlien.add(new Point(-4, 1));
+		listAlien.add(new Point(-3,1));
+		listAlien.add(new Point(-3, 2));
+		listAlien.add(new Point(-2,2));
+		listAlien.add(new Point(-2, 3));
+		listAlien.add(new Point(-3,3));
+		listAlien.add(new Point(-3,4));
+		listAlien.add(new Point(-2,4));
+		listAlien.add(new Point(-2,3));
+		listAlien.add(new Point(-1,3));
+		listAlien.add(new Point(-1,2));
+		listAlien.add(new Point(0,2));
 
 
 
 		//create an alternative shape for alien
-		pntAlternate = pointsListToArray(pntAlien);
-		pntShip = pointsListToArray(pntNormal);
+		pntAlien = pointsListToArray(listAlien);
+		pntShip = pointsListToArray(listShip);
 		//set initial default to normal (ship) points
 		setCartesians(pntShip);
 
@@ -158,7 +156,7 @@ public class Falcon extends Sprite {
 	//has no functional use, but demonstrates how to morph the shape of a Sprite
 	public void toggleAlien(boolean alien){
 			if (alien){
-				setCartesians(pntAlternate);
+				setCartesians(pntAlien);
 			} else {
 				setCartesians(pntShip);
 			}
