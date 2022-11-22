@@ -33,6 +33,11 @@ Any 80's style vector arcade game is ideally suited to this game engine, such as
 Command, Qix, etc. To create your own game, you would effectively ignore/delete the Asteroids model and create
 your own model.
 
+This game uses vector graphics. If you press the 'a' key while playing, you will see how to morph between vector shapes.
+The advantage of vector graphics is that they scale infinitely, and they render extremely fast. If you want to use
+raster graphics (png's, jpg's, etc) which are essentially two-dimensional grids of pixels, make sure to reduce
+ the pixel depth to as low as possible, otherwise your game will lag when rendering.
+
 The TAs will select the top six games. The six finalists will demonstrate their games and present their code and
 architecture, and the class will vote on the best game. The winner will receive a token prize during an
 awards-ceremony/reception on the last day.
