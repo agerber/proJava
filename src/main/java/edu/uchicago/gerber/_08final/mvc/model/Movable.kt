@@ -12,7 +12,8 @@ interface Movable {
     fun move()
     fun draw(g: Graphics)
 
-    //for collision detection
+    //for collision detection. We can not use getCenter(), getRadius(), etc. b/c
+    //that would conflict with Kotlin's automatic getters/setters; so we use myCenter(), etc.
     fun myCenter(): Point
     fun myRadius(): Int
     fun myTeam(): Team
