@@ -68,6 +68,14 @@ class GamePanel(dim: Dimension?) : Panel() {
         }
     }
 
+    //this is used for development, you can remove it from your final game
+    private fun drawFrame(g: Graphics) {
+        g.color = Color.white
+        g.font = fnt
+        g.drawString("FRAME :  " + CommandCenter.frame, fontWidth, Game.DIM.height - (fontHeight + 22))
+
+    }
+
     override fun update(g: Graphics) {
         //create an image off-screen
         imgOff = createImage(Game.DIM.width, Game.DIM.height)
@@ -78,6 +86,7 @@ class GamePanel(dim: Dimension?) : Panel() {
         grpOff.setColor(Color.black)
         grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height)
         drawScore(grpOff)
+        drawFrame(grpOff)
         if (CommandCenter.isGameOver()) {
             displayTextOnScreen(
                 grpOff,

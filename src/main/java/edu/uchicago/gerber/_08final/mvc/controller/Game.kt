@@ -82,6 +82,7 @@ class Game : Runnable, KeyListener {
             checkCollisions()
             checkNewLevel()
             spawnNewShipFloater()
+            CommandCenter.incrementFrame()
 
             // surround the sleep() in a try/catch block
             // this simply controls delay time between
@@ -189,8 +190,7 @@ class Game : Runnable, KeyListener {
 
     private fun spawnNewShipFloater() {
 
-        //appears more often as your level increases.
-        if (System.currentTimeMillis() / ANI_DELAY % (SPAWN_NEW_SHIP_FLOATER - CommandCenter.level * 7L) == 0L) {
+        if (CommandCenter.frame % SPAWN_NEW_SHIP_FLOATER  == 0L) {
             CommandCenter.opsQueue.enqueue(NewShipFloater(), GameOp.Action.ADD)
         }
     }

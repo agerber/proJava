@@ -14,6 +14,7 @@ object CommandCenter {
      var score: Long = 0L
      var paused = false
      var muted = true
+     var frame: Long = 0L
 
     //the falcon should always point to this object on the heap
      val falcon = Falcon()
@@ -54,6 +55,14 @@ object CommandCenter {
         movFriends.clear()
         movFoes.clear()
         movFloaters.clear()
+    }
+
+    fun incrementFrame(){
+        if (frame == Long.MAX_VALUE){
+            frame = 0
+        } else {
+            frame++
+        }
     }
 
     //if the number of falcons is zero, then game over
