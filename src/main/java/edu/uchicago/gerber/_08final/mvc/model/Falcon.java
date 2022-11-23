@@ -166,11 +166,11 @@ public class Falcon extends Sprite {
 	}
 
 
-	//if fading, or if cartesians is pointing to the alien points, then make invincible
+	//if fading then make invincible
 	@Override
 	public boolean isProtected() {
-		return  getFade() < 255
-				|| getCartesians() == pntAlien;  //makes the game too easy, so you will want to remove it.
+		return  getFade() < 255;
+			//	|| getCartesians() == pntAlien;  //makes the game too easy
 	}
 
 	// ==============================================================
