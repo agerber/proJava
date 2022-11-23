@@ -154,19 +154,23 @@ public class Falcon extends Sprite {
 
 	}
 
-	//has no functional use, but demonstrates how to morph the shape of a Sprite
+	//demonstrates how to morph the shape of a Sprite
 	public void toggleAlien(boolean alien){
 			if (alien){
+				setColor(Color.GREEN);
 				setCartesians(pntAlien);
 			} else {
+				setColor(Color.WHITE);
 				setCartesians(pntShip);
 			}
 	}
 
 
+	//if fading, or if cartesians is pointing to the alien points, then make invincible
+	//the || makes the game too easy, so you will want to remove it.
 	@Override
 	public boolean isProtected() {
-		return getFade() < 255;
+		return getFade() < 255 || getCartesians() == pntAlien;
 	}
 
 	// ==============================================================
@@ -176,7 +180,7 @@ public class Falcon extends Sprite {
 	public void move() {
 		super.move();
 
-		if (isProtected()) {
+		if (getFade() < 255) {
 			setFade(getFade() + 3);
 		}
 
