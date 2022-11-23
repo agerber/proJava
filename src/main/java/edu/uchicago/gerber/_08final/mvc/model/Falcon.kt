@@ -155,10 +155,10 @@ class Falcon : Sprite() { //end class
         }
     }
 
-    //if fading, or if cartesians is pointing to the alien points, then make invincible
-    //the || makes the game too easy, so you will want to remove it.
+    //if fading, then make invincible
     override fun isProtected(): Boolean {
-        return fade < 255 || cartesians == pntAlien
+        return fade < 255
+               // || cartesians == pntAlien
     }
 
     // ==============================================================
