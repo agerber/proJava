@@ -156,7 +156,7 @@ abstract class Sprite : Movable {
                         .map { pnt: Point -> pnt.y }
                         .mapToInt { obj: Int -> obj }
                         .toArray(),
-                cartesians.size)
+                polars.size)
 
         //for debugging center-point. Feel free to remove these two lines.
         //#########################################

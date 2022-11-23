@@ -147,15 +147,18 @@ class Falcon : Sprite() { //end class
     //has no functional value, but demonstrates how to morph a sprite
     fun toggleAlien(alien: Boolean) {
         if (alien) {
+            color = Color.GREEN
             cartesians = pntAlien
         } else {
+            color = Color.WHITE
             cartesians = pntShip
         }
     }
 
-
+    //if fading, or if cartesians is pointing to the alien points, then make invincible
+    //the || makes the game too easy, so you will want to remove it.
     override fun isProtected(): Boolean {
-        return fade < 255
+        return fade < 255 || cartesians == pntAlien
     }
 
     // ==============================================================
@@ -163,7 +166,7 @@ class Falcon : Sprite() { //end class
     // ==============================================================
     override fun move() {
         super.move()
-        if (isProtected()) {
+        if (fade < 255) {
             fade = fade + 3
         }
 
