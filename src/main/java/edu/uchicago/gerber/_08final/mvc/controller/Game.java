@@ -33,6 +33,8 @@ public class Game implements Runnable, KeyListener {
 	private final Thread animationThread;
 
 
+
+
 	private final int PAUSE = 80, // p key
 			QUIT = 81, // q key
 			LEFT = 37, // rotate left; left arrow
@@ -96,10 +98,12 @@ public class Game implements Runnable, KeyListener {
 		// this thread animates the scene
 		while (Thread.currentThread() == animationThread) {
 
+
 			gmpPanel.update(gmpPanel.getGraphics()); // see GamePanel class
 			checkCollisions();
 			checkNewLevel();
 			spawnNewShipFloater();
+			CommandCenter.getInstance().incrementFrame();
 
 			// surround the sleep() in a try/catch block
 			// this simply controls delay time between
@@ -117,6 +121,8 @@ public class Game implements Runnable, KeyListener {
 			}
 		} // end while
 	} // end run
+
+
 
 	private void checkCollisions() {
 
@@ -226,8 +232,7 @@ public class Game implements Runnable, KeyListener {
 
 	private void spawnNewShipFloater() {
 
-		//appears more often as your level increases.
-		if ((System.currentTimeMillis() / ANI_DELAY) % (SPAWN_NEW_SHIP_FLOATER - CommandCenter.getInstance().getLevel() * 7L) == 0) {
+		if (CommandCenter.getInstance().getFrame() % SPAWN_NEW_SHIP_FLOATER  == 0) {
 			CommandCenter.getInstance().getOpsQueue().enqueue(new NewShipFloater(), GameOp.Action.ADD);
 		}
 	}

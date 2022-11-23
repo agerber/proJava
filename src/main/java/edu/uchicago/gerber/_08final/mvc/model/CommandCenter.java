@@ -22,6 +22,7 @@ public class CommandCenter {
 	private  long score;
 	private  boolean paused;
 	private  boolean muted;
+	private long frame;
 
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap
@@ -74,6 +75,14 @@ public class CommandCenter {
 		falcon.setOrientation(Game.R.nextInt(360));
 		falcon.setDeltaX(0);
 		falcon.setDeltaY(0);
+	}
+
+	public void incrementFrame(){
+		if (frame == Long.MAX_VALUE){
+			frame = 0;
+		} else {
+			frame++;
+		}
 	}
 
 	private void clearAll(){

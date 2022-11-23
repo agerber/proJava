@@ -60,6 +60,14 @@ public class GamePanel extends Panel {
         }
     }
 
+    private void drawNumFrame(Graphics g) {
+        g.setColor(Color.white);
+        g.setFont(fnt);
+        g.drawString("FRAME :  " + CommandCenter.getInstance().getFrame(), fontWidth,
+                Game.DIM.height  - (fontHeight + 22));
+
+    }
+
     @SuppressWarnings("unchecked")
     public void update(Graphics g) {
         //create an image off-screen
@@ -73,6 +81,7 @@ public class GamePanel extends Panel {
         grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
 
         drawScore(grpOff);
+        drawNumFrame(grpOff);
 
         if (CommandCenter.getInstance().isGameOver()) {
             displayTextOnScreen(grpOff,
