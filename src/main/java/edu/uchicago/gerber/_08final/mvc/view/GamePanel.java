@@ -59,7 +59,7 @@ public class GamePanel extends Panel {
             g.drawString("NO SCORE", fontWidth, fontHeight);
         }
     }
-
+    //this is used for development, you can remove it from your final game
     private void drawNumFrame(Graphics g) {
         g.setColor(Color.white);
         g.setFont(fnt);
