@@ -177,9 +177,8 @@ public class Falcon extends Sprite {
 	public void move() {
 		super.move();
 
-		if (getFade() < 255) {
-			setFade(getFade() + 3);
-		}
+		if (getFade() < 255) setFade(getFade() + 3);
+
 
 		//apply some thrust vectors using trig.
 		if (thrusting) {

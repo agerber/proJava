@@ -86,9 +86,8 @@ public abstract class Sprite implements Movable {
 
         //if a sprite spins, adjust its orientation
         //the default value of spin is zero, therefore non-spinning objects will not call this block.
-        if (getSpin() != 0) {
-            setOrientation(getOrientation() + getSpin());
-        }
+        if (getSpin() != 0) setOrientation(getOrientation() + getSpin());
+
 
     }
 
@@ -119,11 +118,6 @@ public abstract class Sprite implements Movable {
         //by default, sprites are not protected
         return false;
     }
-
-    //certain Sprites, such as Asteroid use this
-
-    //made static so that GamePanel can use this to render num ships left
-
 
     @Override
     public void draw(Graphics g) {
