@@ -223,7 +223,6 @@ public class Falcon extends Sprite {
 
 	public void stopRotating() {
 		turnState = TurnState.IDLE;
-
 	}
 
 	public void thrustOn() {

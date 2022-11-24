@@ -33,7 +33,10 @@ public class GamePanel extends Panel {
     public GamePanel(Dimension dim) {
         GameFrame gmf = new GameFrame();
         gmf.getContentPane().add(this);
+
         Point[] pntFalCarts =  CommandCenter.getInstance().getFalcon().getCartesians();
+        //clone the point-array initially and store as member b/c getFalcon().getCartesians() may change during game
+        // play due to toggleAlien() method
         pntShipsRemaining = Arrays.copyOf(pntFalCarts, pntFalCarts.length);
 
         gmf.pack();
