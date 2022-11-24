@@ -17,15 +17,16 @@ public class Falcon extends Sprite {
 	private final static int DEGREE_STEP = 9;
 	//must be multiple of 3
 	public static final int FADE_INITIAL_VALUE = 51;
-	
-	//private boolean shield = false;
+
 	private boolean thrusting = false;
 	public enum TurnState {
 		IDLE, LEFT, RIGHT
 	}
 	private TurnState turnState = TurnState.IDLE;
 
-	private final Point[] pntShip, pntAlien;
+	//we need to store point-arrays as members, because we toggle between falcon and
+	// alien in the toggleAlien() method
+	private final Point[] cartsFalcon, cartsAlien;
 
 
 
@@ -37,12 +38,11 @@ public class Falcon extends Sprite {
 
 		setTeam(Team.FRIEND);
 
-		//this is the size (radius) of the falcon
+		//this is the radius of the falcon
 		setRadius(35);
 
-
-		List<Point> listShip = new ArrayList<>();
 		// Robert Alef's awesome falcon design
+		List<Point> listShip = new ArrayList<>();
 		listShip.add(new Point(0,9));
 		listShip.add(new Point(-1, 6));
 		listShip.add(new Point(-1,3));
@@ -142,26 +142,23 @@ public class Falcon extends Sprite {
 		listAlien.add(new Point(-1,2));
 		listAlien.add(new Point(0,2));
 
+		cartsAlien = pointsListToArray(listAlien);
+		cartsFalcon = pointsListToArray(listShip);
 
-
-		//create an alternative shape for alien
-		pntAlien = pointsListToArray(listAlien);
-		//we need to store the default points as member (unlike other sprites) because we toggle alien
-		pntShip = pointsListToArray(listShip);
-		//set initial default to normal (ship) points
-		setCartesians(pntShip);
+		//set initial default to normal (falcon) points
+		setCartesians(cartsFalcon);
 
 
 	}
 
-	//demonstrates how to morph the shape of a Sprite
+	//no real utility, just demonstrates how to morph the color/shape of a Sprite
 	public void toggleAlien(boolean alien){
 			if (alien){
 				setColor(Color.GREEN);
-				setCartesians(pntAlien);
+				setCartesians(cartsAlien);
 			} else {
 				setColor(Color.WHITE);
-				setCartesians(pntShip);
+				setCartesians(cartsFalcon);
 			}
 	}
 
@@ -170,7 +167,7 @@ public class Falcon extends Sprite {
 	@Override
 	public boolean isProtected() {
 		return  getFade() < 255;
-			//	|| getCartesians() == pntAlien;  //makes the game too easy
+			//	|| getCartesians() == cartsAlien;  //makes the game too easy
 	}
 
 	// ==============================================================
