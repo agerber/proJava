@@ -260,8 +260,10 @@ public class Falcon extends Sprite {
 			);
 		}
 
-		//most Sprites do not have flames, but Falcon does
-		 double[] flames = { 23 * Math.PI / 24 + Math.PI / 2, Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2 };
+		//draw the flames from the thrusting ship. Described as polar points.
+		 double[] flames = { 23 * Math.PI / 24 + Math.PI / 2,
+				             Math.PI + Math.PI / 2,
+				             25 * Math.PI / 24 + Math.PI / 2 };
 		 Point[] pntFlames = new Point[flames.length];
 
 		//thrusting
