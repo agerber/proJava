@@ -41,16 +41,13 @@ public class Falcon extends Sprite {
 		//in this case we are loading the raster graphics
 		//see the resources/imgs directory in the root of this project.
 		Map<String, BufferedImage> rasters = new HashMap<>();
-		rasters.put("NORMAL",loadGraphic("falcon50.png") );
-		rasters.put("NORMAL_THRUSTING",loadGraphic("falcon50thrust.png") );
-		rasters.put("PROTECTED",loadGraphic("falcon50protect.png") );
-		rasters.put("PROTECTED_THRUSTING",loadGraphic("falcon50both.png") );
+		rasters.put("NORMAL", loadGraphic("falcon50.png") );
+		rasters.put("NORMAL_THRUSTING", loadGraphic("falcon50thrust.png") );
+		rasters.put("PROTECTED", loadGraphic("falcon50protect.png") );
+		rasters.put("PROTECTED_THRUSTING", loadGraphic("falcon50both.png") );
 		setRasters(rasters);
 
-
-
 	}
-
 
 	//if spawning then make invincible. You can also set conditions for power-up shields here, etc.
 	@Override
@@ -102,7 +99,6 @@ public class Falcon extends Sprite {
 	@Override
 	public void draw(Graphics g) {
 
-
 		if (isProtected()){
 			if (thrusting){
 				renderRaster((Graphics2D) g, getRasters().get("PROTECTED_THRUSTING"));
@@ -146,8 +142,6 @@ public class Falcon extends Sprite {
 	public void thrustOff() {
 		thrusting = false;
 	}
-
-
 
 
 } //end class
