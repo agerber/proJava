@@ -115,6 +115,11 @@ public class Asteroid extends Sprite {
 
 	  }
 
+	@Override
+	public void draw(Graphics g) {
+		renderVector(g);
+	}
+
 
 
 }

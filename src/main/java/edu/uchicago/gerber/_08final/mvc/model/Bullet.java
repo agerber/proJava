@@ -41,7 +41,7 @@ public class Bullet extends Sprite {
         listPoints.add(new Point(0, -2));
         listPoints.add(new Point(-1, -1));
 
-        setCartesians(pointsListToArray(listPoints));
+        setCartesians(CommandCenter.pointsListToArray(listPoints));
 
 
 
@@ -49,5 +49,8 @@ public class Bullet extends Sprite {
     }
 
 
-
+    @Override
+    public void draw(Graphics g) {
+           renderVector(g);
+    }
 }

@@ -4,6 +4,7 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 import edu.uchicago.gerber._08final.mvc.model.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -34,10 +35,47 @@ public class GamePanel extends Panel {
         GameFrame gmf = new GameFrame();
         gmf.getContentPane().add(this);
 
-        Point[] pntFalCarts =  CommandCenter.getInstance().getFalcon().getCartesians();
-        //clone the point-array initially and store as member b/c getFalcon().getCartesians() may change during game
-        // play due to toggleAlien() method
-        pntShipsRemaining = Arrays.copyOf(pntFalCarts, pntFalCarts.length);
+        // Robert Alef's awesome falcon design
+        List<Point> listShip = new ArrayList<>();
+        listShip.add(new Point(0,9));
+        listShip.add(new Point(-1, 6));
+        listShip.add(new Point(-1,3));
+        listShip.add(new Point(-4, 1));
+        listShip.add(new Point(4,1));
+        listShip.add(new Point(-4,1));
+        listShip.add(new Point(-4, -2));
+        listShip.add(new Point(-1, -2));
+        listShip.add(new Point(-1, -9));
+        listShip.add(new Point(-1, -2));
+        listShip.add(new Point(-4, -2));
+        listShip.add(new Point(-10, -8));
+        listShip.add(new Point(-5, -9));
+        listShip.add(new Point(-7, -11));
+        listShip.add(new Point(-4, -11));
+        listShip.add(new Point(-2, -9));
+        listShip.add(new Point(-2, -10));
+        listShip.add(new Point(-1, -10));
+        listShip.add(new Point(-1, -9));
+        listShip.add(new Point(1, -9));
+        listShip.add(new Point(1, -10));
+        listShip.add(new Point(2, -10));
+        listShip.add(new Point(2, -9));
+        listShip.add(new Point(4, -11));
+        listShip.add(new Point(7, -11));
+        listShip.add(new Point(5, -9));
+        listShip.add(new Point(10, -8));
+        listShip.add(new Point(4, -2));
+        listShip.add(new Point(1, -2));
+        listShip.add(new Point(1, -9));
+        listShip.add(new Point(1, -2));
+        listShip.add(new Point(4,-2));
+        listShip.add(new Point(4, 1));
+        listShip.add(new Point(1, 3));
+        listShip.add(new Point(1,6));
+        listShip.add(new Point(0,9));
+
+        //this just displays the ships remaining
+        pntShipsRemaining = CommandCenter.pointsListToArray(listShip);
 
         gmf.pack();
         initView();

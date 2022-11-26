@@ -6,6 +6,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -13,7 +14,6 @@ import lombok.Data;
 
 import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 //the lombok @Data gives us automatic getters and setters on all members
@@ -39,15 +39,19 @@ public abstract class Sprite implements Movable {
     //some sprites spin, such as floaters and asteroids
     private int spin;
 
-    //use for fade-in/fade-out
-    private int fade;
+    //use for spawning and protection
+    private int spawn;
 
-    //these are Cartesian points used to draw the polygon.
+    //these are Cartesian points used to draw the polygon in raster mode.
     //once set, their values do not change. It's the job of the render() method to adjust for orientation and location.
     private Point[] cartesians;
 
-    //either you use the cartesians above (vector), or you can use the bufferedImage below (raster)
-    private BufferedImage[] rasters;
+
+    //either you use the cartesians above (vector), or you can use the bufferedImages below (raster)
+    private Map<String, BufferedImage> rasters;
+
+
+
 
     //constructor
     public Sprite() {
@@ -128,23 +132,22 @@ public abstract class Sprite implements Movable {
         return false;
     }
 
+    //force extending classes to implement this
     @Override
-    public void draw(Graphics g) {
-        //set the native color of the sprite
-        g.setColor(getColor());
-        render(g);
+    public abstract void draw(Graphics g); //{
 
-    }
+//        if (graphicsMode == GraphicsMode.VECTOR){
+//            g.setColor(getColor());
+//            renderVector(g);
+//        } else { //GraphicsMode.RASTER
+//
+//            renderRaster((Graphics2D) g, getRasters());
+//        }
+   // }
 
-    public void draw(Graphics g, Color color) {
-        //set custom color
-        g.setColor(color);
-        render(g);
-
-    }
 
     //https://www.tabnine.com/code/java/methods/java.awt.geom.AffineTransform/rotate
-    protected void drawRaster( Graphics2D g2d, BufferedImage bufferedImage ) {
+    protected void renderRaster(Graphics2D g2d, BufferedImage bufferedImage ) {
 
         int centerX = getCenter().x;
         int centerY = getCenter().y;
@@ -178,22 +181,7 @@ public abstract class Sprite implements Movable {
     }
 
 
-    protected void drawImage(BufferedImage img, Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        AffineTransform transform = new AffineTransform();
-
-        //transform.scale(1.5, 1.5);
-        transform.rotate(Math.toRadians(getOrientation()), img.getWidth(), img.getHeight());
-        AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
-        img = op.filter(img, null);
-
-        g2d.drawImage(img, getCenter().x - getRadius(), getCenter().y - getRadius(), null);
-
-        g.setColor(Color.ORANGE);
-        //g.fillOval(getCenter().x - 1, getCenter().y - 1, 2, 2);
-        g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
-    }
-
+    //used to load raster graphics
     protected BufferedImage loadGraphic(String imgName) {
         BufferedImage img;
         try {
@@ -208,8 +196,9 @@ public abstract class Sprite implements Movable {
 
 
 
+    protected void renderVector(Graphics g) {
 
-    private void render(Graphics g) {
+        g.setColor(getColor());
 
         // to render this Sprite, we need to, 1: convert raw cartesians to raw polars, 2: adjust polars
         // for orientation of sprite. Convert back to cartesians 3: adjust for center-point (location).
@@ -265,11 +254,7 @@ public abstract class Sprite implements Movable {
     }
 
 
-    public Point[] pointsListToArray(List<Point> listPoints) {
-        return listPoints.stream()
-                .toArray(Point[]::new);
 
-    }
 
 
 }

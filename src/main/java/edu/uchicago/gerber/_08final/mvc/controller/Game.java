@@ -282,7 +282,7 @@ public class Game implements Runnable, KeyListener {
 			CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);
 			spawnBigAsteroids(CommandCenter.getInstance().getLevel());
 			//setFade e.g. protect the falcon so that player has time to avoid newly spawned asteroids.
-			CommandCenter.getInstance().getFalcon().setFade(Falcon.FADE_INITIAL_VALUE);
+			CommandCenter.getInstance().getFalcon().setSpawn(Falcon.INITIAL_SPAWN_TIME);
 
 		}
 	}
@@ -332,9 +332,7 @@ public class Game implements Runnable, KeyListener {
 			case RIGHT:
 				fal.rotateRight();
 				break;
-			case ALIEN:
-				fal.toggleAlien(true);
-				break;
+
 
 			// possible future use
 			// case KILL:
@@ -383,9 +381,7 @@ public class Game implements Runnable, KeyListener {
 					clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
 				}
 				break;
-			case ALIEN:
-				fal.toggleAlien(false);
-				break;
+
 			default:
 				break;
 			}

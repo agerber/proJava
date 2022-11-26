@@ -37,8 +37,13 @@ public class NewShipFloater extends Sprite {
 		listPoints.add(new Point(-5, 5));
 		listPoints.add(new Point(0,4));
 
-		setCartesians(pointsListToArray(listPoints));
+		setCartesians(CommandCenter.pointsListToArray(listPoints));
 
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		renderVector(g);
 	}
 
 

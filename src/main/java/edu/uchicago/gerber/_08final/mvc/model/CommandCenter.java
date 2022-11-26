@@ -10,7 +10,6 @@ import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 //the lombok @Data gives us automatic getters and setters on all members
@@ -69,7 +68,7 @@ public class CommandCenter {
 		setNumFalcons(getNumFalcons() - 1);
 		if (isGameOver()) return;
 		Sound.playSound("shipspawn.wav");
-		falcon.setFade(Falcon.FADE_INITIAL_VALUE);
+		falcon.setSpawn(Falcon.INITIAL_SPAWN_TIME);
 		//put falcon in the middle of the game-space
 		falcon.setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 		falcon.setOrientation(Game.R.nextInt(360));
@@ -99,7 +98,7 @@ public class CommandCenter {
 
 
 	////////////////////////////////////////////////////////////////////
-	//Utility method for transforming cartesian2Polar
+	//Utility method for transforming cartesian2Polar, etc.
 	////////////////////////////////////////////////////////////////////
 	public static List<PolarPoint> cartesianToPolar(List<Point> pntCartesians) {
 
@@ -128,10 +127,18 @@ public class CommandCenter {
 
 	}
 
+	public static Point[] pointsListToArray(List<Point> listPoints) {
+		return listPoints.stream()
+				.toArray(Point[]::new);
+
+	}
+
 	//private helper method
 	private static double hypotFunction(double dX, double dY) {
 		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
 	}
+
+
 
 
 }

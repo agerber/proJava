@@ -2,10 +2,7 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import java.util.*;
 
 
 public class Falcon extends Sprite {
@@ -17,7 +14,7 @@ public class Falcon extends Sprite {
 	private static final double THRUST = .65;
 	private final static int DEGREE_STEP = 9;
 	//must be multiple of 3
-	public static final int FADE_INITIAL_VALUE = 51;
+	public static final int INITIAL_SPAWN_TIME = 68;
 
 	private boolean thrusting = false;
 	public enum TurnState {
@@ -25,9 +22,6 @@ public class Falcon extends Sprite {
 	}
 	private TurnState turnState = TurnState.IDLE;
 
-	//we need to store point-arrays as members, because we toggle between falcon and
-	// alien in the toggleAlien() method
-	private final Point[] cartsFalcon, cartsAlien;
 
 
 
@@ -42,147 +36,27 @@ public class Falcon extends Sprite {
 
 		//this is the radius of the falcon
 		setRadius(35);
+		setSpawn(INITIAL_SPAWN_TIME);
 
-		// Robert Alef's awesome falcon design
-		List<Point> listShip = new ArrayList<>();
-		listShip.add(new Point(0,9));
-		listShip.add(new Point(-1, 6));
-		listShip.add(new Point(-1,3));
-		listShip.add(new Point(-4, 1));
-		listShip.add(new Point(4,1));
-		listShip.add(new Point(-4,1));
-		listShip.add(new Point(-4, -2));
-		listShip.add(new Point(-1, -2));
-		listShip.add(new Point(-1, -9));
-		listShip.add(new Point(-1, -2));
-		listShip.add(new Point(-4, -2));
-		listShip.add(new Point(-10, -8));
-		listShip.add(new Point(-5, -9));
-		listShip.add(new Point(-7, -11));
-		listShip.add(new Point(-4, -11));
-		listShip.add(new Point(-2, -9));
-		listShip.add(new Point(-2, -10));
-		listShip.add(new Point(-1, -10));
-		listShip.add(new Point(-1, -9));
-		listShip.add(new Point(1, -9));
-		listShip.add(new Point(1, -10));
-		listShip.add(new Point(2, -10));
-		listShip.add(new Point(2, -9));
-		listShip.add(new Point(4, -11));
-		listShip.add(new Point(7, -11));
-		listShip.add(new Point(5, -9));
-		listShip.add(new Point(10, -8));
-		listShip.add(new Point(4, -2));
-		listShip.add(new Point(1, -2));
-		listShip.add(new Point(1, -9));
-		listShip.add(new Point(1, -2));
-		listShip.add(new Point(4,-2));
-		listShip.add(new Point(4, 1));
-		listShip.add(new Point(1, 3));
-		listShip.add(new Point(1,6));
-		listShip.add(new Point(0,9));
+		//in this case we are loading the raster graphics
+		Map<String, BufferedImage> rasters = new HashMap<>();
+		rasters.put("NORMAL",loadGraphic("falcon50.png") );
 
-
-
-		//Danica Gutierrez' crazy Alien
-		List<Point> listAlien = new ArrayList<>();
-		listAlien.add(new Point(0,2));
-		listAlien.add(new Point(1,2));
-		listAlien.add(new Point(1,3));
-		listAlien.add(new Point(2,3));
-		listAlien.add(new Point(2,4));
-		listAlien.add(new Point(3,4));
-		listAlien.add(new Point(3,3));
-		listAlien.add(new Point(2, 3));
-		listAlien.add(new Point(2,2));
-		listAlien.add(new Point(3, 2));
-		listAlien.add(new Point(3,1));
-		listAlien.add(new Point(4, 1));
-		listAlien.add(new Point(4,0));
-		listAlien.add(new Point(5, 0));
-		//bottom right
-		listAlien.add(new Point(5, 0));
-		listAlien.add(new Point(5,-3));
-		listAlien.add(new Point(4, -3));
-		listAlien.add(new Point(4,-1));
-		listAlien.add(new Point(3, -1));
-		listAlien.add(new Point(3,-3));
-		listAlien.add(new Point(2, -3));
-		listAlien.add(new Point(2,-4));
-		listAlien.add(new Point(1,-4));
-		listAlien.add(new Point(1,-3));
-		listAlien.add(new Point(2,-3));
-		listAlien.add(new Point(2,-2));
-		listAlien.add(new Point(1,-2));
-		listAlien.add(new Point(0,-2));
-		//bottom left quadrant
-		listAlien.add(new Point(-2,-2));
-		listAlien.add(new Point(-2,-3));
-		listAlien.add(new Point(-1,-3));
-		listAlien.add(new Point(-1,-4));
-		listAlien.add(new Point(-2,-4));
-		listAlien.add(new Point(-2, -3));
-		listAlien.add(new Point(-3,-3));
-		listAlien.add(new Point(-3, -1));
-		listAlien.add(new Point(-4,-1));
-		listAlien.add(new Point(-4, -3));
-		listAlien.add(new Point(-5,-3));
-		listAlien.add(new Point(-5, 0));
-		//top left quadrant
-		listAlien.add(new Point(-5, 0));
-		listAlien.add(new Point(-4,0));
-		listAlien.add(new Point(-4, 1));
-		listAlien.add(new Point(-3,1));
-		listAlien.add(new Point(-3, 2));
-		listAlien.add(new Point(-2,2));
-		listAlien.add(new Point(-2, 3));
-		listAlien.add(new Point(-3,3));
-		listAlien.add(new Point(-3,4));
-		listAlien.add(new Point(-2,4));
-		listAlien.add(new Point(-2,3));
-		listAlien.add(new Point(-1,3));
-		listAlien.add(new Point(-1,2));
-		listAlien.add(new Point(0,2));
-
-		cartsAlien = pointsListToArray(listAlien);
-		cartsFalcon = pointsListToArray(listShip);
-
-		//set initial default to normal (falcon) points
-		setCartesians(cartsFalcon);
-
-		//in this case we are loading the raster graphics as well for demo purposes. You will do either vector or
-		// raster, but not both.
-		setRasters(new BufferedImage[] {
-				loadGraphic("falcon50.png"),
-				loadGraphic("falcon50f.png"),
-				loadGraphic("falcon50p.png"),
-
-		});
+		rasters.put("NORMAL_THRUSTING",loadGraphic("falcon50thrust.png") );
+		rasters.put("PROTECTED",loadGraphic("falcon50protect.png") );
+		rasters.put("PROTECTED_THRUSTING",loadGraphic("falcon50both.png") );
+		setRasters(rasters);
 
 
 
 	}
 
-	//no real utility, just demonstrates how to morph the color/shape of a Sprite
-	public void toggleAlien(boolean showAlien){
-			if (showAlien){
-				setColor(Color.GREEN);
-				setCartesians(cartsAlien);
-			} else {
-				setColor(Color.WHITE);
-				setCartesians(cartsFalcon);
-			}
-	}
 
-
-
-
-
-	//if fading then make invincible
+	//if spawning then make invincible. You can also set conditions for shields here
 	@Override
 	public boolean isProtected() {
-		return  getFade() < 255;
-			//	|| getCartesians() == cartsAlien;  //makes the game too easy
+		return  getSpawn() > 0;
+
 	}
 
 	// ==============================================================
@@ -192,8 +66,7 @@ public class Falcon extends Sprite {
 	public void move() {
 		super.move();
 
-		if (getFade() < 255) setFade(getFade() + 3);
-
+		if (getSpawn() > 0) setSpawn(getSpawn() -1);
 
 		//apply some thrust vectors using trig.
 		if (thrusting) {
@@ -225,8 +98,6 @@ public class Falcon extends Sprite {
 
 	} //end move
 
-
-
 	//methods for moving the falcon
 	public void rotateLeft() {
 		turnState = TurnState.LEFT;
@@ -250,98 +121,29 @@ public class Falcon extends Sprite {
 
 
 
-	private int adjustColor(int colorNum, int adjust) {
-		return Math.max(colorNum - adjust, 0);
-	}
-
 	@Override
 	public void draw(Graphics g) {
 
+
 		if (isProtected()){
-			drawRaster((Graphics2D) g, getRasters()[2]);
+			if (!thrusting){
+				renderRaster((Graphics2D) g, getRasters().get("PROTECTED"));
+			} else {
+				renderRaster((Graphics2D) g, getRasters().get("PROTECTED_THRUSTING"));
+			}
+			//you can add vector elements to raster graphics
 			g.setColor(Color.CYAN);
 			g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
-			return;
-		}
 
-		if (!thrusting){
-			drawRaster((Graphics2D) g, getRasters()[0]);
 		} else {
-			drawRaster((Graphics2D) g, getRasters()[1]);
+			if (!thrusting){
+				renderRaster((Graphics2D) g, getRasters().get("NORMAL"));
+			} else {
+				renderRaster((Graphics2D) g, getRasters().get("NORMAL_THRUSTING"));
+			}
+
 		}
 
-
-
-//		Color colShip;
-//		if (getFade() == 255) {
-//			colShip = getColor(); //get native color of the sprite
-//		}
-//		//flash to warn player of impending non-protection
-//		else if (getFade() > 220 && getFade() % 9 == 0 ){
-//			colShip = new Color(0, 32, 128); //dark blue
-//		}
-//		//some increasingly lighter shade of blue
-//		else {
-//			colShip = new Color(
-//
-//					adjustColor(getFade(), 200), //red
-//					adjustColor(getFade(), 175), //green
-//					getFade() //blue
-//			);
-//		}
-//
-//		//draw the flames from the thrusting ship. Described as polar points.
-//		 double[] flames = { 23 * Math.PI / 24 + Math.PI / 2,
-//				             Math.PI + Math.PI / 2,
-//				             25 * Math.PI / 24 + Math.PI / 2 };
-//		 Point[] pntFlames = new Point[flames.length];
-//
-//		//thrusting
-//		if (thrusting) {
-//			//the flame
-//			for (int nC = 0; nC < flames.length; nC++) {
-//				if (nC % 2 != 0) //odd
-//				{
-//					//adjust the position so that the flame is off-center
-//					pntFlames[nC] = new Point((int) (getCenter().x + 2
-//							* getRadius()
-//							* Math.sin(Math.toRadians(getOrientation())
-//									+ flames[nC])), (int) (getCenter().y - 2
-//							* getRadius()
-//							* Math.cos(Math.toRadians(getOrientation())
-//									+ flames[nC])));
-//
-//				} else //even
-//				{
-//					pntFlames[nC] = new Point((int) (getCenter().x + getRadius()
-//							* 1.1
-//							* Math.sin(Math.toRadians(getOrientation())
-//									+ flames[nC])),
-//							(int) (getCenter().y - getRadius()
-//									* 1.1
-//									* Math.cos(Math.toRadians(getOrientation())
-//											+ flames[nC])));
-//
-//				} //end even/odd else
-//			} //end for loop
-//
-//			g.setColor(colShip); //flames same color as ship
-//			g.fillPolygon(
-//					Arrays.stream(pntFlames)
-//							.map(pnt -> pnt.x)
-//							.mapToInt(Integer::intValue)
-//							.toArray(),
-//
-//					Arrays.stream(pntFlames)
-//							.map(pnt -> pnt.y)
-//							.mapToInt(Integer::intValue)
-//							.toArray(),
-//
-//					flames.length);
-//
-//		} //end if flame
-//
-//		draw(g,colShip);
 
 	} //end draw()
 
