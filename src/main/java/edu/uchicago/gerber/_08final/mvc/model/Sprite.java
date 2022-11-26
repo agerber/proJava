@@ -36,8 +36,6 @@ public abstract class Sprite implements Movable {
     private int orientation;
     //natural mortality (short-lived sprites only)
     private int expiry;
-    //the color of this sprite
-    private Color color;
 
     //some sprites spin, such as floaters and asteroids
     private int spin;
@@ -48,6 +46,9 @@ public abstract class Sprite implements Movable {
     // location. See NewShipFloater, Bullet, or Asteroid for implementation details.
     private Point[] cartesians;
 
+    //used for vector rendering
+    private Color color;
+
     //Either you use the cartesian points above (vector), or you can use the bufferedImages here (raster)
     //see Falcon for raster implementation
     private Map<String, BufferedImage> rasterMap;
@@ -56,8 +57,6 @@ public abstract class Sprite implements Movable {
     //constructor
     public Sprite() {
 
-        //default sprite color
-        setColor(Color.WHITE);
         //place the sprite at some random location in the frame at instantiation
         setCenter(new Point(Game.R.nextInt(Game.DIM.width),
                 Game.R.nextInt(Game.DIM.height)));

@@ -15,12 +15,10 @@ public class Falcon extends Sprite {
 	
 	private static final double THRUST = .65;
 	private final static int DEGREE_STEP = 9;
-	//must be multiple of 3
 	public static final int INITIAL_SPAWN_TIME = 68;
 
 	//use for spawning and protection
 	private int spawn = INITIAL_SPAWN_TIME;
-
 
 	private boolean thrusting = false;
 	public enum TurnState {
