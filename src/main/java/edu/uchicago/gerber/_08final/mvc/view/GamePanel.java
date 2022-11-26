@@ -132,8 +132,7 @@ public class GamePanel extends Panel {
                     "'S' to Start",
                     "'P' to Pause",
                     "'Q' to Quit",
-                    "left pinkie on 'A' for Shield",
-                    "'Numeric-Enter' for Hyperspace"
+                    "'M' to toggle music"
 
             );
         } else if (CommandCenter.getInstance().isPaused()) {
