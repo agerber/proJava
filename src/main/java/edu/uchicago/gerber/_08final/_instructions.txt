@@ -36,10 +36,11 @@ Any 80's style vector arcade game is ideally suited to this game engine, such as
 Command, Qix, etc. To create your own game, you would effectively ignore/delete the Asteroids model and create
 your own model.
 
-This game uses vector graphics. If you press the 'a' key while playing, you will see how to morph between vector shapes.
-The advantage of vector graphics is that they scale infinitely, and they render extremely fast. If you want to use
+This game uses both vector and raster graphics.
+The advantage of vector graphics is that they scale infinitely, and they render extremely fast. If you use
 raster graphics (png's, jpg's, etc) which are essentially two-dimensional grids of pixels, make sure to reduce
- the pixel depth to as low as possible, otherwise your game will lag when rendering.
+ the pixel depth, otherwise your game will lag when rendering. For raster graphics implementation, see the Falcon class.
+
 
 The TAs will select the top ten games. The ten finalists will demonstrate their games and present their code and
 architecture, and the class will vote on the best game. The winner will receive a token prize during an
@@ -54,17 +55,17 @@ Some things to keep in mind.
 1/ Sprite is essentially a shape circumscribed by a circle, which makes collision detection really easy. If you use
 vector graphics, you will create your polygons as a series of adjacent cartesian vertices on a grid with 0,0 at the
 origin. When you add your points to the ArrayList, order matters, so that each point is adjacent to its neighbor in the
- ArrayList. The following ArrayList<Point> describes the shape of the fictitious Sprite. Just keep in mind that creating
-this ArrayList<Point> out-of-order will produce a jaggedy-shaped sprite. The following order is correct (though I could
-have traversed the points counter-clockwise with the same good result).
+ List. The following List<Point> describes the shape of the fictitious vector Sprite. Just keep in mind that
+ creating this List<Point> out-of-order will produce a jaggedy-shaped sprite. The following order is correct
+ (though I could have traversed the points counter-clockwise with the same good result).
 
 
-		List<Point> pntAs = new ArrayList<Point>();
-		pntAs.add(new Point(0, 5)); //top point
-		pntAs.add(new Point(1, 3));  //right top point
-		pntAs.add(new Point(1, -2)); //right bottom point
-		pntAs.add(new Point(-1, -2)); // left bottom point
-		pntAs.add(new Point(-1, 3)); //left top point
+		List<Point> pntList = new ArrayList<Point>();
+		pntList.add(new Point(0, 5)); //top point
+		pntList.add(new Point(1, 3));  //right top point
+		pntList.add(new Point(1, -2)); //right bottom point
+		pntList.add(new Point(-1, -2)); // left bottom point
+		pntList.add(new Point(-1, 3)); //left top point
 
 
 

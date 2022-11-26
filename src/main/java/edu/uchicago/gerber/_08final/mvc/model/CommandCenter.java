@@ -98,7 +98,7 @@ public class CommandCenter {
 
 
 	////////////////////////////////////////////////////////////////////
-	//Utility method for transforming cartesian2Polar, etc.
+	//Utility methods for transforming cartesian2Polar, pointsListToArray, etc.
 	////////////////////////////////////////////////////////////////////
 	public static List<PolarPoint> cartesianToPolar(List<Point> pntCartesians) {
 
