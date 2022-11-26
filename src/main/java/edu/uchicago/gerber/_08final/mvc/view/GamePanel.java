@@ -192,7 +192,7 @@ public class GamePanel extends Panel {
     // Draw the number of falcons left on the bottom-right of the screen.
     private void drawOneShipLeft(Graphics g, int offSet) {
 
-        g.setColor(Color.WHITE);
+        g.setColor(Color.ORANGE);
 
         final double DEGREES = 90.0;
         final int SIZE = 15, X_POS = 27, Y_POS = 45;
