@@ -322,15 +322,15 @@ public class Game implements Runnable, KeyListener {
 				System.exit(0);
 				break;
 			case UP:
-				fal.thrustOn();
+				fal.toggleThrust(true);
 				if (!CommandCenter.getInstance().isPaused() && !CommandCenter.getInstance().isGameOver())
 					clpThrust.loop(Clip.LOOP_CONTINUOUSLY);
 				break;
 			case LEFT:
-				fal.rotateLeft();
+				fal.toggleRotation(Falcon.TurnState.LEFT);
 				break;
 			case RIGHT:
-				fal.rotateRight();
+				fal.toggleRotation(Falcon.TurnState.RIGHT);
 				break;
 
 
@@ -358,16 +358,13 @@ public class Game implements Runnable, KeyListener {
 				CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(fal), GameOp.Action.ADD);
 				Sound.playSound("laser.wav");
 				break;
-				
 
 			case LEFT:
-				fal.stopRotating();
-				break;
 			case RIGHT:
-				fal.stopRotating();
+				fal.toggleRotation(Falcon.TurnState.IDLE);
 				break;
 			case UP:
-				fal.thrustOff();
+				fal.toggleThrust(false);
 				clpThrust.stop();
 				break;
 				

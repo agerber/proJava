@@ -120,7 +120,7 @@ public class Falcon extends Sprite {
 		}
 
 		//cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
-		//and render the graphic according to the image-state
+		//and render the image according to the image-state
 		renderRaster((Graphics2D) g, getRasterMap().get(imageState.toString()));
 
 		//draw cyan shield, and warn player of impending non-protection
@@ -135,24 +135,13 @@ public class Falcon extends Sprite {
 	}
 
 	//methods for setting the turn-state and thrust of the falcon
-	public void rotateLeft() {
-		turnState = TurnState.LEFT;
+
+	public void toggleRotation(TurnState turnState){
+		this.turnState = turnState;
 	}
 
-	public void rotateRight() {
-		turnState = TurnState.RIGHT;
-	}
-
-	public void stopRotating() {
-		turnState = TurnState.IDLE;
-	}
-
-	public void thrustOn() {
-		thrusting = true;
-	}
-
-	public void thrustOff() {
-		thrusting = false;
+	public void toggleThrust(boolean thrusting){
+		this.thrusting = thrusting;
 	}
 
 
