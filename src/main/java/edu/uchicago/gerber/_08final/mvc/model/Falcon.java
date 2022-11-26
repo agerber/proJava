@@ -1,10 +1,12 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
+import lombok.Data;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
-
+@Data
 public class Falcon extends Sprite {
 
 	// ==============================================================
@@ -16,14 +18,22 @@ public class Falcon extends Sprite {
 	//must be multiple of 3
 	public static final int INITIAL_SPAWN_TIME = 68;
 
+	//use for spawning and protection
+	private int spawn = INITIAL_SPAWN_TIME;
+
+
 	private boolean thrusting = false;
 	public enum TurnState {
 		IDLE, LEFT, RIGHT
 	}
 	private TurnState turnState = TurnState.IDLE;
 
-
-
+	public enum ImageState {
+		FALCON, //normal ship
+		FALCON_THR, //normal ship thrusting
+		FALCON_PRO, //protected ship (green)
+		FALCON_PRO_THR //protected ship (green) thrusting
+	}
 
 
 	// ==============================================================
@@ -35,24 +45,25 @@ public class Falcon extends Sprite {
 		setTeam(Team.FRIEND);
 
 		//this is the radius of the falcon
-		setRadius(35);
-		setSpawn(INITIAL_SPAWN_TIME);
+		setRadius(32);
 
-		//in this case we are loading the raster graphics
-		//see the resources/imgs directory in the root of this project.
-		Map<String, BufferedImage> rasters = new HashMap<>();
-		rasters.put("NORMAL", loadGraphic("falcon50.png") );
-		rasters.put("NORMAL_THRUSTING", loadGraphic("falcon50thrust.png") );
-		rasters.put("PROTECTED", loadGraphic("falcon50protect.png") );
-		rasters.put("PROTECTED_THRUSTING", loadGraphic("falcon50both.png") );
-		setRasters(rasters);
+
+		//see the resources directory in the root of this project.
+		//Using enums as keys is safer b/c we know the value exists when we get it later;
+		//if we had hard-coded strings here and below, there's a chance we could misspell it below.
+		Map<String, BufferedImage> rasterMap = new HashMap<>();
+		rasterMap.put(ImageState.FALCON.toString(), loadGraphic("/imgs/falcon50.png") );
+		rasterMap.put(ImageState.FALCON_THR.toString(), loadGraphic("/imgs/falcon50thrust.png") );
+		rasterMap.put(ImageState.FALCON_PRO.toString(), loadGraphic("/imgs/falcon50protect.png") );
+		rasterMap.put(ImageState.FALCON_PRO_THR.toString(), loadGraphic("/imgs/falcon50protect_thrust.png") );
+		setRasterMap(rasterMap);
 
 	}
 
-	//if spawning then make invincible. You can also set conditions for power-up shields here, etc.
+	//if spawning then make invincible. You can also set conditions for power-up-shields here, etc.
 	@Override
 	public boolean isProtected() {
-		return  getSpawn() > 0;
+		return  spawn > 0;
 
 	}
 
@@ -63,7 +74,7 @@ public class Falcon extends Sprite {
 	public void move() {
 		super.move();
 
-		if (getSpawn() > 0) setSpawn(getSpawn() -1);
+		if (spawn > 0) spawn--;
 
 		//apply some thrust vectors using trig.
 		if (thrusting) {
@@ -93,36 +104,37 @@ public class Falcon extends Sprite {
 
 		}
 
-	} //end move
+	}
 
-	//this is a raster implementation of draw
+	//this is a raster implementation of draw()
 	@Override
 	public void draw(Graphics g) {
 
+		//set image-state
+		ImageState imageState;
 		if (isProtected()){
-			if (thrusting){
-				renderRaster((Graphics2D) g, getRasters().get("PROTECTED_THRUSTING"));
-			} else {
-				renderRaster((Graphics2D) g, getRasters().get("PROTECTED"));
-			}
+			if (thrusting) imageState = ImageState.FALCON_PRO_THR; else imageState = ImageState.FALCON_PRO;
+		}
+		else { //not protected
+			if (thrusting) imageState = ImageState.FALCON_THR; else imageState = ImageState.FALCON;
+		}
 
+		//cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
+		//and render the graphic according to the image-state
+		renderRaster((Graphics2D) g, getRasterMap().get(imageState.toString()));
+
+		//draw cyan shield, and warn player of impending non-protection
+		if (isProtected() && (spawn > 20 || spawn % 8 != 0)) {
 			//you can add vector elements to raster graphics
 			g.setColor(Color.CYAN);
 			g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
-
-		} else { //not protected
-			if (thrusting){
-				renderRaster((Graphics2D) g, getRasters().get("NORMAL_THRUSTING"));
-			} else {
-				renderRaster((Graphics2D) g, getRasters().get("NORMAL"));
-			}
-
 		}
 
 
-	} //end draw()
 
-	//methods for moving the falcon
+	}
+
+	//methods for setting the turn-state and thrust of the falcon
 	public void rotateLeft() {
 		turnState = TurnState.LEFT;
 	}

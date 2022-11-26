@@ -42,8 +42,6 @@ public abstract class Sprite implements Movable {
     //some sprites spin, such as floaters and asteroids
     private int spin;
 
-    //use for spawning and protection
-    private int spawn;
 
     //these are Cartesian points used to draw the polygon in vector mode.
     //once set, their values do not change. It's the job of the renderVector() method to adjust for orientation and
@@ -52,7 +50,7 @@ public abstract class Sprite implements Movable {
 
     //Either you use the cartesian points above (vector), or you can use the bufferedImages here (raster)
     //see Falcon for raster implementation
-    private Map<String, BufferedImage> rasters;
+    private Map<String, BufferedImage> rasterMap;
 
 
     //constructor
@@ -228,10 +226,10 @@ public abstract class Sprite implements Movable {
     }
 
     //used to load raster graphics
-    protected BufferedImage loadGraphic(String imgName) {
+    protected BufferedImage loadGraphic(String imagePath) {
         BufferedImage bufferedImage;
         try {
-            bufferedImage = ImageIO.read(Objects.requireNonNull(Sprite.class.getResourceAsStream("/imgs/" + imgName)));
+            bufferedImage = ImageIO.read(Objects.requireNonNull(Sprite.class.getResourceAsStream(imagePath)));
         }
         catch (IOException e) {
             e.printStackTrace();
