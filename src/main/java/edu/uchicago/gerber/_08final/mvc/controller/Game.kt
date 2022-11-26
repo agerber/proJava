@@ -253,12 +253,12 @@ class Game : Runnable, KeyListener {
 
             QUIT -> System.exit(0)
             UP -> {
-                fal.thrustOn()
+                fal.thrusting = true
                 if (!CommandCenter.paused && !CommandCenter.isGameOver()) clpThrust.loop(Clip.LOOP_CONTINUOUSLY)
             }
 
-            LEFT -> fal.rotateLeft()
-            RIGHT -> fal.rotateRight()
+            LEFT -> fal.turnState = Falcon.TurnState.LEFT
+            RIGHT -> fal.turnState = Falcon.TurnState.RIGHT
 
             else -> {}
         }
@@ -275,10 +275,10 @@ class Game : Runnable, KeyListener {
                 Sound.playSound("laser.wav")
             }
 
-            LEFT -> fal.stopRotating()
-            RIGHT -> fal.stopRotating()
+            LEFT, RIGHT -> fal.turnState = Falcon.TurnState.IDLE
+
             UP -> {
-                fal.thrustOff()
+                fal.thrusting = false
                 clpThrust.stop()
             }
 

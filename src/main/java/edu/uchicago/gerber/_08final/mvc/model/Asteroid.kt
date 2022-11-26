@@ -2,6 +2,7 @@ package edu.uchicago.gerber._08final.mvc.model
 
 import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
+import java.awt.Color
 import java.awt.Graphics
 import java.awt.Point
 import java.util.function.BiFunction
@@ -23,6 +24,8 @@ class Asteroid(size: Int) : Sprite() {
 
         //Asteroid is FOE
         team = Team.FOE
+
+        color = Color.WHITE
         //the spin will be either plus or minus 0-9
         spin = somePosNegValue(10)
         //random delta-x

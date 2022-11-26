@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage
 import java.util.*
 
 
-class Falcon : Sprite() {
+ class Falcon : Sprite() {
     // ==============================================================
     // FIELDS 
     // ==============================================================
@@ -98,32 +98,11 @@ class Falcon : Sprite() {
 
         }
 
-    } //end move
-
-    //methods for moving the falcon
-    fun rotateLeft() {
-        turnState = TurnState.LEFT
     }
 
-    fun rotateRight() {
-        turnState = TurnState.RIGHT
-    }
-
-    fun stopRotating() {
-        turnState = TurnState.IDLE
-    }
-
-    fun thrustOn() {
-        thrusting = true
-    }
-
-    fun thrustOff() {
-        thrusting = false
-    }
 
 
     //raster implementation of draw()
-    @Override
     override fun draw(g: Graphics) {
 
         //set image-state
