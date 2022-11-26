@@ -134,15 +134,6 @@ public class Falcon extends Sprite {
 
 	}
 
-	//methods for setting the turn-state and thrust of the falcon
-
-	public void toggleRotation(TurnState turnState){
-		this.turnState = turnState;
-	}
-
-	public void toggleThrust(boolean thrusting){
-		this.thrusting = thrusting;
-	}
 
 
 } //end class

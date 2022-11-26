@@ -322,15 +322,15 @@ public class Game implements Runnable, KeyListener {
 				System.exit(0);
 				break;
 			case UP:
-				fal.toggleThrust(true);
+				fal.setThrusting(true);
 				if (!CommandCenter.getInstance().isPaused() && !CommandCenter.getInstance().isGameOver())
 					clpThrust.loop(Clip.LOOP_CONTINUOUSLY);
 				break;
 			case LEFT:
-				fal.toggleRotation(Falcon.TurnState.LEFT);
+				fal.setTurnState(Falcon.TurnState.LEFT);
 				break;
 			case RIGHT:
-				fal.toggleRotation(Falcon.TurnState.RIGHT);
+				fal.setTurnState(Falcon.TurnState.RIGHT);
 				break;
 
 
@@ -361,10 +361,10 @@ public class Game implements Runnable, KeyListener {
 
 			case LEFT:
 			case RIGHT:
-				fal.toggleRotation(Falcon.TurnState.IDLE);
+				fal.setTurnState(Falcon.TurnState.IDLE);
 				break;
 			case UP:
-				fal.toggleThrust(false);
+				fal.setThrusting(false);
 				clpThrust.stop();
 				break;
 				
