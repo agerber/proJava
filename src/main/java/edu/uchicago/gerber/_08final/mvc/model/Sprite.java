@@ -17,6 +17,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 //the lombok @Data gives us automatic getters and setters on all members
+
+//A Sprite can be either vector or raster. We do not implement the draw(Graphics g) method, thereby forcing extending
+// classes to implement draw() depending on their graphics mode: vector or raster
 @Data
 public abstract class Sprite implements Movable {
     //the center-point of this sprite
@@ -42,15 +45,14 @@ public abstract class Sprite implements Movable {
     //use for spawning and protection
     private int spawn;
 
-    //these are Cartesian points used to draw the polygon in raster mode.
-    //once set, their values do not change. It's the job of the render() method to adjust for orientation and location.
+    //these are Cartesian points used to draw the polygon in vector mode.
+    //once set, their values do not change. It's the job of the renderVector() method to adjust for orientation and
+    // location. See NewShipFloater, Bullet, or Asteroid for implementation details.
     private Point[] cartesians;
 
-
-    //either you use the cartesians above (vector), or you can use the bufferedImages below (raster)
+    //Either you use the cartesians points above (vector), or you can use the bufferedImages here (raster)
+    //see Falcon for raster implementation
     private Map<String, BufferedImage> rasters;
-
-
 
 
     //constructor
@@ -132,18 +134,7 @@ public abstract class Sprite implements Movable {
         return false;
     }
 
-    //force extending classes to implement this
-    @Override
-    public abstract void draw(Graphics g); //{
 
-//        if (graphicsMode == GraphicsMode.VECTOR){
-//            g.setColor(getColor());
-//            renderVector(g);
-//        } else { //GraphicsMode.RASTER
-//
-//            renderRaster((Graphics2D) g, getRasters());
-//        }
-   // }
 
 
     //https://www.tabnine.com/code/java/methods/java.awt.geom.AffineTransform/rotate
@@ -154,7 +145,6 @@ public abstract class Sprite implements Movable {
         int width = getRadius() * 2;
         int height = getRadius() * 2;
         double angleRadians = Math.toRadians(getOrientation());
-
 
         AffineTransform oldTransform = g2d.getTransform();
         try {
@@ -179,22 +169,6 @@ public abstract class Sprite implements Movable {
 
         }
     }
-
-
-    //used to load raster graphics
-    protected BufferedImage loadGraphic(String imgName) {
-        BufferedImage img;
-        try {
-            img = ImageIO.read(Objects.requireNonNull(Sprite.class.getResourceAsStream("/imgs/" + imgName)));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            img = null;
-        }
-        return img;
-    }
-
-
 
     protected void renderVector(Graphics g) {
 
@@ -253,6 +227,18 @@ public abstract class Sprite implements Movable {
         //#########################################
     }
 
+    //used to load raster graphics
+    protected BufferedImage loadGraphic(String imgName) {
+        BufferedImage img;
+        try {
+            img = ImageIO.read(Objects.requireNonNull(Sprite.class.getResourceAsStream("/imgs/" + imgName)));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            img = null;
+        }
+        return img;
+    }
 
 
 

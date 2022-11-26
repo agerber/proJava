@@ -39,9 +39,9 @@ public class Falcon extends Sprite {
 		setSpawn(INITIAL_SPAWN_TIME);
 
 		//in this case we are loading the raster graphics
+		//see the resources/imgs directory in the root of this project.
 		Map<String, BufferedImage> rasters = new HashMap<>();
 		rasters.put("NORMAL",loadGraphic("falcon50.png") );
-
 		rasters.put("NORMAL_THRUSTING",loadGraphic("falcon50thrust.png") );
 		rasters.put("PROTECTED",loadGraphic("falcon50protect.png") );
 		rasters.put("PROTECTED_THRUSTING",loadGraphic("falcon50both.png") );
@@ -52,7 +52,7 @@ public class Falcon extends Sprite {
 	}
 
 
-	//if spawning then make invincible. You can also set conditions for shields here
+	//if spawning then make invincible. You can also set conditions for power-up shields here, etc.
 	@Override
 	public boolean isProtected() {
 		return  getSpawn() > 0;
@@ -98,6 +98,34 @@ public class Falcon extends Sprite {
 
 	} //end move
 
+	//this is a raster implementation of draw
+	@Override
+	public void draw(Graphics g) {
+
+
+		if (isProtected()){
+			if (thrusting){
+				renderRaster((Graphics2D) g, getRasters().get("PROTECTED_THRUSTING"));
+			} else {
+				renderRaster((Graphics2D) g, getRasters().get("PROTECTED"));
+			}
+
+			//you can add vector elements to raster graphics
+			g.setColor(Color.CYAN);
+			g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
+
+		} else { //not protected
+			if (thrusting){
+				renderRaster((Graphics2D) g, getRasters().get("NORMAL_THRUSTING"));
+			} else {
+				renderRaster((Graphics2D) g, getRasters().get("NORMAL"));
+			}
+
+		}
+
+
+	} //end draw()
+
 	//methods for moving the falcon
 	public void rotateLeft() {
 		turnState = TurnState.LEFT;
@@ -121,30 +149,5 @@ public class Falcon extends Sprite {
 
 
 
-	@Override
-	public void draw(Graphics g) {
-
-
-		if (isProtected()){
-			if (!thrusting){
-				renderRaster((Graphics2D) g, getRasters().get("PROTECTED"));
-			} else {
-				renderRaster((Graphics2D) g, getRasters().get("PROTECTED_THRUSTING"));
-			}
-			//you can add vector elements to raster graphics
-			g.setColor(Color.CYAN);
-			g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
-
-		} else {
-			if (!thrusting){
-				renderRaster((Graphics2D) g, getRasters().get("NORMAL"));
-			} else {
-				renderRaster((Graphics2D) g, getRasters().get("NORMAL_THRUSTING"));
-			}
-
-		}
-
-
-	} //end draw()
 
 } //end class
