@@ -28,6 +28,8 @@ public class Falcon extends Sprite {
 	// alien in the toggleAlien() method
 	private final Point[] cartsFalcon, cartsAlien;
 
+	private boolean drawRaster;
+
 
 
 	// ==============================================================
@@ -148,12 +150,17 @@ public class Falcon extends Sprite {
 		//set initial default to normal (falcon) points
 		setCartesians(cartsFalcon);
 
+		//in this case we are loading the raster graphics as well for demo purposes. You will do either vector or
+		// raster, but not both.
+		setRaster(loadGraphic("falcon50.png"));
+
+
 
 	}
 
 	//no real utility, just demonstrates how to morph the color/shape of a Sprite
-	public void toggleAlien(boolean alien){
-			if (alien){
+	public void toggleAlien(boolean showAlien){
+			if (showAlien){
 				setColor(Color.GREEN);
 				setCartesians(cartsAlien);
 			} else {
@@ -161,6 +168,13 @@ public class Falcon extends Sprite {
 				setCartesians(cartsFalcon);
 			}
 	}
+
+	public void toggleRaster(boolean drawRaster){
+		this.drawRaster = drawRaster;
+
+	}
+
+
 
 
 	//if fading then make invincible
@@ -241,6 +255,11 @@ public class Falcon extends Sprite {
 
 	@Override
 	public void draw(Graphics g) {
+
+		if (true){
+			drawRaster((Graphics2D) g);
+			return;
+		}
 
 		Color colShip;
 		if (getFade() == 255) {
