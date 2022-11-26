@@ -3,11 +3,13 @@ package edu.uchicago.gerber._08final.mvc.model
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Color
 import java.awt.Graphics
+import java.awt.Graphics2D
 import java.awt.Point
+import java.awt.image.BufferedImage
 import java.util.*
 
 
-class Falcon : Sprite() { //end class
+class Falcon : Sprite() {
     // ==============================================================
     // FIELDS 
     // ==============================================================
@@ -18,6 +20,7 @@ class Falcon : Sprite() { //end class
     }
 
     var thrusting = false
+    var spawn = 0
 
     enum class TurnState {
         IDLE, LEFT, RIGHT
@@ -25,140 +28,36 @@ class Falcon : Sprite() { //end class
 
     var turnState = TurnState.IDLE
 
-    //used to toggle between the two shapes of this sprite
-    var pntAlien: List<Point>
-    var pntShip: List<Point>
+      enum class ImageState {
+          FALCON,  //normal ship
+          FALCON_THR,  //normal ship thrusting
+          FALCON_PRO,  //protected ship (green)
+          FALCON_PRO_THR //protected ship (green) thrusting
+      }
 
 
-    // ==============================================================
+      // ==============================================================
     // CONSTRUCTOR 
     // ==============================================================
     init {
         team = Team.FRIEND
         //this is the size (radius) of the falcon
-        radius = 35
-        val listShip = ArrayList<Point>()
-        // Robert Alef's awesome falcon design
-        listShip.add(Point(0, 9))
-        listShip.add(Point(-1, 6))
-        listShip.add(Point(-1, 3))
-        listShip.add(Point(-4, 1))
-        listShip.add(Point(4, 1))
-        listShip.add(Point(-4, 1))
-        listShip.add(Point(-4, -2))
-        listShip.add(Point(-1, -2))
-        listShip.add(Point(-1, -9))
-        listShip.add(Point(-1, -2))
-        listShip.add(Point(-4, -2))
-        listShip.add(Point(-10, -8))
-        listShip.add(Point(-5, -9))
-        listShip.add(Point(-7, -11))
-        listShip.add(Point(-4, -11))
-        listShip.add(Point(-2, -9))
-        listShip.add(Point(-2, -10))
-        listShip.add(Point(-1, -10))
-        listShip.add(Point(-1, -9))
-        listShip.add(Point(1, -9))
-        listShip.add(Point(1, -10))
-        listShip.add(Point(2, -10))
-        listShip.add(Point(2, -9))
-        listShip.add(Point(4, -11))
-        listShip.add(Point(7, -11))
-        listShip.add(Point(5, -9))
-        listShip.add(Point(10, -8))
-        listShip.add(Point(4, -2))
-        listShip.add(Point(1, -2))
-        listShip.add(Point(1, -9))
-        listShip.add(Point(1, -2))
-        listShip.add(Point(4, -2))
-        listShip.add(Point(4, 1))
-        listShip.add(Point(1, 3))
-        listShip.add(Point(1, 6))
-        listShip.add(Point(0, 9))
+        radius = 32
 
-        //Danica Gutierrez' Alien
-        val listAlien: MutableList<Point> = ArrayList()
-        listAlien.add(Point(0, 2))
-        listAlien.add(Point(1, 2))
-        listAlien.add(Point(1, 3))
-        listAlien.add(Point(2, 3))
-        listAlien.add(Point(2, 4))
-        listAlien.add(Point(3, 4))
-        listAlien.add(Point(3, 3))
-        listAlien.add(Point(2, 3))
-        listAlien.add(Point(2, 2))
-        listAlien.add(Point(3, 2))
-        listAlien.add(Point(3, 1))
-        listAlien.add(Point(4, 1))
-        listAlien.add(Point(4, 0))
-        listAlien.add(Point(5, 0))
-        //bottom right
-        listAlien.add(Point(5, 0))
-        listAlien.add(Point(5, -3))
-        listAlien.add(Point(4, -3))
-        listAlien.add(Point(4, -1))
-        listAlien.add(Point(3, -1))
-        listAlien.add(Point(3, -3))
-        listAlien.add(Point(2, -3))
-        listAlien.add(Point(2, -4))
-        listAlien.add(Point(1, -4))
-        listAlien.add(Point(1, -3))
-        listAlien.add(Point(2, -3))
-        listAlien.add(Point(2, -2))
-        listAlien.add(Point(1, -2))
-        listAlien.add(Point(0, -2))
-        //bottom left quadrant
-        listAlien.add(Point(-2, -2))
-        listAlien.add(Point(-2, -3))
-        listAlien.add(Point(-1, -3))
-        listAlien.add(Point(-1, -4))
-        listAlien.add(Point(-2, -4))
-        listAlien.add(Point(-2, -3))
-        listAlien.add(Point(-3, -3))
-        listAlien.add(Point(-3, -1))
-        listAlien.add(Point(-4, -1))
-        listAlien.add(Point(-4, -3))
-        listAlien.add(Point(-5, -3))
-        listAlien.add(Point(-5, 0))
-        //top left quadrant
-        listAlien.add(Point(-5, 0))
-        listAlien.add(Point(-4, 0))
-        listAlien.add(Point(-4, 1))
-        listAlien.add(Point(-3, 1))
-        listAlien.add(Point(-3, 2))
-        listAlien.add(Point(-2, 2))
-        listAlien.add(Point(-2, 3))
-        listAlien.add(Point(-3, 3))
-        listAlien.add(Point(-3, 4))
-        listAlien.add(Point(-2, 4))
-        listAlien.add(Point(-2, 3))
-        listAlien.add(Point(-1, 3))
-        listAlien.add(Point(-1, 2))
-        listAlien.add(Point(0, 2))
 
-        //we need to create members for these points (unlike other Sprites) because we are morphing between ship/alien
-        pntAlien = listAlien
-        pntShip = listShip
+          val rasterMap: MutableMap<String, BufferedImage?> = HashMap()
+          rasterMap[ImageState.FALCON.toString()] = loadGraphic("/imgs/falcon50.png")
+          rasterMap[ImageState.FALCON_THR.toString()] = loadGraphic("/imgs/falcon50thrust.png")
+          rasterMap[ImageState.FALCON_PRO.toString()] = loadGraphic("/imgs/falcon50protect.png")
+          rasterMap[ImageState.FALCON_PRO_THR.toString()] = loadGraphic("/imgs/falcon50protect_thrust.png")
+          this.rasterMap = rasterMap
 
-        //default value of cartesians is ship
-        cartesians = listShip
-    }
-
-    //has no functional value, but demonstrates how to morph a sprite
-    fun toggleAlien(alien: Boolean) {
-        if (alien) {
-            color = Color.GREEN
-            cartesians = pntAlien
-        } else {
-            color = Color.WHITE
-            cartesians = pntShip
-        }
     }
 
     //if fading, then make invincible
     override fun isProtected(): Boolean {
-        return fade < 255
-               // || cartesians == pntAlien
+        return spawn > 0
+
     }
 
     // ==============================================================
@@ -166,9 +65,7 @@ class Falcon : Sprite() { //end class
     // ==============================================================
     override fun move() {
         super.move()
-        if (fade < 255) {
-            fade = fade + 3
-        }
+        if (spawn > 0) spawn--
 
         //apply some thrust vectors using trig.
         if (thrusting) {
@@ -224,83 +121,30 @@ class Falcon : Sprite() { //end class
         thrusting = false
     }
 
-    private fun adjustColor(colorNum: Int, adjust: Int): Int {
-        return Math.max(colorNum - adjust, 0)
-    }
 
+    //raster implementation of draw()
+    @Override
     override fun draw(g: Graphics) {
-        val colShip: Color
-        colShip = if (fade == 255) {
-            color //get native color of the sprite
-        } else if (fade > 220 && fade % 9 == 0) {
-            Color(0, 32, 128) //dark blue
-        } else {
-            Color(
-                adjustColor(fade, 200),  //red
-                adjustColor(fade, 175),  //green
-                fade //blue
-            )
+
+        //set image-state
+        val imageState: ImageState
+        imageState = if (isProtected()) {
+            if (thrusting) ImageState.FALCON_PRO_THR else ImageState.FALCON_PRO
+        } else { //not protected
+            if (thrusting) ImageState.FALCON_THR else ImageState.FALCON
         }
 
-        //most Sprites do not have flames, but Falcon does
-        val flames =
-            doubleArrayOf(23 * Math.PI / 24 + Math.PI / 2, Math.PI + Math.PI / 2, 25 * Math.PI / 24 + Math.PI / 2)
-        val pntFlames = arrayOfNulls<Point>(flames.size)
+        //cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
+        //and render the image according to the image-state
+        renderRaster((g as Graphics2D), rasterMap[imageState.toString()]!!)
 
-        //thrusting
-        if (thrusting) {
-            //the flame
-            for (nC in flames.indices) {
-                if (nC % 2 != 0) //odd
-                {
-                    //adjust the position so that the flame is off-center
-                    pntFlames[nC] = Point(
-                        (center.x + (2
-                                * radius
-                                * Math.sin(
-                            Math.toRadians(orientation.toDouble())
-                                    + flames[nC]
-                        ))).toInt(), (center.y - (2
-                                * radius
-                                * Math.cos(
-                            Math.toRadians(orientation.toDouble())
-                                    + flames[nC]
-                        ))).toInt()
-                    )
-                } else  //even
-                {
-                    pntFlames[nC] = Point(
-                        (center.x + (radius
-                                * 1.1
-                                * Math.sin(
-                            Math.toRadians(orientation.toDouble())
-                                    + flames[nC]
-                        ))).toInt(), (center.y - (radius
-                                * 1.1
-                                * Math.cos(
-                            Math.toRadians(orientation.toDouble())
-                                    + flames[nC]
-                        ))).toInt()
-                    )
-                } //end even/odd else
-            } //end for loop
-
-
-            g.color = colShip //flames same color as ship
-            g.fillPolygon(
-                Arrays.stream(pntFlames)
-                    .map { pnt: Point? -> pnt!!.x }
-                    .mapToInt { obj: Int -> obj }
-                    .toArray(),
-                Arrays.stream(pntFlames)
-                    .map { pnt: Point? -> pnt!!.y }
-                    .mapToInt { obj: Int -> obj }
-                    .toArray(),
-                flames.size)
-        } //end if flame
-        draw(g, colShip)
-
-    } //end draw()
+        //draw cyan shield, and warn player of impending non-protection
+        if (isProtected() && !(spawn <= 21 && spawn % 7 == 0)) {
+            //you can add vector elements to raster graphics
+            g.setColor(Color.CYAN)
+            g.drawOval(center.x - radius, center.y - radius, radius * 2, radius * 2)
+        }
+    }
 
 
 }

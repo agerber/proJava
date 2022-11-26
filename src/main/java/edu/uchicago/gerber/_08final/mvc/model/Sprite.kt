@@ -4,11 +4,15 @@ import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Color
 import java.awt.Graphics
+import java.awt.Graphics2D
 import java.awt.Point
+import java.awt.geom.AffineTransform
+import java.awt.image.BufferedImage
+import java.io.IOException
 import java.util.*
-import java.util.function.BiFunction
 import java.util.function.Function
-import java.util.stream.Collectors
+import javax.imageio.ImageIO
+
 
 abstract class Sprite : Movable {
 
@@ -24,6 +28,7 @@ abstract class Sprite : Movable {
 
     //these will be initialized in the subclasses and have no default values
     lateinit var cartesians: List<Point>
+    lateinit var rasterMap: Map<String, BufferedImage?>
     lateinit var team: Team
 
     init {
@@ -105,20 +110,10 @@ abstract class Sprite : Movable {
     }
 
 
-    override fun draw(g: Graphics) {
-        //set the native color of the sprite
+
+    protected fun renderVector(g: Graphics) {
+
         g.color = color
-        render(g)
-    }
-
-    fun draw(g: Graphics, color: Color) {
-        //set custom color
-        g.color = color
-        render(g)
-    }
-
-    private fun render(g: Graphics) {
-
         // to render this Sprite, we need to, 1: convert raw cartesians to raw polars, 2: adjust polars
         // for orientation of sprite. Convert back to cartesians 3: adjust for center-point (location).
         // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to drawPolygon().
@@ -166,9 +161,45 @@ abstract class Sprite : Movable {
         //#########################################
     }
 
-   fun pointsListToArray(pntPs: List<Point?>): Array<out Any> {
-        return pntPs.stream()
-            .toArray();
+
+
+    //https://www.tabnine.com/code/java/methods/java.awt.geom.AffineTransform/rotate
+    protected open fun renderRaster(g2d: Graphics2D, bufferedImage: BufferedImage) {
+        val centerX: Int = center.x
+        val centerY: Int = center.y
+        val width: Int = radius * 2
+        val height: Int = radius * 2
+        val angleRadians = Math.toRadians(orientation.toDouble())
+        val oldTransform = g2d.transform
+        try {
+            val scaleX = width * 1.0 / bufferedImage.width
+            val scaleY = height * 1.0 / bufferedImage.height
+            val affineTransform = AffineTransform(oldTransform)
+            if (centerX != 0 || centerY != 0) {
+                affineTransform.translate(centerX.toDouble(), centerY.toDouble())
+            }
+            affineTransform.scale(scaleX, scaleY)
+            if (angleRadians != 0.0) {
+                affineTransform.rotate(angleRadians)
+            }
+            affineTransform.translate(-bufferedImage.width / 2.0, -bufferedImage.height / 2.0)
+            g2d.transform = affineTransform
+            g2d.drawImage(bufferedImage, 0, 0, bufferedImage.width, bufferedImage.height, null)
+        } finally {
+            g2d.transform = oldTransform
+        }
     }
+
+    protected open fun loadGraphic(imgPath: String): BufferedImage? {
+        val img: BufferedImage?
+        img = try {
+            ImageIO.read(Objects.requireNonNull(Sprite::class.java.getResourceAsStream(imgPath)))
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+        return img
+    }
+
 
 }

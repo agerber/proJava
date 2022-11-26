@@ -2,6 +2,7 @@ package edu.uchicago.gerber._08final.mvc.model
 
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Color
+import java.awt.Graphics
 import java.awt.Point
 import java.util.*
 
@@ -32,6 +33,10 @@ class NewShipFloater : Sprite() {
         listPoint.add(Point(-5, 5))
         listPoint.add(Point(0, 4))
         cartesians = listPoint
+    }
+
+    override fun draw(g: Graphics) {
+        renderVector(g)
     }
 
 

@@ -2,6 +2,7 @@ package edu.uchicago.gerber._08final.mvc.model
 
 import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
+import java.awt.Graphics
 import java.awt.Point
 import java.util.function.BiFunction
 import java.util.function.Supplier
@@ -92,6 +93,9 @@ class Asteroid(size: Int) : Sprite() {
             .toArray()
 
 
+    }
+    override fun draw(g: Graphics) {
+        renderVector(g)
     }
 
 

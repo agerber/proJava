@@ -27,6 +27,8 @@ object CommandCenter {
 
      val opsQueue = GameOpsQueue()
 
+
+
     fun initGame() {
         clearAll()
         level = 1
@@ -103,6 +105,11 @@ object CommandCenter {
         return Math.sqrt(Math.pow(dX, 2.0) + Math.pow(dY, 2.0))
     }
 
+
+    fun pointsListToArray(pntPs: List<Point?>): Array<out Any> {
+        return pntPs.stream()
+            .toArray();
+    }
 
 
 }

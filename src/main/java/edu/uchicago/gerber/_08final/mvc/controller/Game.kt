@@ -259,7 +259,7 @@ class Game : Runnable, KeyListener {
 
             LEFT -> fal.rotateLeft()
             RIGHT -> fal.rotateRight()
-            ALIEN -> fal.toggleAlien(true)
+
             else -> {}
         }
     }
@@ -291,8 +291,6 @@ class Game : Runnable, KeyListener {
                 }
 
             }
-            ALIEN -> fal.toggleAlien(false)
-
             else -> {}
         }
     }

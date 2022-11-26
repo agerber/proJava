@@ -1,6 +1,8 @@
 package edu.uchicago.gerber._08final.mvc.model
 
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
+import java.awt.Color
+import java.awt.Graphics
 import java.awt.Point
 import java.util.*
 
@@ -12,6 +14,7 @@ class Bullet(fal: Falcon) : Sprite() {
 
     init {
         team = Team.FRIEND
+        color = Color.ORANGE
 
         //a bullet expires after 20 frames. set to one more than frame expiration
         expiry = 21
@@ -35,6 +38,11 @@ class Bullet(fal: Falcon) : Sprite() {
         listPoint.add(Point(0, -2))
         listPoint.add(Point(-1, -1))
         cartesians = listPoint
+    }
+
+    override fun draw(g: Graphics) {
+        //set the native color of the sprite
+        renderVector(g)
     }
 
 }

@@ -2,14 +2,14 @@ package edu.uchicago.gerber._08final.mvc.view
 
 import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.model.CommandCenter
+import edu.uchicago.gerber._08final.mvc.model.CommandCenter.pointsListToArray
 import edu.uchicago.gerber._08final.mvc.model.Movable
+import edu.uchicago.gerber._08final.mvc.model.PolarPoint
 import java.awt.*
+import java.util.*
+import java.util.concurrent.atomic.AtomicInteger
 import java.util.function.BiConsumer
 import java.util.function.Function
-import java.util.Arrays
-import java.util.concurrent.atomic.AtomicInteger
-import java.awt.Graphics
-import edu.uchicago.gerber._08final.mvc.model.PolarPoint
 
 
 class GamePanel(dim: Dimension?) : Panel() {
@@ -37,7 +37,50 @@ class GamePanel(dim: Dimension?) : Panel() {
         gmf = GameFrame()
         gmf.contentPane.add(this)
         //clone it
-        pntShip = ArrayList(CommandCenter.falcon.cartesians)
+
+        // Robert Alef's awesome falcon design
+        val listShip: MutableList<Point> = ArrayList()
+        listShip.add(Point(0, 9))
+        listShip.add(Point(-1, 6))
+        listShip.add(Point(-1, 3))
+        listShip.add(Point(-4, 1))
+        listShip.add(Point(4, 1))
+        listShip.add(Point(-4, 1))
+        listShip.add(Point(-4, -2))
+        listShip.add(Point(-1, -2))
+        listShip.add(Point(-1, -9))
+        listShip.add(Point(-1, -2))
+        listShip.add(Point(-4, -2))
+        listShip.add(Point(-10, -8))
+        listShip.add(Point(-5, -9))
+        listShip.add(Point(-7, -11))
+        listShip.add(Point(-4, -11))
+        listShip.add(Point(-2, -9))
+        listShip.add(Point(-2, -10))
+        listShip.add(Point(-1, -10))
+        listShip.add(Point(-1, -9))
+        listShip.add(Point(1, -9))
+        listShip.add(Point(1, -10))
+        listShip.add(Point(2, -10))
+        listShip.add(Point(2, -9))
+        listShip.add(Point(4, -11))
+        listShip.add(Point(7, -11))
+        listShip.add(Point(5, -9))
+        listShip.add(Point(10, -8))
+        listShip.add(Point(4, -2))
+        listShip.add(Point(1, -2))
+        listShip.add(Point(1, -9))
+        listShip.add(Point(1, -2))
+        listShip.add(Point(4, -2))
+        listShip.add(Point(4, 1))
+        listShip.add(Point(1, 3))
+        listShip.add(Point(1, 6))
+        listShip.add(Point(0, 9))
+
+        //this just displays the ships remaining
+        pntShip  = listShip
+
+
         gmf.pack()
         initView()
         gmf.size = dim
@@ -148,7 +191,7 @@ class GamePanel(dim: Dimension?) : Panel() {
     // Draw the number of falcons left on the bottom-right of the screen.
     private fun drawOneShipLeft(g: Graphics, offSet: Int) {
 
-        g.color = Color.WHITE
+        g.color = Color.ORANGE
 
         val SIZE = 15
         val DEGREES = 90.0
