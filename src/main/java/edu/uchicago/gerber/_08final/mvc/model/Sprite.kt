@@ -23,11 +23,13 @@ abstract class Sprite : Movable {
     var orientation: Int = 0
     var expiry: Int = 0
     var spin: Int = 0
-    var fade: Int = 0
     var color: Color = Color.WHITE
 
-    //these will be initialized in the subclasses and have no default values
+    //all these will be initialized in the subclasses and have no default values
+    //used for vectors
     lateinit var cartesians: List<Point>
+
+    //used for rasters
     lateinit var rasterMap: Map<String, BufferedImage?>
     lateinit var team: Team
 

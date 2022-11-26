@@ -4,7 +4,6 @@ import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.Graphics2D
-import java.awt.Point
 import java.awt.image.BufferedImage
 import java.util.*
 
@@ -16,7 +15,7 @@ class Falcon : Sprite() {
     companion object {
         private const val THRUST = .65
         private const val DEGREE_STEP = 9
-        const val FADE_INITIAL_VALUE = 51
+        const val SPAWN_INIT_VALUE = 68
     }
 
     var thrusting = false
@@ -28,15 +27,15 @@ class Falcon : Sprite() {
 
     var turnState = TurnState.IDLE
 
-      enum class ImageState {
-          FALCON,  //normal ship
-          FALCON_THR,  //normal ship thrusting
-          FALCON_PRO,  //protected ship (green)
-          FALCON_PRO_THR //protected ship (green) thrusting
-      }
+    enum class ImageState {
+        FALCON,  //normal ship
+        FALCON_THR,  //normal ship thrusting
+        FALCON_PRO,  //protected ship (green)
+        FALCON_PRO_THR //protected ship (green) thrusting
+    }
 
 
-      // ==============================================================
+    // ==============================================================
     // CONSTRUCTOR 
     // ==============================================================
     init {
@@ -45,12 +44,13 @@ class Falcon : Sprite() {
         radius = 32
 
 
-          val rasterMap: MutableMap<String, BufferedImage?> = HashMap()
-          rasterMap[ImageState.FALCON.toString()] = loadGraphic("/imgs/falcon50.png")
-          rasterMap[ImageState.FALCON_THR.toString()] = loadGraphic("/imgs/falcon50thrust.png")
-          rasterMap[ImageState.FALCON_PRO.toString()] = loadGraphic("/imgs/falcon50protect.png")
-          rasterMap[ImageState.FALCON_PRO_THR.toString()] = loadGraphic("/imgs/falcon50protect_thrust.png")
-          this.rasterMap = rasterMap
+
+        val rasterMap: MutableMap<String, BufferedImage?> = HashMap()
+        rasterMap[ImageState.FALCON.toString()] = loadGraphic("/imgs/falcon50.png")
+        rasterMap[ImageState.FALCON_THR.toString()] = loadGraphic("/imgs/falcon50thrust.png")
+        rasterMap[ImageState.FALCON_PRO.toString()] = loadGraphic("/imgs/falcon50protect.png")
+        rasterMap[ImageState.FALCON_PRO_THR.toString()] = loadGraphic("/imgs/falcon50protect_thrust.png")
+        this.rasterMap = rasterMap
 
     }
 

@@ -1,7 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model
 
 import edu.uchicago.gerber._08final.mvc.controller.Game
-import lombok.Data
 import java.awt.Point
 import java.util.*
 import java.util.function.BiFunction
@@ -44,7 +43,7 @@ object CommandCenter {
         numFalcons -= 1
         if (isGameOver()) return
         //playSound("shipspawn.wav")
-        falcon.fade = Falcon.FADE_INITIAL_VALUE
+        falcon.spawn = Falcon.SPAWN_INIT_VALUE
         //put falcon in the middle of the game-space
         falcon.center = Point(Game.DIM.width / 2, Game.DIM.height / 2)
         falcon.orientation = Game.R.nextInt(360)

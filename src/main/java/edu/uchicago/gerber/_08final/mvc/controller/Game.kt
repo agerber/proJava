@@ -234,7 +234,7 @@ class Game : Runnable, KeyListener {
             CommandCenter.level = CommandCenter.level + 1
             spawnBigAsteroids(CommandCenter.level)
             //setFade e.g. protect the falcon so that player has time to avoid newly spawned asteroids.
-            CommandCenter.falcon.fade = Falcon.FADE_INITIAL_VALUE
+            CommandCenter.falcon.spawn = Falcon.SPAWN_INIT_VALUE
         }
     }
 
