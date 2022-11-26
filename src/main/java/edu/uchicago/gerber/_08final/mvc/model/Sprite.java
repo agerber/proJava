@@ -10,10 +10,8 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import lombok.Data;
-import lombok.experimental.Tolerate;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -49,7 +47,7 @@ public abstract class Sprite implements Movable {
     private Point[] cartesians;
 
     //either you use the cartesians above (vector), or you can use the bufferedImage below (raster)
-    private BufferedImage raster;
+    private BufferedImage[] rasters;
 
     //constructor
     public Sprite() {
@@ -146,7 +144,7 @@ public abstract class Sprite implements Movable {
     }
 
     //https://www.tabnine.com/code/java/methods/java.awt.geom.AffineTransform/rotate
-    protected void drawRaster( Graphics2D g2d ) {
+    protected void drawRaster( Graphics2D g2d, BufferedImage bufferedImage ) {
 
         int centerX = getCenter().x;
         int centerY = getCenter().y;
@@ -154,7 +152,6 @@ public abstract class Sprite implements Movable {
         int height = getRadius() * 2;
         double angleRadians = Math.toRadians(getOrientation());
 
-        BufferedImage bufferedImage = getRaster();
 
         AffineTransform oldTransform = g2d.getTransform();
         try {
@@ -176,6 +173,7 @@ public abstract class Sprite implements Movable {
             g2d.drawImage( bufferedImage, 0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), null );
         } finally {
             g2d.setTransform( oldTransform );
+
         }
     }
 
