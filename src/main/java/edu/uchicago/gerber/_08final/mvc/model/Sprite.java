@@ -50,7 +50,7 @@ public abstract class Sprite implements Movable {
     // location. See NewShipFloater, Bullet, or Asteroid for implementation details.
     private Point[] cartesians;
 
-    //Either you use the cartesians points above (vector), or you can use the bufferedImages here (raster)
+    //Either you use the cartesian points above (vector), or you can use the bufferedImages here (raster)
     //see Falcon for raster implementation
     private Map<String, BufferedImage> rasters;
 
@@ -176,7 +176,7 @@ public abstract class Sprite implements Movable {
 
         // to render this Sprite, we need to, 1: convert raw cartesians to raw polars, 2: adjust polars
         // for orientation of sprite. Convert back to cartesians 3: adjust for center-point (location).
-        // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to drawPolygon().
+        // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to g.drawPolygon().
 
         //convert raw cartesians to raw polars
         List<PolarPoint> polars = CommandCenter.cartesianToPolar(Arrays.asList(getCartesians()));
@@ -229,15 +229,15 @@ public abstract class Sprite implements Movable {
 
     //used to load raster graphics
     protected BufferedImage loadGraphic(String imgName) {
-        BufferedImage img;
+        BufferedImage bufferedImage;
         try {
-            img = ImageIO.read(Objects.requireNonNull(Sprite.class.getResourceAsStream("/imgs/" + imgName)));
+            bufferedImage = ImageIO.read(Objects.requireNonNull(Sprite.class.getResourceAsStream("/imgs/" + imgName)));
         }
         catch (IOException e) {
             e.printStackTrace();
-            img = null;
+            bufferedImage = null;
         }
-        return img;
+        return bufferedImage;
     }
 
 
