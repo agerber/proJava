@@ -39,7 +39,8 @@ your own model.
 This game uses both vector and raster graphics.
 The advantage of vector graphics is that they scale infinitely, and they render extremely fast. If you use
 raster graphics (png's, jpg's, etc) which are essentially two-dimensional grids of pixels, make sure to reduce
- the pixel depth, otherwise your game will lag when rendering. For raster graphics implementation, see the Falcon class.
+ the pixel depth (e.g. the Falcon images have a pixel depth of 50x50) otherwise your game will lag when rendering. For
+ raster graphics implementation, see the Falcon class.
 
 
 The TAs will select the top ten games. The ten finalists will demonstrate their games and present their code and
