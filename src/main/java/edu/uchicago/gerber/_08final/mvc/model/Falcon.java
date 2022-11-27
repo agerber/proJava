@@ -18,7 +18,7 @@ public class Falcon extends Sprite {
 	public static final int INITIAL_SPAWN_TIME = 68;
 
 	//use for spawning and protection
-	private int spawn = INITIAL_SPAWN_TIME;
+	private int spawn;
 
 	private boolean thrusting = false;
 	public enum TurnState {
@@ -44,6 +44,7 @@ public class Falcon extends Sprite {
 
 		//this is the radius of the falcon
 		setRadius(32);
+
 
 
 		//We use HashMap which has a seek-time of O(1)
