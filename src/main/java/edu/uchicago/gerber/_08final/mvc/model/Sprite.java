@@ -217,10 +217,10 @@ public abstract class Sprite implements Movable {
 
                 polars.size());
 
-        //for debugging center-point. Feel free to remove these two lines.
+        //for debugging center-point and collision. Feel free to remove these three lines.
         //#########################################
-        g.setColor(Color.ORANGE);
-        g.fillOval(getCenter().x - 1, getCenter().y - 1, 2, 2);
+        //g.setColor(Color.GRAY);
+        //g.fillOval(getCenter().x - 1, getCenter().y - 1, 2, 2);
         //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
         //#########################################
     }
