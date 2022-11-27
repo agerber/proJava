@@ -49,11 +49,20 @@ public class Falcon extends Sprite {
 		//We use (Linked) HashMap which has a seek-time of O(1)
 		//See the resources directory in the root of this project for pngs.
 		//Using enums as keys is safer b/c we know the value exists when we get it later;
-		//if we had hard-coded strings here and below, there's a chance we could misspell it below.
+		//if we had hard-coded strings here and below, there's a chance we could misspell it below or elsewhere.
 
-		//If you use a LinkedHashMap as we do here, you can also iterate through these bitmaps in the same order of
-		// insertion, which is convenient if you have an animated series of raster images. Get the ordered key-set
-		// this way: Set<String> keys = getRasterMap().keySet();
+		//If you use a LinkedHashMap, as we do here, you can also iterate through the map entries in the same order of
+		// insertion, which is convenient if you have an animated series of raster images. With animation, call the
+		// iterator.next() method at each draw(). See https://www.geeksforgeeks.org/how-to-iterate-linkedhashmap-in-java/
+		// Similar to a stream, you can not re-iterate a spent iterator. So, you must reset the iterator after each
+		// full cycle if you intend to loop (think Mario walking from Donkey Kong).
+
+		// You can either create your own series, or search for animated series online. See the explosion_series.png
+		// file in the resources/imgs/ directory for an example of a series. If you use this series file (or similar),
+		// you will need to slice the series into individual pngs, make the png backgrounds transparent, and
+		// likely reduce the pixel depth to a level that is both tolerable in terms of pixelation, but small enough to
+		// render quickly.
+
 
 		Map<String, BufferedImage> rasterMap = new LinkedHashMap<>();
 		rasterMap.put(ImageState.FALCON.toString(), loadGraphic("/imgs/falcon50.png") );
