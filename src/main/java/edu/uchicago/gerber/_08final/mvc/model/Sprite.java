@@ -19,7 +19,8 @@ import java.awt.image.BufferedImage;
 //the lombok @Data gives us automatic getters and setters on all members
 
 //A Sprite can be either vector or raster. We do not implement the draw(Graphics g) method, thereby forcing extending
-// classes to implement draw() depending on their graphics mode: vector or raster
+// classes to implement draw() depending on their graphics mode: vector or raster.  See Falcon class for raster
+// implementation of draw(). See NewShipFloater, Bullet, or Asteroid for vector implementations of draw().
 @Data
 public abstract class Sprite implements Movable {
     //the center-point of this sprite
@@ -43,14 +44,13 @@ public abstract class Sprite implements Movable {
 
     //these are Cartesian points used to draw the polygon in vector mode.
     //once set, their values do not change. It's the job of the renderVector() method to adjust for orientation and
-    // location. See NewShipFloater, Bullet, or Asteroid for implementation details.
+    // location.
     private Point[] cartesians;
 
     //used for vector rendering
     private Color color;
 
     //Either you use the cartesian points above (vector), or you can use the BufferedImages here (raster).
-    //See Falcon class for raster implementation
     private Map<String, BufferedImage> rasterMap;
 
 
