@@ -134,9 +134,10 @@ public class CommandCenter {
 	}
 
 	//private helper method
-	private static double hypotFunction(double dX, double dY) {
-		return Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
+	private static double hypotFunction(double sideX, double sideY) {
+		return Math.sqrt(Math.pow(sideX, 2) + Math.pow(sideY, 2));
 	}
+
 
 
 
