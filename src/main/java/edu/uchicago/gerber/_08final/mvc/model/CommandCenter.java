@@ -24,7 +24,7 @@ public class CommandCenter {
 	private long frame;
 
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
-	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap
+	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap.
 	//Lombok will not provide setter methods on final members
 	private final Falcon falcon  = new Falcon();
 
@@ -59,6 +59,7 @@ public class CommandCenter {
 		//set to one greater than number of falcons lives in your game as initFalconAndDecrementNum() also decrements
 		setNumFalcons(4);
 		initFalconAndDecrementFalconNum();
+		//add the falcon to the movFriends list
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 
 	}
@@ -92,7 +93,7 @@ public class CommandCenter {
 	}
 
 	public boolean isGameOver() {		//if the number of falcons is zero, then game over
-		return getNumFalcons() <= 0;
+		return numFalcons <= 0;
 	}
 
 

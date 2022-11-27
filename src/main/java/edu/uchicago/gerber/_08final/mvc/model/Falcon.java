@@ -46,15 +46,22 @@ public class Falcon extends Sprite {
 		setRadius(32);
 
 
-		//see the resources directory in the root of this project.
+		//We use (Linked) HashMap which has a seek-time of O(1)
+		//See the resources directory in the root of this project for pngs.
 		//Using enums as keys is safer b/c we know the value exists when we get it later;
 		//if we had hard-coded strings here and below, there's a chance we could misspell it below.
-		Map<String, BufferedImage> rasterMap = new HashMap<>();
+
+		//If you use a LinkedHashMap as we do here, you can also iterate through these bitmaps in the same order of
+		// insertion, which is convenient if you have an animated series of raster images. Get the ordered key-set
+		// this way: Set<String> keys = getRasterMap().keySet();
+
+		Map<String, BufferedImage> rasterMap = new LinkedHashMap<>();
 		rasterMap.put(ImageState.FALCON.toString(), loadGraphic("/imgs/falcon50.png") );
 		rasterMap.put(ImageState.FALCON_THR.toString(), loadGraphic("/imgs/falcon50thrust.png") );
 		rasterMap.put(ImageState.FALCON_PRO.toString(), loadGraphic("/imgs/falcon50protect.png") );
 		rasterMap.put(ImageState.FALCON_PRO_THR.toString(), loadGraphic("/imgs/falcon50protect_thrust.png") );
 		setRasterMap(rasterMap);
+
 
 	}
 
