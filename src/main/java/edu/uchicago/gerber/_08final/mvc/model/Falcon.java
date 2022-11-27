@@ -17,7 +17,7 @@ public class Falcon extends Sprite {
 	private final static int DEGREE_STEP = 9;
 	public static final int INITIAL_SPAWN_TIME = 68;
 
-	//a counter which counts down from INITIAL_SPAWN_TIME to zero at each move(). Used for determining protection
+	//a counter which counts down from INITIAL_SPAWN_TIME to zero (see move()). Used for determining protection
 	private int spawn;
 
 	private boolean thrusting = false;
