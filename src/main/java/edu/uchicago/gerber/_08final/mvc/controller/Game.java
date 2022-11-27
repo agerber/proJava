@@ -191,7 +191,7 @@ public class Game implements Runnable, KeyListener {
 					} else { //GameOp.Operation.REMOVE
 						CommandCenter.getInstance().getMovFoes().remove(mov);
 						if (mov instanceof Asteroid)
-							spawnSmallerAsteroids((Asteroid) mov);
+							spawnSmallerAsteroidsOrDebris((Asteroid) mov);
 					}
 
 					break;
@@ -247,7 +247,7 @@ public class Game implements Runnable, KeyListener {
 		}
 	}
 
-	private void spawnSmallerAsteroids(Asteroid originalAsteroid) {
+	private void spawnSmallerAsteroidsOrDebris(Asteroid originalAsteroid) {
 
 		    int nSize = originalAsteroid.getSize();
 		    //small asteroids
