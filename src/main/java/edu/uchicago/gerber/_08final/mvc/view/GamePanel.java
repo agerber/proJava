@@ -94,7 +94,7 @@ public class GamePanel extends Panel {
     private void drawScore(Graphics g) {
         g.setColor(Color.white);
         g.setFont(fnt);
-        if (CommandCenter.getInstance().getScore() != 0) {
+        if (CommandCenter.getInstance().getScore() > 0) {
             g.drawString("SCORE :  " + CommandCenter.getInstance().getScore(), fontWidth, fontHeight);
         } else {
             g.drawString("NO SCORE", fontWidth, fontHeight);
@@ -109,7 +109,7 @@ public class GamePanel extends Panel {
 
     }
 
-    @SuppressWarnings("unchecked")
+
     public void update(Graphics g) {
         //create an image off-screen
         // The following "off" vars are used for the off-screen double-buffered image.
@@ -151,7 +151,7 @@ public class GamePanel extends Panel {
                     CommandCenter.getInstance().getMovFriends());
 
 
-            drawNumberShipsLeft(grpOff);
+            drawNumberShipsRemaining(grpOff);
 
 
         }
@@ -181,15 +181,15 @@ public class GamePanel extends Panel {
     }
 
 
-    private void drawNumberShipsLeft(Graphics g) {
+    private void drawNumberShipsRemaining(Graphics g) {
         int numFalcons = CommandCenter.getInstance().getNumFalcons();
         while (numFalcons > 0) {
-            drawOneShipLeft(g, numFalcons--);
+            drawOneShipRemaining(g, numFalcons--);
         }
     }
 
-    // Draw the number of falcons left on the bottom-right of the screen.
-    private void drawOneShipLeft(Graphics g, int offSet) {
+    // Draw the number of falcons remaining on the bottom-right of the screen.
+    private void drawOneShipRemaining(Graphics g, int offSet) {
 
         g.setColor(Color.ORANGE);
 

@@ -49,15 +49,15 @@ public abstract class Sprite implements Movable {
     //used for vector rendering
     private Color color;
 
-    //Either you use the cartesian points above (vector), or you can use the bufferedImages here (raster)
-    //see Falcon for raster implementation
+    //Either you use the cartesian points above (vector), or you can use the BufferedImages here (raster).
+    //See Falcon class for raster implementation
     private Map<String, BufferedImage> rasterMap;
 
 
     //constructor
     public Sprite() {
 
-        //place the sprite at some random location in the frame at instantiation
+        //place the sprite at some random location in the game-space at instantiation
         setCenter(new Point(Game.R.nextInt(Game.DIM.width),
                 Game.R.nextInt(Game.DIM.height)));
 
