@@ -46,12 +46,12 @@ public class Falcon extends Sprite {
 		setRadius(32);
 
 
-		//We use (Linked) HashMap which has a seek-time of O(1)
+		//We use HashMap which has a seek-time of O(1)
 		//See the resources directory in the root of this project for pngs.
 		//Using enums as keys is safer b/c we know the value exists when we get it later;
 		//if we had hard-coded strings here and below, there's a chance we could misspell it below or elsewhere.
 
-		//If you use a LinkedHashMap, as we do here, you can also iterate through the map entries in the same order of
+		//If you use a LinkedHashMap, you can also iterate through the map entries in the same order of
 		// insertion, which is convenient if you have an animated series of raster images. With animation, call the
 		// iterator.next() method at each draw(). See https://www.geeksforgeeks.org/how-to-iterate-linkedhashmap-in-java/
 		// Similar to a stream, you can not re-iterate a spent iterator. So, you must reset the iterator after each
@@ -64,7 +64,7 @@ public class Falcon extends Sprite {
 		// render quickly.
 
 
-		Map<String, BufferedImage> rasterMap = new LinkedHashMap<>();
+		Map<String, BufferedImage> rasterMap = new HashMap<>();
 		rasterMap.put(ImageState.FALCON.toString(), loadGraphic("/imgs/falcon50.png") );
 		rasterMap.put(ImageState.FALCON_THR.toString(), loadGraphic("/imgs/falcon50thrust.png") );
 		rasterMap.put(ImageState.FALCON_PRO.toString(), loadGraphic("/imgs/falcon50protect.png") );
