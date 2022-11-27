@@ -19,8 +19,9 @@ import java.awt.image.BufferedImage;
 //the lombok @Data gives us automatic getters and setters on all members
 
 //A Sprite can be either vector or raster. We do not implement the draw(Graphics g) method, thereby forcing extending
-// classes to implement draw() depending on their graphics mode: vector or raster.  See Falcon class for raster
-// implementation of draw(). See NewShipFloater, Bullet, or Asteroid for vector implementations of draw().
+// classes to implement draw() depending on their graphics mode: vector or raster.  See Falcon, and SmallDebris
+// classes for raster implementation of draw(). See NewShipFloater, Bullet, or Asteroid for vector implementations of
+// draw().
 @Data
 public abstract class Sprite implements Movable {
     //the center-point of this sprite
@@ -51,7 +52,7 @@ public abstract class Sprite implements Movable {
     private Color color;
 
     //Either you use the cartesian points above (vector), or you can use the BufferedImages here (raster).
-    private Map<String, BufferedImage> rasterMap;
+    private Map<?, BufferedImage> rasterMap;
 
 
     //constructor
