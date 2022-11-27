@@ -46,8 +46,8 @@ public class SmallDebris extends Sprite{
     public void draw(Graphics g) {
 
         //we already have a counter with expiry which counts down.
-        int index = getRasterMap().size() - (getExpiry() + 1);
-        renderRaster((Graphics2D) g, getRasterMap().get(index));
+        int index = getRasterMap().size() - getExpiry();
+        renderRaster((Graphics2D) g, getRasterMap().get(--index));
 
 
     }
