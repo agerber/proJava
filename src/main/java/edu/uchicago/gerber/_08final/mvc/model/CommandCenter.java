@@ -21,6 +21,8 @@ public class CommandCenter {
 	private  long score;
 	private  boolean paused;
 	private  boolean muted;
+
+	//this value is used count the number of frames (full animation cycles) in the game
 	private long frame;
 
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
