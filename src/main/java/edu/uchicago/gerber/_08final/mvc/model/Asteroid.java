@@ -82,7 +82,7 @@ public class Asteroid extends Sprite {
 		  final int PRECISION_MULTIPLIER = 1000;
 
 		  Supplier<PolarPoint> polarPointSupplier = () -> {
-			  double r = (700 + Game.R.nextInt(200)) / 1000.0; //number between 0.7 and 0.999
+			  double r = (750 + Game.R.nextInt(200)) / 1000.0; //number between 0.75 and 0.999
 			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0; // number between 0 and 6.282
 		  	  return new PolarPoint(r,theta);
 		  };
