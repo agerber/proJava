@@ -20,7 +20,7 @@ public class NewShipFloater extends Sprite {
 		//set random DeltaX
 		setDeltaX(somePosNegValue(10));
 
-		//set rnadom DeltaY
+		//set random DeltaY
 		setDeltaY(somePosNegValue(10));
 		
 		//set random spin
