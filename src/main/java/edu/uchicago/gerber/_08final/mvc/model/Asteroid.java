@@ -2,11 +2,8 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.awt.*;
 
@@ -40,7 +37,7 @@ public class Asteroid extends Sprite {
 		//random delta-y
 		setDeltaY(somePosNegValue(10));
 
-		setCartesians(genRandomPoints());
+		setCartesians(genRandomVertices());
 
 	}
 
@@ -74,7 +71,7 @@ public class Asteroid extends Sprite {
 
 
 
-	  private Point[] genRandomPoints(){
+	  private Point[] genRandomVertices(){
 
 		  //6.283 is the max radians
 		  final int MAX_RADIANS_X1000 =6283;

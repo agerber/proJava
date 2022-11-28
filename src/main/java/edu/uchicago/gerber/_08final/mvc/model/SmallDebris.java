@@ -13,6 +13,9 @@ public class SmallDebris extends Sprite{
 
     public SmallDebris(Asteroid explodingAsteroid) {
 
+        //Debris means that this sprite does not interact with other teams.
+        setTeam(Team.DEBRIS);
+
         //see readme.txt file in the resources/imgs/exp directory for how I created these assets
         Map<Integer, BufferedImage> rasterMap = new HashMap<>();
         rasterMap.put(0, loadGraphic("/imgs/exp/row-1-column-1.png") );
@@ -37,15 +40,13 @@ public class SmallDebris extends Sprite{
         setDeltaY(explodingAsteroid.getDeltaY());
         setRadius((int) (explodingAsteroid.getRadius() * 1.3));
 
-        //Debris means that this sprite does not interact with other teams.
-        setTeam(Team.DEBRIS);
     }
 
     //example of raster implementation of draw()
     @Override
     public void draw(Graphics g) {
 
-        //we already have a counter with expiry which counts down; see move() method of Sprite
+        //we already have a counter with expiry; see move() method of Sprite
         int index = getRasterMap().size() - getExpiry() -1;
         renderRaster((Graphics2D) g, getRasterMap().get(index));
 
