@@ -4,14 +4,12 @@ package edu.uchicago.gerber._08final.mvc.model;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
-public class SmallDebris extends Sprite{
+public class WhiteCloudDebris extends Sprite{
 
 
-    public SmallDebris(Asteroid explodingAsteroid) {
+    public WhiteCloudDebris(Sprite explodingSprite) {
 
         //Debris means that this sprite does not interact with other teams.
         setTeam(Team.DEBRIS);
@@ -33,12 +31,12 @@ public class SmallDebris extends Sprite{
         //expire it out after it has done its animation.
         setExpiry(rasterMap.size());
 
-        //everything is relative to the exploding asteroid
-        setSpin(explodingAsteroid.getSpin());
-        setCenter(explodingAsteroid.getCenter());
-        setDeltaX(explodingAsteroid.getDeltaX());
-        setDeltaY(explodingAsteroid.getDeltaY());
-        setRadius((int) (explodingAsteroid.getRadius() * 1.3));
+        //everything is relative to the exploding sprite
+        setSpin(explodingSprite.getSpin());
+        setCenter(explodingSprite.getCenter());
+        setDeltaX(explodingSprite.getDeltaX());
+        setDeltaY(explodingSprite.getDeltaY());
+        setRadius((int) (explodingSprite.getRadius() * 1.3));
 
     }
 

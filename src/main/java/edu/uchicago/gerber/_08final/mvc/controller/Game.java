@@ -252,7 +252,7 @@ public class Game implements Runnable, KeyListener {
 		    int nSize = originalAsteroid.getSize();
 		    //small asteroids
 		    if (nSize > 1) {
-				CommandCenter.getInstance().getOpsQueue().enqueue(new SmallDebris(originalAsteroid), GameOp.Action.ADD);
+				CommandCenter.getInstance().getOpsQueue().enqueue(new WhiteCloudDebris(originalAsteroid), GameOp.Action.ADD);
 			}
 			//med and large
 			else {
