@@ -82,7 +82,7 @@ public class Asteroid extends Sprite {
 		  final int PRECISION_MULTIPLIER = 1000;
 
 		  Supplier<PolarPoint> polarPointSupplier = () -> {
-			  double r = (800 + Game.R.nextInt(200)) / 1000.0; //number between 0.8 and 0.999
+			  double r = (700 + Game.R.nextInt(200)) / 1000.0; //number between 0.7 and 0.999
 			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0; // number between 0 and 6.282
 		  	  return new PolarPoint(r,theta);
 		  };
@@ -95,8 +95,8 @@ public class Asteroid extends Sprite {
 						  * Math.cos(Math.toRadians(spr.getOrientation())
 						  + pp.getTheta())));
 
-		 //random number of vertices between 17 and 23
-		 final int VERTICES = Game.R.nextInt( 7 ) + 17;
+		 //random number of vertices
+		 final int VERTICES = Game.R.nextInt( 7 ) + 25;
 
 		 return Stream.generate(polarPointSupplier)
 				 .limit(VERTICES)
