@@ -40,7 +40,7 @@ This game uses both vector and raster graphics.
 The advantage of vector graphics is that they scale infinitely, and they render extremely fast. If you use
 raster graphics (png's, jpg's, etc) which are essentially two-dimensional grids of pixels, make sure to reduce
  the pixel depth (e.g. the Falcon images have a pixel depth of 50x50) otherwise your game will lag when rendering. For
- raster graphics implementation, see the Falcon class.
+ raster graphics implementation, see the Falcon or SmallDebris classes.
 
 
 The TAs will select the top ten games. The ten finalists will demonstrate their games and present their code and
@@ -58,7 +58,8 @@ vector graphics, you will create your polygons as a series of adjacent cartesian
 origin. When you add your points to the ArrayList, order matters, so that each point is adjacent to its neighbor in the
  List. The following List<Point> describes the shape of the fictitious vector Sprite. Just keep in mind that
  creating this List<Point> out-of-order will produce a jaggedy-shaped sprite. The following order is correct
- (though I could have traversed the points counter-clockwise with the same good result).
+ (though I could have traversed the points counter-clockwise with the same good result). See Bullet or NewShipFloater
+ classes to see how to create carteseans.
 
 
 		List<Point> pntList = new ArrayList<Point>();
