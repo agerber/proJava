@@ -112,7 +112,7 @@ public class Falcon extends Sprite {
 	@Override
 	public void draw(Graphics g) {
 
-		//set image-state
+		//set local image-state
 		ImageState imageState;
 		if (isProtected()){
 			if (thrusting) imageState = ImageState.FALCON_PRO_THR; else imageState = ImageState.FALCON_PRO;

@@ -44,6 +44,7 @@ public class WhiteCloudDebris extends Sprite{
     //However, we could also create a looping animation; think bird flapping over and over.
     //We can also create a hybrid of looping and image-state; think Mario
     //walking (looping), standing (suspended loop), jumping (one state), crouching (another state).
+    //See Falcon class for example of image-state.
     @Override
     public void draw(Graphics g) {
 
