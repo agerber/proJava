@@ -24,6 +24,11 @@ public class Asteroid extends Sprite {
 	//small asteroids get blasted into debris, but do not spawn anything
 	public Asteroid(int size){
 
+		//a size of zero is a big asteroid
+		//a size of 1 or 2 is med or small asteroid respectively. See getSize() method.
+		if (size == 0) setRadius(LARGE_RADIUS);
+		else setRadius(LARGE_RADIUS/(size * 2));
+
 		//Asteroid is FOE
 		setTeam(Team.FOE);
 		setColor(Color.WHITE);
@@ -34,14 +39,6 @@ public class Asteroid extends Sprite {
 		setDeltaX(somePosNegValue(10));
 		//random delta-y
 		setDeltaY(somePosNegValue(10));
-
-		//a size of zero is a big asteroid
-		//a size of 1 or 2 is med or small asteroid respectively. See getSize() method.
-		if (size == 0)
-			setRadius(LARGE_RADIUS);
-		else
-			setRadius(LARGE_RADIUS/(size * 2));
-
 
 		setCartesians(genRandomPoints());
 
