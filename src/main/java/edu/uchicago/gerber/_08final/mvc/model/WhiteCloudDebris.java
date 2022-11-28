@@ -11,11 +11,11 @@ public class WhiteCloudDebris extends Sprite{
 
     public WhiteCloudDebris(Sprite explodingSprite) {
 
-        //Debris means that this sprite does not interact with other teams.
+        //DEBRIS means that this sprite is inert, and does not interact with other teams.
         setTeam(Team.DEBRIS);
 
-        //see readme.txt file in the resources/imgs/exp directory for how I created these assets
         Map<Integer, BufferedImage> rasterMap = new HashMap<>();
+        //see readme.txt file in the resources/imgs/exp directory for how I created these assets
         rasterMap.put(0, loadGraphic("/imgs/exp/row-1-column-1.png") );
         rasterMap.put(1, loadGraphic("/imgs/exp/row-1-column-2.png") );
         rasterMap.put(2, loadGraphic("/imgs/exp/row-1-column-3.png") );
@@ -40,13 +40,17 @@ public class WhiteCloudDebris extends Sprite{
 
     }
 
-    //example of raster implementation of draw()
+    //In this example, we are simply in-order traversing the rasterMap once.
+    //However, we could also create a looping animation; think bird flapping over and over.
+    //We can also create a hybrid of looping and image-state; think Mario
+    //walking (looping), standing (suspended loop), jumping (one state), crouching (another state).
     @Override
     public void draw(Graphics g) {
 
-        //we already have a counter with expiry; see move() method of Sprite
+        //we already have a simple decrement-to-zero counter with expiry; see move() method of Sprite
         int index = getRasterMap().size() - getExpiry() -1;
         renderRaster((Graphics2D) g, getRasterMap().get(index));
+
 
 
     }
