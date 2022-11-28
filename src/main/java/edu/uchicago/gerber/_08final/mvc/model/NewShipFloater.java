@@ -13,7 +13,7 @@ public class NewShipFloater extends Sprite {
 
 		setTeam(Team.FLOATER);
 
-		setExpiry(251);
+		setExpiry(250);
 		setRadius(50);
 		setColor(Color.BLUE);
 
