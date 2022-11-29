@@ -45,7 +45,7 @@ public class Falcon extends Sprite {
 		setTeam(Team.FRIEND);
 
 		//this is the radius of the falcon
-		setRadius(32);
+		setRadius(37);
 
 
 
@@ -55,10 +55,10 @@ public class Falcon extends Sprite {
 		//if we had hard-coded strings here and below, there's a chance we could misspell it below or elsewhere.
 
     	Map<ImageState, BufferedImage> rasterMap = new HashMap<>();
-		rasterMap.put(ImageState.FALCON, loadGraphic("/imgs/fal/falcon50.png") );
-		rasterMap.put(ImageState.FALCON_THR, loadGraphic("/imgs/fal/falcon50thrust.png") );
-		rasterMap.put(ImageState.FALCON_PRO, loadGraphic("/imgs/fal/falcon50protect.png") );
-		rasterMap.put(ImageState.FALCON_PRO_THR, loadGraphic("/imgs/fal/falcon50protect_thrust.png") );
+		rasterMap.put(ImageState.FALCON, loadGraphic("/imgs/fal/falcon125.png") );
+		rasterMap.put(ImageState.FALCON_THR, loadGraphic("/imgs/fal/falcon125_thr.png") );
+		rasterMap.put(ImageState.FALCON_PRO, loadGraphic("/imgs/fal/falcon125_PRO.png") );
+		rasterMap.put(ImageState.FALCON_PRO_THR, loadGraphic("/imgs/fal/falcon125_PRO_thr.png") );
 		setRasterMap(rasterMap);
 
 

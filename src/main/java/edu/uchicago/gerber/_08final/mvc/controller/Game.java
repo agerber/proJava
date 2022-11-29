@@ -102,8 +102,7 @@ public class Game implements Runnable, KeyListener {
             panel.update(panel.getGraphics()); // see GamePanel class
             checkCollisions();
             checkNewLevel();
-            spawnNewWallFloater();
-            spawnShieldFloater();
+            checkFloaters();
             CommandCenter.getInstance().incrementFrame();
 
             // surround the sleep() in a try/catch block
@@ -122,6 +121,11 @@ public class Game implements Runnable, KeyListener {
             }
         } // end while
     } // end run
+
+    private void checkFloaters() {
+        spawnNewWallFloater();
+        spawnShieldFloater();
+    }
 
 
     private void checkCollisions() {
@@ -179,8 +183,8 @@ public class Game implements Runnable, KeyListener {
                         CommandCenter.getInstance().getFalcon().setSpawn(Falcon.MAX_SHIELD);
                      break;
                     case "NewWallFloater":
-                        Sound.playSound("insect.wav");
-                        attemptWall();
+                        Sound.playSound("wall.wav");
+                        buildWall();
                         break;
                 }
                 CommandCenter.getInstance().getOpsQueue().enqueue(movFloater, GameOp.Action.REMOVE);
@@ -263,9 +267,8 @@ public class Game implements Runnable, KeyListener {
 
     //shows how to add walls or rectangular elements one
     //brick at a time
-    private void attemptWall() {
+    private void buildWall() {
         final int BRICK_SIZE = Game.DIM.width / 30, ROWS = 20, COLS = 2, X_OFFSET = BRICK_SIZE * 5, Y_OFFSET = 50;
-
 
         for (int nRow = 0; nRow < ROWS; nRow++) {
             for (int nCol = 0; nCol < COLS; nCol++) {
