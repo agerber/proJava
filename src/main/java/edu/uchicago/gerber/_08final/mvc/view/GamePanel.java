@@ -114,10 +114,10 @@ public class GamePanel extends Panel {
         int spawnForMeter =   CommandCenter.getInstance().getFalcon().getSpawn() / 2;
 
         g.setColor(Color.CYAN);
-        g.fillRect(20, 30, spawnForMeter, 10);
+        g.fillRect(Game.DIM.width - 220, Game.DIM.height -45, spawnForMeter, 10);
 
         g.setColor(Color.DARK_GRAY);
-        g.drawRect(20, 30, 100, 10);
+        g.drawRect(Game.DIM.width - 220, Game.DIM.height -45, 100, 10);
     }
 
 
