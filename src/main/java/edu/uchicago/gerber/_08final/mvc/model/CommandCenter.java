@@ -79,7 +79,7 @@ public class CommandCenter {
 
 	private void createWall(){
 
-		final int BRICK_SIZE = (Game.DIM.width / 30) + 1, ROWS = 20, COLS = 2,  X_OFFSET = BRICK_SIZE * 5, Y_OFFSET =
+		final int BRICK_SIZE = Game.DIM.width / 30, ROWS = 20, COLS = 2,  X_OFFSET = BRICK_SIZE * 5, Y_OFFSET =
 				Game.DIM.height - 200;
 
 		for (int nRow = 0; nRow < ROWS; nRow++)
