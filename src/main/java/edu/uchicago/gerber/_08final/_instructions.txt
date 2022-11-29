@@ -45,7 +45,7 @@ that means do NOT attempt to detect the intersection of two polygons or even two
 be effectively a shape with equal width and height circumscribed by a circle.
 
 2/ Start with the Asteroids game and make incremental changes to it. You will avoid a lot of problems using
-this appraoch. Your game should not stray too far from Asteroids.  Games like
+this approach. Your game should not stray too far from Asteroids.  Games like
 1941, Joust, Galaga, Sinistar, Space Invaders, Missile Command, are good. Do not try to create a game that
 requires a grid like tetris, break-out, pong, pac-man, etc.
 
