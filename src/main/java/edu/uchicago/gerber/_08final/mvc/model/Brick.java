@@ -12,12 +12,12 @@ public class Brick extends Sprite {
 
 	private final int BRICK_IMAGE = 0;
 
-	//make sure to set the size as even numbers. The size of this brick is always square!
-	//we use upperLeft because that is the origin when drawing objects in Java
+	//The size of this brick is always square!
+	//we use upperLeftCorner because that is the origin when drawing objects in Java
 	public Brick(Point upperLeftCorner, int size) {
 
-		//currently set to Friend, but you can change the team or create a new team
-		// asteroids will crash into this wall.
+		//currently set to Friend, but you can change the team or create a new team.
+		//Asteroids will crash into this wall when set to FRIEND.
 		setTeam(Team.FRIEND);
 
 		setCenter(new Point(upperLeftCorner.x + size/2, upperLeftCorner.y + size/2));
