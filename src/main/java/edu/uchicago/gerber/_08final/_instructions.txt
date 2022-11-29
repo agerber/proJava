@@ -47,7 +47,7 @@ be effectively a shape with equal width and height circumscribed by a circle.
 2/ Start with the Asteroids game and make incremental changes to it. You will avoid a lot of problems using
 this approach. Your game should not stray too far from Asteroids.  Games like
 1941, Joust, Galaga, Sinistar, Space Invaders, Missile Command, are good. Do not try to create a game that
-requires a grid like tetris, break-out, pong, pac-man, etc.
+requires a grid like Tetris, Break-out, Pong, Pac-man, etc.
 
 The TAs will select the top ten games. The ten finalists will demonstrate their games and present their code and
 architecture, and the class will vote on the best game. The winner will receive a token prize during an
