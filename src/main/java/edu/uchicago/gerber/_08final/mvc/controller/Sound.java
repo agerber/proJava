@@ -15,6 +15,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Sound {
 
+	//todo implement an executor thread pool and limit the number of
 	//for individual wav sounds (not looped)
 	//http://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
 	public static synchronized void playSound(final String strPath) {

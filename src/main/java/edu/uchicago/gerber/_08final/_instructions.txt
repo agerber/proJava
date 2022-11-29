@@ -32,15 +32,22 @@ Create a classic video game using the tools you've learned throughout the quarte
 My code (the game base) is yours, and not considered found-code. Github is a good resource for 2D Java games from which
 to draw inspiration.
 
-Any 80's style vector arcade game is ideally suited to this game engine, such as: Galaga, Space Invaders, Missile
-Command, Qix, etc. To create your own game, you would effectively ignore/delete the Asteroids model and create
-your own model.
-
 This game uses both vector and raster graphics.
 The advantage of vector graphics is that they scale infinitely, and they render extremely fast. If you use
 raster graphics (png's, jpg's, etc) which are essentially two-dimensional grids of pixels, make sure to reduce
- the pixel depth (e.g. the Falcon images have a pixel depth of 50x50) otherwise your game will lag when rendering. For
- raster graphics implementation, see the Falcon or SmallDebris classes.
+ the pixel density (e.g. no more than about 100x100 pixels) otherwise your game will lag when rendering. For
+ raster graphics implementation, see the Falcon or WhiteCloudDebris classes.
+
+In order to extend the game code provided to you, there are some traps you should avoid:
+
+1/ Do not attempt to do colission detection in any other way that what is already implemented for you with circles; and
+that means do NOT attempt to detect the intersection of two polygons or even two rectangle objects. Your sprites should
+be effectively a square or a circle circumscribed by a circle.
+
+2/ Start with the Asteroids game and make incremental changes to it. You will avoid a lot of problems using
+this appraoch. Your game should not stray too far from Asteroids.  Games like
+1941, Joust, Galaga, Sinistar, Space Invaders, Defender, Missile Command, are good. Do not try to create a game that
+requires a grid like tetris, break-out, pong, pac-man, etc.
 
 
 The TAs will select the top ten games. The ten finalists will demonstrate their games and present their code and
