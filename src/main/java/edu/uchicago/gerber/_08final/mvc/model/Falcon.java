@@ -15,10 +15,12 @@ public class Falcon extends Sprite {
 	
 	private static final double THRUST = .65;
 	private final static int DEGREE_STEP = 9;
-	public static final int INITIAL_SPAWN_TIME = 68;
+	public static final int INITIAL_SPAWN_TIME = 50;
 
 	//a counter which counts down from INITIAL_SPAWN_TIME to zero (see move()). Used for determining protection
 	private int spawn;
+
+	public static final int MAX_SHIELD = 200;
 
 	private boolean thrusting = false;
 	public enum TurnState {
@@ -125,12 +127,13 @@ public class Falcon extends Sprite {
 		//and render the image according to the image-state
 		renderRaster((Graphics2D) g, getRasterMap().get(imageState));
 
+		//you can also add vector elements to raster graphics
 		//draw cyan shield, and warn player of impending non-protection
-		if (isProtected() && !(spawn <= 21 && spawn % 7 == 0)) {
-			//you can add vector elements to raster graphics
-			g.setColor(Color.CYAN);
-			g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
-		}
+//		if (isProtected() && !(spawn <= 21 && spawn % 7 == 0)) {
+//
+//			g.setColor(Color.CYAN);
+//			g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
+//		}
 
 
 
