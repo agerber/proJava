@@ -40,15 +40,14 @@ raster graphics (png's, jpg's, etc) which are essentially two-dimensional grids 
 
 In order to extend the game code provided to you, there are some traps you should avoid:
 
-1/ Do not attempt to do colission detection in any other way that what is already implemented for you with circles; and
+1/ Do not attempt to do colission detection in any other way than what is already implemented for you with circles; and
 that means do NOT attempt to detect the intersection of two polygons or even two rectangle objects. Your sprites should
-be effectively a square or a circle circumscribed by a circle.
+be effectively a shape with equal width and height circumscribed by a circle.
 
 2/ Start with the Asteroids game and make incremental changes to it. You will avoid a lot of problems using
 this appraoch. Your game should not stray too far from Asteroids.  Games like
 1941, Joust, Galaga, Sinistar, Space Invaders, Missile Command, are good. Do not try to create a game that
 requires a grid like tetris, break-out, pong, pac-man, etc.
-
 
 The TAs will select the top ten games. The ten finalists will demonstrate their games and present their code and
 architecture, and the class will vote on the best game. The winner will receive a token prize during an

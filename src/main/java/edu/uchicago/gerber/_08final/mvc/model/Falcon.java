@@ -65,7 +65,7 @@ public class Falcon extends Sprite {
 	//if spawning then make invincible. You can also set conditions for power-up-shields here, etc.
 	@Override
 	public boolean isProtected() {
-		return  spawn > 0 || true;
+		return  spawn > 0;
 
 	}
 
