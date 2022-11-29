@@ -71,6 +71,23 @@ public class CommandCenter {
 		//add the falcon to the movFriends list
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 
+		//doesn't add much functionality to the game, but shows how to add walls or rectangular elements one
+		//brick at a time
+		createWall();
+
+	}
+
+	private void createWall(){
+
+		final int BRICK_SIZE = Game.DIM.width / 30, ROWS = 20, COLS = 2,  X_OFFSET = BRICK_SIZE * 5, Y_OFFSET =
+				Game.DIM.height - 200;
+
+		for (int nRow = 0; nRow < ROWS; nRow++)
+			for (int nCol = 0; nCol < COLS; nCol++)
+				opsQueue.enqueue(new Brick(new Point(nRow * BRICK_SIZE + X_OFFSET, nCol * BRICK_SIZE+ Y_OFFSET), BRICK_SIZE),
+						GameOp.Action.ADD);
+
+
 	}
 
 
