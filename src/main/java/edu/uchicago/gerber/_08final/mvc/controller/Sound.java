@@ -2,6 +2,8 @@ package edu.uchicago.gerber._08final.mvc.controller;
 
 
 
+import edu.uchicago.gerber._08final.mvc.model.CommandCenter;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,27 +17,29 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Sound {
 
-	//todo implement an executor thread pool and limit the number of
+
 	//for individual wav sounds (not looped)
 	//http://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
-	public static synchronized void playSound(final String strPath) {
-	    new Thread(new Runnable() { 
-	      public void run() {
-	        try {
-	          Clip clp = AudioSystem.getClip();
+	public static void playSound(final String strPath) {
 
-				InputStream audioSrc = Sound.class.getResourceAsStream("/sounds/" + strPath);
-				InputStream bufferedIn = new BufferedInputStream(audioSrc);
-				AudioInputStream aisStream = AudioSystem.getAudioInputStream(bufferedIn);
-	          
-	          clp.open(aisStream);
-	          clp.start(); 
-	        } catch (Exception e) {
-	          System.err.println(e.getMessage());
-	        }
-	      }
-	    }).start();
-	  }
+		CommandCenter.getInstance().getSoundExecutor().execute(new Runnable() {
+			public void run() {
+				try {
+					Clip clp = AudioSystem.getClip();
+
+					InputStream audioSrc = Sound.class.getResourceAsStream("/sounds/" + strPath);
+					InputStream bufferedIn = new BufferedInputStream(audioSrc);
+					AudioInputStream aisStream = AudioSystem.getAudioInputStream(bufferedIn);
+
+					clp.open(aisStream);
+					clp.start();
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
+			}
+		});
+
+	}
 	
 	
 	//for looping wav clips

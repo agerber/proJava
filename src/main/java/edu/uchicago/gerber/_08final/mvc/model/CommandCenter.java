@@ -9,6 +9,10 @@ import lombok.Data;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
@@ -37,6 +41,9 @@ public class CommandCenter {
 	private final List<Movable> movFloaters = new LinkedList<>();
 
 	private final GameOpsQueue opsQueue = new GameOpsQueue();
+
+	//for sound playing. Limit the number of threads to 5 at a time.
+	private final ThreadPoolExecutor soundExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
 
 	//singleton
 	private static CommandCenter instance = null;
