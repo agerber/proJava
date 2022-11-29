@@ -111,7 +111,7 @@ public class GamePanel extends Panel {
 
     private void drawShieldMeter(Graphics g){
 
-        int spawnForMeter =   CommandCenter.getInstance().getFalcon().getSpawn() / 2;
+        int spawnForMeter =   CommandCenter.getInstance().getFalcon().getShield() / 2;
 
         g.setColor(Color.CYAN);
         g.fillRect(Game.DIM.width - 220, Game.DIM.height -45, spawnForMeter, 10);

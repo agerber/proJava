@@ -17,8 +17,7 @@ public class Brick extends Sprite {
 	public Brick(Point upperLeftCorner, int size) {
 
 		//currently set to Foe, but you can change the team or create a new team.
-		//Avoid the red NewWallFloaters.
-		//you can shoot to destroy the wall
+		//you can shoot to destroy the wall which yields big points
 		setTeam(Team.FOE);
 
 		setCenter(new Point(upperLeftCorner.x + size/2, upperLeftCorner.y + size/2));

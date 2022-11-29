@@ -180,7 +180,7 @@ public class Game implements Runnable, KeyListener {
                 switch (clazz.getSimpleName()){
                     case "ShieldFloater":
                         Sound.playSound("shieldup.wav");
-                        CommandCenter.getInstance().getFalcon().setSpawn(Falcon.MAX_SHIELD);
+                        CommandCenter.getInstance().getFalcon().setShield(Falcon.MAX_SHIELD);
                      break;
                     case "NewWallFloater":
                         Sound.playSound("wall.wav");
@@ -345,7 +345,7 @@ public class Game implements Runnable, KeyListener {
             CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);
             spawnBigAsteroids(CommandCenter.getInstance().getLevel());
             //setFade e.g. protect the falcon so that player has time to avoid newly spawned asteroids.
-            CommandCenter.getInstance().getFalcon().setSpawn(Falcon.INITIAL_SPAWN_TIME);
+            CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
 
         }
     }

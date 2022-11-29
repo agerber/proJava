@@ -9,8 +9,6 @@ import lombok.Data;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.BiFunction;
@@ -82,7 +80,7 @@ public class CommandCenter {
 		setNumFalcons(getNumFalcons() - 1);
 		if (isGameOver()) return;
 		Sound.playSound("shipspawn.wav");
-		falcon.setSpawn(Falcon.INITIAL_SPAWN_TIME);
+		falcon.setShield(Falcon.INITIAL_SPAWN_TIME);
 		//put falcon in the middle of the game-space
 		falcon.setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 		falcon.setOrientation(Game.R.nextInt(360));

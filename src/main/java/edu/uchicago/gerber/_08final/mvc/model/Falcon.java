@@ -18,7 +18,7 @@ public class Falcon extends Sprite {
 	public static final int INITIAL_SPAWN_TIME = 50;
 
 	//a counter which counts down from INITIAL_SPAWN_TIME to zero (see move()). Used for determining protection
-	private int spawn;
+	private int shield;
 
 	public static final int MAX_SHIELD = 200;
 
@@ -67,7 +67,7 @@ public class Falcon extends Sprite {
 	//if spawning then make invincible. You can also set conditions for power-up-shields here, etc.
 	@Override
 	public boolean isProtected() {
-		return  spawn > 0;
+		return  shield > 0;
 
 	}
 
@@ -78,7 +78,7 @@ public class Falcon extends Sprite {
 	public void move() {
 		super.move();
 
-		if (spawn > 0) spawn--;
+		if (shield > 0) shield--;
 
 		//apply some thrust vectors using trig.
 		if (thrusting) {
