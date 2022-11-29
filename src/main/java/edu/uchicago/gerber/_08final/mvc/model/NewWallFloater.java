@@ -1,21 +1,19 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
-import edu.uchicago.gerber._08final.mvc.controller.Game;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewShipFloater extends Sprite {
+public class NewWallFloater extends Sprite {
 
 
-	public NewShipFloater() {
+	public NewWallFloater() {
 
 		setTeam(Team.FLOATER);
 
 		setExpiry(250);
 		setRadius(50);
-		setColor(Color.BLUE);
+		setColor(Color.ORANGE);
 
 		//set random DeltaX
 		setDeltaX(somePosNegValue(10));

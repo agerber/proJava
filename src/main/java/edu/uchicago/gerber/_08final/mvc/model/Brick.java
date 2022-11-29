@@ -16,9 +16,10 @@ public class Brick extends Sprite {
 	//we use upperLeftCorner because that is the origin when drawing graphics in Java
 	public Brick(Point upperLeftCorner, int size) {
 
-		//currently set to Friend, but you can change the team or create a new team.
-		//Asteroids (FOEs) will crash into this brick when set to FRIEND.
-		setTeam(Team.FRIEND);
+		//currently set to Foe, but you can change the team or create a new team.
+		//Avoid the red NewWallFloaters.
+		//you can shoot to destroy the wall
+		setTeam(Team.FOE);
 
 		setCenter(new Point(upperLeftCorner.x + size/2, upperLeftCorner.y + size/2));
 
