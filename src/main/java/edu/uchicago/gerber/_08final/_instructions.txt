@@ -38,46 +38,29 @@ raster graphics (png's, jpg's, etc) which are essentially two-dimensional grids 
  the pixel density, otherwise your game will lag when rendering. For
  raster graphics implementation, see the Falcon or WhiteCloudDebris classes.
 
-In order to extend the game code provided to you, there are some traps you should avoid:
+Ignore the following advice at your own peril:
 
-1/ Do not attempt to do colission detection in any other way than what is already implemented for you with circles; and
-that means do NOT attempt to detect the intersection of two polygons or even two rectangle objects. Your sprites should
-be effectively a shape with equal width and height circumscribed by a circle.
+1/ For collision detection, do NOT attempt to detect the intersection of two polygons including rectangles. Your sprites
+ should effectively be a shape with equal width and height circumscribed by a circle, as this facilitates collision
+ detection.  If you want to create non-square rectilinear shapes, walls, or other odd shapes, you can build them one
+ brick at a time; see the Brick class.
 
-2/ Start with the Asteroids game and make incremental changes to it. You will avoid a lot of problems using
-this approach. Your game should not stray too far from Asteroids.  Games like
-1941, Joust, Galaga, Sinistar, Space Invaders, Missile Command, are good. Do not try to create a game that
-requires a grid like Tetris, Break-out, Pong, Pac-man, etc.
+2/ Start with the Asteroids game and make incremental changes to it. You will avoid a lot of problems taking
+this approach. Your game should not stray too far from Asteroids initially. As you get more familiar with the game and
+its architecture, you can take more risks, but always be prepared to roll back your changes. Git is your best friend
+for experimenting with new features of your game.  Games like 1941, Joust, Galaga, Space Invaders, Missile Command, are
+good inspiration. Take advantage of the existing architecture with its
+free-form deltaX and deltaY; do not try to create a game that requires a grid like Tetris, Break-out, Pong, or Pac-man
+as these are not well suited to this base-code architecture, and would be like putting plastic tricycle wheels on a
+Lamborghini.
+
+3/ If you find your gaming groove, then you can explode beyond the bounds of the existing Game.DIM and create an entire
+world with a mini-map, and new levels, etc. See Sinistar in moregames (git@github.com:agerber/moregames.git) for how to
+create a mini-map. Other big-world games that cycle are Defender, Mario Bros, etc.
 
 The TAs will select the top ten games. The ten finalists will demonstrate their games and present their code and
 architecture, and the class will vote on the best game. The winner will receive a token prize during an
 awards-ceremony on the last day.
 
-**************************************************
-**************************************************
-**************************************************
 
-Some things to keep in mind.
-
-1/ Sprite is essentially a shape circumscribed by a circle, which makes collision detection really easy. If you use
-vector graphics, you will create your polygons as a series of adjacent cartesian vertices on a grid with 0,0 at the
-origin. When you add your points to the ArrayList, order matters, so that each point is adjacent to its neighbor in the
- List. The following List<Point> describes the shape of the fictitious vector Sprite. Just keep in mind that
- creating this List<Point> out-of-order will produce a jaggedy-shaped sprite. The following order is correct
- (though I could have traversed the points counter-clockwise with the same good result). See Bullet or NewShipFloater
- classes to see how to create carteseans.
-
-
-		List<Point> pntList = new ArrayList<Point>();
-		pntList.add(new Point(0, 5)); //top point
-		pntList.add(new Point(1, 3));  //right top point
-		pntList.add(new Point(1, -2)); //right bottom point
-		pntList.add(new Point(-1, -2)); // left bottom point
-		pntList.add(new Point(-1, 3)); //left top point
-
-
-
-
-Some addition info:
-the M key is for muting music. 
 
