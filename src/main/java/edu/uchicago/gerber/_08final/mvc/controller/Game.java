@@ -181,11 +181,11 @@ public class Game implements Runnable, KeyListener {
                     case "ShieldFloater":
                         Sound.playSound("shieldup.wav");
                         CommandCenter.getInstance().getFalcon().setShield(Falcon.MAX_SHIELD);
-                     break;
+                    break;
                     case "NewWallFloater":
                         Sound.playSound("wall.wav");
                         buildWall();
-                        break;
+                    break;
                 }
                 CommandCenter.getInstance().getOpsQueue().enqueue(movFloater, GameOp.Action.REMOVE);
 

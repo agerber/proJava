@@ -34,7 +34,7 @@ to draw inspiration.
 
 This game uses both vector and raster graphics.
 The advantage of vector graphics is that they scale infinitely, and they render extremely fast. If you use
-raster graphics (png's, jpg's, etc) which are essentially two-dimensional grids of pixels, make sure to reduce
+raster graphics (png's) which are essentially two-dimensional grids of pixels, make sure to reduce
  the pixel density, otherwise your game will lag when rendering. For
  raster graphics implementation, see the Falcon or WhiteCloudDebris classes.
 
@@ -56,7 +56,7 @@ Lamborghini.
 
 3/ If you find your gaming groove, then you can explode beyond the bounds of the existing Game.DIM and create an entire
 world with a mini-map, and new levels, etc. See Sinistar in moregames (git@github.com:agerber/moregames.git) for how to
-create a mini-map. Other big-world games that cycle are Defender, Mario Bros, etc.
+create a mini-map. Other big-world 2D games that cycle are Defender, Mario Bros, etc.
 
 The TAs will select the top ten games. The ten finalists will demonstrate their games and present their code and
 architecture, and the class will vote on the best game. The winner will receive a token prize during an

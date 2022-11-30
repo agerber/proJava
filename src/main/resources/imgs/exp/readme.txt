@@ -13,5 +13,5 @@ https://pinetools.com/split-image
 https://www.photopea.com/
 
 
-You may need to reduce the pixel depth to a level that is both tolerable in terms of pixelation, but small enough to
+You may need to reduce the pixel density to a level that is both tolerable in terms of pixelation, but small enough to
 render quickly.
