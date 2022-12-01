@@ -20,7 +20,7 @@ import java.awt.image.BufferedImage;
 
 //A Sprite can be either vector or raster. We do not implement the draw(Graphics g) method, thereby forcing extending
 // classes to implement draw() depending on their graphics mode: vector or raster.  See Falcon, and WhiteCloudDebris
-// classes for raster implementation of draw(). See NewShipFloater, Bullet, or Asteroid for vector implementations of
+// classes for raster implementation of draw(). See ShieldFloater, Bullet, or Asteroid for vector implementations of
 // draw().
 @Data
 public abstract class Sprite implements Movable {

@@ -4,9 +4,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractFloater extends Sprite {
+public abstract class Floater extends Sprite {
 
-    public AbstractFloater() {
+    public Floater() {
 
         setTeam(Team.FLOATER);
 
