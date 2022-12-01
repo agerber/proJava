@@ -24,6 +24,9 @@ public class Brick extends Sprite {
 
 		setRadius(size/2);
 
+		//As this sprite does not animate or change state, we could just store a BufferedImage as a member, but
+		//since we already have a rasterMap in the Sprite class, we might as well be consistent for all raster sprites
+		// and use it.
     	Map<Integer, BufferedImage> rasterMap = new HashMap<>();
 		//brick from Mario Bros
 		rasterMap.put(BRICK_IMAGE, loadGraphic("/imgs/brick/Brick_Block100.png") );
