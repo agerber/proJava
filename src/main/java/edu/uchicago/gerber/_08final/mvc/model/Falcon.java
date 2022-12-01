@@ -27,16 +27,17 @@ public class Falcon extends Sprite {
 	}
 	private TurnState turnState = TurnState.IDLE;
 
-	public enum ImageState {
-		FALCON, //normal ship
-		FALCON_THR, //normal ship thrusting
-		FALCON_PRO, //protected ship (green)
-		FALCON_PRO_THR //protected ship (green) thrusting
-	}
+
+	//images states
+	private static int FALCON = 0; //normal ship
+	private static int FALCON_THR = 1; //normal ship thrusting
+	private static int FALCON_PRO = 2; //protected ship (green)
+	private static int FALCON_PRO_THR = 3; //protected ship (green) thrusting
+
 
 
 	// ==============================================================
-	// CONSTRUCTOR 
+	// CONSTRUCTOR
 	// ==============================================================
 	
 	public Falcon() {
@@ -50,14 +51,14 @@ public class Falcon extends Sprite {
 
 		//We use HashMap which has a seek-time of O(1)
 		//See the resources directory in the root of this project for pngs.
-		//Using enums as keys is safer b/c we know the value exists when we get it later;
+		//Using constants as keys is safer b/c we know the value exists when we get it later;
 		//if we had hard-coded strings here and below, there's a chance we could misspell it below or elsewhere.
 
-    	Map<ImageState, BufferedImage> rasterMap = new HashMap<>();
-		rasterMap.put(ImageState.FALCON, loadGraphic("/imgs/fal/falcon125.png") );
-		rasterMap.put(ImageState.FALCON_THR, loadGraphic("/imgs/fal/falcon125_thr.png") );
-		rasterMap.put(ImageState.FALCON_PRO, loadGraphic("/imgs/fal/falcon125_PRO.png") );
-		rasterMap.put(ImageState.FALCON_PRO_THR, loadGraphic("/imgs/fal/falcon125_PRO_thr.png") );
+    	Map<Integer, BufferedImage> rasterMap = new HashMap<>();
+		rasterMap.put(FALCON, loadGraphic("/imgs/fal/falcon125.png") );
+		rasterMap.put(FALCON_THR, loadGraphic("/imgs/fal/falcon125_thr.png") );
+		rasterMap.put(FALCON_PRO, loadGraphic("/imgs/fal/falcon125_PRO.png") );
+		rasterMap.put(FALCON_PRO_THR, loadGraphic("/imgs/fal/falcon125_PRO_thr.png") );
 		setRasterMap(rasterMap);
 
 
@@ -114,12 +115,12 @@ public class Falcon extends Sprite {
 	public void draw(Graphics g) {
 
 		//set local image-state
-		ImageState imageState;
+		int imageState;
 		if (isProtected()){
-			if (thrusting) imageState = ImageState.FALCON_PRO_THR; else imageState = ImageState.FALCON_PRO;
+			if (thrusting) imageState = FALCON_PRO_THR; else imageState = FALCON_PRO;
 		}
 		else { //not protected
-			if (thrusting) imageState = ImageState.FALCON_THR; else imageState = ImageState.FALCON;
+			if (thrusting) imageState = FALCON_THR; else imageState = FALCON;
 		}
 
 		//cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
