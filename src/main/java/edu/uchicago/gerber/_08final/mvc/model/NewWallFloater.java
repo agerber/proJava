@@ -6,6 +6,7 @@ public class NewWallFloater extends Floater {
 
 	public NewWallFloater() {
 		setColor(Color.ORANGE);
+		setExpiry(230);
 	}
 
 

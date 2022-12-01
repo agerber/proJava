@@ -6,6 +6,7 @@ public class ShieldFloater extends Floater {
 
 	public ShieldFloater() {
 		setColor(Color.CYAN);
+		setExpiry(260);
 	}
 
 

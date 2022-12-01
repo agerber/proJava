@@ -10,16 +10,14 @@ public abstract class Floater extends Sprite {
 
         setTeam(Team.FLOATER);
 
+        //default values, all of which can be overridden in the extending concrete classes
         setExpiry(250);
+        setColor(Color.WHITE);
         setRadius(50);
-
-
         //set random DeltaX
         setDeltaX(somePosNegValue(10));
-
         //set random DeltaY
         setDeltaY(somePosNegValue(10));
-
         //set random spin
         setSpin(somePosNegValue(10));
 
