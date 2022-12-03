@@ -10,7 +10,7 @@ public class Bullet extends Sprite {
 
 
 
-    public Bullet(Falcon fal) {
+    public Bullet(Falcon falcon) {
 
 
 
@@ -23,16 +23,16 @@ public class Bullet extends Sprite {
 
 
         //everything is relative to the falcon ship that fired the bullet
-        setCenter(fal.getCenter());
+        setCenter(falcon.getCenter());
 
         //set the bullet orientation to the falcon (ship) orientation
-        setOrientation(fal.getOrientation());
+        setOrientation(falcon.getOrientation());
 
         final double FIRE_POWER = 35.0;
-        setDeltaX(fal.getDeltaX() +
-                Math.cos(Math.toRadians(fal.getOrientation())) * FIRE_POWER);
-        setDeltaY(fal.getDeltaY() +
-                Math.sin(Math.toRadians(fal.getOrientation())) * FIRE_POWER);
+        setDeltaX(falcon.getDeltaX() +
+                Math.cos(Math.toRadians(falcon.getOrientation())) * FIRE_POWER);
+        setDeltaY(falcon.getDeltaY() +
+                Math.sin(Math.toRadians(falcon.getOrientation())) * FIRE_POWER);
 
 
         //defined the points on a cartesian grid
