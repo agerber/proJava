@@ -165,7 +165,7 @@ public class GamePanel extends Panel {
             drawNumberShipsRemaining(grpOff);
             drawShieldMeter(grpOff);
             drawScore(grpOff);
-            displayLevel(grpOff);
+            drawLevel(grpOff);
 
 
         }
@@ -193,7 +193,7 @@ public class GamePanel extends Panel {
 
 
     }
-    private void displayLevel(final Graphics graphics){
+    private void drawLevel(final Graphics graphics){
         graphics.drawString("LEVEL: " + CommandCenter.getInstance().getLevel(), 20, 30);
     }
 
