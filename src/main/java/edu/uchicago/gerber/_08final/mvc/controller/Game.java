@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
+
 // ===============================================
 // == This Game class is the CONTROLLER
 // ===============================================
@@ -51,8 +52,8 @@ public class Game implements Runnable, KeyListener {
     private final Clip soundBackground;
 
     //spawn every 30 seconds
-    private static final int SPAWN_NEW_WALL_FLOATER = FRAMES_PER_SECOND * 40;
-    private static final int SPAWN_SHIELD_FLOATER = FRAMES_PER_SECOND * 25;
+
+
 
 
 
@@ -285,14 +286,14 @@ public class Game implements Runnable, KeyListener {
 
     private void spawnNewWallFloater() {
 
-        if (CommandCenter.getInstance().getFrame() % SPAWN_NEW_WALL_FLOATER == 0 && hasNoBricks()) {
+        if (CommandCenter.getInstance().getFrame() % NewWallFloater.SPAWN_NEW_WALL_FLOATER == 0 && hasNoBricks()) {
             CommandCenter.getInstance().getOpsQueue().enqueue(new NewWallFloater(), GameOp.Action.ADD);
         }
     }
 
     private void spawnShieldFloater() {
 
-        if (CommandCenter.getInstance().getFrame() % SPAWN_SHIELD_FLOATER == 0 ) {
+        if (CommandCenter.getInstance().getFrame() % ShieldFloater.SPAWN_SHIELD_FLOATER == 0 ) {
             CommandCenter.getInstance().getOpsQueue().enqueue(new ShieldFloater(), GameOp.Action.ADD);
         }
     }
