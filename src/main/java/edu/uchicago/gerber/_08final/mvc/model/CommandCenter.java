@@ -81,7 +81,7 @@ public class CommandCenter {
 		if (isGameOver()) return;
 		Sound.playSound("shipspawn.wav");
 		falcon.setShield(Falcon.INITIAL_SPAWN_TIME);
-		falcon.setInvisible(Falcon.INITIAL_SPAWN_TIME/4);
+		falcon.setInvisible(Falcon.INITIAL_SPAWN_TIME/3);
 		//put falcon in the middle of the game-space
 		falcon.setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 		falcon.setOrientation(Game.R.nextInt(360));
