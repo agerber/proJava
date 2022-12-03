@@ -139,6 +139,8 @@ public abstract class Sprite implements Movable {
     //https://www.tabnine.com/code/java/methods/java.awt.geom.AffineTransform/rotate
     protected void renderRaster(Graphics2D g2d, BufferedImage bufferedImage) {
 
+        if (null == bufferedImage) return;
+
         int centerX = getCenter().x;
         int centerY = getCenter().y;
         int width = getRadius() * 2;

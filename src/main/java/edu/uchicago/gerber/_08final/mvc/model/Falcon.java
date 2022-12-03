@@ -18,6 +18,7 @@ public class Falcon extends Sprite {
 	public static final int INITIAL_SPAWN_TIME = 50;
 
 	private int shield;
+	private int invisible;
 
 	public static final int MAX_SHIELD = 200;
 
@@ -33,6 +34,7 @@ public class Falcon extends Sprite {
 	private static int FALCON_THR = 1; //normal ship thrusting
 	private static int FALCON_PRO = 2; //protected ship (green)
 	private static int FALCON_PRO_THR = 3; //protected ship (green) thrusting
+	private static int FALCON_INVISIBLE = 4; //for pre-spawning
 
 
 
@@ -59,6 +61,7 @@ public class Falcon extends Sprite {
 		rasterMap.put(FALCON_THR, loadGraphic("/imgs/fal/falcon125_thr.png") );
 		rasterMap.put(FALCON_PRO, loadGraphic("/imgs/fal/falcon125_PRO.png") );
 		rasterMap.put(FALCON_PRO_THR, loadGraphic("/imgs/fal/falcon125_PRO_thr.png") );
+		rasterMap.put(FALCON_INVISIBLE, null );
 		setRasterMap(rasterMap);
 
 
@@ -78,6 +81,7 @@ public class Falcon extends Sprite {
 	public void move() {
 		super.move();
 
+		if (invisible > 0) invisible--;
 		if (shield > 0) shield--;
 
 		//apply some thrust vectors using trig.
@@ -116,7 +120,10 @@ public class Falcon extends Sprite {
 
 		//set local image-state
 		int imageState;
-		if (isProtected()){
+		if (invisible > 0){
+			imageState = FALCON_INVISIBLE;
+		}
+		else if (isProtected()){
 			if (thrusting) imageState = FALCON_PRO_THR; else imageState = FALCON_PRO;
 		}
 		else { //not protected
