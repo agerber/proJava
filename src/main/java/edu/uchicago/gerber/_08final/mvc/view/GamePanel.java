@@ -132,8 +132,7 @@ public class GamePanel extends Panel {
         grpOff.setColor(Color.black);
         grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
 
-        drawScore(grpOff);
-        displayLevel(grpOff);
+
         drawNumFrame(grpOff);
 
         if (CommandCenter.getInstance().isGameOver()) {
@@ -165,6 +164,8 @@ public class GamePanel extends Panel {
 
             drawNumberShipsRemaining(grpOff);
             drawShieldMeter(grpOff);
+            drawScore(grpOff);
+            displayLevel(grpOff);
 
 
         }
