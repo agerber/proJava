@@ -133,6 +133,7 @@ public class GamePanel extends Panel {
         grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
 
         drawScore(grpOff);
+        displayLevel(grpOff);
         drawNumFrame(grpOff);
 
         if (CommandCenter.getInstance().isGameOver()) {
@@ -191,6 +192,11 @@ public class GamePanel extends Panel {
 
 
     }
+    private void displayLevel(final Graphics graphics){
+        graphics.drawString("LEVEL: " + CommandCenter.getInstance().getLevel(), 20, 30);
+    }
+
+
 
 
     private void drawNumberShipsRemaining(Graphics g) {
