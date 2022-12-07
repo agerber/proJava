@@ -269,10 +269,10 @@ public class Game implements Runnable, KeyListener {
     //shows how to add walls or rectangular elements one
     //brick at a time
     private void buildWall() {
-        final int BRICK_SIZE = Game.DIM.width / 30, ROWS = 20, COLS = 2, X_OFFSET = BRICK_SIZE * 5, Y_OFFSET = 50;
+        final int BRICK_SIZE = Game.DIM.width / 30, ROWS = 2, COLS = 20, X_OFFSET = BRICK_SIZE * 5, Y_OFFSET = 50;
 
-        for (int nRow = 0; nRow < ROWS; nRow++) {
-            for (int nCol = 0; nCol < COLS; nCol++) {
+        for (int nRow = 0; nRow < COLS; nRow++) {
+            for (int nCol = 0; nCol < ROWS; nCol++) {
                 CommandCenter.getInstance().getOpsQueue().enqueue(
                         new Brick(
                                 new Point(nRow * BRICK_SIZE + X_OFFSET, nCol * BRICK_SIZE + Y_OFFSET),
@@ -348,7 +348,7 @@ public class Game implements Runnable, KeyListener {
             //make falcon invincible momentarily in case new asteroids spawn on top of him, and give player
             //time to adjust to new asteroids in game space.
             CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
-            //flash the raster invisible for just a few frames to provide feedback to user of new level
+            //flash the falcon invisible for just a few frames to provide feedback to user of new level
             CommandCenter.getInstance().getFalcon().setInvisible(Falcon.INITIAL_SPAWN_TIME/7);
 
         }
