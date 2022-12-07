@@ -129,7 +129,7 @@ public class GamePanel extends Panel {
         Graphics grpOff = imgOff.getGraphics();
 
         //Fill the off-screen image background with black.
-        grpOff.setColor(Color.black);
+        grpOff.setColor(Color.BLACK);
         grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
 
 
