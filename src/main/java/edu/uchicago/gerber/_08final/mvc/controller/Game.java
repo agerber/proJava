@@ -347,6 +347,7 @@ public class Game implements Runnable, KeyListener {
             spawnBigAsteroids(CommandCenter.getInstance().getLevel());
             //setFade e.g. protect the falcon so that player has time to avoid newly spawned asteroids.
             CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
+            CommandCenter.getInstance().getFalcon().setInvisible(Falcon.INITIAL_SPAWN_TIME/7);
 
         }
     }
