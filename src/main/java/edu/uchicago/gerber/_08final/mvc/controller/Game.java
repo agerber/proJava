@@ -254,11 +254,11 @@ public class Game implements Runnable, KeyListener {
 
         }
     }
-    private boolean hasNoBricks() {
+    private boolean isBrickFree() {
         //if there are no more Bricks on the screen
         boolean bricksFree = true;
-        for (Movable movFriend : CommandCenter.getInstance().getMovFoes()) {
-            if (movFriend instanceof Brick) {
+        for (Movable movFoe : CommandCenter.getInstance().getMovFoes()) {
+            if (movFoe instanceof Brick) {
                 bricksFree = false;
                 break;
             }
@@ -286,7 +286,7 @@ public class Game implements Runnable, KeyListener {
 
     private void spawnNewWallFloater() {
 
-        if (CommandCenter.getInstance().getFrame() % NewWallFloater.SPAWN_NEW_WALL_FLOATER == 0 && hasNoBricks()) {
+        if (CommandCenter.getInstance().getFrame() % NewWallFloater.SPAWN_NEW_WALL_FLOATER == 0 && isBrickFree()) {
             CommandCenter.getInstance().getOpsQueue().enqueue(new NewWallFloater(), GameOp.Action.ADD);
         }
     }
