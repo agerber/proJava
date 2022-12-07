@@ -254,17 +254,6 @@ public class Game implements Runnable, KeyListener {
 
         }
     }
-    private boolean isBrickFree() {
-        //if there are no more Bricks on the screen
-        boolean bricksFree = true;
-        for (Movable movFoe : CommandCenter.getInstance().getMovFoes()) {
-            if (movFoe instanceof Brick) {
-                bricksFree = false;
-                break;
-            }
-        }
-        return bricksFree;
-    }
 
     //shows how to add walls or rectangular elements one
     //brick at a time
@@ -326,6 +315,17 @@ public class Game implements Runnable, KeyListener {
 
     }
 
+    private boolean isBrickFree() {
+        //if there are no more Bricks on the screen
+        boolean brickFree = true;
+        for (Movable movFoe : CommandCenter.getInstance().getMovFoes()) {
+            if (movFoe instanceof Brick) {
+                brickFree = false;
+                break;
+            }
+        }
+        return brickFree;
+    }
 
     private boolean isLevelClear() {
         //if there are no more Asteroids on the screen
