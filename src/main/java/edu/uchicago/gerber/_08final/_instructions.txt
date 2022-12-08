@@ -57,7 +57,7 @@ this approach. Your game should not stray too far from Asteroids initially. As y
 its architecture, you can take more risks, but always be prepared to roll back your changes. Git is your best friend
 for experimenting with new features of your game.  Games like 1941, Joust, Galaga, Space Invaders, Missile Command, are
 good inspiration. Take advantage of the existing architecture with its
-free-form deltaX and deltaY; do not try to create a game that requires a grid like Tetris, Break-out, Pong, or Pac-man
+free-form deltaX and deltaY; do not try to create a game that requires a grid like Tetris, Break-out, or Pong
 as these are not well suited to this base-code architecture.
 
 3/ Commit (with git) often as you develop your game. This will allow the TAs to see your development process. Don't be
