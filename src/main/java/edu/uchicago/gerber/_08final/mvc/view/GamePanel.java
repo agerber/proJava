@@ -167,6 +167,10 @@ public class GamePanel extends Panel {
             drawScore(grpOff);
             drawLevel(grpOff);
 
+            if (CommandCenter.getInstance().getFalcon().getCleared() > 0) {
+                displayTextOnScreen(grpOff, "Level " + CommandCenter.getInstance().getLevel());
+            }
+
 
         }
 
