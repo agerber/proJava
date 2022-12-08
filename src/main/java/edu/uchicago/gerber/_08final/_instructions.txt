@@ -25,13 +25,18 @@
 
 
 Create a classic video game using the tools you've learned throughout the quarter.
-1/ You MUST extend the existing game architecture of which Asteroids is just
+1/ You MUST extend the existing base-code architecture of which Asteroids is just
  one example implementation. You MUST use Movable, Sprite, CommandCenter, GameOpsQueue, GameFrame,
  GamePanel, and Game classes. Failure to do so will result in an automatic and non-negotiable zero
  on this evaluation.
 2/ You can create any video game you want, EXCEPT Asteroids.
 3/ You may code your game in either Java or Kotlin; see README.md of proJava for Kotlin instructions.
 
+
+The reason I require students to extend the base-code architecture is to: (1) level the playing field,
+(2) provide a foundation upon which students can build, and (3) provide implementations for
+difficult challenges like I/O and collision detection which allows students to focus on their
+game logic, and not the details of I/O, etc.
 
 This game uses both vector and raster graphics.
 The advantage of vector graphics is that they scale infinitely, and they render extremely fast. If you use
@@ -42,7 +47,7 @@ raster graphics (png's) which are essentially two-dimensional grids of pixels, m
 Please heed the following:
 
 1/ For collision detection, do NOT attempt to detect the intersection of two polygons
-including rectangles. Use the existing circle collision detection algorithm. Your sprites should effectively be a shape
+including rectangles. Use the existing circle-collision detection algorithm. Your sprites should effectively be a shape
 with equal width and height circumscribed/inscribed by a circle, as this
 facilitates collision detection.  If you want to create non-square rectilinear shapes, walls, or other odd
  shapes, you can build them one brick at a time; see the Brick class.
