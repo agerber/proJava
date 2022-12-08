@@ -25,13 +25,11 @@
 
 
 Create a classic video game using the tools you've learned throughout the quarter.
-1/ You MUST extend the Asteroids code-base provided to you. Failure to comply with this first and most important rule
-will result in an automatic and non-negotiable zero score on this evaluation.
+1/ You MUST extend the Asteroids code-base provided to you. Failure to comply
+will result in an automatic and non-negotiable zero on this evaluation.
 2/ You can create any video game you want, EXCEPT Asteroids.
 3/ You may code your game in either Java or Kotlin; see README.md of proJava for Kotlin instructions.
-4/ You may use up to (but no more than) 40% found-code, so long as you cite the source in your java source files.
-My code (the game base) is yours, and not considered found-code. Github is a good resource for 2D Java games from which
-to draw inspiration.
+
 
 This game uses both vector and raster graphics.
 The advantage of vector graphics is that they scale infinitely, and they render extremely fast. If you use
@@ -41,9 +39,9 @@ raster graphics (png's) which are essentially two-dimensional grids of pixels, m
 
 Ignore the following advice at your own peril:
 
-1/ For collision detection, I strongly recommend that you do NOT attempt to detect the intersection of two polygons
-including rectangles. Your sprites should effectively be a shape with equal width and height circumscribed by a circle,
- as this facilitates collision detection.  If you want to create non-square rectilinear shapes, walls, or other odd
+1/ For collision detection, do NOT attempt to detect the intersection of two polygons
+including rectangles. Use the existing circle collision detection. Your sprites should effectively be a shape with equal
+ width and height circumscribed by a circle, as this facilitates collision detection.  If you want to create non-square rectilinear shapes, walls, or other odd
  shapes, you can build them one brick at a time; see the Brick class.
 
 2/ Start with the Asteroids game and make incremental changes to it. You will avoid a lot of problems taking
