@@ -47,7 +47,7 @@ raster graphics (png's) which are essentially two-dimensional grids of pixels, m
 Please heed the following:
 
 1/ For collision detection, do NOT attempt to detect the intersection of two polygons
-including rectangles. Use the existing circle-collision detection algorithm. Your sprites should effectively be a shape
+including rectangles. Use the existing circle-collision-detection algorithm. Your sprites should effectively be a shape
 with equal width and height circumscribed/inscribed by a circle, as this
 facilitates collision detection.  If you want to create non-square rectilinear shapes, walls, or other odd
  shapes, you can build them one brick at a time; see the Brick class.
@@ -60,7 +60,10 @@ good inspiration. Take advantage of the existing architecture with its
 free-form deltaX and deltaY; do not try to create a game that requires a grid like Tetris, Break-out, Pong, or Pac-man
 as these are not well suited to this base-code architecture.
 
-3/ If you find your gaming groove, then you can explode beyond the bounds of the existing Game.DIM and create an entire
+3/ Commit (with git) often as you develop your game. This will allow the TAs to see your development process. Don't be
+afraid to fail. If you reach a dead-end, revert (git) to the last good commit and continue.
+
+4/ If you find your gaming groove, then you can explode beyond the bounds of the existing Game.DIM and create an entire
 world with a mini-map, and new levels, etc. See Sinistar in moregames (git@github.com:agerber/moregames.git) for how to
 create a mini-map. Other big-world 2D games that cycle are Defender, Mario Bros, etc.
 
