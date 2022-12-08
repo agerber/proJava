@@ -25,7 +25,7 @@
 
 
 Create a classic video game using the tools you've learned throughout the quarter.
-1/ You MUST extend the Asteroids code-base and game architecture provided to you. Failure to comply
+1/ You MUST extend the Asteroids code-base and game architecture provided to you. Failure to do so
 will result in an automatic and non-negotiable zero on this evaluation.
 2/ You can create any video game you want, EXCEPT Asteroids.
 3/ You may code your game in either Java or Kotlin; see README.md of proJava for Kotlin instructions.
@@ -37,11 +37,12 @@ raster graphics (png's) which are essentially two-dimensional grids of pixels, m
  the pixel density, otherwise your game will lag when rendering. For
  raster graphics implementation, see the Falcon or WhiteCloudDebris classes.
 
-Ignore the following advice at your own peril:
+Please heed the following:
 
 1/ For collision detection, do NOT attempt to detect the intersection of two polygons
-including rectangles. Use the existing circle collision detection. Your sprites should effectively be a shape with equal
- width and height circumscribed by a circle, as this facilitates collision detection.  If you want to create non-square rectilinear shapes, walls, or other odd
+including rectangles. Use the existing circle collision detection algorithm. Your sprites should effectively be a shape
+with equal width and height circumscribed/inscribed by a circle, as this
+facilitates collision detection.  If you want to create non-square rectilinear shapes, walls, or other odd
  shapes, you can build them one brick at a time; see the Brick class.
 
 2/ Start with the Asteroids game and make incremental changes to it. You will avoid a lot of problems taking
