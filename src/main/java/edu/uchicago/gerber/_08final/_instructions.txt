@@ -25,7 +25,7 @@
 
 
 Create a classic video game using the tools you've learned throughout the quarter.
-1/ You MUST extend the Asteroids code-base provided to you. Failure to comply
+1/ You MUST extend the Asteroids code-base and game architecture provided to you. Failure to comply
 will result in an automatic and non-negotiable zero on this evaluation.
 2/ You can create any video game you want, EXCEPT Asteroids.
 3/ You may code your game in either Java or Kotlin; see README.md of proJava for Kotlin instructions.
