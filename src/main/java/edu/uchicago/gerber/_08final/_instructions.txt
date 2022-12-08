@@ -27,8 +27,11 @@
 Create a classic video game using the tools you've learned throughout the quarter.
 1/ You MUST extend the existing base-code architecture of which Asteroids is just
  one example implementation. You MUST use the Movable interface, Sprite, CommandCenter, GameOpsQueue, GameOp, GameFrame,
- GamePanel, Sound, PolarPoint, and Game classes. Failure to do so will result in an automatic and non-negotiable zero
- on this evaluation.
+ GamePanel, Sound, PolarPoint, and Game classes. You must use the existing collision detection. You must use a
+ separate List of Movables for each Team, though you a free to add, remove, or rename your Teams. The expectation is
+ that you will swap out the appropriate classes in the model directory for your models, and change the game logic in
+ the Game and CommandCenter classes to suit your game.  Failing any of the above will result in an automatic and
+ non-negotiable zero on this evaluation.
 2/ You can create any video game you want, EXCEPT Asteroids.
 3/ You may code your game in either Java or Kotlin; see README.md of proJava for Kotlin instructions.
 
