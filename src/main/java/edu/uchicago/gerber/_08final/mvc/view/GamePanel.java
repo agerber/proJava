@@ -166,10 +166,8 @@ public class GamePanel extends Panel {
             drawShieldMeter(grpOff);
             drawScore(grpOff);
             drawLevel(grpOff);
+            drawLevelCleared(grpOff);
 
-            if (CommandCenter.getInstance().getFalcon().getCleared() > 0) {
-                displayTextOnScreen(grpOff, "Level " + CommandCenter.getInstance().getLevel());
-            }
 
 
         }
@@ -197,8 +195,17 @@ public class GamePanel extends Panel {
 
 
     }
+    //upper-left corner of screen
     private void drawLevel(final Graphics graphics){
         graphics.drawString("LEVEL: " + CommandCenter.getInstance().getLevel(), 20, 30);
+    }
+
+    //middle of screen
+    private void drawLevelCleared(final Graphics graphics){
+        if (CommandCenter.getInstance().getFalcon().getCleared() > 0) {
+            displayTextOnScreen(graphics, "Level " + CommandCenter.getInstance().getLevel());
+        }
+
     }
 
 
