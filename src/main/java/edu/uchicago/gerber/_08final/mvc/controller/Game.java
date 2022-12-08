@@ -349,7 +349,7 @@ public class Game implements Runnable, KeyListener {
             //time to adjust to new asteroids in game space.
             CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
             //flash the falcon invisible for just a few frames to provide feedback to user of new level
-            CommandCenter.getInstance().getFalcon().setInvisible(Falcon.INITIAL_SPAWN_TIME/7);
+            CommandCenter.getInstance().getFalcon().setInvisible(Falcon.INITIAL_SPAWN_TIME/10);
 
         }
     }
