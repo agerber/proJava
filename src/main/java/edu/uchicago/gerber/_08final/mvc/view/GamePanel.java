@@ -95,9 +95,7 @@ public class GamePanel extends Panel {
         g.setColor(Color.white);
         g.setFont(fnt);
         if (CommandCenter.getInstance().getScore() > 0) {
-            g.drawString("SCORE :  " + CommandCenter.getInstance().getScore(), fontWidth, fontHeight);
-        } else {
-            g.drawString("NO SCORE", fontWidth, fontHeight);
+            g.drawString("Score :  " + CommandCenter.getInstance().getScore(), fontWidth, fontHeight);
         }
     }
     //this is used for development, you can remove it from your final game
@@ -166,7 +164,7 @@ public class GamePanel extends Panel {
             drawShieldMeter(grpOff);
             drawScore(grpOff);
             drawLevel(grpOff);
-            drawLevelCleared(grpOff);
+            //drawLevelCleared(grpOff);
 
 
 
@@ -197,16 +195,20 @@ public class GamePanel extends Panel {
     }
     //upper-left corner of screen
     private void drawLevel(final Graphics graphics){
-        graphics.drawString("LEVEL: " + CommandCenter.getInstance().getLevel(), 20, 30);
+        final String levelText = "Level: " + CommandCenter.getInstance().getLevel();
+        graphics.drawString(levelText, 20, 30);
+        if (CommandCenter.getInstance().getFalcon().getCleared() > 0) {
+            displayTextOnScreen(graphics, levelText);
+        }
     }
 
     //middle of screen
-    private void drawLevelCleared(final Graphics graphics){
-        if (CommandCenter.getInstance().getFalcon().getCleared() > 0) {
-            displayTextOnScreen(graphics, "Level " + CommandCenter.getInstance().getLevel());
-        }
-
-    }
+//    private void drawLevelCleared(final Graphics graphics){
+//        if (CommandCenter.getInstance().getFalcon().getCleared() > 0) {
+//            displayTextOnScreen(graphics, "Level " + CommandCenter.getInstance().getLevel());
+//        }
+//
+//    }
 
 
 
