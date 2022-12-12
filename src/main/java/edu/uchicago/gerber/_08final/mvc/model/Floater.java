@@ -1,5 +1,7 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;

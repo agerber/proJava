@@ -1,5 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import lombok.Data;
 
 import java.awt.*;

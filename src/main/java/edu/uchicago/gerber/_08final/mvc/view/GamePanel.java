@@ -1,5 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.view;
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 import edu.uchicago.gerber._08final.mvc.model.*;
 
@@ -193,7 +194,7 @@ public class GamePanel extends Panel {
 
 
     }
-    //upper-left corner of screen
+
     private void drawLevel(final Graphics graphics){
         final String levelText = "Level: " + CommandCenter.getInstance().getLevel();
         graphics.drawString(levelText, 20, 30);
@@ -202,13 +203,6 @@ public class GamePanel extends Panel {
         }
     }
 
-    //middle of screen
-//    private void drawLevelCleared(final Graphics graphics){
-//        if (CommandCenter.getInstance().getFalcon().getCleared() > 0) {
-//            displayTextOnScreen(graphics, "Level " + CommandCenter.getInstance().getLevel());
-//        }
-//
-//    }
 
 
 

@@ -1,5 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
+import edu.uchicago.gerber._08final.mvc.controller.GameOp;
 import lombok.Data;
 
 import javax.imageio.ImageIO;
@@ -110,7 +112,7 @@ public abstract class Sprite implements Movable {
         //if a short-lived sprite has an expiry of one, it commits suicide by enqueuing itself (this) onto the
         //opsList with an operation of REMOVE
         if (getExpiry() == 1) {
-            CommandCenter.getInstance().getOpsQueue().enqueue(this, GameOp.Action.REMOVE);
+            edu.uchicago.gerber._08final.mvc.controller.CommandCenter.getInstance().getOpsQueue().enqueue(this, GameOp.Action.REMOVE);
         }
         //and then decrements in all cases
         setExpiry(getExpiry() - 1);

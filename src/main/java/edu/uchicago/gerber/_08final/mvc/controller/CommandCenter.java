@@ -1,9 +1,8 @@
-package edu.uchicago.gerber._08final.mvc.model;
+package edu.uchicago.gerber._08final.mvc.controller;
 
 
 
-import edu.uchicago.gerber._08final.mvc.controller.Game;
-import edu.uchicago.gerber._08final.mvc.controller.Sound;
+import edu.uchicago.gerber._08final.mvc.model.*;
 import lombok.Data;
 
 import java.awt.*;

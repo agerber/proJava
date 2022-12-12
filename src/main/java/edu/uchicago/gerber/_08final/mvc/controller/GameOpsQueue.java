@@ -1,4 +1,6 @@
-package edu.uchicago.gerber._08final.mvc.model;
+package edu.uchicago.gerber._08final.mvc.controller;
+
+import edu.uchicago.gerber._08final.mvc.model.Movable;
 
 import java.util.*;
 import java.util.concurrent.locks.Lock;

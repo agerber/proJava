@@ -2,7 +2,7 @@ package edu.uchicago.gerber._08final.mvc.controller;
 
 
 
-import edu.uchicago.gerber._08final.mvc.model.CommandCenter;
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
