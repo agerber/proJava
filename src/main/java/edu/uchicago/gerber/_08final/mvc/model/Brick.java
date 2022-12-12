@@ -44,4 +44,11 @@ public class Brick extends Sprite {
 		//g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
 	}
 
+	//the reason we override the move method is to skip the logic contained in super-class Sprite
+	//and gaining slight performance
+	@Override
+	public void move(){
+		//do NOT call super and do nothing, a brick does not move.
+	}
+
 } //end class
