@@ -33,7 +33,7 @@ public abstract class Sprite implements Movable {
 
     //every sprite has a team: friend, foe, floater, or debris.
     private Team team;
-    //the radius of circumscribing circle
+    //the radius of circumscribing/inscribing circle
     private int radius;
 
     //orientation from 0-359
@@ -46,15 +46,15 @@ public abstract class Sprite implements Movable {
 
 
     //these are Cartesian points used to draw the polygon in vector mode.
-    //once set, their values do not change. It's the job of the renderVector() method to adjust for orientation and
+    //Once set, their values do not change. It's the job of the renderVector() method to adjust for orientation and
     // location.
     private Point[] cartesians;
 
     //used for vector rendering
     private Color color;
 
-    //Either you use the cartesian points above (vector), or you can use the BufferedImages here (raster).
-    //Keys can be any object (?) you want. See Falcon and WhiteCloudDebris for example implementations.
+    //Either you use the cartesian points and color above (vector), or you can use the BufferedImages here (raster).
+    //Keys in this map can be any object (?) you want. See Falcon and WhiteCloudDebris for example implementations.
     private Map<?, BufferedImage> rasterMap;
 
 
@@ -122,6 +122,7 @@ public abstract class Sprite implements Movable {
 
 
 
+    //utility method used by extending classes to produce random pos/neg values
     protected int somePosNegValue(int seed) {
         int randomNumber = Game.R.nextInt(seed);
         if (randomNumber % 2 == 0)
@@ -141,7 +142,7 @@ public abstract class Sprite implements Movable {
     //https://www.tabnine.com/code/java/methods/java.awt.geom.AffineTransform/rotate
     protected void renderRaster(Graphics2D g2d, BufferedImage bufferedImage) {
 
-        if (null == bufferedImage) return;
+        if (bufferedImage ==  null) return;
 
         int centerX = getCenter().x;
         int centerY = getCenter().y;
