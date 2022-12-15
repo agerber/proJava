@@ -20,7 +20,7 @@ public class Falcon extends Sprite {
 	private int shield;
 	private int invisible;
 
-	private int cleared;
+	private int showLevelInMiddle;
 
 	public static final int MAX_SHIELD = 200;
 
@@ -85,7 +85,7 @@ public class Falcon extends Sprite {
 
 		if (invisible > 0) invisible--;
 		if (shield > 0) shield--;
-		if (cleared > 0) cleared--;
+		if (showLevelInMiddle > 0) showLevelInMiddle--;
 
 		//apply some thrust vectors using trig.
 		if (thrusting) {
