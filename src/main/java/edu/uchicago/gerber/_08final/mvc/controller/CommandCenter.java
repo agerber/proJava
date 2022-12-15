@@ -100,7 +100,7 @@ public class CommandCenter {
 	}
 
 	public boolean isGameOver() {		//if the number of falcons is zero, then game over
-		return numFalcons <= 0;
+		return numFalcons < 1;
 	}
 
 
