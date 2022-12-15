@@ -342,13 +342,17 @@ public class Game implements Runnable, KeyListener {
     private void checkNewLevel() {
 
         if (isLevelClear()) {
-            //more asteroids at each level to increase difficulty
-            CommandCenter.getInstance().setLevel(CommandCenter.getInstance().getLevel() + 1);
-            spawnBigAsteroids(CommandCenter.getInstance().getLevel());
+            //currentLevel will be zero at beginning of game
+            int level = CommandCenter.getInstance().getLevel();
+            //award some points
+            CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + (10_000L * level++));
+            CommandCenter.getInstance().setLevel(level);
+            //spawn some big new asteroids
+            spawnBigAsteroids(level);
             //make falcon invincible momentarily in case new asteroids spawn on top of him, and give player
             //time to adjust to new asteroids in game space.
             CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
-            //show level-clear
+            //show "Level X" in middle of screen
             CommandCenter.getInstance().getFalcon().setCleared(Falcon.INITIAL_SPAWN_TIME);
 
         }
