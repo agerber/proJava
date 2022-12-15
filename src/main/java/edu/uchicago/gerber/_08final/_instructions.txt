@@ -28,13 +28,12 @@ Create a classic video game using the tools you've learned throughout the quarte
 1/ You MUST extend the existing base-code architecture of which Asteroids is just
  one example implementation. You MUST use the Movable interface, Sprite, CommandCenter, GameOpsQueue, GameOp, GameFrame,
  GamePanel, Sound, and Game classes. You must use the existing collision detection. You must use a
- separate List of Movables for each Team, though you a free to add, remove, or rename your Teams. The expectation is
+ separate List of Movables for each Team, though you are free to add, remove, or rename your Teams. The expectation is
  that you will swap out the appropriate classes in the model directory for your models, and change the game logic in
- the Game and CommandCenter classes to suit your game. Failing to extend the base-code architecture will result in an
- automatic and non-negotiable zero on this evaluation.
+ the Game and CommandCenter classes to suit your game, and make other necessary changes. Failing to extend the base-code
+ will result in an automatic and non-negotiable zero on this evaluation.
 2/ You can create any video game you want, EXCEPT Asteroids.
 3/ You may code your game in either Java or Kotlin; see README.md of proJava for Kotlin instructions.
-
 
 The reason I require students to extend the base-code architecture is to: (1) level the playing field,
 (2) provide a foundation upon which students can build, and (3) provide implementations for
@@ -57,7 +56,7 @@ facilitates collision detection.  If you want to create non-square rectilinear s
 
 2/ Start with the Asteroids game and make incremental changes to it. You will avoid a lot of problems taking
 this approach. Your game should not stray too far from Asteroids initially. As you get more familiar with the game and
-its architecture, you can take more risks, but always be prepared to roll back your changes. Git is your best friend
+its architecture, you can take more risks, but always be prepared to roll back your changes; git is your best friend
 for experimenting with new features of your game.  Games like 1941, Joust, Galaga, Space Invaders, Missile Command, are
 good inspiration. Take advantage of the existing architecture with its
 free-form deltaX and deltaY; do not try to create a game that requires a grid like Tetris, Break-out, or Pong
