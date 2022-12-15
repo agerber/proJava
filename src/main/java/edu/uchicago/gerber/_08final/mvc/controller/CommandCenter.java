@@ -89,7 +89,7 @@ public class CommandCenter {
 	}
 
 	public void incrementFrame(){
-		frame = frame != Long.MAX_VALUE ? ++frame : 0;
+		frame = frame < Long.MAX_VALUE ? frame + 1 : 0;
 	}
 
 	private void clearAll(){
