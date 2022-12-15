@@ -112,7 +112,7 @@ public abstract class Sprite implements Movable {
         //if a short-lived sprite has an expiry of one, it commits suicide by enqueuing itself (this) onto the
         //opsList with an operation of REMOVE
         if (getExpiry() == 1) {
-            edu.uchicago.gerber._08final.mvc.controller.CommandCenter.getInstance().getOpsQueue().enqueue(this, GameOp.Action.REMOVE);
+            CommandCenter.getInstance().getOpsQueue().enqueue(this, GameOp.Action.REMOVE);
         }
         //and then decrements in all cases
         setExpiry(getExpiry() - 1);
