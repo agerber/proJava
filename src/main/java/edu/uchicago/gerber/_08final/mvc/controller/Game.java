@@ -54,10 +54,6 @@ public class Game implements Runnable, KeyListener {
     //spawn every 30 seconds
 
 
-
-
-
-
     // ===============================================
     // ==CONSTRUCTOR
     // ===============================================
@@ -152,7 +148,7 @@ public class Game implements Runnable, KeyListener {
                     //remove the foe
                     CommandCenter.getInstance().getOpsQueue().enqueue(movFoe, GameOp.Action.REMOVE);
 
-                    if (movFoe instanceof  Brick){
+                    if (movFoe instanceof Brick) {
                         CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + 1000);
                         Sound.playSound("rock.wav");
                     } else {
@@ -178,15 +174,15 @@ public class Game implements Runnable, KeyListener {
             if (pntFalCenter.distance(pntFloaterCenter) < (radFalcon + radFloater)) {
 
                 Class<? extends Movable> clazz = movFloater.getClass();
-                switch (clazz.getSimpleName()){
+                switch (clazz.getSimpleName()) {
                     case "ShieldFloater":
                         Sound.playSound("shieldup.wav");
                         CommandCenter.getInstance().getFalcon().setShield(Falcon.MAX_SHIELD);
-                    break;
+                        break;
                     case "NewWallFloater":
                         Sound.playSound("wall.wav");
                         buildWall();
-                    break;
+                        break;
                 }
                 CommandCenter.getInstance().getOpsQueue().enqueue(movFloater, GameOp.Action.REMOVE);
 
@@ -197,8 +193,6 @@ public class Game implements Runnable, KeyListener {
         processGameOpsQueue();
 
     }//end meth
-
-
 
 
     private void processGameOpsQueue() {
@@ -282,7 +276,7 @@ public class Game implements Runnable, KeyListener {
 
     private void spawnShieldFloater() {
 
-        if (CommandCenter.getInstance().getFrame() % ShieldFloater.SPAWN_SHIELD_FLOATER == 0 ) {
+        if (CommandCenter.getInstance().getFrame() % ShieldFloater.SPAWN_SHIELD_FLOATER == 0) {
             CommandCenter.getInstance().getOpsQueue().enqueue(new ShieldFloater(), GameOp.Action.ADD);
         }
     }
@@ -344,8 +338,9 @@ public class Game implements Runnable, KeyListener {
         if (isLevelClear()) {
             //currentLevel will be zero at beginning of game
             int level = CommandCenter.getInstance().getLevel();
-            //award some points
-            CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + (10_000L * level++));
+            //award some points for having cleared the previous level
+            CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + (10_000L * level));
+            level = level + 1;
             CommandCenter.getInstance().setLevel(level);
             //spawn some big new asteroids
             spawnBigAsteroids(level);
@@ -378,40 +373,39 @@ public class Game implements Runnable, KeyListener {
         if (nKey == START && CommandCenter.getInstance().isGameOver())
             CommandCenter.getInstance().initGame();
 
-        if (fal != null) {
 
-            switch (nKey) {
-                case PAUSE:
-                    CommandCenter.getInstance().setPaused(!CommandCenter.getInstance().isPaused());
-                    if (CommandCenter.getInstance().isPaused())
-                        stopLoopingSounds(soundBackground, soundThrust);
+        switch (nKey) {
+            case PAUSE:
+                CommandCenter.getInstance().setPaused(!CommandCenter.getInstance().isPaused());
+                if (CommandCenter.getInstance().isPaused())
+                    stopLoopingSounds(soundBackground, soundThrust);
 
-                    break;
-                case QUIT:
-                    System.exit(0);
-                    break;
-                case UP:
-                    fal.setThrusting(true);
-                    if (!CommandCenter.getInstance().isPaused() && !CommandCenter.getInstance().isGameOver())
-                        soundThrust.loop(Clip.LOOP_CONTINUOUSLY);
-                    break;
-                case LEFT:
-                    fal.setTurnState(Falcon.TurnState.LEFT);
-                    break;
-                case RIGHT:
-                    fal.setTurnState(Falcon.TurnState.RIGHT);
-                    break;
+                break;
+            case QUIT:
+                System.exit(0);
+                break;
+            case UP:
+                fal.setThrusting(true);
+                if (!CommandCenter.getInstance().isPaused() && !CommandCenter.getInstance().isGameOver())
+                    soundThrust.loop(Clip.LOOP_CONTINUOUSLY);
+                break;
+            case LEFT:
+                fal.setTurnState(Falcon.TurnState.LEFT);
+                break;
+            case RIGHT:
+                fal.setTurnState(Falcon.TurnState.RIGHT);
+                break;
 
 
-                // possible future use
-                // case KILL:
-                // case SHIELD:
-                // case NUM_ENTER:
+            // possible future use
+            // case KILL:
+            // case SHIELD:
+            // case NUM_ENTER:
 
-                default:
-                    break;
-            }
+            default:
+                break;
         }
+
     }
 
     @Override
@@ -421,36 +415,36 @@ public class Game implements Runnable, KeyListener {
         //show the key-code in the console
         System.out.println(nKey);
 
-        if (fal != null) {
-            switch (nKey) {
-                case FIRE:
-                    CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(fal), GameOp.Action.ADD);
-                    Sound.playSound("laser.wav");
-                    break;
 
-                case LEFT:
-                case RIGHT:
-                    fal.setTurnState(Falcon.TurnState.IDLE);
-                    break;
-                case UP:
-                    fal.setThrusting(false);
-                    soundThrust.stop();
-                    break;
+        switch (nKey) {
+            case FIRE:
+                CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(fal), GameOp.Action.ADD);
+                Sound.playSound("laser.wav");
+                break;
 
-                case MUTE:
-                    CommandCenter.getInstance().setMuted(!CommandCenter.getInstance().isMuted());
+            case LEFT:
+            case RIGHT:
+                fal.setTurnState(Falcon.TurnState.IDLE);
+                break;
+            case UP:
+                fal.setThrusting(false);
+                soundThrust.stop();
+                break;
 
-                    if (!CommandCenter.getInstance().isMuted()) {
-                        stopLoopingSounds(soundBackground);
-                    } else {
-                        soundBackground.loop(Clip.LOOP_CONTINUOUSLY);
-                    }
-                    break;
+            case MUTE:
+                CommandCenter.getInstance().setMuted(!CommandCenter.getInstance().isMuted());
 
-                default:
-                    break;
-            }
+                if (!CommandCenter.getInstance().isMuted()) {
+                    stopLoopingSounds(soundBackground);
+                } else {
+                    soundBackground.loop(Clip.LOOP_CONTINUOUSLY);
+                }
+                break;
+
+            default:
+                break;
         }
+
     }
 
     @Override
