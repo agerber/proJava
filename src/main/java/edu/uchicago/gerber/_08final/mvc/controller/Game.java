@@ -367,14 +367,14 @@ public class Game implements Runnable, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        Falcon fal = CommandCenter.getInstance().getFalcon();
-        int nKey = e.getKeyCode();
+        Falcon falcon = CommandCenter.getInstance().getFalcon();
+        int keyCode = e.getKeyCode();
 
-        if (nKey == START && CommandCenter.getInstance().isGameOver())
+        if (keyCode == START && CommandCenter.getInstance().isGameOver())
             CommandCenter.getInstance().initGame();
 
 
-        switch (nKey) {
+        switch (keyCode) {
             case PAUSE:
                 CommandCenter.getInstance().setPaused(!CommandCenter.getInstance().isPaused());
                 if (CommandCenter.getInstance().isPaused())
@@ -385,15 +385,15 @@ public class Game implements Runnable, KeyListener {
                 System.exit(0);
                 break;
             case UP:
-                fal.setThrusting(true);
+                falcon.setThrusting(true);
                 if (!CommandCenter.getInstance().isPaused() && !CommandCenter.getInstance().isGameOver())
                     soundThrust.loop(Clip.LOOP_CONTINUOUSLY);
                 break;
             case LEFT:
-                fal.setTurnState(Falcon.TurnState.LEFT);
+                falcon.setTurnState(Falcon.TurnState.LEFT);
                 break;
             case RIGHT:
-                fal.setTurnState(Falcon.TurnState.RIGHT);
+                falcon.setTurnState(Falcon.TurnState.RIGHT);
                 break;
 
 
@@ -410,24 +410,24 @@ public class Game implements Runnable, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        Falcon fal = CommandCenter.getInstance().getFalcon();
-        int nKey = e.getKeyCode();
+        Falcon falcon = CommandCenter.getInstance().getFalcon();
+        int keyCode = e.getKeyCode();
         //show the key-code in the console
-        System.out.println(nKey);
+        System.out.println(keyCode);
 
 
-        switch (nKey) {
+        switch (keyCode) {
             case FIRE:
-                CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(fal), GameOp.Action.ADD);
+                CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(falcon), GameOp.Action.ADD);
                 Sound.playSound("laser.wav");
                 break;
 
             case LEFT:
             case RIGHT:
-                fal.setTurnState(Falcon.TurnState.IDLE);
+                falcon.setTurnState(Falcon.TurnState.IDLE);
                 break;
             case UP:
-                fal.setThrusting(false);
+                falcon.setThrusting(false);
                 soundThrust.stop();
                 break;
 
