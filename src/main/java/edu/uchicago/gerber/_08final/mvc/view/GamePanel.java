@@ -198,7 +198,7 @@ public class GamePanel extends Panel {
     private void drawLevel(final Graphics graphics){
         final String levelText = "Level: " + CommandCenter.getInstance().getLevel();
         graphics.drawString(levelText, 20, 30);
-        if (CommandCenter.getInstance().getFalcon().getShowLevelInMiddle() > 0) {
+        if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) {
             displayTextOnScreen(graphics, levelText);
         }
     }
