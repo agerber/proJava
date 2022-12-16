@@ -25,6 +25,7 @@ public class GamePanel extends Panel {
     private int fontWidth;
     private int fontHeight;
 
+    //used to draw number of ships remaining
     private final Point[] pntShipsRemaining;
 
 
@@ -75,7 +76,6 @@ public class GamePanel extends Panel {
         listShip.add(new Point(1,6));
         listShip.add(new Point(0,9));
 
-        //this just displays the ships remaining
         pntShipsRemaining = CommandCenter.pointsListToArray(listShip);
 
         gmf.pack();
@@ -110,10 +110,10 @@ public class GamePanel extends Panel {
 
     private void drawShieldMeter(Graphics g){
 
-        int spawnForMeter =   CommandCenter.getInstance().getFalcon().getShield() / 2;
+        int shieldMeter =   CommandCenter.getInstance().getFalcon().getShield() / 2;
 
         g.setColor(Color.CYAN);
-        g.fillRect(Game.DIM.width - 220, Game.DIM.height -45, spawnForMeter, 10);
+        g.fillRect(Game.DIM.width - 220, Game.DIM.height -45, shieldMeter, 10);
 
         g.setColor(Color.DARK_GRAY);
         g.drawRect(Game.DIM.width - 220, Game.DIM.height -45, 100, 10);
@@ -131,7 +131,7 @@ public class GamePanel extends Panel {
         grpOff.setColor(Color.BLACK);
         grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
 
-
+        //this is used for development, you may remove drawNumFrame() in your final game.
         drawNumFrame(grpOff);
 
         if (CommandCenter.getInstance().isGameOver()) {
@@ -165,8 +165,6 @@ public class GamePanel extends Panel {
             drawShieldMeter(grpOff);
             drawScore(grpOff);
             drawLevel(grpOff);
-            //drawLevelCleared(grpOff);
-
 
 
         }
@@ -197,9 +195,9 @@ public class GamePanel extends Panel {
 
     private void drawLevel(final Graphics graphics){
         final String levelText = "Level: " + CommandCenter.getInstance().getLevel();
-        graphics.drawString(levelText, 20, 30);
+        graphics.drawString(levelText, 20, 30); //upper-left corner
         if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) {
-            displayTextOnScreen(graphics, levelText);
+            displayTextOnScreen(graphics, levelText); //middle of the screen
         }
     }
 
