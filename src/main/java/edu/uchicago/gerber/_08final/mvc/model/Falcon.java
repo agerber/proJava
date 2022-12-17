@@ -136,7 +136,7 @@ public class Falcon extends Sprite {
 		}
 
 		//cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
-		//and render the image according to the image-state
+		//and render the raster image according to the image-state
 		renderRaster((Graphics2D) g, getRasterMap().get(imageState));
 
 	}
