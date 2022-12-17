@@ -55,9 +55,7 @@ public class Falcon extends Sprite {
 
 		//We use HashMap which has a seek-time of O(1)
 		//See the resources directory in the root of this project for pngs.
-		//Using constants as keys is safer b/c we know the value exists when we get it later;
-		//if we had hard-coded strings here and below, there's a chance we could misspell it below or elsewhere.
-
+		//Using constants as keys is safer b/c we know the value exists when we reference the consts later in code.
     	Map<Integer, BufferedImage> rasterMap = new HashMap<>();
 		rasterMap.put(FALCON, loadGraphic("/imgs/fal/falcon125.png") );
 		rasterMap.put(FALCON_THR, loadGraphic("/imgs/fal/falcon125_thr.png") );
