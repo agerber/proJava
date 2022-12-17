@@ -137,12 +137,11 @@ public class Falcon extends Sprite {
 		//and render the image according to the image-state
 		renderRaster((Graphics2D) g, getRasterMap().get(imageState));
 
-		//you can also add vector elements to raster graphics
-		//draw cyan shield
-//		if (invisible == 0 && isProtected()) {
-//			g.setColor(Color.CYAN);
-//			g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
-//		}
+		//you can also combine vector elements and raster elements
+		if (invisible < 1 && isProtected()) {
+			g.setColor(Color.CYAN);
+			g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
+		}
 
 
 
