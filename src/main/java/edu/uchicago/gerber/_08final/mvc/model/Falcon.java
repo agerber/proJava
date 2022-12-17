@@ -117,7 +117,7 @@ public class Falcon extends Sprite {
 
 	}
 
-	//this is a raster implementation of draw()
+	//this is a raster and vector implementation of draw()
 	@Override
 	public void draw(Graphics g) {
 
@@ -128,6 +128,8 @@ public class Falcon extends Sprite {
 		}
 		else if (isProtected()){
 			if (thrusting) imageState = FALCON_PRO_THR; else imageState = FALCON_PRO;
+			//you can also combine vector elements and raster elements
+		    drawShield(g);
 		}
 		else { //not protected
 			if (thrusting) imageState = FALCON_THR; else imageState = FALCON;
@@ -137,14 +139,11 @@ public class Falcon extends Sprite {
 		//and render the image according to the image-state
 		renderRaster((Graphics2D) g, getRasterMap().get(imageState));
 
-		//you can also combine vector elements and raster elements
-		if (invisible < 1 && isProtected()) {
-			g.setColor(Color.CYAN);
-			g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
-		}
+	}
 
-
-
+	private void drawShield(Graphics g){
+		g.setColor(Color.CYAN);
+		g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
 	}
 
 
