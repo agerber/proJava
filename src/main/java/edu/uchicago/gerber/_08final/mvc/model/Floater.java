@@ -1,6 +1,7 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
+import edu.uchicago.gerber._08final.mvc.controller.Utils;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public abstract class Floater extends Sprite {
         listPoints.add(new Point(-5, 5));
         listPoints.add(new Point(0,4));
 
-        setCartesians(CommandCenter.pointsListToArray(listPoints));
+        setCartesians(Utils.pointsListToArray(listPoints));
 
     }
 

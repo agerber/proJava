@@ -2,6 +2,7 @@ package edu.uchicago.gerber._08final.mvc.view;
 
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
+import edu.uchicago.gerber._08final.mvc.controller.Utils;
 import edu.uchicago.gerber._08final.mvc.model.*;
 
 import java.awt.*;
@@ -76,7 +77,7 @@ public class GamePanel extends Panel {
         listShip.add(new Point(1,6));
         listShip.add(new Point(0,9));
 
-        pntShipsRemaining = CommandCenter.pointsListToArray(listShip);
+        pntShipsRemaining = Utils.pointsListToArray(listShip);
 
         gmf.pack();
         initView();
@@ -234,13 +235,13 @@ public class GamePanel extends Panel {
 
         g.drawPolygon(
 
-                CommandCenter.cartesianToPolar(Arrays.asList(pntShipsRemaining)).stream()
+                Utils.cartesianToPolar(Arrays.asList(pntShipsRemaining)).stream()
                         .map(rotateFalcon90)
                         .map(pnt -> pnt.x + Game.DIM.width - (X_POS * offSet))
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                CommandCenter.cartesianToPolar(Arrays.asList(pntShipsRemaining)).stream()
+                Utils.cartesianToPolar(Arrays.asList(pntShipsRemaining)).stream()
                         .map(rotateFalcon90)
                         .map(pnt -> pnt.y + Game.DIM.height - Y_POS)
                         .mapToInt(Integer::intValue)

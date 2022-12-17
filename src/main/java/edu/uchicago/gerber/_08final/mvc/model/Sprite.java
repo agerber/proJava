@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import edu.uchicago.gerber._08final.mvc.controller.GameOp;
+import edu.uchicago.gerber._08final.mvc.controller.Utils;
 import lombok.Data;
 
 import javax.imageio.ImageIO;
@@ -183,7 +184,7 @@ public abstract class Sprite implements Movable {
         // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to g.drawPolygon().
 
         //convert raw cartesians to raw polars
-        List<PolarPoint> polars = CommandCenter.cartesianToPolar(Arrays.asList(getCartesians()));
+        List<PolarPoint> polars = Utils.cartesianToPolar(Arrays.asList(getCartesians()));
 
         //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
         Function<PolarPoint, Point> adjustForOrientation =

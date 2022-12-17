@@ -1,6 +1,7 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
+import edu.uchicago.gerber._08final.mvc.controller.Utils;
 import lombok.Data;
 
 import java.awt.*;
@@ -43,7 +44,7 @@ public class Bullet extends Sprite {
         listPoints.add(new Point(0, -2));
         listPoints.add(new Point(-1, -1));
 
-        setCartesians(CommandCenter.pointsListToArray(listPoints));
+        setCartesians(Utils.pointsListToArray(listPoints));
 
 
 
