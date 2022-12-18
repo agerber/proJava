@@ -283,8 +283,8 @@ public class Game implements Runnable, KeyListener {
 
 
     //this method spawns new Large (0) Asteroids
-    private void spawnBigAsteroids(int nNum) {
-        while (nNum-- > 0) {
+    private void spawnBigAsteroids(int numBig) {
+        while (numBig-- > 0) {
             //Asteroids with size of zero are big
             CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(0), GameOp.Action.ADD);
 
@@ -293,16 +293,17 @@ public class Game implements Runnable, KeyListener {
 
     private void spawnSmallerAsteroidsOrDebris(Asteroid originalAsteroid) {
 
-        int nSize = originalAsteroid.getSize();
+        int size = originalAsteroid.getSize();
         //small asteroids
-        if (nSize > 1) {
+        if (size > 1) {
             CommandCenter.getInstance().getOpsQueue().enqueue(new WhiteCloudDebris(originalAsteroid), GameOp.Action.ADD);
         }
         //med and large
         else {
             //for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
-            nSize += 2;
-            while (nSize-- > 0) {
+            //We can use the existing variable (size) to do this
+            size += 2;
+            while (size-- > 0) {
                 CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(originalAsteroid), GameOp.Action.ADD);
             }
         }
