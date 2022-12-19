@@ -41,9 +41,9 @@ public class Bullet extends Sprite {
         setDeltaY(vectorY);
 
         //fire kick-back on the falcon
-        final double KICK_BACK = 160.0;
-        falcon.setDeltaX(falcon.getDeltaX() - vectorX / KICK_BACK);
-        falcon.setDeltaY(falcon.getDeltaY() - vectorY / KICK_BACK);
+        final double KICK_BACK_DIVISOR = 160.0;
+        falcon.setDeltaX(falcon.getDeltaX() - vectorX / KICK_BACK_DIVISOR);
+        falcon.setDeltaY(falcon.getDeltaY() - vectorY / KICK_BACK_DIVISOR);
 
 
         //defined the points on a cartesian grid
