@@ -89,28 +89,28 @@ public class Falcon extends Sprite {
 
 		//apply some thrust vectors using trig.
 		if (thrusting) {
-			double adjustX = Math.cos(Math.toRadians(getOrientation()))
+			double vectorX = Math.cos(Math.toRadians(getOrientation()))
 					* THRUST;
-			double adjustY = Math.sin(Math.toRadians(getOrientation()))
+			double vectorY = Math.sin(Math.toRadians(getOrientation()))
 					* THRUST;
-			setDeltaX(getDeltaX() + adjustX);
-			setDeltaY(getDeltaY() + adjustY);
+			setDeltaX(getDeltaX() + vectorX);
+			setDeltaY(getDeltaY() + vectorY);
 		}
 
 		//adjust the orientation given turnState
-		int orientation = getOrientation();
+		int adjustOr = getOrientation();
 		switch (turnState){
 			case LEFT:
-				orientation = getOrientation() <= 0 ? 360 : getOrientation() - DEGREE_STEP;
+				adjustOr = getOrientation() <= 0 ? 360 : getOrientation() - DEGREE_STEP;
 				break;
 			case RIGHT:
-				orientation = getOrientation() >= 360 ? 0 : getOrientation() + DEGREE_STEP;
+				adjustOr = getOrientation() >= 360 ? 0 : getOrientation() + DEGREE_STEP;
 				break;
 			case IDLE:
 			default:
 				//do nothing
 		}
-		setOrientation(orientation);
+		setOrientation(adjustOr);
 
 	}
 
