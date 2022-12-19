@@ -106,6 +106,7 @@ public class Falcon extends Sprite {
 			case RIGHT:
 				orientation = getOrientation() >= 360 ? 0 : getOrientation() + DEGREE_STEP;
 				break;
+			case IDLE:
 			default:
 				//do nothing
 		}
