@@ -31,10 +31,19 @@ public class Bullet extends Sprite {
         setOrientation(falcon.getOrientation());
 
         final double FIRE_POWER = 35.0;
-        setDeltaX(falcon.getDeltaX() +
-                Math.cos(Math.toRadians(falcon.getOrientation())) * FIRE_POWER);
-        setDeltaY(falcon.getDeltaY() +
-                Math.sin(Math.toRadians(falcon.getOrientation())) * FIRE_POWER);
+        double vectorX = falcon.getDeltaX() +
+                Math.cos(Math.toRadians(falcon.getOrientation())) * FIRE_POWER;
+        double vectorY = falcon.getDeltaY() +
+                Math.sin(Math.toRadians(falcon.getOrientation())) * FIRE_POWER;
+
+        //fire vectors forces
+        setDeltaX(vectorX);
+        setDeltaY(vectorY);
+
+        //fire kick-back on the falcon
+        final double KICK_BACK = 160.0;
+        falcon.setDeltaX(falcon.getDeltaX() - vectorX / KICK_BACK);
+        falcon.setDeltaY(falcon.getDeltaY() - vectorY / KICK_BACK);
 
 
         //defined the points on a cartesian grid

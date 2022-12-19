@@ -265,6 +265,7 @@ public class GamePanel extends Panel {
     // This method draws some text to the middle of the screen before/after a game
     private void displayTextOnScreen(final Graphics graphics, String... lines) {
 
+        //AtomicInteger is safe to pass into a stream
         final AtomicInteger spacer = new AtomicInteger(0);
         Arrays.stream(lines)
                 .forEach(s ->
