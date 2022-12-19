@@ -97,23 +97,19 @@ public class Falcon extends Sprite {
 			setDeltaY(getDeltaY() + adjustY);
 		}
 
+		//adjust the orientation given turnState
+		int orientation = getOrientation();
 		switch (turnState){
 			case LEFT:
-				if (getOrientation() <= 0) {
-					setOrientation(360);
-				}
-				setOrientation(getOrientation() - DEGREE_STEP);
+				orientation = getOrientation() <= 0 ? 360 : getOrientation() - DEGREE_STEP;
 				break;
 			case RIGHT:
-				if (getOrientation() >= 360) {
-					setOrientation(0);
-				}
-				setOrientation(getOrientation() + DEGREE_STEP);
+				orientation = getOrientation() >= 360 ? 0 : getOrientation() + DEGREE_STEP;
 				break;
 			default:
 				//do nothing
-
 		}
+		setOrientation(orientation);
 
 	}
 
