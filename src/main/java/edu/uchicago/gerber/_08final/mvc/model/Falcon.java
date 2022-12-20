@@ -124,12 +124,12 @@ public class Falcon extends Sprite {
 			imageState = FALCON_INVISIBLE;
 		}
 		else if (isProtected()){
-			if (thrusting) imageState = FALCON_PRO_THR; else imageState = FALCON_PRO;
+			imageState = thrusting ? FALCON_PRO_THR : FALCON_PRO;
 			//you can also combine vector elements and raster elements
 		    drawShield(g);
 		}
 		else { //not protected
-			if (thrusting) imageState = FALCON_THR; else imageState = FALCON;
+			imageState = thrusting ? FALCON_THR : FALCON;
 		}
 
 		//cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
