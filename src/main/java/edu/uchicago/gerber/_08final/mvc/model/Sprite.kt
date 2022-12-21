@@ -158,8 +158,8 @@ abstract class Sprite : Movable {
 
         //for debugging center-point. Feel free to remove these two lines.
         //#########################################
-        g.color = Color.ORANGE
-        g.fillOval(center.x - 1, center.y - 1, 2, 2)
+        //g.color = Color.ORANGE
+        //g.fillOval(center.x - 1, center.y - 1, 2, 2)
         //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
         //#########################################
     }

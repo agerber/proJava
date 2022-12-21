@@ -34,7 +34,7 @@ object CommandCenter {
 
     fun initGame() {
         clearAll()
-        level = 1
+        level = 0
         score = 0
         paused = false
         //set to one greater than number of falcons lives in your game as initFalconAndDecrementNum() also decrements

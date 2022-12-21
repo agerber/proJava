@@ -161,8 +161,8 @@ class Game : Runnable, KeyListener {
                 CommandCenter.opsQueue.enqueue(movFloater, GameOp.Action.REMOVE)
 
             } //end for
-            processGameOpsQueue()
         }
+        processGameOpsQueue()
     }//end meth
 
     private fun processGameOpsQueue() {
