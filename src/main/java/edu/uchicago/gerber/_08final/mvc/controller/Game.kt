@@ -123,7 +123,13 @@ class Game : Runnable, KeyListener {
                     }
                     //remove the foe
                     CommandCenter.opsQueue.enqueue(movFoe, GameOp.Action.REMOVE)
-                    Sound.playSound("kapow.wav")
+                    if (movFoe is Brick) {
+                        CommandCenter.score = (CommandCenter.score + 1000)
+                        playSound("rock.wav")
+                    } else {
+                        CommandCenter.score = (CommandCenter.score + 10)
+                        playSound("kapow.wav")
+                    }
                 }
             } //end inner for
         } //end outer for
@@ -173,7 +179,7 @@ class Game : Runnable, KeyListener {
                         CommandCenter.movFoes.add(mov)
                     } else { //GameOp.Operation.REMOVE
                         CommandCenter.movFoes.remove(mov)
-                        if (mov is Asteroid) spawnSmallerAsteroids(mov)
+                        if (mov is Asteroid) spawnSmallerAsteroidsOrDebris(mov)
                     }
 
                     Team.FRIEND -> if (action == GameOp.Action.ADD) {
@@ -259,14 +265,18 @@ class Game : Runnable, KeyListener {
         }
     }
 
-    private fun spawnSmallerAsteroids(originalAsteroid: Asteroid) {
-        var nSize = originalAsteroid.size
-        if (nSize > 1) return  //return if Small (2) Asteroid
-
-        //for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
-        nSize += 2
-        while (nSize-- > 0) {
-            CommandCenter.opsQueue.enqueue(Asteroid(originalAsteroid), GameOp.Action.ADD)
+    private fun spawnSmallerAsteroidsOrDebris(originalAsteroid: Asteroid) {
+        var size = originalAsteroid.size
+        //small asteroids
+        if (size > 1) {
+            CommandCenter.opsQueue.enqueue(WhiteCloudDebris(originalAsteroid), GameOp.Action.ADD)
+        } else {
+            //for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
+            //We can use the existing variable (size) to do this
+            size += 2
+            while (size-- > 0) {
+                CommandCenter.opsQueue.enqueue(Asteroid(originalAsteroid), GameOp.Action.ADD)
+            }
         }
     }
 

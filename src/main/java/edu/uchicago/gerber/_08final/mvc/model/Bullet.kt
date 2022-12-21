@@ -11,6 +11,7 @@ class Bullet(fal: Falcon) : Sprite() {
 
     companion object {
         const val FIRE_POWER = 35.0
+        const val KICK_BACK_DIVISOR = 24.0
     }
 
     init {
@@ -27,10 +28,18 @@ class Bullet(fal: Falcon) : Sprite() {
         //set the bullet orientation to the falcon (ship) orientation
         orientation = fal.orientation
 
-        deltaX = fal.deltaX +
-                Math.cos(Math.toRadians(fal.orientation.toDouble())) * FIRE_POWER
-        deltaY = fal.deltaY +
-                Math.sin(Math.toRadians(fal.orientation.toDouble())) * FIRE_POWER
+
+        val vectorX = Math.cos(Math.toRadians(orientation.toDouble())) * FIRE_POWER
+        val vectorY = Math.sin(Math.toRadians(orientation.toDouble())) * FIRE_POWER
+
+        //fire force: falcon inertia + fire-vector
+        deltaX = fal.deltaX + vectorX
+        deltaY = fal.deltaY + vectorY
+
+
+        //fire kick-back on the falcon: inertia - fire-vector / some arbitrary divisor
+        fal.deltaX = fal.deltaX - vectorX / KICK_BACK_DIVISOR
+        fal.deltaY = fal.deltaY - vectorY / KICK_BACK_DIVISOR
 
         //defined the points on a cartesian grid
         val listPoint = ArrayList<Point>()
