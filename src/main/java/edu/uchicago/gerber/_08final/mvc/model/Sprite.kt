@@ -31,7 +31,7 @@ abstract class Sprite : Movable {
     lateinit var cartesians: Array<Point>
 
     //used for rasters
-    lateinit var rasterMap: Map<String, BufferedImage?>
+    lateinit var rasterMap: Map<Int, BufferedImage?>
     lateinit var team: Team
 
     init {
@@ -167,7 +167,10 @@ abstract class Sprite : Movable {
 
 
     //https://www.tabnine.com/code/java/methods/java.awt.geom.AffineTransform/rotate
-    protected open fun renderRaster(g2d: Graphics2D, bufferedImage: BufferedImage) {
+    protected open fun renderRaster(g2d: Graphics2D, bufferedImage: BufferedImage?) {
+
+        if (bufferedImage == null) return
+
         val centerX: Int = center.x
         val centerY: Int = center.y
         val width: Int = radius * 2

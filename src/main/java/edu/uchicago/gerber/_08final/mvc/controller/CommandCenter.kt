@@ -47,7 +47,7 @@ object CommandCenter {
         numFalcons -= 1
         if (isGameOver()) return
         //playSound("shipspawn.wav")
-        falcon.spawn = Falcon.SPAWN_INIT_VALUE
+        falcon.shield = Falcon.SPAWN_INIT_VALUE
         //put falcon in the middle of the game-space
         falcon.center = Point(Game.DIM.width / 2, Game.DIM.height / 2)
         falcon.orientation = Game.R.nextInt(360)

@@ -5,7 +5,6 @@ import java.awt.Color
 import java.awt.Graphics
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage
-import java.util.*
 
 
  class Falcon : Sprite() {
@@ -16,10 +15,19 @@ import java.util.*
         private const val THRUST = .65
         private const val DEGREE_STEP = 9
         const val SPAWN_INIT_VALUE = 68
+        const val MAX_SHIELD = 200
+        //image states
+        const val FALCON = 0 //normal ship
+        const val FALCON_THR = 1 //normal ship thrusting
+        const val FALCON_PRO = 2 //protected ship (green)
+        const val FALCON_PRO_THR = 3 //protected ship (green) thrusting
+        const val FALCON_INVISIBLE = 4 //for pre-spawning
     }
 
     var thrusting = false
-    var spawn = 0
+    var shield = 0
+    var invisible = 0
+    var showLevel = 0
 
     enum class TurnState {
         IDLE, LEFT, RIGHT
@@ -27,15 +35,10 @@ import java.util.*
 
     var turnState = TurnState.IDLE
 
-    enum class ImageState {
-        FALCON,  //normal ship
-        FALCON_THR,  //normal ship thrusting
-        FALCON_PRO,  //protected ship (green)
-        FALCON_PRO_THR //protected ship (green) thrusting
-    }
 
 
-    // ==============================================================
+
+     // ==============================================================
     // CONSTRUCTOR 
     // ==============================================================
     init {
@@ -45,18 +48,19 @@ import java.util.*
 
 
 
-        val rasterMap: MutableMap<String, BufferedImage?> = HashMap()
-        rasterMap[ImageState.FALCON.toString()] = loadGraphic("/imgs/falcon50.png")
-        rasterMap[ImageState.FALCON_THR.toString()] = loadGraphic("/imgs/falcon50thrust.png")
-        rasterMap[ImageState.FALCON_PRO.toString()] = loadGraphic("/imgs/falcon50protect.png")
-        rasterMap[ImageState.FALCON_PRO_THR.toString()] = loadGraphic("/imgs/falcon50protect_thrust.png")
+        val rasterMap: MutableMap<Int, BufferedImage?> = HashMap()
+        rasterMap[FALCON] = loadGraphic("/imgs/falcon50.png")
+        rasterMap[FALCON_THR] = loadGraphic("/imgs/falcon50thrust.png")
+        rasterMap[FALCON_PRO] = loadGraphic("/imgs/falcon50protect.png")
+        rasterMap[FALCON_PRO_THR] = loadGraphic("/imgs/falcon50protect_thrust.png")
+        rasterMap[FALCON_INVISIBLE] = null
         this.rasterMap = rasterMap
 
     }
 
     //if fading, then make invincible
     override fun isProtected(): Boolean {
-        return spawn > 0
+        return shield > 0
 
     }
 
@@ -65,7 +69,13 @@ import java.util.*
     // ==============================================================
     override fun move() {
         super.move()
-        if (spawn > 0) spawn--
+        if (invisible > 0) invisible--
+        if (shield > 0) shield--
+        //The falcon is a convenient place to decrement this variable as the falcon
+        //move() method is being called every frame (~40ms); and the falcon reference is never null.
+        //The falcon is a convenient place to decrement this variable as the falcon
+        //move() method is being called every frame (~40ms); and the falcon reference is never null.
+        if (showLevel > 0) showLevel--
 
         //apply some thrust vectors using trig.
         if (thrusting) {
@@ -106,24 +116,27 @@ import java.util.*
     override fun draw(g: Graphics) {
 
         //set image-state
-        val imageState: ImageState
-        imageState = if (isProtected()) {
-            if (thrusting) ImageState.FALCON_PRO_THR else ImageState.FALCON_PRO
+        val imageState: Int
+        if (isProtected()) {
+          imageState =  if (thrusting) FALCON_PRO_THR else FALCON_PRO
+            //you can also combine vector elements and raster elements
+            //you can also combine vector elements and raster elements
+            drawShield(g)
         } else { //not protected
-            if (thrusting) ImageState.FALCON_THR else ImageState.FALCON
+            imageState =   if (thrusting) FALCON_THR else FALCON
         }
 
         //cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
         //and render the image according to the image-state
-        renderRaster((g as Graphics2D), rasterMap[imageState.toString()]!!)
+        renderRaster((g as Graphics2D), rasterMap[imageState]!!)
 
-        //draw cyan shield, and warn player of impending non-protection
-        if (isProtected() && !(spawn <= 21 && spawn % 7 == 0)) {
-            //you can add vector elements to raster graphics
-            g.setColor(Color.CYAN)
-            g.drawOval(center.x - radius, center.y - radius, radius * 2, radius * 2)
-        }
+
     }
+
+     private fun drawShield(g: Graphics) {
+         g.color = Color.CYAN
+         g.drawOval(center.x - radius, center.y - radius, radius * 2, radius * 2)
+     }
 
 
 }

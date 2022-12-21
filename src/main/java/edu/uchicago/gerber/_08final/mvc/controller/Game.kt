@@ -1,5 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.controller
 
+import edu.uchicago.gerber._08final.mvc.controller.Sound.playSound
 import edu.uchicago.gerber._08final.mvc.model.*
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import edu.uchicago.gerber._08final.mvc.view.GamePanel
@@ -81,7 +82,7 @@ class Game : Runnable, KeyListener {
             gmpPanel.update(gmpPanel.graphics) // see GamePanel class
             checkCollisions()
             checkNewLevel()
-            spawnNewShipFloater()
+            checkFloaters()
             CommandCenter.incrementFrame()
 
             // surround the sleep() in a try/catch block
@@ -122,7 +123,7 @@ class Game : Runnable, KeyListener {
                     }
                     //remove the foe
                     CommandCenter.opsQueue.enqueue(movFoe, GameOp.Action.REMOVE)
-                   Sound.playSound("kapow.wav")
+                    Sound.playSound("kapow.wav")
                 }
             } //end inner for
         } //end outer for
@@ -137,13 +138,26 @@ class Game : Runnable, KeyListener {
             radFloater = movFloater.myRadius()
 
             //detect collision
-            if (pntFalCenter.distance(pntFloaterCenter) < radFalcon + radFloater) {
+            if (pntFalCenter.distance(pntFloaterCenter) < (radFalcon + radFloater)) {
+
+                val clazz: Class<out Movable?> = movFloater.javaClass
+                when (clazz.simpleName) {
+                    "ShieldFloater" -> {
+                        playSound("shieldup.wav")
+                        CommandCenter.falcon.shield = Falcon.MAX_SHIELD
+                    }
+
+                    "NewWallFloater" -> {
+                        playSound("wall.wav")
+                        buildWall()
+                    }
+                }
                 CommandCenter.opsQueue.enqueue(movFloater, GameOp.Action.REMOVE)
-               Sound.playSound("pacman_eatghost.wav")
-            } //end if
-        } //end for
-        processGameOpsQueue()
-    } //end meth
+
+            } //end for
+            processGameOpsQueue()
+        }
+    }//end meth
 
     private fun processGameOpsQueue() {
 
@@ -188,13 +202,54 @@ class Game : Runnable, KeyListener {
         }
     }
 
-    private fun spawnNewShipFloater() {
+    //shows how to add walls or rectangular elements one
+    //brick at a time
+    private fun buildWall() {
+        val BRICK_SIZE = DIM.width / 30
+        val ROWS = 2
+        val COLS = 20
+        val X_OFFSET = BRICK_SIZE * 5
+        val Y_OFFSET = 50
+        for (nRow in 0 until COLS) {
+            for (nCol in 0 until ROWS) {
+                CommandCenter.opsQueue.enqueue(
+                    Brick(
+                        Point(nRow * BRICK_SIZE + X_OFFSET, nCol * BRICK_SIZE + Y_OFFSET),
+                        BRICK_SIZE
+                    ),
+                    GameOp.Action.ADD
+                )
+            }
+        }
+    }
+    private fun checkFloaters() {
+        spawnNewWallFloater()
+        spawnShieldFloater()
+    }
 
-        if (CommandCenter.frame % SPAWN_NEW_SHIP_FLOATER  == 0L) {
-            CommandCenter.opsQueue.enqueue(NewShipFloater(), GameOp.Action.ADD)
+    private fun spawnNewWallFloater() {
+        if (CommandCenter.frame % NewWallFloater.SPAWN_NEW_WALL_FLOATER == 0L && isBrickFree()) {
+            CommandCenter.opsQueue.enqueue(NewWallFloater(), GameOp.Action.ADD)
         }
     }
 
+    private fun spawnShieldFloater() {
+        if (CommandCenter.frame % ShieldFloater.SPAWN_SHIELD_FLOATER == 0L) {
+            CommandCenter.opsQueue.enqueue(ShieldFloater(), GameOp.Action.ADD)
+        }
+    }
+
+    private fun isBrickFree(): Boolean {
+        //if there are no more Bricks on the screen
+        var brickFree = true
+        for (movFoe in CommandCenter.movFoes) {
+            if (movFoe is Brick) {
+                brickFree = false
+                break
+            }
+        }
+        return brickFree
+    }
     //this method spawns new Large (0) Asteroids
     private fun spawnBigAsteroids(nNum: Int) {
         var localNum = nNum
@@ -233,8 +288,7 @@ class Game : Runnable, KeyListener {
             //more asteroids at each level to increase difficulty
             CommandCenter.level = CommandCenter.level + 1
             spawnBigAsteroids(CommandCenter.level)
-            //setFade e.g. protect the falcon so that player has time to avoid newly spawned asteroids.
-            CommandCenter.falcon.spawn = Falcon.SPAWN_INIT_VALUE
+            CommandCenter.falcon.shield = Falcon.SPAWN_INIT_VALUE
         }
     }
 

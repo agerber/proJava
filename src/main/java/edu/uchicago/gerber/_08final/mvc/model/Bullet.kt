@@ -1,5 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model
 
+import edu.uchicago.gerber._08final.mvc.controller.Utils
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Color
 import java.awt.Graphics
@@ -37,7 +38,7 @@ class Bullet(fal: Falcon) : Sprite() {
         listPoint.add(Point(1, -1))
         listPoint.add(Point(0, -2))
         listPoint.add(Point(-1, -1))
-        cartesians = listPoint
+        cartesians = Utils.pointsListToArray(listPoint)
     }
 
     override fun draw(g: Graphics) {
