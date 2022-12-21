@@ -1,8 +1,10 @@
-package edu.uchicago.gerber._08final.mvc.model
+package edu.uchicago.gerber._08final.mvc.controller
 
-import edu.uchicago.gerber._08final.mvc.controller.Game
+import edu.uchicago.gerber._08final.mvc.model.*
 import java.awt.Point
 import java.util.*
+import java.util.concurrent.Executors
+import java.util.concurrent.ThreadPoolExecutor
 import java.util.function.BiFunction
 import java.util.stream.Collectors
 
@@ -26,6 +28,8 @@ object CommandCenter {
 
      val opsQueue = GameOpsQueue()
 
+    //for sound playing. Limit the number of threads to 5 at a time.
+    private val soundExecutor = Executors.newFixedThreadPool(5) as ThreadPoolExecutor
 
 
     fun initGame() {
@@ -58,13 +62,10 @@ object CommandCenter {
         movFloaters.clear()
     }
 
-    fun incrementFrame(){
-        if (frame == Long.MAX_VALUE){
-            frame = 0
-        } else {
-            frame++
-        }
+    fun incrementFrame() {
+        frame = if (frame < Long.MAX_VALUE) frame + 1 else 0
     }
+
 
     //if the number of falcons is zero, then game over
     fun isGameOver(): Boolean {

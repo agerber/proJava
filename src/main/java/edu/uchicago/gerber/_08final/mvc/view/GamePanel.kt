@@ -1,8 +1,7 @@
 package edu.uchicago.gerber._08final.mvc.view
 
 import edu.uchicago.gerber._08final.mvc.controller.Game
-import edu.uchicago.gerber._08final.mvc.model.CommandCenter
-import edu.uchicago.gerber._08final.mvc.model.CommandCenter.pointsListToArray
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter
 import edu.uchicago.gerber._08final.mvc.model.Movable
 import edu.uchicago.gerber._08final.mvc.model.PolarPoint
 import java.awt.*
