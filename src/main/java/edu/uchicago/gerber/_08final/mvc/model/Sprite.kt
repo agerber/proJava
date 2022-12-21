@@ -28,7 +28,7 @@ abstract class Sprite : Movable {
 
     //all these will be initialized in the subclasses and have no default values
     //used for vectors
-    lateinit var cartesians: List<Point>
+    lateinit var cartesians: Array<Point>
 
     //used for rasters
     lateinit var rasterMap: Map<String, BufferedImage?>
@@ -142,13 +142,13 @@ abstract class Sprite : Movable {
                     center.y - p.y)
         }
         g.drawPolygon(
-                polars.stream()
+                Arrays.stream(polars)
                         .map(adjustForOrientation)
                         .map(adjustForLocation)
                         .map { pnt: Point -> pnt.x }
                         .mapToInt { obj: Int -> obj }
                         .toArray(),
-                polars.stream()
+                Arrays.stream(polars)
                         .map(adjustForOrientation)
                         .map(adjustForLocation)
                         .map { pnt: Point -> pnt.y }

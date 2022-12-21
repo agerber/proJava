@@ -74,7 +74,7 @@ object CommandCenter {
 
 
     //Utility method for transforming cartesian points to polar points
-     fun cartesianToPolar(pntCartesians: List<Point>): List<PolarPoint> {
+     fun cartesianToPolar(pntCartesians: Array<Point>): Array<PolarPoint> {
 
         val cartToPolarTransform = BiFunction { pnt: Point, hyp: Double ->
             PolarPoint( //this is r from PolarPoint(r,theta).
@@ -95,9 +95,10 @@ object CommandCenter {
 
         //we must make hypotenuse final to pass into a stream.
         val hyp = largestHypotenuse
-        return pntCartesians.stream()
+        return Arrays.stream(pntCartesians)
             .map { pnt: Point -> cartToPolarTransform.apply(pnt, hyp) }
             .collect(Collectors.toList())
+            .toTypedArray()
     }
 
     //private helper method
