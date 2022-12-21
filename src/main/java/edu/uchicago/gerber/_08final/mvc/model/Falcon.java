@@ -13,7 +13,7 @@ public class Falcon extends Sprite {
 	// FIELDS 
 	// ==============================================================
 	
-	private static final double THRUST = 1.05;
+	private static final double THRUST = 0.85;
 	private final static int DEGREE_STEP = 9;
 	public static final int INITIAL_SPAWN_TIME = 46;
 
@@ -47,7 +47,7 @@ public class Falcon extends Sprite {
 		setTeam(Team.FRIEND);
 
 		//this is the radius of the falcon
-		setRadius(37);
+		setRadius(32);
 
 
 
