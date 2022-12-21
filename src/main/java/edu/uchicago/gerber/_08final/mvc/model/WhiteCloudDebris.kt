@@ -10,7 +10,7 @@ class WhiteCloudDebris(explodingSprite: Sprite) : Sprite() {
 
         //DEBRIS means that this sprite is inert, and does not interact with other teams.
         team = Team.DEBRIS
-        var rasterMap: MutableMap<Int, BufferedImage?> = HashMap()
+        var rasterMap: MutableMap<Any, BufferedImage?> = HashMap()
         //see readme.txt file in the resources/imgs/exp directory for how I created these assets
         rasterMap[0] = loadGraphic("/imgs/exp/row-1-column-1.png")
         rasterMap[1] = loadGraphic("/imgs/exp/row-1-column-2.png")

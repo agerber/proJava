@@ -1,51 +1,42 @@
-package edu.uchicago.gerber._08final.mvc.model;
+package edu.uchicago.gerber._08final.mvc.model
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
+import edu.uchicago.gerber._08final.mvc.model.Movable.Team
+import java.awt.Graphics
+import java.awt.Graphics2D
+import java.awt.Point
+import java.awt.image.BufferedImage
 
-public class Brick extends Sprite {
+class Brick(upperLeftCorner: Point, size: Int) : Sprite() {
+    private val BRICK_IMAGE = 0
 
-	private final int BRICK_IMAGE = 0;
+    //The size of this brick is always square!
+    //we use upperLeftCorner because that is the origin when drawing graphics in Java
+    init {
 
-	//The size of this brick is always square!
-	//we use upperLeftCorner because that is the origin when drawing graphics in Java
-	public Brick(Point upperLeftCorner, int size) {
+        //currently set to Foe, but you can change the team or create a new team.
+        //you can shoot to destroy the wall which yields big points
+        team = Team.FOE
+        center = Point(upperLeftCorner.x + size / 2, upperLeftCorner.y + size / 2)
+        radius = size / 2
 
-		//currently set to Foe, but you can change the team or create a new team.
-		//you can shoot to destroy the wall which yields big points
-		setTeam(Team.FOE);
+        //As this sprite does not animate or change state, we could just store a BufferedImage as a member, but
+        //since we already have a rasterMap in the Sprite class, we might as well be consistent for all raster sprites
+        // and use it.
+        val rasterMap: MutableMap<Any, BufferedImage?> = HashMap()
+        rasterMap.put(BRICK_IMAGE, loadGraphic("/imgs/brick/Brick_Block100.png"))
+        this.rasterMap = rasterMap
+    }
 
-		setCenter(new Point(upperLeftCorner.x + size/2, upperLeftCorner.y + size/2));
+    override fun draw(g: Graphics) {
+        renderRaster((g as Graphics2D), rasterMap[BRICK_IMAGE])
+        //if you uncomment these, you can see how collision works. Feel free to remove these two lines.
+        //g.setColor(Color.LIGHT_GRAY);
+        //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
+    }
 
-		setRadius(size/2);
-
-		//As this sprite does not animate or change state, we could just store a BufferedImage as a member, but
-		//since we already have a rasterMap in the Sprite class, we might as well be consistent for all raster sprites
-		// and use it.
-    	Map<Integer, BufferedImage> rasterMap = new HashMap<>();
-		//brick from Mario Bros
-		rasterMap.put(BRICK_IMAGE, loadGraphic("/imgs/brick/Brick_Block100.png") );
-
-		setRasterMap(rasterMap);
-
-
-	}
-
-	@Override
-	public void draw(Graphics g) {
-		renderRaster((Graphics2D) g, getRasterMap().get(BRICK_IMAGE));
-		//if you uncomment these, you can see how collision works. Feel free to remove these two lines.
-		//g.setColor(Color.LIGHT_GRAY);
-		//g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
-	}
-
-	//the reason we override the move method is to skip the logic contained in super-class Sprite move() method
-	//and gain slight performance
-	@Override
-	public void move(){
-		//do NOT call super.move() and do nothing, a brick does not move.
-	}
-
+    //the reason we override the move method is to skip the logic contained in super-class Sprite move() method
+    //and gain slight performance
+    override fun move() {
+        //do NOT call super.move() and do nothing, a brick does not move.
+    }
 } //end class

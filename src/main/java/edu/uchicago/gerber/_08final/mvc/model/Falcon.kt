@@ -48,7 +48,7 @@ import java.awt.image.BufferedImage
 
 
 
-        val rasterMap: MutableMap<Int, BufferedImage?> = HashMap()
+        val rasterMap: MutableMap<Any, BufferedImage?> = HashMap()
         rasterMap[FALCON] = loadGraphic("/imgs/fal/falcon125.png")
         rasterMap[FALCON_THR] = loadGraphic("/imgs/fal/falcon125_thr.png")
         rasterMap[FALCON_PRO] = loadGraphic("/imgs/fal/falcon125_PRO.png")
@@ -71,8 +71,6 @@ import java.awt.image.BufferedImage
         super.move()
         if (invisible > 0) invisible--
         if (shield > 0) shield--
-        //The falcon is a convenient place to decrement this variable as the falcon
-        //move() method is being called every frame (~40ms); and the falcon reference is never null.
         //The falcon is a convenient place to decrement this variable as the falcon
         //move() method is being called every frame (~40ms); and the falcon reference is never null.
         if (showLevel > 0) showLevel--

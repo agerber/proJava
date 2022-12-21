@@ -31,7 +31,7 @@ abstract class Sprite : Movable {
     lateinit var cartesians: Array<Point>
 
     //used for rasters
-    lateinit var rasterMap: Map<Int, BufferedImage?>
+    lateinit var rasterMap: Map<Any, BufferedImage?>
     lateinit var team: Team
 
     init {
