@@ -1,5 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model
 
+import edu.uchicago.gerber._08final.mvc.controller.Utils
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Color
 import java.awt.Graphics
@@ -32,7 +33,7 @@ class NewShipFloater : Sprite() {
         listPoint.add(Point(-4, 0))
         listPoint.add(Point(-5, 5))
         listPoint.add(Point(0, 4))
-        cartesians = listPoint
+        cartesians = Utils.pointsListToArray(listPoint)
     }
 
     override fun draw(g: Graphics) {

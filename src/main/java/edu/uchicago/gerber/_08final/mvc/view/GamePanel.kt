@@ -2,6 +2,7 @@ package edu.uchicago.gerber._08final.mvc.view
 
 import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter
+import edu.uchicago.gerber._08final.mvc.controller.Utils
 import edu.uchicago.gerber._08final.mvc.model.Movable
 import edu.uchicago.gerber._08final.mvc.model.PolarPoint
 import java.awt.*
@@ -27,7 +28,7 @@ class GamePanel(dim: Dimension?) : Panel() {
     private var fontHeight = 0
     private var strDisplay = ""
 
-    private val pntShip: List<Point>
+    private val pntShip: Array<Point>
 
     // ==============================================================
     // CONSTRUCTOR 
@@ -77,7 +78,7 @@ class GamePanel(dim: Dimension?) : Panel() {
         listShip.add(Point(0, 9))
 
         //this just displays the ships remaining
-        pntShip  = listShip
+        pntShip  = Utils.pointsListToArray(listShip)
 
 
         gmf.pack()
@@ -213,12 +214,12 @@ class GamePanel(dim: Dimension?) : Panel() {
         }
 
         g.drawPolygon(
-            CommandCenter.cartesianToPolar(pntShip).stream()
+           Arrays.stream( CommandCenter.cartesianToPolar(pntShip))
                 .map(rotateFalcon90)
                 .map { pnt: Point -> pnt.x + Game.DIM.width - X_POS * offSet }
                 .mapToInt { obj: Int -> obj }
                 .toArray(),
-            CommandCenter.cartesianToPolar(pntShip).stream()
+            Arrays.stream( CommandCenter.cartesianToPolar(pntShip))
                 .map(rotateFalcon90)
                 .map { pnt: Point -> pnt.y + Game.DIM.height - Y_POS }
                 .mapToInt { obj: Int -> obj }
