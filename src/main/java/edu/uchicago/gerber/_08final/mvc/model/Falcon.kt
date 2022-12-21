@@ -49,10 +49,10 @@ import java.awt.image.BufferedImage
 
 
         val rasterMap: MutableMap<Int, BufferedImage?> = HashMap()
-        rasterMap[FALCON] = loadGraphic("/imgs/falcon50.png")
-        rasterMap[FALCON_THR] = loadGraphic("/imgs/falcon50thrust.png")
-        rasterMap[FALCON_PRO] = loadGraphic("/imgs/falcon50protect.png")
-        rasterMap[FALCON_PRO_THR] = loadGraphic("/imgs/falcon50protect_thrust.png")
+        rasterMap[FALCON] = loadGraphic("/imgs/fal/falcon125.png")
+        rasterMap[FALCON_THR] = loadGraphic("/imgs/fal/falcon125_thr.png")
+        rasterMap[FALCON_PRO] = loadGraphic("/imgs/fal/falcon125_PRO.png")
+        rasterMap[FALCON_PRO_THR] = loadGraphic("/imgs/fal/falcon125_PRO_thr.png")
         rasterMap[FALCON_INVISIBLE] = null
         this.rasterMap = rasterMap
 

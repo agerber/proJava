@@ -14,18 +14,18 @@ object Sound {
     //http://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
     fun playSound(strPath: String) {
         //use coroutines here on the io dispatcher
-        Thread {
-            try {
-                val clp = AudioSystem.getClip()
-                val audioSrc = Sound::class.java.getResourceAsStream("/sounds/$strPath")
-                val bufferedIn: InputStream = BufferedInputStream(audioSrc)
-                val aisStream = AudioSystem.getAudioInputStream(bufferedIn)
-                clp.open(aisStream)
-                clp.start()
-            } catch (e: Exception) {
-                System.err.println(e.message)
-            }
-        }.start()
+       CommandCenter.soundExecutor.execute {
+           try {
+               val clp = AudioSystem.getClip()
+               val audioSrc = Sound::class.java.getResourceAsStream("/sounds/$strPath")
+               val bufferedIn: InputStream = BufferedInputStream(audioSrc)
+               val aisStream = AudioSystem.getAudioInputStream(bufferedIn)
+               clp.open(aisStream)
+               clp.start()
+           } catch (e: Exception) {
+               System.err.println(e.message)
+           }
+       }
     }
 
     //for looping wav clips

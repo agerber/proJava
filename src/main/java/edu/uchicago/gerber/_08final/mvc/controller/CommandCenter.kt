@@ -29,7 +29,7 @@ object CommandCenter {
      val opsQueue = GameOpsQueue()
 
     //for sound playing. Limit the number of threads to 5 at a time.
-    private val soundExecutor = Executors.newFixedThreadPool(5) as ThreadPoolExecutor
+     val soundExecutor = Executors.newFixedThreadPool(5) as ThreadPoolExecutor
 
 
     fun initGame() {
