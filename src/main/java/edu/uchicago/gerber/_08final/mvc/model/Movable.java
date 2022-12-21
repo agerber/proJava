@@ -4,9 +4,7 @@ import java.awt.*;
 
 public interface Movable {
 
-	enum Team {
-		FRIEND, FOE, FLOATER, DEBRIS
-	}
+	enum Team {FRIEND, FOE, FLOATER, DEBRIS}
 
 	//for the game to move and draw movable objects
 	void move();

@@ -25,9 +25,7 @@ public class Falcon extends Sprite {
 	public static final int MAX_SHIELD = 200;
 
 	private boolean thrusting = false;
-	public enum TurnState {
-		IDLE, LEFT, RIGHT
-	}
+	public enum TurnState {IDLE, LEFT, RIGHT}
 	private TurnState turnState = TurnState.IDLE;
 
 
@@ -82,8 +80,8 @@ public class Falcon extends Sprite {
 
 		if (invisible > 0) invisible--;
 		if (shield > 0) shield--;
-		//The falcon is a convenient place to decrement this variable as the falcon reference is in the movFriends list
-		//and so its move() method is being called every frame (~40ms); and the falcon reference is never null.
+		//The falcon is a convenient place to decrement this variable as the falcon
+		//move() method is being called every frame (~40ms); and the falcon reference is never null.
 		if (showLevel > 0) showLevel--;
 
 		//apply some thrust vectors using trig.
