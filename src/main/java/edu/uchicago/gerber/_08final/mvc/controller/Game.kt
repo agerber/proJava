@@ -295,10 +295,18 @@ class Game : Runnable, KeyListener {
 
     private fun checkNewLevel() {
         if (isLevelClear()) {
+
+            //currentLevel will be zero at beginning of game
+            var level: Int = CommandCenter.level
+            //award some points for having cleared the previous level
+            CommandCenter.score = CommandCenter.score + (level * 10_000L)
             //more asteroids at each level to increase difficulty
-            CommandCenter.level = CommandCenter.level + 1
-            spawnBigAsteroids(CommandCenter.level)
+            level = level + 1
+            CommandCenter.level = level
+            spawnBigAsteroids(level)
             CommandCenter.falcon.shield = Falcon.SPAWN_INIT_VALUE
+            CommandCenter.falcon.showLevel = Falcon.SPAWN_INIT_VALUE
+
         }
     }
 

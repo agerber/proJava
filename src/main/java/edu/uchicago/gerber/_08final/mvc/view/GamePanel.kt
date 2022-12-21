@@ -1,7 +1,7 @@
 package edu.uchicago.gerber._08final.mvc.view
 
-import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter
+import edu.uchicago.gerber._08final.mvc.controller.Game
 import edu.uchicago.gerber._08final.mvc.controller.Utils
 import edu.uchicago.gerber._08final.mvc.model.Movable
 import edu.uchicago.gerber._08final.mvc.model.PolarPoint
@@ -111,6 +111,14 @@ class GamePanel(dim: Dimension?) : Panel() {
         }
     }
 
+    private fun drawLevel(graphics: Graphics) {
+        val levelText = "Level: " + CommandCenter.level
+        graphics.drawString(levelText, 20, 30) //upper-left corner
+        if (CommandCenter.falcon.showLevel > 0) {
+            displayTextOnScreen(graphics, levelText) //middle of the screen
+        }
+    }
+
     //this is used for development, you can remove it from your final game
     private fun drawFrame(g: Graphics) {
         g.color = Color.white
@@ -139,8 +147,7 @@ class GamePanel(dim: Dimension?) : Panel() {
                 "'S' to Start",
                 "'P' to Pause",
                 "'Q' to Quit",
-                "left pinkie on 'A' for Shield",
-                "'Numeric-Enter' for Hyperspace"
+                "'M' to toggle music"
             )
 
         } else if (CommandCenter.paused) {
@@ -158,6 +165,10 @@ class GamePanel(dim: Dimension?) : Panel() {
                 CommandCenter.movFriends
             )
             drawNumberShipsLeft(grpOff)
+            drawShieldMeter(grpOff)
+            drawScore(grpOff)
+            drawLevel(grpOff)
+
         }
 
         //after drawing all the movables or text on the offscreen-image, copy it in one fell-swoop to graphics context
@@ -186,6 +197,23 @@ class GamePanel(dim: Dimension?) : Panel() {
         while (numFalcons > 0) {
             drawOneShipLeft(g, numFalcons--)
         }
+    }
+
+    private fun drawNumFrame(g: Graphics) {
+        g.color = Color.white
+        g.font = fnt
+        g.drawString(
+            "FRAME :  " + CommandCenter.frame, fontWidth,
+            Game.DIM.height - (fontHeight + 22)
+        )
+    }
+
+    private fun drawShieldMeter(g: Graphics) {
+        val shieldMeter: Int = CommandCenter.falcon.shield / 2
+        g.color = Color.CYAN
+        g.fillRect(Game.DIM.width - 220, Game.DIM.height - 45, shieldMeter, 10)
+        g.color = Color.DARK_GRAY
+        g.drawRect(Game.DIM.width - 220, Game.DIM.height - 45, 100, 10)
     }
 
     // Draw the number of falcons left on the bottom-right of the screen.

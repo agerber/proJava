@@ -11,7 +11,7 @@ class Bullet(fal: Falcon) : Sprite() {
 
     companion object {
         const val FIRE_POWER = 35.0
-        const val KICK_BACK_DIVISOR = 24.0
+        const val KICK_BACK_DIVISOR = 36.0
     }
 
     init {

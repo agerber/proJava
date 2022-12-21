@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage
     // FIELDS 
     // ==============================================================
     companion object {
-        private const val THRUST = .65
+        private const val THRUST = 0.85
         private const val DEGREE_STEP = 9
         const val SPAWN_INIT_VALUE = 68
         const val MAX_SHIELD = 200
@@ -117,9 +117,11 @@ import java.awt.image.BufferedImage
 
         //set image-state
         val imageState: Int
-        if (isProtected()) {
+        if (invisible > 0){
+            imageState = FALCON_INVISIBLE
+        }
+        else if (isProtected()) {
           imageState =  if (thrusting) FALCON_PRO_THR else FALCON_PRO
-            //you can also combine vector elements and raster elements
             //you can also combine vector elements and raster elements
             drawShield(g)
         } else { //not protected
@@ -128,7 +130,7 @@ import java.awt.image.BufferedImage
 
         //cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
         //and render the image according to the image-state
-        renderRaster((g as Graphics2D), rasterMap[imageState]!!)
+        renderRaster((g as Graphics2D), rasterMap[imageState])
 
 
     }

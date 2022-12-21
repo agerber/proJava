@@ -87,8 +87,8 @@ class Asteroid(size: Int) : Sprite() {
         }
 
 
-        //random number of vertices between 17 and 23
-        val VERTICES = Game.R.nextInt(7) + 17
+        //random number of vertices
+        val VERTICES = Game.R.nextInt(7) + 22
         return Stream.generate(polarPointSupplier)
             .limit(VERTICES.toLong())
             .sorted { pp1, pp2 -> pp1.theta.compareTo(pp2.theta) }
