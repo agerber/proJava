@@ -36,7 +36,7 @@ class Asteroid(size: Int) : Sprite() {
         //a size of zero is a big asteroid
         //a size of 1 or 2 is med or small asteroid respectively. See getSize() method.
         radius = if (size == 0) LARGE_RADIUS else LARGE_RADIUS / (size * 2)
-        cartesians = genRandomPoints().toList() as java.util.ArrayList<Point>
+        cartesians = genRandomPoints()
     }
 
     //overloaded so we can spawn smaller asteroids from an exploding one
@@ -59,7 +59,7 @@ class Asteroid(size: Int) : Sprite() {
         }
 
 
-    private fun genRandomPoints(): Array<out Any> {
+    private fun genRandomPoints(): Array<Point> {
         //6.283 is the max radians
         val MAX_RADIANS_X1000 = 6283
         //when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
@@ -93,7 +93,8 @@ class Asteroid(size: Int) : Sprite() {
             .limit(VERTICES.toLong())
             .sorted { pp1, pp2 -> pp1.theta.compareTo(pp2.theta) }
             .map { pp: PolarPoint -> transformer.apply(this, pp) }
-            .toArray()
+            .collect(Collectors.toList())
+            .toTypedArray()
 
 
     }
