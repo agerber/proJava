@@ -98,10 +98,10 @@ public class Falcon extends Sprite {
 		int adjustOr = getOrientation();
 		switch (turnState){
 			case LEFT:
-				adjustOr = getOrientation() <= 0 ? 360 : getOrientation() - DEGREE_STEP;
+				adjustOr = getOrientation() <= 0 ? 351 : getOrientation() - DEGREE_STEP;
 				break;
 			case RIGHT:
-				adjustOr = getOrientation() >= 360 ? 0 : getOrientation() + DEGREE_STEP;
+				adjustOr = getOrientation() >= 360 ? 9 : getOrientation() + DEGREE_STEP;
 				break;
 			case IDLE:
 			default:
