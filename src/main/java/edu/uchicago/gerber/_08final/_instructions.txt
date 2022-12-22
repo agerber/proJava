@@ -24,6 +24,7 @@
 
 
 
+
 Create a classic video game using the tools you've learned throughout the quarter.
 1/ You MUST extend the existing base-code architecture of which Asteroids is just
  one example implementation. You MUST use the Movable interface, Sprite, CommandCenter, GameOpsQueue, GameOp, GameFrame,
