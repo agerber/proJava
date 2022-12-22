@@ -51,7 +51,8 @@ object CommandCenter {
         falcon.invisible = Falcon.SPAWN_INIT_VALUE / 4
         //put falcon in the middle of the game-space
         falcon.center = Point(Game.DIM.width / 2, Game.DIM.height / 2)
-        falcon.orientation = Game.R.nextInt(360)
+        //random number 0-360 in steps of 9
+        falcon.orientation = Game.R.nextInt(40) * 9
         falcon.deltaX = 0.0
         falcon.deltaY = 0.0
     }
