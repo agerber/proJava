@@ -87,17 +87,11 @@ import java.awt.image.BufferedImage
 
         when (turnState) {
             TurnState.LEFT -> {
-                if (orientation < 0) {
-                    orientation = 351
-                }
-                orientation = orientation - DEGREE_STEP
+                orientation =  if (orientation <= 0) 351 else orientation - DEGREE_STEP
             }
 
             TurnState.RIGHT -> {
-                if (orientation > 360) {
-                    orientation = 9
-                }
-                orientation = orientation + DEGREE_STEP
+               orientation =  if (orientation >= 360) 9 else orientation + DEGREE_STEP
             }
 
             else -> {
