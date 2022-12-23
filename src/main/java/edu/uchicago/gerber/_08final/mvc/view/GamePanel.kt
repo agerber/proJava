@@ -242,12 +242,12 @@ class GamePanel(dim: Dimension?) : Panel() {
         }
 
         g.drawPolygon(
-           Arrays.stream( CommandCenter.cartesianToPolar(pntShip))
+           Arrays.stream( Utils.cartesianToPolar(pntShip))
                 .map(rotateFalcon90)
                 .map { pnt: Point -> pnt.x + Game.DIM.width - X_POS * offSet }
                 .mapToInt { obj: Int -> obj }
                 .toArray(),
-            Arrays.stream( CommandCenter.cartesianToPolar(pntShip))
+            Arrays.stream( Utils.cartesianToPolar(pntShip))
                 .map(rotateFalcon90)
                 .map { pnt: Point -> pnt.y + Game.DIM.height - Y_POS }
                 .mapToInt { obj: Int -> obj }

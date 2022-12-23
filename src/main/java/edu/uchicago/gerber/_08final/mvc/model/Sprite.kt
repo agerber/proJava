@@ -2,6 +2,7 @@ package edu.uchicago.gerber._08final.mvc.model
 
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter
 import edu.uchicago.gerber._08final.mvc.controller.Game
+import edu.uchicago.gerber._08final.mvc.controller.Utils
 import edu.uchicago.gerber._08final.mvc.model.Movable.Team
 import java.awt.Color
 import java.awt.Graphics
@@ -122,7 +123,7 @@ abstract class Sprite : Movable {
         // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to drawPolygon().
 
         //convert raw cartesians to raw polars
-        val polars = CommandCenter.cartesianToPolar(cartesians)
+        val polars = Utils.cartesianToPolar(cartesians)
 
         //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
         val adjustForOrientation = Function { (r, theta): PolarPoint ->

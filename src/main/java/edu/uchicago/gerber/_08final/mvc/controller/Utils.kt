@@ -2,6 +2,7 @@ package edu.uchicago.gerber._08final.mvc.controller
 
 import edu.uchicago.gerber._08final.mvc.model.PolarPoint
 import java.awt.Point
+import java.util.*
 import java.util.function.BiFunction
 import java.util.stream.Collectors
 
@@ -9,7 +10,8 @@ object Utils {
     ////////////////////////////////////////////////////////////////////
     //Utility methods for transforming cartesian2Polar, pointsListToArray, etc.
     ////////////////////////////////////////////////////////////////////
-    fun cartesianToPolar(pntCartesians: List<Point>): List<PolarPoint> {
+    fun cartesianToPolar(pntCartesians: Array<Point>): Array<PolarPoint> {
+
         val cartToPolarTransform = BiFunction { pnt: Point, hyp: Double ->
             PolarPoint( //this is r from PolarPoint(r,theta).
                 hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) / hyp,  //r is relative to the largestHypotenuse
@@ -21,19 +23,20 @@ object Utils {
 
         //determine the largest hypotenuse
         var largestHypotenuse = 0.0
-        for (pnt in pntCartesians) if (hypotFunction(
-                pnt.x.toDouble(),
-                pnt.y.toDouble()
-            ) > largestHypotenuse
-        ) largestHypotenuse = hypotFunction(pnt.x.toDouble(), pnt.y.toDouble())
+        for (pnt in pntCartesians){
+            if (hypotFunction(pnt.x.toDouble(), pnt.y.toDouble()) > largestHypotenuse)
+                largestHypotenuse = hypotFunction(pnt.x.toDouble(), pnt.y.toDouble())
+        }
 
 
         //we must make hypotenuse final to pass into a stream.
         val hyp = largestHypotenuse
-        return pntCartesians.stream()
+        return Arrays.stream(pntCartesians)
             .map { pnt: Point -> cartToPolarTransform.apply(pnt, hyp) }
             .collect(Collectors.toList())
+            .toTypedArray()
     }
+
 
     @JvmStatic
     fun pointsListToArray(listPoints: List<Point>): Array<Point> {
