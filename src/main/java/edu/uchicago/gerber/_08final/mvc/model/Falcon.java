@@ -14,7 +14,7 @@ public class Falcon extends Sprite {
 	// ==============================================================
 	
 	private static final double THRUST = 0.85;
-	private final static int DEGREE_STEP = 9;
+	public final static int DEGREE_STEP = 9;
 	public static final int INITIAL_SPAWN_TIME = 46;
 
 	private int shield;
