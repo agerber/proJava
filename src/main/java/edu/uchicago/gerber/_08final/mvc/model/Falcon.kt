@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage
     // ==============================================================
     companion object {
         private const val THRUST = 0.85
-        private const val DEGREE_STEP = 9
+        const val DEGREE_STEP = 9
         const val SPAWN_INIT_VALUE = 68
         const val MAX_SHIELD = 200
         //image states
