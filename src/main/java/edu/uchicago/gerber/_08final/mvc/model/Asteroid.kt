@@ -41,7 +41,6 @@ class Asteroid(size: Int) : Sprite() {
 
     //overloaded so we can spawn smaller asteroids from an exploding one
     constructor(astExploded: Asteroid) : this(astExploded.size + 1) {
-        //calls the other constructor: Asteroid(int size)
         center = astExploded.center
         val newSmallerSize = astExploded.size + 1
         //random delta-x : inertia + the smaller the asteroid, the faster its possible speed

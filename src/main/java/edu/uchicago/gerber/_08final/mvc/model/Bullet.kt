@@ -41,7 +41,7 @@ class Bullet(fal: Falcon) : Sprite() {
         fal.deltaX = fal.deltaX - vectorX / KICK_BACK_DIVISOR
         fal.deltaY = fal.deltaY - vectorY / KICK_BACK_DIVISOR
 
-        //defined the points on a cartesian grid
+        //define the points on a cartesian grid
         val listPoint = ArrayList<Point>()
         listPoint.add(Point(0, 3)) //top point
         listPoint.add(Point(1, -1))

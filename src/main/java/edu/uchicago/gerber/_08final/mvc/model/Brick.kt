@@ -13,8 +13,6 @@ class Brick(upperLeftCorner: Point, size: Int) : Sprite() {
     //we use upperLeftCorner because that is the origin when drawing graphics in Java
     init {
 
-        //currently set to Foe, but you can change the team or create a new team.
-        //you can shoot to destroy the wall which yields big points
         team = Team.FOE
         center = Point(upperLeftCorner.x + size / 2, upperLeftCorner.y + size / 2)
         radius = size / 2
