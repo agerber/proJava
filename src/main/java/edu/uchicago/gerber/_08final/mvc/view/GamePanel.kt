@@ -168,6 +168,7 @@ class GamePanel(dim: Dimension?) : Panel() {
             drawShieldMeter(grpOff)
             drawScore(grpOff)
             drawLevel(grpOff)
+            drawNumFrame(grpOff)
 
         }
 
