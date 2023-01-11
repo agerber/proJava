@@ -34,9 +34,6 @@ import java.awt.image.BufferedImage
 
     var turnState = TurnState.IDLE
 
-
-
-
      // ==============================================================
     // CONSTRUCTOR 
     // ==============================================================
@@ -44,8 +41,6 @@ import java.awt.image.BufferedImage
         team = Team.FRIEND
         //this is the size (radius) of the falcon
         radius = 32
-
-
 
         val rasterMap: MutableMap<Any, BufferedImage?> = HashMap()
         rasterMap[FALCON] = loadGraphic("/imgs/fal/falcon125.png")

@@ -9,7 +9,6 @@ import java.awt.Point
 abstract class Floater : Sprite() {
     init {
         team = Team.FLOATER
-
         //default values, all of which can be overridden in the extending concrete classes
         expiry = 250
         color = Color.WHITE

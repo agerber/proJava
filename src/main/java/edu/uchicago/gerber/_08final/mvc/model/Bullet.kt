@@ -7,7 +7,7 @@ import java.awt.Graphics
 import java.awt.Point
 import java.util.*
 
-class Bullet(fal: Falcon) : Sprite() {
+class Bullet(falcon: Falcon) : Sprite() {
 
 
     init {
@@ -19,24 +19,24 @@ class Bullet(fal: Falcon) : Sprite() {
         radius = 6
 
         //everything is relative to the falcon ship that fired the bullet
-        center = fal.center
+        center = falcon.center
 
         //set the bullet orientation to the falcon (ship) orientation
-        orientation = fal.orientation
+        orientation = falcon.orientation
 
         val FIRE_POWER = 35.0
         val vectorX = Math.cos(Math.toRadians(orientation.toDouble())) * FIRE_POWER
         val vectorY = Math.sin(Math.toRadians(orientation.toDouble())) * FIRE_POWER
 
         //fire force: falcon inertia + fire-vector
-        deltaX = fal.deltaX + vectorX
-        deltaY = fal.deltaY + vectorY
+        deltaX = falcon.deltaX + vectorX
+        deltaY = falcon.deltaY + vectorY
 
 
         //fire kick-back on the falcon: inertia - fire-vector / some arbitrary divisor
         val KICK_BACK_DIVISOR = 36.0
-        fal.deltaX = fal.deltaX - vectorX / KICK_BACK_DIVISOR
-        fal.deltaY = fal.deltaY - vectorY / KICK_BACK_DIVISOR
+        falcon.deltaX = falcon.deltaX - vectorX / KICK_BACK_DIVISOR
+        falcon.deltaY = falcon.deltaY - vectorY / KICK_BACK_DIVISOR
 
         //define the points on a cartesian grid
         val listPoint = ArrayList<Point>()
