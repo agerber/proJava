@@ -12,16 +12,15 @@ import java.awt.image.BufferedImage
     // FIELDS 
     // ==============================================================
     companion object {
-        private const val THRUST = 0.85
         const val DEGREE_STEP = 9
         const val SPAWN_INIT_VALUE = 68
         const val MAX_SHIELD = 200
         //image states
-        const val FALCON = 0 //normal ship
-        const val FALCON_THR = 1 //normal ship thrusting
-        const val FALCON_PRO = 2 //protected ship (green)
-        const val FALCON_PRO_THR = 3 //protected ship (green) thrusting
-        const val FALCON_INVISIBLE = 4 //for pre-spawning
+        private const val FALCON = 0 //normal ship
+        private const val FALCON_THR = 1 //normal ship thrusting
+        private const val FALCON_PRO = 2 //protected ship (green)
+        private const val FALCON_PRO_THR = 3 //protected ship (green) thrusting
+        private const val FALCON_INVISIBLE = 4 //for pre-spawning
     }
 
     var thrusting = false
@@ -58,7 +57,7 @@ import java.awt.image.BufferedImage
 
     }
 
-    //if fading, then make invincible
+
     override fun isProtected(): Boolean {
         return shield > 0
 
@@ -76,6 +75,7 @@ import java.awt.image.BufferedImage
         if (showLevel > 0) showLevel--
 
         //apply some thrust vectors using trig.
+        val THRUST = 0.85
         if (thrusting) {
             val adjustX = (Math.cos(Math.toRadians(orientation.toDouble()))
                     * THRUST)
@@ -104,7 +104,7 @@ import java.awt.image.BufferedImage
 
 
 
-    //raster implementation of draw()
+    //raster and vector implementation of draw()
     override fun draw(g: Graphics) {
 
         //set image-state

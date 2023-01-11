@@ -7,7 +7,10 @@ import java.awt.Point
 import java.awt.image.BufferedImage
 
 class Brick(upperLeftCorner: Point, size: Int) : Sprite() {
-    private val BRICK_IMAGE = 0
+    companion object{
+        private const val BRICK_IMAGE = 0
+    }
+
 
     //The size of this brick is always square!
     //we use upperLeftCorner because that is the origin when drawing graphics in Java

@@ -9,10 +9,6 @@ import java.util.*
 
 class Bullet(fal: Falcon) : Sprite() {
 
-    companion object {
-        const val FIRE_POWER = 35.0
-        const val KICK_BACK_DIVISOR = 36.0
-    }
 
     init {
         team = Team.FRIEND
@@ -28,7 +24,7 @@ class Bullet(fal: Falcon) : Sprite() {
         //set the bullet orientation to the falcon (ship) orientation
         orientation = fal.orientation
 
-
+        val FIRE_POWER = 35.0
         val vectorX = Math.cos(Math.toRadians(orientation.toDouble())) * FIRE_POWER
         val vectorY = Math.sin(Math.toRadians(orientation.toDouble())) * FIRE_POWER
 
@@ -38,6 +34,7 @@ class Bullet(fal: Falcon) : Sprite() {
 
 
         //fire kick-back on the falcon: inertia - fire-vector / some arbitrary divisor
+        val KICK_BACK_DIVISOR = 36.0
         fal.deltaX = fal.deltaX - vectorX / KICK_BACK_DIVISOR
         fal.deltaY = fal.deltaY - vectorY / KICK_BACK_DIVISOR
 
