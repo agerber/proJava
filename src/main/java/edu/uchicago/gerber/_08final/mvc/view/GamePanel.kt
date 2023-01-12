@@ -12,7 +12,7 @@ import java.util.function.BiConsumer
 import java.util.function.Function
 
 
-class GamePanel(dim: Dimension?) : Panel() {
+class GamePanel(dim: Dimension) : Panel() {
     // ==============================================================
     // FIELDS 
     // ============================================================== 
@@ -36,7 +36,6 @@ class GamePanel(dim: Dimension?) : Panel() {
     init {
         gameFrame = GameFrame()
         gameFrame.contentPane.add(this)
-        //clone it
 
         // Robert Alef's awesome falcon design
         val listShip: MutableList<Point> = ArrayList()
@@ -170,7 +169,7 @@ class GamePanel(dim: Dimension?) : Panel() {
             drawShieldMeter(grpOff)
             drawScore(grpOff)
             drawLevel(grpOff)
-            drawNumFrame(grpOff)
+
 
         }
 
@@ -202,14 +201,6 @@ class GamePanel(dim: Dimension?) : Panel() {
         }
     }
 
-    private fun drawNumFrame(g: Graphics) {
-        g.color = Color.white
-        g.font = panelFont
-        g.drawString(
-            "FRAME :  " + CommandCenter.frame, fontWidth,
-            Game.DIM.height - (fontHeight + 22)
-        )
-    }
 
     private fun drawShieldMeter(g: Graphics) {
         val shieldMeter: Int = CommandCenter.falcon.shield / 2
