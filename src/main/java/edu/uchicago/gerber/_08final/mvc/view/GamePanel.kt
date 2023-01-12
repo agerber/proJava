@@ -19,23 +19,23 @@ class GamePanel(dim: Dimension?) : Panel() {
     // The following "off" vars are used for the off-screen double-buffered image.
     private var imgOff: Image
     private var grpOff: Graphics
-    private val gmf: GameFrame
-    private val fnt: Font
-    private val fntBig: Font
-    private var fmt: FontMetrics
+    private val gameFrame: GameFrame
+    private val panelFont: Font
+    private val panelFontBig: Font
+    private var fontMetrics: FontMetrics
 
     private var fontWidth = 0
     private var fontHeight = 0
-    private var strDisplay = ""
 
-    private val pntShip: Array<Point>
+
+    private val pntShipsRemianing: Array<Point>
 
     // ==============================================================
     // CONSTRUCTOR 
     // ==============================================================
     init {
-        gmf = GameFrame()
-        gmf.contentPane.add(this)
+        gameFrame = GameFrame()
+        gameFrame.contentPane.add(this)
         //clone it
 
         // Robert Alef's awesome falcon design
@@ -78,24 +78,24 @@ class GamePanel(dim: Dimension?) : Panel() {
         listShip.add(Point(0, 9))
 
         //this just displays the ships remaining
-        pntShip  = Utils.pointsListToArray(listShip)
+        pntShipsRemianing  = Utils.pointsListToArray(listShip)
 
 
-        gmf.pack()
+        gameFrame.pack()
         initView()
-        gmf.size = dim
-        gmf.title = "Game Base"
-        gmf.isResizable = false
-        gmf.isVisible = true
+        gameFrame.size = dim
+        gameFrame.title = "Game Base"
+        gameFrame.isResizable = false
+        gameFrame.isVisible = true
         isFocusable = true
 
         imgOff = createImage(Game.DIM.width, Game.DIM.height)
         grpOff = imgOff.getGraphics()
-        fnt = Font("SansSerif", Font.BOLD, 12)
-        fntBig = Font("SansSerif", Font.BOLD + Font.ITALIC, 36)
+        panelFont = Font("SansSerif", Font.BOLD, 12)
+        panelFontBig = Font("SansSerif", Font.BOLD + Font.ITALIC, 36)
         // val g = graphics // get the graphics context for the panel
-        graphics.font = fnt // take care of some simple font stuff
-        fmt = graphics.fontMetrics
+        graphics.font = panelFont // take care of some simple font stuff
+        fontMetrics = graphics.fontMetrics
     }
 
     // ==============================================================
@@ -103,7 +103,7 @@ class GamePanel(dim: Dimension?) : Panel() {
     // ==============================================================
     private fun drawScore(g: Graphics) {
         g.color = Color.white
-        g.font = fnt
+        g.font = panelFont
         if (CommandCenter.score != 0L) {
             g.drawString("SCORE :  " + CommandCenter.score, fontWidth, fontHeight)
         } else {
@@ -122,7 +122,7 @@ class GamePanel(dim: Dimension?) : Panel() {
     //this is used for development, you can remove it from your final game
     private fun drawFrame(g: Graphics) {
         g.color = Color.white
-        g.font = fnt
+        g.font = panelFont
         g.drawString("FRAME :  " + CommandCenter.frame, fontWidth, Game.DIM.height - (fontHeight + 22))
 
     }
@@ -151,12 +151,14 @@ class GamePanel(dim: Dimension?) : Panel() {
             )
 
         } else if (CommandCenter.paused) {
-            strDisplay = "Game Paused"
+            val pausedString = "Game Paused"
             grpOff.drawString(
-                strDisplay,
-                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
+                pausedString,
+                (Game.DIM.width - fontMetrics.stringWidth(pausedString)) / 2, Game.DIM.height / 4
             )
-        } else {
+        }
+        //game is playing
+        else {
             processMovables(
                 grpOff,
                 CommandCenter.movDebris,
@@ -202,7 +204,7 @@ class GamePanel(dim: Dimension?) : Panel() {
 
     private fun drawNumFrame(g: Graphics) {
         g.color = Color.white
-        g.font = fnt
+        g.font = panelFont
         g.drawString(
             "FRAME :  " + CommandCenter.frame, fontWidth,
             Game.DIM.height - (fontHeight + 22)
@@ -243,26 +245,26 @@ class GamePanel(dim: Dimension?) : Panel() {
         }
 
         g.drawPolygon(
-           Arrays.stream( Utils.cartesianToPolar(pntShip))
+           Arrays.stream( Utils.cartesianToPolar(pntShipsRemianing))
                 .map(rotateFalcon90)
                 .map { pnt: Point -> pnt.x + Game.DIM.width - X_POS * offSet }
                 .mapToInt { obj: Int -> obj }
                 .toArray(),
-            Arrays.stream( Utils.cartesianToPolar(pntShip))
+            Arrays.stream( Utils.cartesianToPolar(pntShipsRemianing))
                 .map(rotateFalcon90)
                 .map { pnt: Point -> pnt.y + Game.DIM.height - Y_POS }
                 .mapToInt { obj: Int -> obj }
                 .toArray(),
-            pntShip.size)
+            pntShipsRemianing.size)
     }
 
     private fun initView() {
         val g = graphics // get the graphics context for the panel
-        g.font = fnt // take care of some simple font stuff
-        fmt = g.fontMetrics
-        fontWidth = fmt.getMaxAdvance()
-        fontHeight = fmt.getHeight()
-        g.font = fntBig // set font info
+        g.font = panelFont // take care of some simple font stuff
+        fontMetrics = g.fontMetrics
+        fontWidth = fontMetrics.getMaxAdvance()
+        fontHeight = fontMetrics.getHeight()
+        g.font = panelFontBig // set font info
     }
 
     private fun displayTextOnScreen(graphics: Graphics, vararg lines: String) {
@@ -271,7 +273,7 @@ class GamePanel(dim: Dimension?) : Panel() {
         Arrays.stream(lines)
             .forEach { s: String ->
                 graphics.drawString(
-                    s, (Game.DIM.width - fmt.stringWidth(s)) / 2,
+                    s, (Game.DIM.width - fontMetrics.stringWidth(s)) / 2,
                     Game.DIM.height / 4 + fontHeight + spacer.getAndAdd(40)
                 )
             }

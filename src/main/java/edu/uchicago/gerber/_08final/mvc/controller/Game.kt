@@ -64,9 +64,6 @@ class Game : Runnable, KeyListener {
         animationThread.start()
     }
 
-
-
-
     // Game implements runnable, and must have run method
     override fun run() {
 
