@@ -12,21 +12,12 @@ public class Falcon extends Sprite {
 	// ==============================================================
 	// FIELDS 
 	// ==============================================================
-	
+
+	//static fields
 	private static final double THRUST = 0.85;
 	public final static int DEGREE_STEP = 9;
 	public static final int INITIAL_SPAWN_TIME = 46;
-
-	private int shield;
-	private int invisible;
-
-	private int showLevel;
-
 	public static final int MAX_SHIELD = 200;
-
-	private boolean thrusting = false;
-	public enum TurnState {IDLE, LEFT, RIGHT}
-	private TurnState turnState = TurnState.IDLE;
 
 
 	//images states
@@ -35,6 +26,18 @@ public class Falcon extends Sprite {
 	private static int FALCON_PRO = 2; //protected ship (green)
 	private static int FALCON_PRO_THR = 3; //protected ship (green) thrusting
 	private static int FALCON_INVISIBLE = 4; //for pre-spawning
+
+
+
+	//fields
+	private int shield;
+	private int invisible;
+	private int showLevel;
+	private boolean thrusting = false;
+	//enum used for turnState field
+	public enum TurnState {IDLE, LEFT, RIGHT}
+	private TurnState turnState = TurnState.IDLE;
+
 
 
 
