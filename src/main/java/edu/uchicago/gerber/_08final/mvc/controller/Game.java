@@ -210,8 +210,7 @@ public class Game implements Runnable, KeyListener {
                         CommandCenter.getInstance().getMovFoes().add(mov);
                     } else { //GameOp.Operation.REMOVE
                         CommandCenter.getInstance().getMovFoes().remove(mov);
-                        if (mov instanceof Asteroid)
-                            spawnSmallerAsteroidsOrDebris((Asteroid) mov);
+                        if (mov instanceof Asteroid) spawnSmallerAsteroidsOrDebris((Asteroid) mov);
                     }
 
                     break;
@@ -249,16 +248,15 @@ public class Game implements Runnable, KeyListener {
         }
     }
 
-    //shows how to add walls or rectangular elements one
-    //brick at a time
+    //shows how to add walls or rectangular elements one brick at a time
     private void buildWall() {
         final int BRICK_SIZE = Game.DIM.width / 30, ROWS = 2, COLS = 20, X_OFFSET = BRICK_SIZE * 5, Y_OFFSET = 50;
 
-        for (int nRow = 0; nRow < COLS; nRow++) {
-            for (int nCol = 0; nCol < ROWS; nCol++) {
+        for (int nCol = 0; nCol < COLS; nCol++) {
+            for (int nRow = 0; nRow < ROWS; nRow++) {
                 CommandCenter.getInstance().getOpsQueue().enqueue(
                         new Brick(
-                                new Point(nRow * BRICK_SIZE + X_OFFSET, nCol * BRICK_SIZE + Y_OFFSET),
+                                new Point(nCol * BRICK_SIZE + X_OFFSET, nRow * BRICK_SIZE + Y_OFFSET),
                                 BRICK_SIZE),
                         GameOp.Action.ADD);
 
