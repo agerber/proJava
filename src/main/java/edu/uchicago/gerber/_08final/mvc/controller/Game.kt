@@ -20,35 +20,41 @@ fun main() {
 // == This Game class is the CONTROLLER
 // ===============================================
 class Game : Runnable, KeyListener {
+
     private val gmpPanel: GamePanel
     private val animationThread: Thread
 
-    // p key
-    private val PAUSE = 80
-    // q key
-    private val QUIT = 81
-
-    // rotate left; left arrow
-    private val LEFT = 37
-    // rotate right; right arrow
-    private val RIGHT = 39
-    // thrust; up arrow
-    private val UP = 38
-
-    // s key
-    private val START = 83
-
-    // space key
-    private val FIRE = 32
-    // m-key mute
-    private val MUTE = 77
-
-    // for possible future use
-    // HYPER = 68, 					// D key
-    private val ALIEN = 65 				// A key
-    // SPECIAL = 70; 					// fire special weapon;  F key
+    //sounds
     private val clpThrust: Clip
     private val clpMusicBackground: Clip
+
+    //STATIC CONTEXT
+    companion object {
+        //KEY CONSTANTS
+        // p key
+        const val PAUSE = 80
+        // q key
+        const val QUIT = 81
+        // rotate left; left arrow
+        const val LEFT = 37
+        // rotate right; right arrow
+        const val RIGHT = 39
+        // thrust; up arrow
+        const val UP = 38
+        // s key
+        const val START = 83
+        // space key
+        const val FIRE = 32
+        // m-key mute
+        const val MUTE = 77
+        val DIM = Dimension(1100, 900) //the dimension of the game.
+        //this is used throughout many classes.
+        val R = Random()
+        const val ANIMATION_DELAY = 40 // milliseconds between screen
+        // updates (animation)
+        const val FRAMES_PER_SECOND = 1000 / ANIMATION_DELAY
+
+    }
 
     // ===============================================
     // ==CONSTRUCTOR
@@ -89,7 +95,7 @@ class Game : Runnable, KeyListener {
                 // The total amount of time is guaranteed to be at least ANI_DELAY long.  If processing (update) 
                 // between frames takes longer than ANI_DELAY, then the difference between lStartTime - 
                 // System.currentTimeMillis() will be negative, then zero will be the sleep time
-                lStartTime += ANI_DELAY.toLong()
+                lStartTime += ANIMATION_DELAY.toLong()
                 Thread.sleep(Math.max(0,
                         lStartTime - System.currentTimeMillis()))
             } catch (e: InterruptedException) {
@@ -205,19 +211,18 @@ class Game : Runnable, KeyListener {
         }
     }
 
-    //shows how to add walls or rectangular elements one
-    //brick at a time
+    //shows how to add walls or rectangular elements one brick at a time
     private fun buildWall() {
         val BRICK_SIZE = DIM.width / 30
         val ROWS = 2
         val COLS = 20
         val X_OFFSET = BRICK_SIZE * 5
         val Y_OFFSET = 50
-        for (nRow in 0 until COLS) {
-            for (nCol in 0 until ROWS) {
+        for (nCol in 0 until COLS) {
+            for (nRow in 0 until ROWS) {
                 CommandCenter.opsQueue.enqueue(
                     Brick(
-                        Point(nRow * BRICK_SIZE + X_OFFSET, nCol * BRICK_SIZE + Y_OFFSET),
+                        Point(nCol * BRICK_SIZE + X_OFFSET, nRow * BRICK_SIZE + Y_OFFSET),
                         BRICK_SIZE
                     ),
                     GameOp.Action.ADD
@@ -367,35 +372,12 @@ class Game : Runnable, KeyListener {
     // does nothing, but we need it b/c of KeyListener contract
     override fun keyTyped(e: KeyEvent) {}
 
-    companion object {
-        // ===============================================
-        // FIELDS
-        // ===============================================
-
-		val DIM = Dimension(1100, 900) //the dimension of the game.
-
-        //this is used throughout many classes.
-		val R = Random()
-
-        const val ANI_DELAY = 40 // milliseconds between screen
-
-        // updates (animation)
-        const val FRAMES_PER_SECOND = 1000 / ANI_DELAY
-
-        //spawn every 30 seconds
-        private const val SPAWN_NEW_SHIP_FLOATER = FRAMES_PER_SECOND * 30
-
-        // ===============================================
-        // ==METHODS
-        // ===============================================
-
-
-
-        // Varargs for stopping looping-music-clips
-        private fun stopLoopingSounds(vararg clpClips: Clip) {
-            for (clp in clpClips) {
-                clp.stop()
-            }
+    //utility method for stop looping sounds.
+    private fun stopLoopingSounds(vararg clpClips: Clip) {
+        for (clp in clpClips) {
+            clp.stop()
         }
     }
+
+
 }

@@ -11,9 +11,9 @@ import java.util.stream.Collectors
 import java.util.stream.Stream
 
 class Asteroid(size: Int) : Sprite() {
-    //radius of a large asteroid
+    //radius of a large asteroid. This never changes, so might as well store this in the static context.
     companion object {
-        private const val LARGE_RADIUS = 100
+        const val LARGE_RADIUS = 100
     }
 
     //size determines if the Asteroid is Large (0), Medium (1), or Small (2)
