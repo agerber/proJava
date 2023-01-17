@@ -14,7 +14,6 @@ public class Falcon extends Sprite {
 	// ==============================================================
 
 	//static fields
-	private static final double THRUST = 0.85;
 	public final static int DEGREE_STEP = 9;
 	public static final int INITIAL_SPAWN_TIME = 46;
 	public static final int MAX_SHIELD = 200;
@@ -28,8 +27,7 @@ public class Falcon extends Sprite {
 	private static int FALCON_INVISIBLE = 4; //for pre-spawning
 
 
-
-	//fields
+	//instance fields (getters/setters provided by Lombok @Data above)
 	private int shield;
 	private int invisible;
 	private int showLevel;
@@ -37,8 +35,6 @@ public class Falcon extends Sprite {
 	//enum used for turnState field
 	public enum TurnState {IDLE, LEFT, RIGHT}
 	private TurnState turnState = TurnState.IDLE;
-
-
 
 
 	// ==============================================================
@@ -88,6 +84,7 @@ public class Falcon extends Sprite {
 		if (showLevel > 0) showLevel--;
 
 		//apply some thrust vectors using trig.
+		final double THRUST = 0.85;
 		if (thrusting) {
 			double vectorX = Math.cos(Math.toRadians(getOrientation()))
 					* THRUST;
