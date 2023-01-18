@@ -20,11 +20,14 @@ public class Falcon extends Sprite {
 
 
 	//images states
-	private static int FALCON = 0; //normal ship
-	private static int FALCON_THR = 1; //normal ship thrusting
-	private static int FALCON_PRO = 2; //protected ship (green)
-	private static int FALCON_PRO_THR = 3; //protected ship (green) thrusting
-	private static int FALCON_INVISIBLE = 4; //for pre-spawning
+	public enum ImageState {
+		FALCON_INVISIBLE, //for pre-spawning
+		FALCON, //normal ship
+		FALCON_PRO, //protected ship (green)
+		FALCON_THR, //normal ship thrusting
+		FALCON_PRO_THR, //protected ship (green) thrusting
+
+	}
 
 
 	//instance fields (getters/setters provided by Lombok @Data above)
@@ -52,13 +55,14 @@ public class Falcon extends Sprite {
 
 		//We use HashMap which has a seek-time of O(1)
 		//See the resources directory in the root of this project for pngs.
-		//Using constants as keys is safer b/c we know the value exists when we reference the consts later in code.
-    	Map<Integer, BufferedImage> rasterMap = new HashMap<>();
-		rasterMap.put(FALCON, loadGraphic("/imgs/fal/falcon125.png") );
-		rasterMap.put(FALCON_THR, loadGraphic("/imgs/fal/falcon125_thr.png") );
-		rasterMap.put(FALCON_PRO, loadGraphic("/imgs/fal/falcon125_PRO.png") );
-		rasterMap.put(FALCON_PRO_THR, loadGraphic("/imgs/fal/falcon125_PRO_thr.png") );
-		rasterMap.put(FALCON_INVISIBLE, null );
+		//Using enums as keys is safer b/c we know the value exists when we reference the consts later in code.
+    	Map<ImageState, BufferedImage> rasterMap = new HashMap<>();
+		rasterMap.put(ImageState.FALCON_INVISIBLE, null );
+		rasterMap.put(ImageState.FALCON, loadGraphic("/imgs/fal/falcon125.png") );
+		rasterMap.put(ImageState.FALCON_THR, loadGraphic("/imgs/fal/falcon125_thr.png") );
+		rasterMap.put(ImageState.FALCON_PRO, loadGraphic("/imgs/fal/falcon125_PRO.png") );
+		rasterMap.put(ImageState.FALCON_PRO_THR, loadGraphic("/imgs/fal/falcon125_PRO_thr.png") );
+
 		setRasterMap(rasterMap);
 
 
@@ -116,17 +120,17 @@ public class Falcon extends Sprite {
 	public void draw(Graphics g) {
 
 		//set local image-state
-		int imageState;
+		ImageState imageState;
 		if (invisible > 0){
-			imageState = FALCON_INVISIBLE;
+			imageState = ImageState.FALCON_INVISIBLE;
 		}
 		else if (isProtected()){
-			imageState = thrusting ? FALCON_PRO_THR : FALCON_PRO;
+			imageState = thrusting ? ImageState.FALCON_PRO_THR : ImageState.FALCON_PRO;
 			//you can also combine vector elements and raster elements
 		    drawShield(g);
 		}
 		else { //not protected
-			imageState = thrusting ? FALCON_THR : FALCON;
+			imageState = thrusting ? ImageState.FALCON_THR : ImageState.FALCON;
 		}
 
 		//cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
