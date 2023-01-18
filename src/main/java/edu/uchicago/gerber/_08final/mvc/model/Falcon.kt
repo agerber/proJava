@@ -15,13 +15,14 @@ import java.awt.image.BufferedImage
         const val DEGREE_STEP = 9
         const val SPAWN_INIT_VALUE = 68
         const val MAX_SHIELD = 200
-        //image states
-        private const val FALCON = 0 //normal ship
-        private const val FALCON_THR = 1 //normal ship thrusting
-        private const val FALCON_PRO = 2 //protected ship (green)
-        private const val FALCON_PRO_THR = 3 //protected ship (green) thrusting
-        private const val FALCON_INVISIBLE = 4 //for pre-spawning
     }
+     enum class ImageState {
+         FALCON_INVISIBLE, //for pre-spawning
+         FALCON, //normal ship
+         FALCON_THR, //normal ship thrusting
+         FALCON_PRO, //protected ship (green)
+         FALCON_PRO_THR //protected ship (green) thrusting
+     }
 
     var thrusting = false
     var shield = 0
@@ -43,11 +44,11 @@ import java.awt.image.BufferedImage
         radius = 32
 
         val rasterMap: MutableMap<Any, BufferedImage?> = HashMap()
-        rasterMap[FALCON] = loadGraphic("/imgs/fal/falcon125.png")
-        rasterMap[FALCON_THR] = loadGraphic("/imgs/fal/falcon125_thr.png")
-        rasterMap[FALCON_PRO] = loadGraphic("/imgs/fal/falcon125_PRO.png")
-        rasterMap[FALCON_PRO_THR] = loadGraphic("/imgs/fal/falcon125_PRO_thr.png")
-        rasterMap[FALCON_INVISIBLE] = null
+        rasterMap[ImageState.FALCON] = loadGraphic("/imgs/fal/falcon125.png")
+        rasterMap[ImageState.FALCON_THR] = loadGraphic("/imgs/fal/falcon125_thr.png")
+        rasterMap[ImageState.FALCON_PRO] = loadGraphic("/imgs/fal/falcon125_PRO.png")
+        rasterMap[ImageState.FALCON_PRO_THR] = loadGraphic("/imgs/fal/falcon125_PRO_thr.png")
+        rasterMap[ImageState.FALCON_INVISIBLE] = null
         this.rasterMap = rasterMap
 
     }
@@ -103,16 +104,16 @@ import java.awt.image.BufferedImage
     override fun draw(g: Graphics) {
 
         //set image-state
-        val imageState: Int
+        val imageState: ImageState
         if (invisible > 0){
-            imageState = FALCON_INVISIBLE
+            imageState = ImageState.FALCON_INVISIBLE
         }
         else if (isProtected()) {
-          imageState =  if (thrusting) FALCON_PRO_THR else FALCON_PRO
+          imageState =  if (thrusting) ImageState.FALCON_PRO_THR else ImageState.FALCON_PRO
             //you can also combine vector elements and raster elements
             drawShield(g)
         } else { //not protected
-            imageState =   if (thrusting) FALCON_THR else FALCON
+            imageState =   if (thrusting) ImageState.FALCON_THR else ImageState.FALCON
         }
 
         //cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
