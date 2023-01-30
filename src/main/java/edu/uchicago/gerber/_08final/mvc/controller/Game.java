@@ -180,7 +180,7 @@ public class Game implements Runnable, KeyListener {
                         CommandCenter.getInstance().getFalcon().setShield(Falcon.MAX_SHIELD);
                         break;
                     case "NewWallFloater":
-                        Sound.playSound("wall.wav");
+                        Sound.playSound("pac.wav");
                         buildWall();
                         break;
                 }
