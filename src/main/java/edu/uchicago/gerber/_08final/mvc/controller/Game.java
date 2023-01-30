@@ -34,18 +34,20 @@ public class Game implements Runnable, KeyListener {
     private final Thread animationThread;
 
 
-    private final int PAUSE = 80, // p key
+    //key-codes
+    private static final int
+            PAUSE = 80, // p key
             QUIT = 81, // q key
             LEFT = 37, // rotate left; left arrow
             RIGHT = 39, // rotate right; right arrow
             UP = 38, // thrust; up arrow
             START = 83, // s key
             FIRE = 32, // space key
-            MUTE = 77, // m-key mute
+            MUTE = 77; // m-key mute
 
     // for possible future use
     // HYPER = 68, 					// D key
-    ALIEN = 65;                // A key
+    //ALIEN = 65;                // A key
     // SPECIAL = 70; 					// fire special weapon;  F key
 
     private final Clip soundThrust;
@@ -106,8 +108,8 @@ public class Game implements Runnable, KeyListener {
             // this simply controls delay time between
             // the frames of the animation
             try {
-                // The total amount of time is guaranteed to be at least ANI_DELAY long.  If processing (update)
-                // between frames takes longer than ANI_DELAY, then the difference between startTime -
+                // The total amount of time is guaranteed to be at least ANIMATION_DELAY long.  If processing (update)
+                // between frames takes longer than ANIMATION_DELAY, then the difference between startTime -
                 // System.currentTimeMillis() will be negative, then zero will be the sleep time
                 startTime += ANIMATION_DELAY;
 
