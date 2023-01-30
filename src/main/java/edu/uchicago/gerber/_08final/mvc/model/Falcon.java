@@ -34,7 +34,7 @@ public class Falcon extends Sprite {
 	private int shield;
 	private int invisible;
 	private int showLevel;
-	private boolean thrusting = false;
+	private boolean thrusting;
 	//enum used for turnState field
 	public enum TurnState {IDLE, LEFT, RIGHT}
 	private TurnState turnState = TurnState.IDLE;
