@@ -99,10 +99,15 @@ public class Game implements Runnable, KeyListener {
         while (Thread.currentThread() == animationThread) {
 
 
-            panel.update(panel.getGraphics()); // see GamePanel class
+            //this call will cause all movables to move() and draw() themselves every ~40ms
+            // see GamePanel class for details
+            panel.update(panel.getGraphics());
+
             checkCollisions();
             checkNewLevel();
             checkFloaters();
+
+            //keep track of the frame for development purposes
             CommandCenter.getInstance().incrementFrame();
 
             // surround the sleep() in a try/catch block
@@ -378,9 +383,7 @@ public class Game implements Runnable, KeyListener {
         switch (keyCode) {
             case PAUSE:
                 CommandCenter.getInstance().setPaused(!CommandCenter.getInstance().isPaused());
-                if (CommandCenter.getInstance().isPaused())
-                    stopLoopingSounds(soundBackground, soundThrust);
-
+                if (CommandCenter.getInstance().isPaused()) stopLoopingSounds(soundBackground, soundThrust);
                 break;
             case QUIT:
                 System.exit(0);

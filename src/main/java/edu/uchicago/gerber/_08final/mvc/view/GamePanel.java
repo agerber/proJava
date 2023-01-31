@@ -82,6 +82,7 @@ public class GamePanel extends Panel {
         gmf.pack();
         initView();
         gmf.setSize(dim);
+        //change the name of the game-frame to your game name
         gmf.setTitle("Game Base");
         gmf.setResizable(false);
         gmf.setVisible(true);
@@ -155,6 +156,7 @@ public class GamePanel extends Panel {
         //playing and not paused!
         else {
 
+
             processMovables(grpOff,
                     CommandCenter.getInstance().getMovDebris(),
                     CommandCenter.getInstance().getMovFloaters(),
@@ -201,8 +203,6 @@ public class GamePanel extends Panel {
             displayTextOnScreen(graphics, levelText); //middle of the screen
         }
     }
-
-
 
 
 
