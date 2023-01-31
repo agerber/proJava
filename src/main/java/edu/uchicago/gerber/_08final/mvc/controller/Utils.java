@@ -12,7 +12,7 @@ public class Utils {
 
 
     ////////////////////////////////////////////////////////////////////
-    //Utility methods for transforming cartesian2Polar, pointsListToArray, etc.
+    //Utility method for transforming cartesian2Polar
     ////////////////////////////////////////////////////////////////////
     public static List<PolarPoint> cartesianToPolar(Point[]  pntCartesians) {
 
@@ -38,13 +38,6 @@ public class Utils {
         return Arrays.asList(pntCartesians).stream()
                 .map(pnt -> cartToPolarTransform.apply(pnt, hyp))
                 .collect(Collectors.toList());
-
-    }
-
-
-    public static Point[] pointsListToArray(List<Point> listPoints) {
-        return listPoints.stream()
-                .toArray(Point[]::new);
 
     }
 

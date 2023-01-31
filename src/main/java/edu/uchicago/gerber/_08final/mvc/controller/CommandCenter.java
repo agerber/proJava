@@ -31,7 +31,7 @@ public class CommandCenter {
 	//Lombok will not provide setter methods on final members
 	private final Falcon falcon  = new Falcon();
 
-	//lists containing our movables
+	//lists containing our movables subdivided by team
 	private final List<Movable> movDebris = new LinkedList<>();
 	private final List<Movable> movFriends = new LinkedList<>();
 	private final List<Movable> movFoes = new LinkedList<>();

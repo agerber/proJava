@@ -14,6 +14,7 @@ import java.util.function.Function;
 import edu.uchicago.gerber._08final.mvc.controller.GameOp;
 import edu.uchicago.gerber._08final.mvc.controller.Utils;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 
 import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
@@ -243,7 +244,6 @@ public abstract class Sprite implements Movable {
         }
         return bufferedImage;
     }
-
 
 
 

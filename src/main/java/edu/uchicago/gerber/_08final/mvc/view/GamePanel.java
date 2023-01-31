@@ -77,7 +77,7 @@ public class GamePanel extends Panel {
         listShip.add(new Point(1,6));
         listShip.add(new Point(0,9));
 
-        pntShipsRemaining = Utils.pointsListToArray(listShip);
+        pntShipsRemaining = listShip.toArray(new Point[0]);
 
         gmf.pack();
         initView();

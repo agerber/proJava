@@ -81,7 +81,7 @@ public class Asteroid extends Sprite {
 		  Supplier<PolarPoint> polarPointSupplier = () -> {
 			  double r = (800 + Game.R.nextInt(200)) / 1000.0; //number between 0.8 and 0.999
 			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0; // number between 0 and 6.282
-		  	  return new PolarPoint(r,theta);
+		  	  return new PolarPoint(r, theta);
 		  };
 
 		  BiFunction<PolarPoint, Sprite, Point> polarToCartTransform = (pp, spr) -> new Point(
@@ -93,7 +93,7 @@ public class Asteroid extends Sprite {
 						  + pp.getTheta())));
 
 		 //random number of vertices
-		 final int VERTICES = Game.R.nextInt( 7 ) + 25;
+		 final int VERTICES = Game.R.nextInt(7) + 25;
 
 		 return Stream.generate(polarPointSupplier)
 				 .limit(VERTICES)

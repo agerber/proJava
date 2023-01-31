@@ -35,7 +35,7 @@ public abstract class Floater extends Sprite {
         listPoints.add(new Point(-5, 5));
         listPoints.add(new Point(0,4));
 
-        setCartesians(Utils.pointsListToArray(listPoints));
+        setCartesians(listPoints.toArray(new Point[0]));
 
     }
 
