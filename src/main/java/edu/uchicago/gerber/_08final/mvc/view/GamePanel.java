@@ -235,13 +235,13 @@ public class GamePanel extends Panel {
 
         g.drawPolygon(
 
-                Utils.cartesianToPolar(Arrays.asList(pntShipsRemaining)).stream()
+                Utils.cartesianToPolar(pntShipsRemaining).stream()
                         .map(rotateFalcon90)
                         .map(pnt -> pnt.x + Game.DIM.width - (X_POS * offSet))
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                Utils.cartesianToPolar(Arrays.asList(pntShipsRemaining)).stream()
+                Utils.cartesianToPolar(pntShipsRemaining).stream()
                         .map(rotateFalcon90)
                         .map(pnt -> pnt.y + Game.DIM.height - Y_POS)
                         .mapToInt(Integer::intValue)

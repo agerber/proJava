@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * Created by ag on 6/17/2015.
+ The GameOp (short for Game Operation) simply associates a movable with an action. Once
+ the GameOpsQueue is processed it will add/remove movables from their appropriate list
+ in the CommandCenter depending on the movable's team.
  */
 
 //the lombok @Data gives us automatic getters and setters

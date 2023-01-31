@@ -183,7 +183,7 @@ public abstract class Sprite implements Movable {
         // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to g.drawPolygon().
 
         //convert raw cartesians to raw polars
-        List<PolarPoint> polars = Utils.cartesianToPolar(Arrays.asList(getCartesians()));
+        List<PolarPoint> polars = Utils.cartesianToPolar(getCartesians());
 
         //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
         Function<PolarPoint, Point> adjustForOrientation =

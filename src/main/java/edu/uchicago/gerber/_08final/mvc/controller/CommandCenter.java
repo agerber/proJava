@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
-
+//The CommandCenter is a singleton that manages the state of the game.
 //the lombok @Data gives us automatic getters and setters on all members
 @Data
 public class CommandCenter {
@@ -90,6 +90,7 @@ public class CommandCenter {
 	}
 
 	public void incrementFrame(){
+		//use of ternary expression to simplify the logic to one line
 		frame = frame < Long.MAX_VALUE ? frame + 1 : 0;
 	}
 

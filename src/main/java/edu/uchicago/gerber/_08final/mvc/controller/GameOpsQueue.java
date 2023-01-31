@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
- * Created by ag on 6/17/2015.
+ * Effectively a Queue that enqueues and dequeues Game Operations (add/remove)
  */
 public class GameOpsQueue extends LinkedList<GameOp> {
 

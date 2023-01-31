@@ -5,9 +5,11 @@ import edu.uchicago.gerber._08final.mvc.view.GamePanel;
 
 
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -53,7 +55,6 @@ public class Game implements Runnable, KeyListener {
     private final Clip soundThrust;
     private final Clip soundBackground;
 
-    //spawn every 30 seconds
 
 
     // ===============================================
@@ -341,6 +342,7 @@ public class Game implements Runnable, KeyListener {
             int level = CommandCenter.getInstance().getLevel();
             //award some points for having cleared the previous level
             CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + (10_000L * level));
+            //bump the level up
             level = level + 1;
             CommandCenter.getInstance().setLevel(level);
             //spawn some big new asteroids
@@ -357,9 +359,7 @@ public class Game implements Runnable, KeyListener {
 
     // Varargs for stopping looping-music-clips
     private static void stopLoopingSounds(Clip... clpClips) {
-        for (Clip clp : clpClips) {
-            clp.stop();
-        }
+        Arrays.stream(clpClips).forEach(clip -> clip.stop());
     }
 
     // ===============================================
@@ -387,8 +387,7 @@ public class Game implements Runnable, KeyListener {
                 break;
             case UP:
                 falcon.setThrusting(true);
-                if (!CommandCenter.getInstance().isPaused() && !CommandCenter.getInstance().isGameOver())
-                    soundThrust.loop(Clip.LOOP_CONTINUOUSLY);
+                soundThrust.loop(Clip.LOOP_CONTINUOUSLY);
                 break;
             case LEFT:
                 falcon.setTurnState(Falcon.TurnState.LEFT);
