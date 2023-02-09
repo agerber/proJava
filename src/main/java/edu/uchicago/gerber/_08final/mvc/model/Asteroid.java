@@ -75,20 +75,21 @@ public class Asteroid extends Sprite {
 
 		  //6.283 is the max radians
 		  final int MAX_RADIANS_X1000 =6283;
-		  //when casting from double to int, we truncate and lose precision, so best to be generous with multiplier
-		  final int PRECISION_MULTIPLIER = 1000;
+		  //when casting from double to int, we truncate and lose precision, so best to be generous with the
+		  //precision factor as this will create a more random distribution
+		  final double PRECISION = 1000.0;
 
 		  Supplier<PolarPoint> polarPointSupplier = () -> {
-			  double r = (800 + Game.R.nextInt(200)) / 1000.0; //number between 0.8 and 0.999
-			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / 1000.0; // number between 0 and 6.282
+			  double r = (800 + Game.R.nextInt(200)) / PRECISION; //number between 0.8 and 0.999
+			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / PRECISION; // number between 0 and 6.282
 		  	  return new PolarPoint(r, theta);
 		  };
 
 		  BiFunction<PolarPoint, Sprite, Point> polarToCartTransform = (pp, spr) -> new Point(
-				  (int) (spr.getCenter().x + pp.getR() * spr.getRadius() * PRECISION_MULTIPLIER
+				  (int) (spr.getCenter().x + pp.getR() * spr.getRadius() * PRECISION
 						  * Math.sin(Math.toRadians(spr.getOrientation())
 						  + pp.getTheta())),
-				  (int) (spr.getCenter().y - pp.getR() * spr.getRadius() * PRECISION_MULTIPLIER
+				  (int) (spr.getCenter().y - pp.getR() * spr.getRadius() * PRECISION
 						  * Math.cos(Math.toRadians(spr.getOrientation())
 						  + pp.getTheta())));
 

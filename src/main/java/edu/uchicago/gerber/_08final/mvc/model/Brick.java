@@ -16,7 +16,6 @@ public class Brick extends Sprite {
 	//we use upperLeftCorner because that is the origin when drawing graphics in Java
 	public Brick(Point upperLeftCorner, int size) {
 
-		//currently set to Foe, but you can change the team or create a new team.
 		//you can shoot to destroy the wall which yields big points
 		setTeam(Team.FOE);
 
@@ -45,10 +44,10 @@ public class Brick extends Sprite {
 	}
 
 	//the reason we override the move method is to skip the logic contained in super-class Sprite move() method
-	//and gain slight performance
+	//which is laborious, thereby gaining slight performance
 	@Override
 	public void move(){
-		//do NOT call super.move() and do nothing, a brick does not move.
+		//do NOT call super.move() and do nothing; a brick does not move.
 	}
 
 } //end class
