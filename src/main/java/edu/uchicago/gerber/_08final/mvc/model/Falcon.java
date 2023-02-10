@@ -14,7 +14,9 @@ public class Falcon extends Sprite {
 	// ==============================================================
 
 	//static fields
-	public final static int DEGREE_STEP = 9;
+
+	//number of degrees the falcon will turn at each animation cycle
+	public final static int TURN_STEP = 9;
 	public static final int INITIAL_SPAWN_TIME = 46;
 	public static final int MAX_SHIELD = 200;
 
@@ -113,10 +115,10 @@ public class Falcon extends Sprite {
 		int adjustOr = getOrientation();
 		switch (turnState){
 			case LEFT:
-				adjustOr = getOrientation() <= 0 ? 351 : getOrientation() - DEGREE_STEP;
+				adjustOr = getOrientation() <= 0 ? 360 - TURN_STEP : getOrientation() - TURN_STEP;
 				break;
 			case RIGHT:
-				adjustOr = getOrientation() >= 360 ? 9 : getOrientation() + DEGREE_STEP;
+				adjustOr = getOrientation() >= 360 ? TURN_STEP : getOrientation() + TURN_STEP;
 				break;
 			case IDLE:
 			default:

@@ -10,8 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
+
 //The CommandCenter is a singleton that manages the state of the game.
 //the lombok @Data gives us automatic getters and setters on all members
 @Data
@@ -84,7 +83,7 @@ public class CommandCenter {
 		//put falcon in the middle of the game-space
 		falcon.setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 		//random number between 0-360 in steps of 9 (DEGREE_STEP)
-		falcon.setOrientation(Game.R.nextInt(40) * Falcon.DEGREE_STEP);
+		falcon.setOrientation(Game.R.nextInt(40) * Falcon.TURN_STEP);
 		falcon.setDeltaX(0);
 		falcon.setDeltaY(0);
 	}
