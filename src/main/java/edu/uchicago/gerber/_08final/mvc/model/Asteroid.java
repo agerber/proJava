@@ -56,6 +56,8 @@ public class Asteroid extends Sprite {
 
 	}
 
+	//converts the radius to cardinal number representing the size of the Asteroid:
+	//0 = large, 1 = medium, 2 = small
 	public int getSize(){
 		switch (getRadius()) {
 			case LARGE_RADIUS:
