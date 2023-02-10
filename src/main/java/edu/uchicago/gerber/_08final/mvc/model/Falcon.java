@@ -18,6 +18,8 @@ public class Falcon extends Sprite {
 	public static final int INITIAL_SPAWN_TIME = 46;
 	public static final int MAX_SHIELD = 200;
 
+	public static final int MIN_RADIUS = 32;
+
 
 	//images states
 	public enum ImageState {
@@ -33,6 +35,10 @@ public class Falcon extends Sprite {
 	//instance fields (getters/setters provided by Lombok @Data above)
 	private int shield;
 	private int invisible;
+
+	//showLevel is not germane to the Falcon. Rather, it controls whether the level is shown in the middle of the
+	// screen. However, given that the Falcon reference is never null, and that a Falcon is a Sprite whose move/draw
+	// methods are being called every ~40ms, this is a very convenient place to store this variable.
 	private int showLevel;
 	private boolean thrusting;
 	//enum used for turnState field
@@ -48,9 +54,7 @@ public class Falcon extends Sprite {
 
 		setTeam(Team.FRIEND);
 
-		//this is the radius of the falcon
-		setRadius(32);
-
+		setRadius(MIN_RADIUS);
 
 
 		//We use HashMap which has a seek-time of O(1)
@@ -97,6 +101,13 @@ public class Falcon extends Sprite {
 			setDeltaX(getDeltaX() + vectorX);
 			setDeltaY(getDeltaY() + vectorY);
 		}
+
+		//Make the ship radius bigger when the absolute velocity increases, thereby increasing difficulty when not
+		// protected, and allowing player to use the shield offensively when protected.
+		//Absolute velocity is the hypotenuse of absolute deltaX and deltaY
+		final int ABS_VELOCITY =
+				(int) Math.sqrt(Math.pow(Math.abs(getDeltaX()), 2) + Math.pow(Math.abs(getDeltaY()), 2));
+		setRadius(MIN_RADIUS + ABS_VELOCITY / 3);
 
 		//adjust the orientation given turnState
 		int adjustOr = getOrientation();
