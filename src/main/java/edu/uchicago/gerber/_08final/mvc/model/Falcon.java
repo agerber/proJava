@@ -16,11 +16,11 @@ public class Falcon extends Sprite {
 	//static fields
 
 	//number of degrees the falcon will turn at each animation cycle
-	public final static int TURN_STEP = 12;
+	public final static int TURN_STEP = 11;
 	public static final int INITIAL_SPAWN_TIME = 46;
 	public static final int MAX_SHIELD = 200;
 
-	public static final int MIN_RADIUS = 32;
+	public static final int MIN_RADIUS = 28;
 
 
 	//images states
@@ -107,9 +107,10 @@ public class Falcon extends Sprite {
 		//Make the ship radius bigger when the absolute velocity increases, thereby increasing difficulty when not
 		// protected, and allowing player to use the shield offensively when protected.
 		//Absolute velocity is the hypotenuse of absolute deltaX and deltaY
-		final int ABS_VELOCITY =
+		int absVelocity =
 				(int) Math.sqrt(Math.pow(Math.abs(getDeltaX()), 2) + Math.pow(Math.abs(getDeltaY()), 2));
-		setRadius(MIN_RADIUS + ABS_VELOCITY / 3);
+		absVelocity = Math.min(absVelocity, 39); //max-out the absVelocity factor
+		setRadius(MIN_RADIUS + absVelocity / 3);
 
 		//adjust the orientation given turnState
 		int adjustOr = getOrientation();
