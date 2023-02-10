@@ -39,7 +39,7 @@ public class Falcon extends Sprite {
 	private int invisible;
 
 	//showLevel is not germane to the Falcon. Rather, it controls whether the level is shown in the middle of the
-	// screen. However, given that the Falcon reference is never null, and that a Falcon is a Sprite whose move/draw
+	// screen. However, given that the Falcon reference is never null, and that a Falcon is a Movable whose move/draw
 	// methods are being called every ~40ms, this is a very convenient place to store this variable.
 	private int showLevel;
 	private boolean thrusting;

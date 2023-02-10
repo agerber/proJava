@@ -422,7 +422,7 @@ public class Game implements Runnable, KeyListener {
         switch (keyCode) {
             case FIRE:
                 CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(falcon), GameOp.Action.ADD);
-                Sound.playSound("laser.wav");
+                Sound.playSound("thump.wav");
                 break;
 
             case LEFT:
