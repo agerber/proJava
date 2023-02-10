@@ -16,7 +16,7 @@ public class Falcon extends Sprite {
 	//static fields
 
 	//number of degrees the falcon will turn at each animation cycle
-	public final static int TURN_STEP = 9;
+	public final static int TURN_STEP = 12;
 	public static final int INITIAL_SPAWN_TIME = 46;
 	public static final int MAX_SHIELD = 200;
 
