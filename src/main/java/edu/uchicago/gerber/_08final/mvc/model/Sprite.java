@@ -125,9 +125,7 @@ public abstract class Sprite implements Movable {
     //utility method used by extending (thus protected keyword) classes to produce random pos/neg values
     protected int somePosNegValue(int seed) {
         int randomNumber = Game.R.nextInt(seed);
-        if (randomNumber % 2 == 0)
-            randomNumber = -randomNumber;
-        return randomNumber;
+        return (randomNumber % 2 == 0) ? randomNumber : -randomNumber;
     }
 
     //A protected sprite will not be destroyed upon collision
