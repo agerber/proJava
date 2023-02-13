@@ -177,20 +177,20 @@ public abstract class Sprite implements Movable {
 
     protected void renderVector(Graphics g) {
 
-        g.setColor(getColor());
 
         // To render this Sprite in vector mode, we need to, 1: convert raw cartesians to raw polars, 2: adjust polars
         // for orientation of sprite. 3: Convert back to cartesians 4: adjust for center-point (location).
         // and 5: pass the cartesian-x and cartesian-y coords as arrays, along with length, to g.drawPolygon().
 
-        //1: convert raw cartesians to raw polars (used later in stream below)
+        //1: convert raw cartesians to raw polars (used later in stream below).
+        //The reason we convert cartesian-points to polar-points is that it's much easier to rotate polar-points
         List<PolarPoint> polars = Utils.cartesianToPolar(getCartesians());
 
         //2: rotate raw polars given the orientation of the sprite.
-        Function<PolarPoint, PolarPoint> adjustForOrientation =
+        Function<PolarPoint, PolarPoint> rotatePolarByOrientation =
                 pp -> new PolarPoint(
                         pp.getR(),
-                        pp.getTheta() + Math.toRadians(getOrientation())
+                        pp.getTheta() + Math.toRadians(getOrientation()) //rotated Theta
                 );
 
         //3: convert the rotated polars back to cartesians
@@ -199,7 +199,7 @@ public abstract class Sprite implements Movable {
                         (int)  (pp.getR() * getRadius() * Math.sin(pp.getTheta())),
                         (int)  (pp.getR() * getRadius() * Math.cos(pp.getTheta())));
 
-        //4: adjust for the location (center-point) of the sprite.
+        //4: adjust the cartesians for the location (center-point) of the sprite.
         // the reason we subtract the y-value has to do with how Java plots the vertical axis for
         // graphics (from top to bottom)
         Function<Point, Point> adjustForLocation =
@@ -209,11 +209,14 @@ public abstract class Sprite implements Movable {
 
 
 
+        //set the graphics context color to the color of the sprite
+        g.setColor(getColor());
 
+        //draw the polygon using the List of raw polars from step 1 above
         g.drawPolygon(
                 //stream the raw polars from above, applying the mapping operations from above
                 polars.stream()
-                        .map(adjustForOrientation)
+                        .map(rotatePolarByOrientation)
                         .map(polarToCartesian)
                         .map(adjustForLocation)
                         .map(pnt -> pnt.x)
@@ -221,7 +224,7 @@ public abstract class Sprite implements Movable {
                         .toArray(),
                 //stream the raw polars from above, applying the mapping operations from above
                 polars.stream()
-                        .map(adjustForOrientation)
+                        .map(rotatePolarByOrientation)
                         .map(polarToCartesian)
                         .map(adjustForLocation)
                         .map(pnt -> pnt.y)
