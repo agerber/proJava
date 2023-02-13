@@ -212,7 +212,7 @@ public abstract class Sprite implements Movable {
         //set the graphics context color to the color of the sprite
         g.setColor(getColor());
 
-        //draw the polygon using the List of raw polars from step 1 above
+        //5: draw the polygon using the List of raw polars from above, applying mapping transforms as required
         g.drawPolygon(
                 //stream the raw polars from above, applying the mapping operations from above
                 polars.stream()
