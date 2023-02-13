@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 
@@ -218,36 +219,42 @@ public class GamePanel extends Panel {
 
         g.setColor(Color.ORANGE);
 
+        //rotate the ship 90 degrees
         final double DEGREES = 90.0;
-        final int SIZE = 15, X_POS = 27, Y_POS = 45;
-        //rotate raw polars given the orientation, Then convert back to cartesians.
-        Function<PolarPoint, Point> rotateFalcon90 =
-                pp -> new Point(
-                        (int)  (pp.getR() * SIZE
-                                * Math.sin(Math.toRadians(DEGREES)
-                                + pp.getTheta())),
+        final int RADIUS = 15, X_POS = 27, Y_POS = 45;
 
-                        (int)  (pp.getR() * SIZE
-                                * Math.cos(Math.toRadians(DEGREES)
-                                + pp.getTheta())));
+        List<PolarPoint> polars = Utils.cartesianToPolar(pntShipsRemaining);
 
+        BiFunction<Double, PolarPoint, PolarPoint> rotatePolarByDegrees =
+                (deg,  pp)  -> new PolarPoint(
+                        pp.getR(),
+                        pp.getTheta() + Math.toRadians(deg) //rotated Theta
+                );
+
+        BiFunction<Integer, PolarPoint, Point> polarToCartesianWithRadius =
+                (radius,  pp) -> new Point(
+                        (int)  (pp.getR() * radius * Math.sin(pp.getTheta())),
+                        (int)  (pp.getR() * radius * Math.cos(pp.getTheta()))
+                );
 
 
         g.drawPolygon(
 
-                Utils.cartesianToPolar(pntShipsRemaining).stream()
-                        .map(rotateFalcon90)
+                polars.stream()
+                        .map(pp -> rotatePolarByDegrees.apply(DEGREES, pp))
+                        .map(pp -> polarToCartesianWithRadius.apply(RADIUS, pp))
                         .map(pnt -> pnt.x + Game.DIM.width - (X_POS * offSet))
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                Utils.cartesianToPolar(pntShipsRemaining).stream()
-                        .map(rotateFalcon90)
+                polars.stream()
+                        .map(pp -> rotatePolarByDegrees.apply(DEGREES, pp))
+                        .map(pp -> polarToCartesianWithRadius.apply(RADIUS, pp))
                         .map(pnt -> pnt.y + Game.DIM.height - Y_POS)
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
-                pntShipsRemaining.length);
+                polars.size());
 
 
     }
