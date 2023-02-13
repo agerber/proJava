@@ -138,6 +138,19 @@ public abstract class Sprite implements Movable {
     }
 
 
+    //used to load raster graphics
+    protected BufferedImage loadGraphic(String imagePath) {
+        BufferedImage bufferedImage;
+        try {
+            bufferedImage = ImageIO.read(Objects.requireNonNull(Sprite.class.getResourceAsStream(imagePath)));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            bufferedImage = null;
+        }
+        return bufferedImage;
+    }
+
 
 
     //https://www.tabnine.com/code/java/methods/java.awt.geom.AffineTransform/rotate
@@ -214,7 +227,6 @@ public abstract class Sprite implements Movable {
 
         //5: draw the polygon using the List of raw polars from above, applying mapping transforms as required
         g.drawPolygon(
-                //stream the raw polars from above, applying the mapping operations from above
                 polars.stream()
                         .map(rotatePolarByOrientation)
                         .map(polarToCartesian)
@@ -222,7 +234,7 @@ public abstract class Sprite implements Movable {
                         .map(pnt -> pnt.x)
                         .mapToInt(Integer::intValue)
                         .toArray(),
-                //stream the raw polars from above, applying the mapping operations from above
+
                 polars.stream()
                         .map(rotatePolarByOrientation)
                         .map(polarToCartesian)
@@ -239,19 +251,6 @@ public abstract class Sprite implements Movable {
         //g.fillOval(getCenter().x - 1, getCenter().y - 1, 2, 2);
         //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
         //#########################################
-    }
-
-    //used to load raster graphics
-    protected BufferedImage loadGraphic(String imagePath) {
-        BufferedImage bufferedImage;
-        try {
-            bufferedImage = ImageIO.read(Objects.requireNonNull(Sprite.class.getResourceAsStream(imagePath)));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            bufferedImage = null;
-        }
-        return bufferedImage;
     }
 
 
