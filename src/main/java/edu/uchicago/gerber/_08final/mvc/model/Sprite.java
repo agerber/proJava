@@ -179,25 +179,27 @@ public abstract class Sprite implements Movable {
 
         g.setColor(getColor());
 
-        // to render this Sprite, we need to, 1: convert raw cartesians to raw polars, 2: adjust polars
-        // for orientation of sprite. Convert back to cartesians 3: adjust for center-point (location).
-        // and 4: pass the cartesian-x and cartesian-y coords as arrays, along with length, to g.drawPolygon().
+        // To render this Sprite in vector mode, we need to, 1: convert raw cartesians to raw polars, 2: adjust polars
+        // for orientation of sprite. 3: Convert back to cartesians 4: adjust for center-point (location).
+        // and 5: pass the cartesian-x and cartesian-y coords as arrays, along with length, to g.drawPolygon().
 
-        //convert raw cartesians to raw polars
+        //1: convert raw cartesians to raw polars (used later in stream below)
         List<PolarPoint> polars = Utils.cartesianToPolar(getCartesians());
 
-        //rotate raw polars given the orientation of the sprite. Then convert back to cartesians.
-        Function<PolarPoint, Point> adjustForOrientation =
+        //2: rotate raw polars given the orientation of the sprite.
+        Function<PolarPoint, PolarPoint> adjustForOrientation =
+                pp -> new PolarPoint(
+                        pp.getR(),
+                        pp.getTheta() + Math.toRadians(getOrientation())
+                );
+
+        //3: convert the rotated polars back to cartesians
+        Function<PolarPoint, Point> polarToCartesian =
                 pp -> new Point(
-                        (int)  (pp.getR() * getRadius()
-                                * Math.sin(Math.toRadians(getOrientation())
-                                + pp.getTheta())),
+                        (int)  (pp.getR() * getRadius() * Math.sin(pp.getTheta())),
+                        (int)  (pp.getR() * getRadius() * Math.cos(pp.getTheta())));
 
-                        (int)  (pp.getR() * getRadius()
-                                * Math.cos(Math.toRadians(getOrientation())
-                                + pp.getTheta())));
-
-        // adjust for the location (center-point) of the sprite.
+        //4: adjust for the location (center-point) of the sprite.
         // the reason we subtract the y-value has to do with how Java plots the vertical axis for
         // graphics (from top to bottom)
         Function<Point, Point> adjustForLocation =
@@ -207,16 +209,20 @@ public abstract class Sprite implements Movable {
 
 
 
+
         g.drawPolygon(
+                //stream the raw polars from above, applying the mapping operations from above
                 polars.stream()
                         .map(adjustForOrientation)
+                        .map(polarToCartesian)
                         .map(adjustForLocation)
                         .map(pnt -> pnt.x)
                         .mapToInt(Integer::intValue)
                         .toArray(),
-
+                //stream the raw polars from above, applying the mapping operations from above
                 polars.stream()
                         .map(adjustForOrientation)
+                        .map(polarToCartesian)
                         .map(adjustForLocation)
                         .map(pnt -> pnt.y)
                         .mapToInt(Integer::intValue)
