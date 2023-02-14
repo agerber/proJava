@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 
@@ -21,9 +20,9 @@ public class GamePanel extends Panel {
     // ==============================================================
     // FIELDS
     // ==============================================================
-    private final Font fnt = new Font("SansSerif", Font.BOLD, 12);
-    private final Font fntBig = new Font("SansSerif", Font.BOLD + Font.ITALIC, 36);
-    private FontMetrics fmt;
+    private final Font fontNormal = new Font("SansSerif", Font.BOLD, 12);
+    private final Font fontBig = new Font("SansSerif", Font.BOLD + Font.ITALIC, 36);
+    private FontMetrics fontMetrics;
     private int fontWidth;
     private int fontHeight;
 
@@ -36,8 +35,8 @@ public class GamePanel extends Panel {
     // ==============================================================
 
     public GamePanel(Dimension dim) {
-        GameFrame gmf = new GameFrame();
-        gmf.getContentPane().add(this);
+        GameFrame gameFrame = new GameFrame();
+        gameFrame.getContentPane().add(this);
 
         // Robert Alef's awesome falcon design
         List<Point> listShip = new ArrayList<>();
@@ -80,13 +79,13 @@ public class GamePanel extends Panel {
 
         pntShipsRemaining = listShip.toArray(new Point[0]);
 
-        gmf.pack();
+        gameFrame.pack();
         initView();
-        gmf.setSize(dim);
+        gameFrame.setSize(dim);
         //change the name of the game-frame to your game name
-        gmf.setTitle("Game Base");
-        gmf.setResizable(false);
-        gmf.setVisible(true);
+        gameFrame.setTitle("Game Base");
+        gameFrame.setResizable(false);
+        gameFrame.setVisible(true);
         setFocusable(true);
     }
 
@@ -97,7 +96,7 @@ public class GamePanel extends Panel {
 
     private void drawScore(Graphics g) {
         g.setColor(Color.white);
-        g.setFont(fnt);
+        g.setFont(fontNormal);
         if (CommandCenter.getInstance().getScore() > 0) {
             g.drawString("Score :  " + CommandCenter.getInstance().getScore(), fontWidth, fontHeight);
         }
@@ -105,7 +104,7 @@ public class GamePanel extends Panel {
     //this is used for development, you can remove it from your final game
     private void drawNumFrame(Graphics g) {
         g.setColor(Color.white);
-        g.setFont(fnt);
+        g.setFont(fontNormal);
         g.drawString("FRAME :  " + CommandCenter.getInstance().getFrame(), fontWidth,
                 Game.DIM.height  - (fontHeight + 22));
 
@@ -269,11 +268,11 @@ public class GamePanel extends Panel {
 
     private void initView() {
         Graphics g = getGraphics();            // get the graphics context for the panel
-        g.setFont(fnt);                        // take care of some simple font stuff
-        fmt = g.getFontMetrics();
-        fontWidth = fmt.getMaxAdvance();
-        fontHeight = fmt.getHeight();
-        g.setFont(fntBig);                    // set font info
+        g.setFont(fontNormal);                        // take care of some simple font stuff
+        fontMetrics = g.getFontMetrics();
+        fontWidth = fontMetrics.getMaxAdvance();
+        fontHeight = fontMetrics.getHeight();
+        g.setFont(fontBig);                    // set font info
     }
 
 
@@ -284,7 +283,7 @@ public class GamePanel extends Panel {
         final AtomicInteger spacer = new AtomicInteger(0);
         Arrays.stream(lines)
                 .forEach(s ->
-                            graphics.drawString(s, (Game.DIM.width - fmt.stringWidth(s)) / 2,
+                            graphics.drawString(s, (Game.DIM.width - fontMetrics.stringWidth(s)) / 2,
                                     Game.DIM.height / 4 + fontHeight + spacer.getAndAdd(40))
 
                 );
