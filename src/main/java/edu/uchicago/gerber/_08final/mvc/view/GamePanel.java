@@ -221,36 +221,44 @@ public class GamePanel extends Panel {
 
         //rotate the ship 90 degrees
         final double DEGREES = 90.0;
-        final int RADIUS = 15, X_POS = 27, Y_POS = 45;
+        final int RADIUS = 15;
+        final int X_POS = Game.DIM.width - (27 * offSet);
+        final int Y_POS = Game.DIM.height - 45;
 
         List<PolarPoint> polars = Utils.cartesianToPolar(pntShipsRemaining);
 
-        BiFunction<Double, PolarPoint, PolarPoint> rotatePolarByDegrees =
-                (deg,  pp)  -> new PolarPoint(
+        Function<PolarPoint, PolarPoint> rotatePolarByOrientation =
+                pp -> new PolarPoint(
                         pp.getR(),
-                        pp.getTheta() + Math.toRadians(deg) //rotated Theta
+                        pp.getTheta() + Math.toRadians(DEGREES) //rotated Theta
                 );
 
-        BiFunction<Integer, PolarPoint, Point> polarToCartesianWithRadius =
-                (radius,  pp) -> new Point(
-                        (int)  (pp.getR() * radius * Math.sin(pp.getTheta())),
-                        (int)  (pp.getR() * radius * Math.cos(pp.getTheta()))
-                );
+        Function<PolarPoint, Point> polarToCartesian =
+                pp -> new Point(
+                        (int)  (pp.getR() * RADIUS * Math.sin(pp.getTheta())),
+                        (int)  (pp.getR() * RADIUS * Math.cos(pp.getTheta())));
+
+        Function<Point, Point> adjustForLocation =
+                pnt -> new Point(
+                        pnt.x + X_POS,
+                        pnt.y + Y_POS);
 
 
         g.drawPolygon(
 
                 polars.stream()
-                        .map(pp -> rotatePolarByDegrees.apply(DEGREES, pp))
-                        .map(pp -> polarToCartesianWithRadius.apply(RADIUS, pp))
-                        .map(pnt -> pnt.x + Game.DIM.width - (X_POS * offSet))
+                        .map(rotatePolarByOrientation)
+                        .map(polarToCartesian)
+                        .map(adjustForLocation)
+                        .map(pnt -> pnt.x)
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
                 polars.stream()
-                        .map(pp -> rotatePolarByDegrees.apply(DEGREES, pp))
-                        .map(pp -> polarToCartesianWithRadius.apply(RADIUS, pp))
-                        .map(pnt -> pnt.y + Game.DIM.height - Y_POS)
+                        .map(rotatePolarByOrientation)
+                        .map(polarToCartesian)
+                        .map(adjustForLocation)
+                        .map(pnt -> pnt.y)
                         .mapToInt(Integer::intValue)
                         .toArray(),
 
