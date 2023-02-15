@@ -191,7 +191,7 @@ public abstract class Sprite implements Movable {
         //set the graphics context color to the color of the sprite
         g.setColor(getColor());
 
-        // To render this Sprite in vector mode, we need to, 1: convert raw cartesians to raw polars, 2: adjust polars
+        // To render this Sprite in vector mode, we need to, 1: convert raw cartesians to raw polars, 2: rotate polars
         // for orientation of sprite. 3: Convert back to cartesians 4: adjust for center-point (location).
         // and 5: pass the cartesian-x and cartesian-y coords as arrays, along with length, to g.drawPolygon().
 

@@ -2,7 +2,6 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 
 import java.util.Comparator;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -38,7 +37,7 @@ public class Asteroid extends Sprite {
 		//random delta-y
 		setDeltaY(somePosNegValue(10));
 
-		setCartesians(genRandomVertices());
+		setCartesians(generateVertices());
 
 	}
 
@@ -74,12 +73,12 @@ public class Asteroid extends Sprite {
 
 
 
-	  private Point[] genRandomVertices(){
+	  private Point[] generateVertices(){
 
 		  //6.283 is the max radians
 		  final int MAX_RADIANS_X1000 =6283;
 		  //when casting from double to int, we truncate and lose precision, so best to be generous with the
-		  //precision factor as this will create a more random distribution
+		  //precision factor as this will create a more random distribution of vertices
 		  final double PRECISION = 1000.0;
 
 		  Supplier<PolarPoint> polarPointSupplier = () -> {

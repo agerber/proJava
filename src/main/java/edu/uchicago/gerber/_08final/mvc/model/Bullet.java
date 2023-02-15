@@ -14,8 +14,6 @@ public class Bullet extends Sprite {
 
     public Bullet(Falcon falcon) {
 
-
-
         setTeam(Team.FRIEND);
         setColor(Color.ORANGE);
 
