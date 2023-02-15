@@ -20,6 +20,8 @@ public class GameOpsQueue extends LinkedList<GameOp> {
         lock =   new ReentrantLock();
     }
 
+    //enqueues may happen either as a result of a keystroke such as a bullet fire (main-swing-thread) or
+    // a collision, etc. (animation-thread). Use a lock to ensure this data structure is thread safe.
     public void enqueue(Movable mov, GameOp.Action action) {
        try {
             lock.lock();
@@ -30,13 +32,8 @@ public class GameOpsQueue extends LinkedList<GameOp> {
     }
 
 
+    //dequeues are done in serial by the animation thread only. No lock required.
     public GameOp dequeue() {
-        try {
-            lock.lock();
             return removeFirst();
-        } finally {
-            lock.unlock();
-        }
-
     }
 }

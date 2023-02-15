@@ -23,7 +23,6 @@ public class Utils {
                 Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180
         );
 
-
         //determine the largest hypotenuse
         double largestHypotenuse = 0;
         for (Point pnt : pntCartesians)
@@ -32,11 +31,11 @@ public class Utils {
 
 
         //we must make hypotenuse final to pass into a stream.
-        final double hyp = largestHypotenuse;
+        final double LARGEST_HYPOTENUSE = largestHypotenuse;
 
 
-        return Arrays.asList(pntCartesians).stream()
-                .map(pnt -> cartToPolarTransform.apply(pnt, hyp))
+        return Arrays.stream(pntCartesians)
+                .map(pnt -> cartToPolarTransform.apply(pnt, LARGEST_HYPOTENUSE))
                 .collect(Collectors.toList());
 
     }

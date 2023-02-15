@@ -5,7 +5,6 @@ import edu.uchicago.gerber._08final.mvc.view.GamePanel;
 
 
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -24,7 +23,7 @@ public class Game implements Runnable, KeyListener {
     // ===============================================
 
     public static final Dimension DIM = new Dimension(1100, 900); //the dimension of the game.
-    private final GamePanel panel;
+    private final GamePanel gamePanel;
     //this is used throughout many classes.
     public static final Random R = new Random();
 
@@ -63,8 +62,8 @@ public class Game implements Runnable, KeyListener {
 
     public Game() {
 
-        panel = new GamePanel(DIM);
-        panel.addKeyListener(this); //Game object implements KeyListener
+        gamePanel = new GamePanel(DIM);
+        gamePanel.addKeyListener(this); //Game object implements KeyListener
         soundThrust = Sound.clipForLoopFactory("whitenoise.wav");
         soundBackground = Sound.clipForLoopFactory("music-background.wav");
 
@@ -101,7 +100,7 @@ public class Game implements Runnable, KeyListener {
 
             //this call will cause all movables to move() and draw() themselves every ~40ms
             // see GamePanel class for details
-            panel.update(panel.getGraphics());
+            gamePanel.update(gamePanel.getGraphics());
 
             checkCollisions();
             checkNewLevel();
