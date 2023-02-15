@@ -205,16 +205,16 @@ public class GamePanel extends Panel {
     }
 
 
-
+    // Draw the number of falcons remaining on the bottom-right of the screen.
     private void drawNumberShipsRemaining(Graphics g) {
         int numFalcons = CommandCenter.getInstance().getNumFalcons();
         while (numFalcons > 0) {
-            drawOneShipRemaining(g, numFalcons--);
+            drawOneShip(g, numFalcons--);
         }
     }
 
-    // Draw the number of falcons remaining on the bottom-right of the screen.
-    private void drawOneShipRemaining(Graphics g, int offSet) {
+
+    private void drawOneShip(Graphics g, int offSet) {
 
         g.setColor(Color.ORANGE);
 
