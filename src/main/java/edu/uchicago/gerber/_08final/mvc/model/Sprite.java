@@ -77,7 +77,6 @@ public abstract class Sprite implements Movable {
         //The following code block just keeps the sprite inside the bounds of the frame.
         //To ensure this behavior among all sprites in your game, make sure to call super.move() in extending classes
         // where you need to override the move() method.
-        Point center = getCenter();
 
         //right-bounds reached
         if (center.x > Game.DIM.width) {
