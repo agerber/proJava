@@ -157,7 +157,7 @@ public class GamePanel extends Panel {
         else {
 
 
-            processMovables(grpOff,
+            moveDrawMovables(grpOff,
                     CommandCenter.getInstance().getMovDebris(),
                     CommandCenter.getInstance().getMovFloaters(),
                     CommandCenter.getInstance().getMovFoes(),
@@ -181,7 +181,7 @@ public class GamePanel extends Panel {
 
     //this method causes all sprites to move and draw themselves
     @SafeVarargs
-    private final void processMovables(final Graphics g, List<Movable>... arrayOfListMovables) {
+    private final void moveDrawMovables(final Graphics g, List<Movable>... arrayOfListMovables) {
 
         BiConsumer<Graphics, Movable> moveDraw = (grp, mov) -> {
             mov.move();
