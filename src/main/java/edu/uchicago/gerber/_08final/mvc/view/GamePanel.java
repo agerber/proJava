@@ -219,17 +219,18 @@ public class GamePanel extends Panel {
         g.setColor(Color.ORANGE);
 
         //rotate the ship 90 degrees
-        final double DEGREES = 90.0;
+        final double DEGREES_90 = 90.0;
         final int RADIUS = 15;
         final int X_POS = Game.DIM.width - (27 * offSet);
         final int Y_POS = Game.DIM.height - 45;
 
+        //the reason we convert to polar-points is that it's much easier to rotate polar-points.
         List<PolarPoint> polars = Utils.cartesianToPolar(pntShipsRemaining);
 
-        Function<PolarPoint, PolarPoint> rotatePolarByOrientation =
+        Function<PolarPoint, PolarPoint> rotatePolarBy90 =
                 pp -> new PolarPoint(
                         pp.getR(),
-                        pp.getTheta() + Math.toRadians(DEGREES) //rotated Theta
+                        pp.getTheta() + Math.toRadians(DEGREES_90) //rotated Theta
                 );
 
         Function<PolarPoint, Point> polarToCartesian =
@@ -246,7 +247,7 @@ public class GamePanel extends Panel {
         g.drawPolygon(
 
                 polars.stream()
-                        .map(rotatePolarByOrientation)
+                        .map(rotatePolarBy90)
                         .map(polarToCartesian)
                         .map(adjustForLocation)
                         .map(pnt -> pnt.x)
@@ -254,7 +255,7 @@ public class GamePanel extends Panel {
                         .toArray(),
 
                 polars.stream()
-                        .map(rotatePolarByOrientation)
+                        .map(rotatePolarBy90)
                         .map(polarToCartesian)
                         .map(adjustForLocation)
                         .map(pnt -> pnt.y)
