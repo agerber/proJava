@@ -17,7 +17,7 @@ public class GameOpsQueue extends LinkedList<GameOp> {
     private final Lock lock;
 
     public GameOpsQueue() {
-        this.lock =   new ReentrantLock();
+        lock =   new ReentrantLock();
     }
 
     public void enqueue(Movable mov, GameOp.Action action) {

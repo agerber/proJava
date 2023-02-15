@@ -3,6 +3,7 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import java.util.Comparator;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import java.awt.*;
@@ -87,13 +88,10 @@ public class Asteroid extends Sprite {
 		  	  return new PolarPoint(r, theta);
 		  };
 
-		  BiFunction<PolarPoint, Sprite, Point> polarToCartTransform = (pp, spr) -> new Point(
-				  (int) (spr.getCenter().x + pp.getR() * spr.getRadius() * PRECISION
-						  * Math.sin(Math.toRadians(spr.getOrientation())
-						  + pp.getTheta())),
-				  (int) (spr.getCenter().y - pp.getR() * spr.getRadius() * PRECISION
-						  * Math.cos(Math.toRadians(spr.getOrientation())
-						  + pp.getTheta())));
+		  Function<PolarPoint, Point> polarToCartesian =
+				  pp -> new Point(
+						  (int)  (pp.getR() * PRECISION * Math.sin(pp.getTheta())),
+						  (int)  (pp.getR() * PRECISION * Math.cos(pp.getTheta())));
 
 		 //random number of vertices
 		 final int VERTICES = Game.R.nextInt(7) + 25;
@@ -107,7 +105,7 @@ public class Asteroid extends Sprite {
 								return  pp1.getTheta().compareTo(pp2.getTheta());
 							}
 						})
-				 .map(pp -> polarToCartTransform.apply(pp, this))
+				 .map(polarToCartesian)
 				 .toArray(Point[]::new);
 
 

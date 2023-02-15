@@ -6,7 +6,7 @@ public interface Movable {
 
 	enum Team {FRIEND, FOE, FLOATER, DEBRIS}
 
-	//for the game to move and draw movable objects. See processMovables() method of the GamePanel class.
+	//for the game to move and draw movable objects. See the GamePanel class.
 	void move();
 	void draw(Graphics g);
 
