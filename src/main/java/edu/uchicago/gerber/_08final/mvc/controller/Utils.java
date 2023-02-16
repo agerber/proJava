@@ -17,20 +17,21 @@ public class Utils {
     ////////////////////////////////////////////////////////////////////
     public static List<PolarPoint> cartesianToPolar(Point[]  pntCartesians) {
 
+        //determine the largest hypotenuse
+        //we must make hypotenuse final to pass into a stream below.
+        final double largestHypotenuse = Arrays.stream(pntCartesians)
+                .map(p -> hypotFunction(p.x, p.y))
+                .max(Double::compare)
+                .orElse(0.0);
+
+
+        //BiFunction used in stream below
         BiFunction<Point, Double, PolarPoint> cartToPolarTransform = (pnt, hyp) -> new PolarPoint(
                 //this is r from PolarPoint(r,theta).
                 hypotFunction(pnt.x, pnt.y) / hyp, //r is relative to the largestHypotenuse
                 //this is theta from PolarPoint(r,theta)
                 Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180
         );
-
-        //determine the largest hypotenuse
-        //we must make hypotenuse final to pass into a stream on line 37 below.
-        final double largestHypotenuse = Arrays.stream(pntCartesians)
-                .map(p -> hypotFunction(p.x, p.y))
-                .max(Double::compare)
-                .orElse(0.0);
-
 
         return Arrays.stream(pntCartesians)
                 .map(pnt -> cartToPolarTransform.apply(pnt, largestHypotenuse))
