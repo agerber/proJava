@@ -5,6 +5,7 @@ import edu.uchicago.gerber._08final.mvc.model.PolarPoint;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
@@ -24,18 +25,15 @@ public class Utils {
         );
 
         //determine the largest hypotenuse
-        double largestHypotenuse = 0;
-        for (Point pnt : pntCartesians)
-            if (hypotFunction(pnt.x, pnt.y) > largestHypotenuse)
-                largestHypotenuse = hypotFunction(pnt.x, pnt.y);
-
-
-        //we must make hypotenuse final to pass into a stream.
-        final double LARGEST_HYPOTENUSE = largestHypotenuse;
+        //we must make hypotenuse final to pass into a stream on line 37 below.
+        final double largestHypotenuse = Arrays.stream(pntCartesians)
+                .map(p -> hypotFunction(p.x, p.y))
+                .max(Double::compare)
+                .orElse(0.0);
 
 
         return Arrays.stream(pntCartesians)
-                .map(pnt -> cartToPolarTransform.apply(pnt, LARGEST_HYPOTENUSE))
+                .map(pnt -> cartToPolarTransform.apply(pnt, largestHypotenuse))
                 .collect(Collectors.toList());
 
     }
