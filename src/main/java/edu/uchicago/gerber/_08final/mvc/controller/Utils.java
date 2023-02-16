@@ -19,7 +19,7 @@ public class Utils {
 
         //determine the largest hypotenuse
         //we must make hypotenuse final to pass into a stream below.
-        final double largestHypotenuse = Arrays.stream(pntCartesians)
+        final double LARGEST_HYP = Arrays.stream(pntCartesians)
                 .map(p -> hypotFunction(p.x, p.y))
                 .max(Double::compare)
                 .orElse(0.0);
@@ -34,7 +34,7 @@ public class Utils {
         );
 
         return Arrays.stream(pntCartesians)
-                .map(pnt -> cartToPolarTransform.apply(pnt, largestHypotenuse))
+                .map(pnt -> cartToPolarTransform.apply(pnt, LARGEST_HYP))
                 .collect(Collectors.toList());
 
     }
