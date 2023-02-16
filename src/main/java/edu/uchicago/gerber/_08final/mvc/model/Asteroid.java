@@ -77,8 +77,9 @@ public class Asteroid extends Sprite {
 
 		  //6.283 is the max radians
 		  final int MAX_RADIANS_X1000 =6283;
-		  //when casting from double to int, we truncate and lose precision, so best to be generous with the
-		  //precision factor as this will create a more random distribution of vertices
+		  //When casting from double to int, we truncate and lose precision, so best to be generous with the
+		  //precision factor as this will create a more random distribution of vertices. Precision is a proxy for
+		  //radius in the absence of a predefined radius.
 		  final double PRECISION = 100.0;
 
 		  Supplier<PolarPoint> polarPointSupplier = () -> {
@@ -96,6 +97,7 @@ public class Asteroid extends Sprite {
 		 final int VERTICES = Game.R.nextInt(7) + 25;
 
 		 return Stream.generate(polarPointSupplier)
+				 //the supplier will never terminate unless we use a limit.
 				 .limit(VERTICES)
 				 //I used the 'new' keyword to generate the anon-inner class; you can convert to lambda.
 				 .sorted(new Comparator<PolarPoint>() {
