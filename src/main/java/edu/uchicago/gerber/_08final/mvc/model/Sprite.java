@@ -99,11 +99,11 @@ public abstract class Sprite implements Movable {
 
         //expire (decrement expiry) on short-lived objects only
         //the default value of expiry is zero, so this block will only apply to expiring sprites
-        if (getExpiry() > 0) expire();
+        if (expiry > 0) expire();
 
         //if a sprite spins, adjust its orientation
         //the default value of spin is zero, therefore non-spinning objects will not call this block.
-        if (getSpin() != 0) setOrientation(getOrientation() + getSpin());
+        if (spin != 0) orientation += spin;
 
 
     }
@@ -112,11 +112,11 @@ public abstract class Sprite implements Movable {
 
         //if a short-lived sprite has an expiry of one, it commits suicide by enqueuing itself (this) onto the
         //opsList with an operation of REMOVE
-        if (getExpiry() == 1) {
+        if (expiry == 1) {
             CommandCenter.getInstance().getOpsQueue().enqueue(this, GameOp.Action.REMOVE);
         }
         //and then decrements in all cases
-        setExpiry(getExpiry() - 1);
+        expiry--;
 
     }
 
@@ -188,7 +188,7 @@ public abstract class Sprite implements Movable {
     protected void renderVector(Graphics g) {
 
         //set the graphics context color to the color of the sprite
-        g.setColor(getColor());
+        g.setColor(color);
 
         // To render this Sprite in vector mode, we need to, 1: convert raw cartesians to raw polars, 2: rotate polars
         // for orientation of sprite. 3: Convert back to cartesians 4: adjust for center-point (location).
