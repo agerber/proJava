@@ -32,8 +32,15 @@ public class GameOpsQueue extends LinkedList<GameOp> {
     }
 
 
-    //dequeues are done in serial by the animation thread only. No lock required.
+    //dequeues are done in serial by the animation thread. However, we don't want to attempt to enqueue and
+    //dequeue the same datastructure simultaneously. Make thread-safe.
     public GameOp dequeue() {
-            return removeFirst();
+        try {
+            lock.lock();
+               return removeFirst();
+        } finally {
+            lock.unlock();
+        }
+
     }
 }
