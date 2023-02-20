@@ -97,9 +97,11 @@ public class Asteroid extends Sprite {
 		 final int VERTICES = Game.R.nextInt(7) + 25;
 
 		 return Stream.generate(polarPointSupplier)
-				 //the supplier will never terminate unless we use a limit.
+				 //the supplier stream will never terminate unless we use a limit.
 				 .limit(VERTICES)
 				 //I used the 'new' keyword to generate the anon-inner class; you can convert to lambda.
+				 //The polar-points must be sorted by theta, otherwise they will not render as asteroids, but
+				 //rather as a bundle of jaggedy lines. Try removing the .sorted() call to see how they render.
 				 .sorted(new Comparator<PolarPoint>() {
 							@Override
 							public int compare(PolarPoint pp1, PolarPoint pp2) {

@@ -91,7 +91,7 @@ public class Falcon extends Sprite {
 
 		if (invisible > 0) invisible--;
 		if (shield > 0) shield--;
-		//The falcon is a convenient place to decrement this variable as the falcon
+		//The falcon is a convenient place to decrement the showLevel variable as the falcon
 		//move() method is being called every frame (~40ms); and the falcon reference is never null.
 		if (showLevel > 0) showLevel--;
 
@@ -131,7 +131,9 @@ public class Falcon extends Sprite {
 
 	}
 
-	//this is a raster and vector implementation of draw()
+	//Since the superclass Spite does not provide an
+	// implementation for draw() (contract method from Movable) ,we inherit that contract debt, and therefore must
+	// provide an implementation. This is a raster and vector (see drawShield below) implementation of draw().
 	@Override
 	public void draw(Graphics g) {
 

@@ -48,7 +48,8 @@ public class WhiteCloudDebris extends Sprite{
     @Override
     public void draw(Graphics g) {
 
-        //we already have a simple decrement-to-zero counter with expiry; see move() method of Sprite
+        //we already have a simple decrement-to-zero counter with expiry; see move() method of Sprite.
+        //Since draw() is being called every ~40ms, index will count-up once from 0 to 8.
         int index = getRasterMap().size() - getExpiry() -1;
         renderRaster((Graphics2D) g, getRasterMap().get(index));
 
