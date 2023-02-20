@@ -108,9 +108,9 @@ public class Falcon extends Sprite {
 
 		//Make the ship radius bigger when the absolute velocity increases, thereby increasing difficulty when not
 		// protected, and allowing player to use the shield offensively when protected.
-		//Absolute velocity is the hypotenuse of absolute deltaX and deltaY
+		//Absolute velocity is the hypotenuse of deltaX and deltaY
 		int absVelocity =
-				(int) Math.sqrt(Math.pow(Math.abs(getDeltaX()), 2) + Math.pow(Math.abs(getDeltaY()), 2));
+				(int) Math.sqrt(Math.pow(getDeltaX(), 2) + Math.pow(getDeltaY(), 2));
 		absVelocity = Math.min(absVelocity, 39); //max-out the absVelocity factor
 		setRadius(MIN_RADIUS + absVelocity / 3);
 

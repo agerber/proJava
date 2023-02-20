@@ -20,7 +20,7 @@ public class Utils {
 
         //Function used in stream below, as well as in BiFunction below
         Function<Point, Double> hypotenuseOfPoint = (pnt) ->
-                Math.sqrt(Math.abs(Math.pow(pnt.x, 2)) + Math.abs(Math.pow(pnt.y, 2)));
+                Math.sqrt(Math.pow(pnt.x, 2) + Math.pow(pnt.y, 2));
 
         //determine the largest hypotenuse
         //we must make hypotenuse final to pass into a stream below.
