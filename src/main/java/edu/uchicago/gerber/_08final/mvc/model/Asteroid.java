@@ -13,7 +13,7 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 public class Asteroid extends Sprite {
 
 	//radius of a large asteroid
-	private final int LARGE_RADIUS = 100;
+	private final int LARGE_RADIUS = 110;
 
 	//size determines if the Asteroid is Large (0), Medium (1), or Small (2)
 	//when you explode a Large asteroid, you should spawn 2 or 3 medium asteroids

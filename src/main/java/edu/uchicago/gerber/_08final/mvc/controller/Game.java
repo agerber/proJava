@@ -27,8 +27,7 @@ public class Game implements Runnable, KeyListener {
     //this is used throughout many classes.
     public static final Random R = new Random();
 
-    public final static int ANIMATION_DELAY = 40; // milliseconds between screen
-    // updates (animation)
+    public final static int ANIMATION_DELAY = 40; // milliseconds between frames
 
     public final static int FRAMES_PER_SECOND = 1000 / ANIMATION_DELAY;
 
@@ -202,10 +201,11 @@ public class Game implements Runnable, KeyListener {
     }//end meth
 
 
+    //this method adds and removes movables to/from their respective linked-lists
     private void processGameOpsQueue() {
 
         //deferred mutation: these operations are done AFTER we have completed our collision detection to avoid
-        // mutating the movable linkedlists while iterating them above
+        // mutating the movable linkedlists while iterating them above.
         while (!CommandCenter.getInstance().getOpsQueue().isEmpty()) {
             GameOp gameOp = CommandCenter.getInstance().getOpsQueue().dequeue();
             Movable mov = gameOp.getMovable();
@@ -375,8 +375,10 @@ public class Game implements Runnable, KeyListener {
         Falcon falcon = CommandCenter.getInstance().getFalcon();
         int keyCode = e.getKeyCode();
 
-        if (keyCode == START && CommandCenter.getInstance().isGameOver())
+        if (keyCode == START && CommandCenter.getInstance().isGameOver()) {
             CommandCenter.getInstance().initGame();
+            return;
+        }
 
 
         switch (keyCode) {
@@ -423,7 +425,7 @@ public class Game implements Runnable, KeyListener {
                 CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(falcon), GameOp.Action.ADD);
                 Sound.playSound("thump.wav");
                 break;
-
+            //releasing either the LEFT or RIGHT arrow key will set the TurnState to IDLE
             case LEFT:
             case RIGHT:
                 falcon.setTurnState(Falcon.TurnState.IDLE);
