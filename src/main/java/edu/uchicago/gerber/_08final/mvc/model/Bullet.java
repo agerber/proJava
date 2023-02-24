@@ -38,6 +38,7 @@ public class Bullet extends Sprite {
         setDeltaX(falcon.getDeltaX() + vectorX);
         setDeltaY(falcon.getDeltaY() + vectorY);
 
+        //we have a reference to the falcon passed into the constructor. Let's create some kick-back.
         //fire kick-back on the falcon: inertia - fire-vector / some arbitrary divisor
         final double KICK_BACK_DIVISOR = 36.0;
         falcon.setDeltaX(falcon.getDeltaX() - vectorX / KICK_BACK_DIVISOR);

@@ -27,13 +27,14 @@ public class Utils {
         final double LARGEST_HYP = Arrays.stream(pntCartesians)
                 .map(hypotenuseOfPoint)
                 .max(Double::compare)
+                //since .max returns an Optional<Double>, we use .orElse to return 0.0 in the event it is null.
                 .orElse(0.0);
 
 
-        //BiFunction used in stream below
-        BiFunction<Point, Double, PolarPoint> cartToPolarTransform = (pnt, hyp) -> new PolarPoint(
+        //BiFunction used in stream below. We can use Functions within functions e.g. hypotenuseOfPoint.apply()
+        BiFunction<Point, Double, PolarPoint> cartToPolarTransform = (pnt, dbl) -> new PolarPoint(
                 //this is r from PolarPoint(r,theta).
-                hypotenuseOfPoint.apply(pnt) / hyp, //r is relative to the largestHypotenuse
+                hypotenuseOfPoint.apply(pnt) / dbl, //r is relative to the LARGEST_HYP (dbl)
                 //this is theta from PolarPoint(r,theta)
                 Math.toDegrees(Math.atan2(pnt.y, pnt.x)) * Math.PI / 180
         );

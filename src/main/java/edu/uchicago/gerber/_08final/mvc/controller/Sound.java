@@ -39,11 +39,16 @@ public class Sound {
 	
 	//for looping wav clips
 	//http://stackoverflow.com/questions/4875080/music-loop-in-java
-	public static Clip clipForLoopFactory(String strPath){
+	public static Clip clipForLoopFactory(String fileName){
 
 		Clip clp = null;
 		try {
-			InputStream audioSrc = Sound.class.getResourceAsStream("/sounds/" + strPath);
+			String relativePath = "/sounds/" + fileName;
+			InputStream audioSrc = Sound.class.getResourceAsStream(relativePath);
+
+			if (audioSrc == null)
+				throw new IOException("No such sound file exists at " + relativePath);
+
 			InputStream bufferedIn = new BufferedInputStream(audioSrc);
 			AudioInputStream aisStream = AudioSystem.getAudioInputStream(bufferedIn);
 			clp = AudioSystem.getClip();

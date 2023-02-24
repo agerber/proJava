@@ -181,17 +181,18 @@ public class GamePanel extends Panel {
 
     //this method causes all sprites to move and draw themselves
     @SafeVarargs
-    private final void moveDrawMovables(final Graphics g, List<Movable>... arrayOfListMovables) {
+    private final void moveDrawMovables(final Graphics g, List<Movable>... teams) {
 
-        BiConsumer<Graphics, Movable> moveDraw = (grp, mov) -> {
+        BiConsumer<Movable, Graphics> moveDraw = (mov, grp) -> {
             mov.move();
             mov.draw(grp);
         };
 
-        //we use flatMap to flatten the List<Movable>[] passed-in above into a single stream of Movables
-        Arrays.stream(arrayOfListMovables) //Stream<List<Movable>>
+
+        Arrays.stream(teams) //Stream<List<Movable>>
+                //we use flatMap to flatten the teams (List<Movable>[]) passed-in above into a single stream of Movables
                 .flatMap(Collection::stream) //Stream<Movable>
-                .forEach(m -> moveDraw.accept(g, m));
+                .forEach(m -> moveDraw.accept(m, g));
 
 
     }
@@ -283,8 +284,8 @@ public class GamePanel extends Panel {
         //AtomicInteger is safe to pass into a stream
         final AtomicInteger spacer = new AtomicInteger(0);
         Arrays.stream(lines)
-                .forEach(s ->
-                            graphics.drawString(s, (Game.DIM.width - fontMetrics.stringWidth(s)) / 2,
+                .forEach(str ->
+                            graphics.drawString(str, (Game.DIM.width - fontMetrics.stringWidth(str)) / 2,
                                     Game.DIM.height / 4 + fontHeight + spacer.getAndAdd(40))
 
                 );
