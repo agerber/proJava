@@ -29,8 +29,8 @@ public class Falcon extends Sprite {
 	public enum ImageState {
 		FALCON_INVISIBLE, //for pre-spawning
 		FALCON, //normal ship
-		FALCON_PRO, //protected ship (green)
 		FALCON_THR, //normal ship thrusting
+		FALCON_PRO, //protected ship (green)
 		FALCON_PRO_THR, //protected ship (green) thrusting
 
 	}

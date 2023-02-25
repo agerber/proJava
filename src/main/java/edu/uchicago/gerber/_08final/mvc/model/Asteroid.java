@@ -16,9 +16,6 @@ public class Asteroid extends Sprite {
 	private final int LARGE_RADIUS = 110;
 
 	//size determines if the Asteroid is Large (0), Medium (1), or Small (2)
-	//when you explode a Large asteroid, you should spawn 2 or 3 medium asteroids
-	//same for medium asteroid, you should spawn small asteroids
-	//small asteroids get blasted into debris, but do not spawn anything
 	public Asteroid(int size){
 
 		//a size of zero is a big asteroid

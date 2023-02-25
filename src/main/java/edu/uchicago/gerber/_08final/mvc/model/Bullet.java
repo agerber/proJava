@@ -45,7 +45,7 @@ public class Bullet extends Sprite {
         falcon.setDeltaY(falcon.getDeltaY() - vectorY / KICK_BACK_DIVISOR);
 
 
-        //defined the points on a cartesian grid
+        //define the points on a cartesian grid
         List<Point> listPoints = new ArrayList<>();
         listPoints.add(new Point(0, 3)); //top point
         listPoints.add(new Point(1, -1));

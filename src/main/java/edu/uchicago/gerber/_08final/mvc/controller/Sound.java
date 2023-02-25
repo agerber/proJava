@@ -41,7 +41,7 @@ public class Sound {
 	//http://stackoverflow.com/questions/4875080/music-loop-in-java
 	public static Clip clipForLoopFactory(String fileName){
 
-		Clip clp = null;
+		Clip clip = null;
 		try {
 			String relativePath = "/sounds/" + fileName;
 			InputStream audioSrc = Sound.class.getResourceAsStream(relativePath);
@@ -51,14 +51,14 @@ public class Sound {
 
 			InputStream bufferedIn = new BufferedInputStream(audioSrc);
 			AudioInputStream aisStream = AudioSystem.getAudioInputStream(bufferedIn);
-			clp = AudioSystem.getClip();
-		    clp.open( aisStream );
+			clip = AudioSystem.getClip();
+		    clip.open( aisStream );
 
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 			e.printStackTrace();
 		}
 
-		return clp;
+		return clip;
 
 	}
 	
