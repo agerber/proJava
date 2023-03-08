@@ -288,8 +288,8 @@ public class Game implements Runnable, KeyListener {
 
 
     //this method spawns new Large (0) Asteroids
-    private void spawnBigAsteroids(int numBig) {
-        while (numBig-- > 0) {
+    private void spawnBigAsteroids(int num) {
+        while (num-- > 0) {
             //Asteroids with size of zero are big
             CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(0), GameOp.Action.ADD);
 
