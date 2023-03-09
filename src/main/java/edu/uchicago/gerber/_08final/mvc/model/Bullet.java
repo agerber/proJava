@@ -49,7 +49,7 @@ public class Bullet extends Sprite {
         List<Point> listPoints = new ArrayList<>();
         listPoints.add(new Point(0, 3)); //top point
         listPoints.add(new Point(1, -1));
-        listPoints.add(new Point(0, -2));
+        listPoints.add(new Point(0, 0));
         listPoints.add(new Point(-1, -1));
 
         setCartesians(listPoints.toArray(new Point[0]));
