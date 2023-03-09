@@ -75,7 +75,7 @@ public class CommandCenter {
 
 
 	public void initFalconAndDecrementFalconNum(){
-		setNumFalcons(getNumFalcons() - 1);
+		numFalcons--;
 		if (isGameOver()) return;
 		Sound.playSound("shipspawn.wav");
 		falcon.setShield(Falcon.INITIAL_SPAWN_TIME);
