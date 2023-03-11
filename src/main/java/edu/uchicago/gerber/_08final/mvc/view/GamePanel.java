@@ -114,9 +114,11 @@ public class GamePanel extends Panel {
 
         int shieldMeter =   CommandCenter.getInstance().getFalcon().getShield() / 2;
 
+        //draw meter
         g.setColor(Color.CYAN);
         g.fillRect(Game.DIM.width - 220, Game.DIM.height -45, shieldMeter, 10);
 
+        //draw gray box
         g.setColor(Color.DARK_GRAY);
         g.drawRect(Game.DIM.width - 220, Game.DIM.height -45, 100, 10);
     }
