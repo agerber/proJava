@@ -94,13 +94,30 @@ public class GamePanel extends Panel {
     // METHODS
     // ==============================================================
 
-    private void drawScore(Graphics g) {
-        g.setColor(Color.white);
-        g.setFont(fontNormal);
-        if (CommandCenter.getInstance().getScore() > 0) {
-            g.drawString("Score :  " + CommandCenter.getInstance().getScore(), fontWidth, fontHeight);
+    private void drawFalconStatus(final Graphics graphics){
+
+        graphics.setColor(Color.white);
+        graphics.setFont(fontNormal);
+
+        //draw score always
+        graphics.drawString("Score :  " + CommandCenter.getInstance().getScore(), fontWidth, fontHeight);
+
+        //draw the level upper-left corner always
+        String levelText = "Level: " + CommandCenter.getInstance().getLevel();
+        graphics.drawString(levelText, 20, 30); //upper-left corner
+
+        //build the status string array with possible messages in middle of screen
+        List<String> statusArray = new ArrayList<>();
+        if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) statusArray.add(levelText);
+        if (CommandCenter.getInstance().getFalcon().isMaxSpeedAttained()) statusArray.add("WARNING - SLOW DOWN");
+
+        if (statusArray.size() > 0){
+            displayTextOnScreen(graphics, statusArray.toArray(new String[0])); //middle of the screen
         }
+
+
     }
+
     //this is used for development, you can remove it from your final game
     private void drawNumFrame(Graphics g) {
         g.setColor(Color.white);
@@ -168,7 +185,6 @@ public class GamePanel extends Panel {
 
             drawNumberShipsRemaining(grpOff);
             drawShieldMeter(grpOff);
-            drawScore(grpOff);
             drawFalconStatus(grpOff);
 
 
@@ -199,23 +215,7 @@ public class GamePanel extends Panel {
 
     }
 
-    private void drawFalconStatus(final Graphics graphics){
 
-        //draw the level upper-left corner always
-        String levelText = "Level: " + CommandCenter.getInstance().getLevel();
-        graphics.drawString(levelText, 20, 30); //upper-left corner
-
-        //build the status string array with possible messages in middle of screen
-        List<String> statusArray = new ArrayList<>();
-        if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) statusArray.add(levelText);
-        if (CommandCenter.getInstance().getFalcon().isMaxSpeedAttained()) statusArray.add("WARNING - SLOW DOWN");
-
-        if (statusArray.size() > 0){
-            displayTextOnScreen(graphics, statusArray.toArray(new String[0])); //middle of the screen
-        }
-
-
-    }
 
 
     // Draw the number of falcons remaining on the bottom-right of the screen.
