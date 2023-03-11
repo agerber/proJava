@@ -86,6 +86,8 @@ public class CommandCenter {
 		falcon.setOrientation(Game.R.nextInt(360 / Falcon.TURN_STEP) * Falcon.TURN_STEP);
 		falcon.setDeltaX(0);
 		falcon.setDeltaY(0);
+		falcon.setRadius(Falcon.MIN_RADIUS);
+		falcon.setMaxSpeedAttained(false);
 	}
 
 	public void incrementFrame(){

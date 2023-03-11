@@ -39,6 +39,7 @@ public class Falcon extends Sprite {
 	//instance fields (getters/setters provided by Lombok @Data above)
 	private int shield;
 	private int invisible;
+	private boolean maxSpeedAttained;
 
 	//showLevel is not germane to the Falcon. Rather, it controls whether the level is shown in the middle of the
 	// screen. However, given that the Falcon reference is never null, and that a Falcon is a Movable whose move/draw
@@ -95,24 +96,37 @@ public class Falcon extends Sprite {
 		//move() method is being called every frame (~40ms); and the falcon reference is never null.
 		if (showLevel > 0) showLevel--;
 
-		//apply some thrust vectors using trig.
 		final double THRUST = 0.85;
+		final int MAX_VELOCITY = 33;
+
+
+		//apply some thrust vectors using trig.
 		if (thrusting) {
 			double vectorX = Math.cos(Math.toRadians(getOrientation()))
 					* THRUST;
 			double vectorY = Math.sin(Math.toRadians(getOrientation()))
 					* THRUST;
-			setDeltaX(getDeltaX() + vectorX);
-			setDeltaY(getDeltaY() + vectorY);
-		}
 
-		//Make the ship radius bigger when the absolute velocity increases, thereby increasing difficulty when not
-		// protected, and allowing player to use the shield offensively when protected.
-		//Absolute velocity is the hypotenuse of deltaX and deltaY
-		int absVelocity =
-				(int) Math.sqrt(Math.pow(getDeltaX(), 2) + Math.pow(getDeltaY(), 2));
-		absVelocity = Math.min(absVelocity, 39); //max-out the absVelocity factor
-		setRadius(MIN_RADIUS + absVelocity / 3);
+			//Absolute velocity is the hypotenuse of deltaX and deltaY
+			int absVelocity =
+					(int) Math.sqrt(Math.pow(getDeltaX()+ vectorX, 2) + Math.pow(getDeltaY() + vectorY, 2));
+
+			//only accelerate (or adjust radius) if we are below the maximum absVelocity.
+			if (absVelocity < MAX_VELOCITY){
+				//accelerate
+				setDeltaX(getDeltaX() + vectorX);
+				setDeltaY(getDeltaY() + vectorY);
+				//Make the ship radius bigger when the absolute velocity increases, thereby increasing difficulty when not
+				// protected, and allowing player to use the shield offensively when protected.
+				setRadius(MIN_RADIUS + absVelocity / 3);
+				maxSpeedAttained = false;
+			} else {
+				//at max speed, you will lose steerage if you attempt to accelerate in the same general direction
+				//show WARNING message to player using this flag (see drawFalconStatus() of GamePanel class)
+				maxSpeedAttained = true;
+			}
+
+		}
 
 		//adjust the orientation given turnState
 		int adjustOr = getOrientation();
@@ -151,7 +165,7 @@ public class Falcon extends Sprite {
 			imageState = thrusting ? ImageState.FALCON_THR : ImageState.FALCON;
 		}
 
-		//cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
+		//down-cast (widen the aperture of) the graphics object to gain access to methods of Graphics2D
 		//and render the raster image according to the image-state
 		renderRaster((Graphics2D) g, getRasterMap().get(imageState));
 

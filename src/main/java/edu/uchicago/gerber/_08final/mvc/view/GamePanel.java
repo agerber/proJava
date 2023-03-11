@@ -167,7 +167,7 @@ public class GamePanel extends Panel {
             drawNumberShipsRemaining(grpOff);
             drawShieldMeter(grpOff);
             drawScore(grpOff);
-            drawLevel(grpOff);
+            drawFalconStatus(grpOff);
 
 
         }
@@ -197,12 +197,22 @@ public class GamePanel extends Panel {
 
     }
 
-    private void drawLevel(final Graphics graphics){
-        final String levelText = "Level: " + CommandCenter.getInstance().getLevel();
+    private void drawFalconStatus(final Graphics graphics){
+
+        //draw the level upper-left corner always
+        String levelText = "Level: " + CommandCenter.getInstance().getLevel();
         graphics.drawString(levelText, 20, 30); //upper-left corner
-        if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) {
-            displayTextOnScreen(graphics, levelText); //middle of the screen
+
+        //build the status string array with possible messages in middle of screen
+        List<String> statusArray = new ArrayList<>();
+        if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) statusArray.add(levelText);
+        if (CommandCenter.getInstance().getFalcon().isMaxSpeedAttained()) statusArray.add("WARNING - SLOW DOWN");
+
+        if (statusArray.size() > 0){
+            displayTextOnScreen(graphics, statusArray.toArray(new String[0])); //middle of the screen
         }
+
+
     }
 
 
