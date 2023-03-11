@@ -97,7 +97,7 @@ public class Falcon extends Sprite {
 		if (showLevel > 0) showLevel--;
 
 		final double THRUST = 0.85;
-		final int MAX_VELOCITY = 33;
+		final int MAX_VELOCITY = 39;
 
 
 		//apply some thrust vectors using trig.
