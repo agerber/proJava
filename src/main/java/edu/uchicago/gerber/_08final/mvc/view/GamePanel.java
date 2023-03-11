@@ -111,9 +111,10 @@ public class GamePanel extends Panel {
         if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) statusArray.add(levelText);
         if (CommandCenter.getInstance().getFalcon().isMaxSpeedAttained()) statusArray.add("WARNING - SLOW DOWN");
 
-        if (statusArray.size() > 0){
-            displayTextOnScreen(graphics, statusArray.toArray(new String[0])); //middle of the screen
-        }
+        //draw the statusArray strings to middle of screen
+        if (statusArray.size() > 0)
+            displayTextOnScreen(graphics, statusArray.toArray(new String[0]));
+
 
 
     }
