@@ -80,7 +80,7 @@ public class GamePanel extends Panel {
         pntShipsRemaining = listShip.toArray(new Point[0]);
 
         gameFrame.pack();
-        initView();
+        initFontInfo();
         gameFrame.setSize(dim);
         //change the name of the game-frame to your game name
         gameFrame.setTitle("Game Base");
@@ -130,11 +130,12 @@ public class GamePanel extends Panel {
 
     private void drawShieldMeter(Graphics g){
 
-        int shieldMeter =   CommandCenter.getInstance().getFalcon().getShield() / 2;
+        //will be a number between 0-100 inclusive
+        int shieldValue =   CommandCenter.getInstance().getFalcon().getShield() / 2;
 
         //draw meter
         g.setColor(Color.CYAN);
-        g.fillRect(Game.DIM.width - 220, Game.DIM.height -45, shieldMeter, 10);
+        g.fillRect(Game.DIM.width - 220, Game.DIM.height -45, shieldValue, 10);
 
         //draw gray box
         g.setColor(Color.DARK_GRAY);
@@ -281,7 +282,7 @@ public class GamePanel extends Panel {
 
     }
 
-    private void initView() {
+    private void initFontInfo() {
         Graphics g = getGraphics();            // get the graphics context for the panel
         g.setFont(fontNormal);                        // take care of some simple font stuff
         fontMetrics = g.getFontMetrics();
