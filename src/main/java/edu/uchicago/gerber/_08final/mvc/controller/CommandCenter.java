@@ -58,6 +58,7 @@ public class CommandCenter {
 
 	public void initGame(){
 		clearAll();
+		generateStarField();
 		setLevel(0);
 		setScore(0);
 		setPaused(false);
@@ -68,6 +69,15 @@ public class CommandCenter {
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 
 
+
+	}
+
+	private void generateStarField(){
+
+		int count = 100;
+		while (count-- > 0){
+			opsQueue.enqueue(new Star(), GameOp.Action.ADD);
+		}
 
 	}
 
