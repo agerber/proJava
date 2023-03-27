@@ -451,6 +451,7 @@ public class Game implements Runnable, KeyListener {
             case NUKE:
                 if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
                     CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
+                    Sound.playSound("nuke.wav");
                     CommandCenter.getInstance().getFalcon().setNukeMeter(0);
                 }
 
