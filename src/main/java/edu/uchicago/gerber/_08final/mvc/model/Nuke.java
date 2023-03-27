@@ -6,7 +6,7 @@ import java.awt.*;
 public class Nuke extends Sprite{
 
     private final int EXPIRE = 60;
-    private int count = 0;
+    private int nukeState = 0;
 
     public Nuke(Falcon falcon) {
         setCenter(falcon.getCenter());
@@ -47,15 +47,18 @@ public class Nuke extends Sprite{
     @Override
     public void move() {
         super.move();
-        if (getExpiry() % 20 == 0) count++;
-        switch (count) {
+        if (getExpiry() % (EXPIRE/3) == 0) nukeState++;
+        switch (nukeState) {
+            //travelling
             case 0:
             default:
                 setRadius(2);
                 break;
+            //exploding
             case 1:
                 setRadius(getRadius() + 16);
                 break;
+            //imploding
             case 2:
                 setRadius(getRadius() - 16);
                 break;
