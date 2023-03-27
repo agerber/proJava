@@ -14,14 +14,12 @@ public class Nuke extends Sprite{
         setExpiry(EXPIRE);
         setRadius(0);
         setTeam(Team.FRIEND);
-        //the nuke is a cicle, so it has no orientation, but we need this to calculate vectors
-        setOrientation(falcon.getOrientation());
 
         final double FIRE_POWER = 11.0;
         double vectorX =
-                Math.cos(Math.toRadians(getOrientation())) * FIRE_POWER;
+                Math.cos(Math.toRadians(falcon.getOrientation())) * FIRE_POWER;
         double vectorY =
-                Math.sin(Math.toRadians(getOrientation())) * FIRE_POWER;
+                Math.sin(Math.toRadians(falcon.getOrientation())) * FIRE_POWER;
 
         //fire force: falcon inertia + fire-vector
         setDeltaX(falcon.getDeltaX() + vectorX);
