@@ -10,7 +10,7 @@ public class Nuke extends Sprite{
 
     public Nuke(Falcon falcon) {
         setCenter(falcon.getCenter());
-        setColor(Color.RED);
+        setColor(Color.YELLOW);
         setExpiry(MAX_COUNT);
         setRadius(0);
         setTeam(Team.FRIEND);
