@@ -128,18 +128,27 @@ public class GamePanel extends Panel {
 
     }
 
-    private void drawShieldMeter(Graphics g){
+    private void drawMeters(Graphics g){
 
         //will be a number between 0-100 inclusive
         int shieldValue =   CommandCenter.getInstance().getFalcon().getShield() / 2;
 
+        int nukeValue = CommandCenter.getInstance().getFalcon().getNukeMeter();
+
+        drawOneMeter(g, Color.CYAN, 1, shieldValue);
+        drawOneMeter(g, Color.YELLOW, 2, nukeValue);
+
+
+    }
+
+    private static void drawOneMeter(Graphics g, Color color, int offSet, int percent) {
         //draw meter
-        g.setColor(Color.CYAN);
-        g.fillRect(Game.DIM.width - 220, Game.DIM.height -45, shieldValue, 10);
+        g.setColor(color);
+        g.fillRect(Game.DIM.width - (220 * offSet), Game.DIM.height -45, percent, 10);
 
         //draw gray box
         g.setColor(Color.DARK_GRAY);
-        g.drawRect(Game.DIM.width - 220, Game.DIM.height -45, 100, 10);
+        g.drawRect(Game.DIM.width - (220 * offSet), Game.DIM.height -45, 100, 10);
     }
 
 
@@ -186,7 +195,7 @@ public class GamePanel extends Panel {
 
 
             drawNumberShipsRemaining(grpOff);
-            drawShieldMeter(grpOff);
+            drawMeters(grpOff);
             drawFalconStatus(grpOff);
 
 

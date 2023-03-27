@@ -21,6 +21,7 @@ public class Falcon extends Sprite {
 	public static final int INITIAL_SPAWN_TIME = 46;
 	//number of frames falcon will be protected after consuming a NewShieldFloater
 	public static final int MAX_SHIELD = 200;
+	public static final int MAX_NUKE = 100;
 
 	public static final int MIN_RADIUS = 28;
 
@@ -38,6 +39,8 @@ public class Falcon extends Sprite {
 
 	//instance fields (getters/setters provided by Lombok @Data above)
 	private int shield;
+
+	private int nukeMeter;
 	private int invisible;
 	private boolean maxSpeedAttained;
 
@@ -92,6 +95,7 @@ public class Falcon extends Sprite {
 
 		if (invisible > 0) invisible--;
 		if (shield > 0) shield--;
+		if (nukeMeter > 0) nukeMeter--;
 		//The falcon is a convenient place to decrement the showLevel variable as the falcon
 		//move() method is being called every frame (~40ms); and the falcon reference is never null.
 		if (showLevel > 0) showLevel--;

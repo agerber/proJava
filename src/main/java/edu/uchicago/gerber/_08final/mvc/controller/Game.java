@@ -43,7 +43,9 @@ public class Game implements Runnable, KeyListener {
             UP = 38, // thrust; up arrow
             START = 83, // s key
             FIRE = 32, // space key
-            MUTE = 77; // m-key mute
+            MUTE = 77, // m-key mute
+
+            NUKE = 78; // n-key mute
 
     // for possible future use
     // HYPER = 68, 					// D key
@@ -190,10 +192,9 @@ public class Game implements Runnable, KeyListener {
                         Sound.playSound("insect.wav");
                         buildWall();
                         break;
-
                     case "NukeFloater":
                         Sound.playSound("insect.wav");
-                        CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(CommandCenter.getInstance().getFalcon()), GameOp.Action.ADD);
+                        CommandCenter.getInstance().getFalcon().setNukeMeter(Falcon.MAX_NUKE);
                         break;
                 }
                 CommandCenter.getInstance().getOpsQueue().enqueue(movFloater, GameOp.Action.REMOVE);
@@ -447,7 +448,10 @@ public class Game implements Runnable, KeyListener {
                 falcon.setThrusting(false);
                 soundThrust.stop();
                 break;
-
+            case NUKE:
+                CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
+                Sound.playSound("thump.wav");
+                break;
             case MUTE:
                 CommandCenter.getInstance().setMuted(!CommandCenter.getInstance().isMuted());
 
