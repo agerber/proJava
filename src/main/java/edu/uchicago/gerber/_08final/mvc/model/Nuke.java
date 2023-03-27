@@ -47,19 +47,22 @@ public class Nuke extends Sprite{
     @Override
     public void move() {
         super.move();
-        if (getExpiry() % (EXPIRE/3) == 0) nukeState++;
+        if (getExpiry() % (EXPIRE/7) == 0) nukeState++;
         switch (nukeState) {
             //travelling
             case 0:
-            default:
                 setRadius(2);
                 break;
             //exploding
             case 1:
+            case 2:
+            case 3:
                 setRadius(getRadius() + 16);
                 break;
             //imploding
-            case 2:
+            case 4:
+            case 5:
+            default:
                 setRadius(getRadius() - 16);
                 break;
 
