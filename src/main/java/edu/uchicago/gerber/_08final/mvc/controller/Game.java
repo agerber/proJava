@@ -128,6 +128,7 @@ public class Game implements Runnable, KeyListener {
     private void checkFloaters() {
         spawnNewWallFloater();
         spawnShieldFloater();
+        spawnNukeFloater();
     }
 
 
@@ -188,6 +189,11 @@ public class Game implements Runnable, KeyListener {
                     case "NewWallFloater":
                         Sound.playSound("insect.wav");
                         buildWall();
+                        break;
+
+                    case "NukeFloater":
+                        Sound.playSound("insect.wav");
+                        CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(CommandCenter.getInstance().getFalcon()), GameOp.Action.ADD);
                         break;
                 }
                 CommandCenter.getInstance().getOpsQueue().enqueue(movFloater, GameOp.Action.REMOVE);
@@ -283,6 +289,13 @@ public class Game implements Runnable, KeyListener {
 
         if (CommandCenter.getInstance().getFrame() % ShieldFloater.SPAWN_SHIELD_FLOATER == 0) {
             CommandCenter.getInstance().getOpsQueue().enqueue(new ShieldFloater(), GameOp.Action.ADD);
+        }
+    }
+
+    private void spawnNukeFloater() {
+
+        if (CommandCenter.getInstance().getFrame() % NukeFloater.SPAWN_NUKE_FLOATER == 0) {
+            CommandCenter.getInstance().getOpsQueue().enqueue(new NukeFloater(), GameOp.Action.ADD);
         }
     }
 

@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class NukeFloater extends Floater {
 
-	public static final int SPAWN_NUKE_FLOATER = Game.FRAMES_PER_SECOND * 10;
+	public static final int SPAWN_NUKE_FLOATER = Game.FRAMES_PER_SECOND * 2;
 	public NukeFloater() {
 		setColor(Color.RED);
 		setExpiry(120);

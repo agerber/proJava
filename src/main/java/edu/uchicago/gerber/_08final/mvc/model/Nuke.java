@@ -5,12 +5,13 @@ import java.awt.*;
 
 public class Nuke extends Sprite{
 
-    private final int MAX_RADIUS = 40;
+    private final int MAX_COUNT = 40;
+    private int count;
 
     public Nuke(Falcon falcon) {
         setCenter(falcon.getCenter());
         setColor(Color.RED);
-        setExpiry(MAX_RADIUS);
+        setExpiry(MAX_COUNT);
         setRadius(0);
         setTeam(Team.FRIEND);
     }
@@ -20,22 +21,18 @@ public class Nuke extends Sprite{
     public void draw(Graphics g) {
 
         g.setColor(getColor());
-        g.drawOval(getCenter().x, getCenter().y, getRadius(), getRadius());
+        g.drawOval(getCenter().x -getRadius(), getCenter().y - getRadius(), getRadius() * 2, getRadius()* 2);
 
     }
-
-
-
 
     @Override
     public void move() {
         super.move();
-        if (getRadius() < MAX_RADIUS / 2)
-            setRadius(getRadius() + 1);
+
+        if (count++ <= MAX_COUNT / 2)
+            setRadius(getRadius() + 16);
         else
-            setRadius(getRadius() -1);
+            setRadius(getRadius() -16);
         }
-
-
 
 }
