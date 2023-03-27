@@ -449,8 +449,11 @@ public class Game implements Runnable, KeyListener {
                 soundThrust.stop();
                 break;
             case NUKE:
-                CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
-                Sound.playSound("thump.wav");
+                if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
+                    CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
+                    CommandCenter.getInstance().getFalcon().setNukeMeter(0);
+                }
+
                 break;
             case MUTE:
                 CommandCenter.getInstance().setMuted(!CommandCenter.getInstance().isMuted());
