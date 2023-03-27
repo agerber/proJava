@@ -133,7 +133,6 @@ public class GamePanel extends Panel {
 
         //will be a number between 0-100 inclusive
         int shieldValue =   CommandCenter.getInstance().getFalcon().getShield() / 2;
-
         int nukeValue = CommandCenter.getInstance().getFalcon().getNukeMeter();
 
         drawOneMeter(g, Color.CYAN, 1, shieldValue);
@@ -142,7 +141,7 @@ public class GamePanel extends Panel {
 
     }
 
-    private static void drawOneMeter(Graphics g, Color color, int offSet, int percent) {
+    private void drawOneMeter(Graphics g, Color color, int offSet, int percent) {
         //draw meter
         g.setColor(color);
         g.fillRect(Game.DIM.width - (100 + 120 * offSet), Game.DIM.height -45, percent, 10);
