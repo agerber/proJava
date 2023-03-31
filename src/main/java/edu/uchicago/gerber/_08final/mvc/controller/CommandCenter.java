@@ -98,6 +98,7 @@ public class CommandCenter {
 		falcon.setDeltaY(0);
 		falcon.setRadius(Falcon.MIN_RADIUS);
 		falcon.setMaxSpeedAttained(false);
+		falcon.setNukeMeter(0);
 	}
 
 	public void incrementFrame(){
