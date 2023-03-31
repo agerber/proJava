@@ -21,7 +21,7 @@ public class Falcon extends Sprite {
 	public static final int INITIAL_SPAWN_TIME = 46;
 	//number of frames falcon will be protected after consuming a NewShieldFloater
 	public static final int MAX_SHIELD = 200;
-	public static final int MAX_NUKE = 100;
+	public static final int MAX_NUKE = 600;
 
 	public static final int MIN_RADIUS = 28;
 
