@@ -142,13 +142,17 @@ public class GamePanel extends Panel {
     }
 
     private void drawOneMeter(Graphics g, Color color, int offSet, int percent) {
+
+        int xVal = Game.DIM.width - (100 + 120 * offSet);
+        int yVal = Game.DIM.height - 45;
+
         //draw meter
         g.setColor(color);
-        g.fillRect(Game.DIM.width - (100 + 120 * offSet), Game.DIM.height -45, percent, 10);
+        g.fillRect(xVal, yVal, percent, 10);
 
         //draw gray box
         g.setColor(Color.DARK_GRAY);
-        g.drawRect(Game.DIM.width - (100 + 120 * offSet), Game.DIM.height -45, 100, 10);
+        g.drawRect(xVal, yVal, 100, 10);
     }
 
 
