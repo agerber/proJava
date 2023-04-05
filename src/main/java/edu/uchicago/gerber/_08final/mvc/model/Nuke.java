@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Nuke extends Sprite{
 
-    private final int EXPIRE = 60;
+    private static final int EXPIRE = 60;
     private int nukeState = 0;
 
     public Nuke(Falcon falcon) {
