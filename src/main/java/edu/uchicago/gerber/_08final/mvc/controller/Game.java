@@ -157,7 +157,7 @@ public class Game implements Runnable, KeyListener {
                     //decrement nuke hits
                     if (movFriend instanceof Nuke){
                         Nuke nuke = (Nuke) movFriend;
-                        nuke.setHits(nuke.getHits() -1);
+                        nuke.hitMe();
                     }
 
                     //remove the foe

@@ -49,6 +49,10 @@ public class Nuke extends Sprite{
         return hits > 0;
     }
 
+    public void hitMe(){
+        hits--;
+    }
+
     @Override
     public void move() {
         super.move();
