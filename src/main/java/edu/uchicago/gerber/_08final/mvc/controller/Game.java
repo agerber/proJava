@@ -154,6 +154,12 @@ public class Game implements Runnable, KeyListener {
                     if (!movFriend.isProtected()) {
                         CommandCenter.getInstance().getOpsQueue().enqueue(movFriend, GameOp.Action.REMOVE);
                     }
+                    //decrement nuke hits
+                    if (movFriend instanceof Nuke){
+                        Nuke nuke = (Nuke) movFriend;
+                        nuke.setHits(nuke.getHits() -1);
+                    }
+
                     //remove the foe
                     CommandCenter.getInstance().getOpsQueue().enqueue(movFoe, GameOp.Action.REMOVE);
 
