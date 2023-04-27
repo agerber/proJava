@@ -29,13 +29,19 @@ public class GamePanel extends Panel {
     //used to draw number of ships remaining
     private final Point[] pntShipsRemaining;
 
+    //used for double-buffering
+    private Image imgOff;
+    private Graphics grpOff;
+
 
     // ==============================================================
     // CONSTRUCTOR
     // ==============================================================
 
     public GamePanel(Dimension dim) {
+
         GameFrame gameFrame = new GameFrame();
+
         gameFrame.getContentPane().add(this);
 
         // Robert Alef's awesome falcon design
@@ -157,11 +163,11 @@ public class GamePanel extends Panel {
 
 
     public void update(Graphics g) {
-        //create an image off-screen
+
         // The following "off" vars are used for the off-screen double-buffered image.
-        Image imgOff = createImage(Game.DIM.width, Game.DIM.height);
+        imgOff = createImage(Game.DIM.width, Game.DIM.height);
         //get its graphics context
-        Graphics grpOff = imgOff.getGraphics();
+        grpOff = imgOff.getGraphics();
 
         //Fill the off-screen image background with black.
         grpOff.setColor(Color.BLACK);
