@@ -11,7 +11,8 @@ public static void main(String[] args) method, and it's where your execution sta
 No need to draw CRC cards, just create a text version of the CRC
 card and put answers in ReviewExercises.txt. For UML, use the UML tool in IntelliJ (right-click the package ||
 Diagrams menu || Show Diagram...) and save those uml diagrams in the _06design directory or appropriate
-subdirectories.
+subdirectories. The 'Show Diagram...' is the preferred method, but if you must draw the diagrams, then take a picture
+with your phone and upload png/jpg to the appropriate subdirectory.
 
 R12.1 OO Analysis and Design
 R12.2 OO Analysis and Design
