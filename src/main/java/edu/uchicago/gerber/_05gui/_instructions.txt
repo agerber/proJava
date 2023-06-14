@@ -1,0 +1,39 @@
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+proDice : Swing and Gui
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Review Exercises: 3 points each. Each of your solutions requires a Driver class. A Driver class is the one with the
+public static void main(String[] args) method, and it's where your execution starts.
+
+Starting on page 501, and 543 of textbook Big Java. Place your answers in
+ReviewExercises.txt located in the root of this project.
+
+R10.5 Events
+R10.6 actionPerformed
+R10.11 Inner class and event-listeners
+R10.14 Object hierarchies
+R10.22 Graphic methods
+R11.2 Layout managers
+R11.11 ButtonGroup
+R11.19 Types of Events
+R11.20 Events
+R11.21 ActionListener versus MouseListener
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Programming Exercises: Name your packages according to the Programming Exercise identifier, except
+replace the period with underscore. You will want a Driver class (with a static main() method) to drive your program.
+
+
+10 points each
+P10.2 Bulls eye
+P10.5 Draw houses of different colors and sizes
+P10.9 Italian flag
+P10.10 Olympic rings
+
+15 points each
+P10.19 Restaurant bill
+P11.9 Circle with clicks
+
