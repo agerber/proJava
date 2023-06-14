@@ -11,7 +11,6 @@ public class Nuke extends Sprite{
 
     private static final int EXPIRE = 60;
     private int nukeState = 0;
-    private int hits;
 
     public Nuke(Falcon falcon) {
         setCenter(falcon.getCenter());
@@ -19,8 +18,6 @@ public class Nuke extends Sprite{
         setExpiry(EXPIRE);
         setRadius(0);
         setTeam(Team.FRIEND);
-        //nuke can collide max 10 times
-        setHits(10);
 
         final double FIRE_POWER = 11.0;
         double vectorX =
@@ -43,14 +40,10 @@ public class Nuke extends Sprite{
 
     }
 
-    //a nuke is invincible until it collides 10 times
+    //a nuke is invincible
     @Override
     public boolean isProtected() {
-        return hits > 0;
-    }
-
-    public void hitMe(){
-        hits--;
+        return true;
     }
 
     @Override
