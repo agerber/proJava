@@ -209,8 +209,12 @@ public class Game implements Runnable, KeyListener {
     }//end meth
 
 
-    //this method adds and removes movables to/from their respective linked-lists
-    private void processGameOpsQueue() {
+    //This method adds and removes movables to/from their respective linked-lists.
+    //This method is being called by the animationThread. The entire method is locked on the intrinsic lock of this
+    // Game object. The main (Swing) thread also has access to the GameOpsQueue via the
+    // key event methods such as keyReleased. Therefore, to avoid mutating the GameOpsQueue while we are iterating
+    // it, we also synchronize the keyReleased and keyPressed methods below on the same intrinsic lock.
+    private synchronized void processGameOpsQueue() {
 
         //deferred mutation: these operations are done AFTER we have completed our collision detection to avoid
         // mutating the movable linkedlists while iterating them above.
@@ -385,8 +389,12 @@ public class Game implements Runnable, KeyListener {
     // KEYLISTENER METHODS
     // ===============================================
 
+    //key events are triggered by the main (Swing) thread which is listening for keystrokes.
+    //The animation-thread also has access to the GameOpsQueue via the processGameOpsQueue() method.
+    // Therefore, to avoid mutating the GameOpsQueue on the main thread, while we are iterating it on the
+    // animation-thread, we synchronize on the same intrinsic lock. processGameOpsQueue() is also synchronized.
     @Override
-    public void keyPressed(KeyEvent e) {
+    public synchronized void keyPressed(KeyEvent e) {
         Falcon falcon = CommandCenter.getInstance().getFalcon();
         int keyCode = e.getKeyCode();
 
@@ -427,13 +435,16 @@ public class Game implements Runnable, KeyListener {
 
     }
 
+    //key events are triggered by the main (Swing) thread which is listening for keystrokes.
+    //The animation-thread also has access to the GameOpsQueue via the processGameOpsQueue() method.
+    // Therefore, to avoid mutating the GameOpsQueue on the main thread, while we are iterating it on the
+    // animation-thread, we synchronize on the same intrinsic lock. processGameOpsQueue() is also synchronized.
     @Override
-    public void keyReleased(KeyEvent e) {
+    public synchronized void keyReleased(KeyEvent e) {
         Falcon falcon = CommandCenter.getInstance().getFalcon();
         int keyCode = e.getKeyCode();
         //show the key-code in the console
         System.out.println(keyCode);
-
 
         switch (keyCode) {
             case FIRE:
@@ -451,11 +462,12 @@ public class Game implements Runnable, KeyListener {
                 break;
             case NUKE:
                 if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
+
                     CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
                     Sound.playSound("nuke.wav");
                     CommandCenter.getInstance().getFalcon().setNukeMeter(0);
-                }
 
+                }
                 break;
             case MUTE:
                 CommandCenter.getInstance().setMuted(!CommandCenter.getInstance().isMuted());
