@@ -389,12 +389,8 @@ public class Game implements Runnable, KeyListener {
     // KEYLISTENER METHODS
     // ===============================================
 
-    //key events are triggered by the main (Swing) thread which is listening for keystrokes.
-    //The animation-thread also has access to the GameOpsQueue via the processGameOpsQueue() method.
-    // Therefore, to avoid mutating the GameOpsQueue on the main thread, while we are iterating it on the
-    // animation-thread, we synchronize on the same intrinsic lock. processGameOpsQueue() is also synchronized.
     @Override
-    public synchronized void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         Falcon falcon = CommandCenter.getInstance().getFalcon();
         int keyCode = e.getKeyCode();
 
