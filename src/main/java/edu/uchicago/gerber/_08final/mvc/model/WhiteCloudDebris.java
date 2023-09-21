@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class WhiteCloudDebris extends Sprite{
 
+   private int index = 0;
 
     public WhiteCloudDebris(Sprite explodingSprite) {
 
@@ -29,7 +30,7 @@ public class WhiteCloudDebris extends Sprite{
         setRasterMap(rasterMap);
 
         //expire it out after it has done its animation.
-        setExpiry(rasterMap.size());
+        setExpiry(rasterMap.size() * 2);
 
         //everything is relative to the exploding sprite
         setSpin(explodingSprite.getSpin());
@@ -49,8 +50,7 @@ public class WhiteCloudDebris extends Sprite{
     public void draw(Graphics g) {
 
         //we already have a simple decrement-to-zero counter with expiry; see move() method of Sprite.
-        //Since draw() is being called every ~40ms, index will count-up once from 0 to 8.
-        int index = getRasterMap().size() - getExpiry() -1;
+        if (getExpiry() % 2 == 0) index++;
         renderRaster((Graphics2D) g, getRasterMap().get(index));
 
 

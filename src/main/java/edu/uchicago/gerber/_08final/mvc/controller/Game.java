@@ -431,7 +431,8 @@ public class Game implements Runnable, KeyListener {
 
     }
 
-    //key events are triggered by the main (Swing) thread which is listening for keystrokes.
+    //key events are triggered by the main (Swing) thread which is listening for keystrokes. Notice that some of the
+    // cases below touch the GameOpsQueue such as fire bullet and nuke.
     //The animation-thread also has access to the GameOpsQueue via the processGameOpsQueue() method.
     // Therefore, to avoid mutating the GameOpsQueue on the main thread, while we are iterating it on the
     // animation-thread, we synchronize on the same intrinsic lock. processGameOpsQueue() is also synchronized.
