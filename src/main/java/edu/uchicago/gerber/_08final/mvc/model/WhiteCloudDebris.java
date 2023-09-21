@@ -29,7 +29,7 @@ public class WhiteCloudDebris extends Sprite{
 
         setRasterMap(rasterMap);
 
-        //expire it out after it has done its animation.
+        //expire it out after it has done its animation. Multiply by 2 to slow down the animation
         setExpiry(rasterMap.size() * 2);
 
         //everything is relative to the exploding sprite
@@ -49,10 +49,11 @@ public class WhiteCloudDebris extends Sprite{
     @Override
     public void draw(Graphics g) {
 
+
+        renderRaster((Graphics2D) g, getRasterMap().get(index));
+        //hold the image for two frames to slow down the dust cloud animation
         //we already have a simple decrement-to-zero counter with expiry; see move() method of Sprite.
         if (getExpiry() % 2 == 0) index++;
-        renderRaster((Graphics2D) g, getRasterMap().get(index));
-
 
 
     }
