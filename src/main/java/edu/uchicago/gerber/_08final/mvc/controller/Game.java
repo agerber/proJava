@@ -437,7 +437,7 @@ public class Game implements Runnable, KeyListener {
     // Therefore, to avoid mutating the GameOpsQueue on the main thread, while we are iterating it on the
     // animation-thread, we synchronize on the same intrinsic lock. processGameOpsQueue() is also synchronized.
     @Override
-    public synchronized void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e) {
         Falcon falcon = CommandCenter.getInstance().getFalcon();
         int keyCode = e.getKeyCode();
         //show the key-code in the console
@@ -445,8 +445,19 @@ public class Game implements Runnable, KeyListener {
 
         switch (keyCode) {
             case FIRE:
-                CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(falcon), GameOp.Action.ADD);
+                synchronized (this){
+                    CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(falcon), GameOp.Action.ADD);
+                }
                 Sound.playSound("thump.wav");
+                break;
+            case NUKE:
+                if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
+                    synchronized (this) {
+                        CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
+                    }
+                    Sound.playSound("nuke.wav");
+                    CommandCenter.getInstance().getFalcon().setNukeMeter(0);
+                }
                 break;
             //releasing either the LEFT or RIGHT arrow key will set the TurnState to IDLE
             case LEFT:
@@ -457,15 +468,7 @@ public class Game implements Runnable, KeyListener {
                 falcon.setThrusting(false);
                 soundThrust.stop();
                 break;
-            case NUKE:
-                if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
 
-                    CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
-                    Sound.playSound("nuke.wav");
-                    CommandCenter.getInstance().getFalcon().setNukeMeter(0);
-
-                }
-                break;
             case MUTE:
                 CommandCenter.getInstance().setMuted(!CommandCenter.getInstance().isMuted());
 
