@@ -213,7 +213,8 @@ public class Game implements Runnable, KeyListener {
     //This method is being called by the animationThread. The entire method is locked on the intrinsic lock of this
     // Game object. The main (Swing) thread also has access to the GameOpsQueue via the
     // key event methods such as keyReleased. Therefore, to avoid mutating the GameOpsQueue while we are iterating
-    // it, we also synchronize the keyReleased and keyPressed methods below on the same intrinsic lock.
+    // it, we also synchronize the critical sections of the keyReleased and keyPressed methods below on the same
+    // intrinsic lock.
     private synchronized void processGameOpsQueue() {
 
         //deferred mutation: these operations are done AFTER we have completed our collision detection to avoid
