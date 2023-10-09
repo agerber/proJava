@@ -1,10 +1,12 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Sound;
 import lombok.Data;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 @Data
 public class Nuke extends Sprite{
@@ -40,11 +42,7 @@ public class Nuke extends Sprite{
 
     }
 
-    //a nuke is invincible
-    @Override
-    public boolean isProtected() {
-        return true;
-    }
+
 
     @Override
     public void move() {
@@ -59,13 +57,13 @@ public class Nuke extends Sprite{
             case 1:
             case 2:
             case 3:
-                setRadius(getRadius() + 16);
+                setRadius(getRadius() + 8);
                 break;
             //imploding
             case 4:
             case 5:
             default:
-                setRadius(getRadius() - 22);
+                setRadius(getRadius() - 11);
                 break;
 
 
@@ -73,5 +71,18 @@ public class Nuke extends Sprite{
 
     }
 
+    @Override
+    public void add(LinkedList<Movable> list) {
+        if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
+            list.add(this);
+            Sound.playSound("nuke.wav");
+            CommandCenter.getInstance().getFalcon().setNukeMeter(0);
+        }
+    }
 
+    @Override
+    public void remove(LinkedList<Movable> list) {
+        //only remove upon natural mortality (see expire() of Sprite), otherwise a Nuke is invincible
+        if (getExpiry() == 0) list.remove(this);
+    }
 }

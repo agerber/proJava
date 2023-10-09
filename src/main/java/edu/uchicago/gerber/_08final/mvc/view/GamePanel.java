@@ -161,7 +161,7 @@ public class GamePanel extends Panel {
         g.drawRect(xVal, yVal, 100, 10);
     }
 
-
+    @Override
     public void update(Graphics g) {
 
         // The following "off" vars are used for the off-screen double-buffered image.

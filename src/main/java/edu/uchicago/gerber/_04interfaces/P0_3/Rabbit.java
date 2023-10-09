@@ -23,7 +23,8 @@ public class Rabbit implements Raceable {
     public Rabbit() {
         string = 0;
         random = new Random();
-        setAscii(FileOps.convertFileToString("//src//P0_3//rabbit.txt"));
+
+        setAscii(FileOps.convertFileToString("/src/main/java/edu/uchicago/gerber/_04interfaces/P0_3/rabbit.txt"));
     }
 
     @Override

@@ -5,10 +5,8 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 
 import edu.uchicago.gerber._08final.mvc.controller.GameOp;
@@ -127,12 +125,6 @@ public abstract class Sprite implements Movable {
         return (randomNumber % 2 == 0) ? randomNumber : -randomNumber;
     }
 
-    //A protected sprite will not be destroyed upon collision
-    @Override
-    public boolean isProtected() {
-        //by default, sprites are not protected
-        return false;
-    }
 
 
     //used to load raster graphics
@@ -249,6 +241,18 @@ public abstract class Sprite implements Movable {
         //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
         //#########################################
     }
+
+    //default behavior for adding and removing objects from game space
+    @Override
+    public void add(LinkedList<Movable> list) {
+        list.add(this);
+    }
+
+    @Override
+    public void remove(LinkedList<Movable> list) {
+        list.remove(this);
+    }
+
 
 
 

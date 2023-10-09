@@ -1,5 +1,8 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
+import edu.uchicago.gerber._08final.mvc.controller.Game;
+import edu.uchicago.gerber._08final.mvc.controller.Sound;
 import lombok.Data;
 
 import java.awt.*;
@@ -80,11 +83,6 @@ public class Falcon extends Sprite {
 
 	}
 
-	@Override
-	public boolean isProtected() {
-		return  shield > 0;
-
-	}
 
 	// ==============================================================
 	// METHODS 
@@ -160,7 +158,7 @@ public class Falcon extends Sprite {
 		if (invisible > 0){
 			imageState = ImageState.FALCON_INVISIBLE;
 		}
-		else if (isProtected()){
+		else if (shield > 0){
 			imageState = thrusting ? ImageState.FALCON_PRO_THR : ImageState.FALCON_PRO;
 			//you can also combine vector elements and raster elements
 		    drawShield(g);
@@ -180,6 +178,30 @@ public class Falcon extends Sprite {
 		g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
 	}
 
+	@Override
+	public void remove(LinkedList<Movable> list) {
+		//The falcon is never actually removed from the game-space; instead we decrement numFalcons
+		//only execute the decrementFalconNumAndSpawn() method if shield is down.
+		if ( shield == 0)  decrementFalconNumAndSpawn();
+	}
 
+
+	public void decrementFalconNumAndSpawn(){
+
+		CommandCenter.getInstance().setNumFalcons(CommandCenter.getInstance().getNumFalcons() -1);
+		if (CommandCenter.getInstance().isGameOver()) return;
+		Sound.playSound("shipspawn.wav");
+		setShield(Falcon.INITIAL_SPAWN_TIME);
+		setInvisible(Falcon.INITIAL_SPAWN_TIME/4);
+		//put falcon in the middle of the game-space
+		setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
+		//random number between 0-360 in steps of TURN_STEP
+		setOrientation(Game.R.nextInt(360 / Falcon.TURN_STEP) * Falcon.TURN_STEP);
+		setDeltaX(0);
+		setDeltaY(0);
+		setRadius(Falcon.MIN_RADIUS);
+		setMaxSpeedAttained(false);
+		setNukeMeter(0);
+	}
 
 } //end class
