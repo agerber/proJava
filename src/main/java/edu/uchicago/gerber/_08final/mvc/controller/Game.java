@@ -70,6 +70,7 @@ public class Game implements Runnable, KeyListener {
 
         //fire up the animation thread
         animationThread = new Thread(this); // pass the animation thread a runnable object, the Game object
+        animationThread.setDaemon(true);
         animationThread.start();
 
 
@@ -88,7 +89,7 @@ public class Game implements Runnable, KeyListener {
     @Override
     public void run() {
 
-        // lower animation thread's priority, thereby yielding to the "main" aka 'Event Dispatch'
+        // lower animation thread's priority, thereby yielding to the 'Event Dispatch Thread' or EDT
         // thread which listens to keystrokes
         animationThread.setPriority(Thread.MIN_PRIORITY);
 
@@ -211,7 +212,7 @@ public class Game implements Runnable, KeyListener {
 
     //This method adds and removes movables to/from their respective linked-lists.
     //This method is being called by the animationThread. The entire method is locked on the intrinsic lock of this
-    // Game object. The main (Swing) thread also has access to the GameOpsQueue via the
+    // Game object. The EDT also has access to the GameOpsQueue via the
     // key event methods such as keyReleased. Therefore, to avoid mutating the GameOpsQueue while we are iterating
     // it, we also synchronize the critical sections of the keyReleased and keyPressed methods below on the same
     // intrinsic lock.
