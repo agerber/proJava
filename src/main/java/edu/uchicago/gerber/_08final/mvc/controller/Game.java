@@ -232,8 +232,6 @@ public class Game implements Runnable, KeyListener {
         }
     }
 
-    //shows how to add walls or rectangular elements one brick at a time
-
 
 
     private void spawnNewWallFloater() {
