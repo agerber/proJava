@@ -1,8 +1,11 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
+import edu.uchicago.gerber._08final.mvc.controller.Sound;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 public class NewWallFloater extends Floater {
 
@@ -14,8 +17,11 @@ public class NewWallFloater extends Floater {
 		setExpiry(230);
 	}
 
+	@Override
+	public void remove(LinkedList<Movable> list) {
+		super.remove(list);
+		Sound.playSound("insect.wav");
+		CommandCenter.getInstance().buildWall();
 
-
-
-
+	}
 }

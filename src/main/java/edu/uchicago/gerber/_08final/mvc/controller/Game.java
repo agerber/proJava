@@ -151,23 +151,11 @@ public class Game implements Runnable, KeyListener {
 
                 //detect collision
                 if (pntFriendCenter.distance(pntFoeCenter) < (radFriend + radFoe)) {
-                    //remove the friend (so long as he is not protected)
-                    if (!movFriend.isProtected()) {
-                        CommandCenter.getInstance().getOpsQueue().enqueue(movFriend, GameOp.Action.REMOVE);
-                    }
-
-                    //remove the foe
+                    //enqueue the friend
+                    CommandCenter.getInstance().getOpsQueue().enqueue(movFriend, GameOp.Action.REMOVE);
+                    //enqueue the foe
                     CommandCenter.getInstance().getOpsQueue().enqueue(movFoe, GameOp.Action.REMOVE);
-
-                    if (movFoe instanceof Brick) {
-                        CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + 1000);
-                        Sound.playSound("rock.wav");
-                    } else {
-                        CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + 10);
-                        Sound.playSound("kapow.wav");
-                    }
                 }
-
             }//end inner for
         }//end outer for
 
@@ -180,28 +168,10 @@ public class Game implements Runnable, KeyListener {
         for (Movable movFloater : CommandCenter.getInstance().getMovFloaters()) {
             pntFloaterCenter = movFloater.getCenter();
             radFloater = movFloater.getRadius();
-
             //detect collision
             if (pntFalCenter.distance(pntFloaterCenter) < (radFalcon + radFloater)) {
-
-                Class<? extends Movable> clazz = movFloater.getClass();
-                switch (clazz.getSimpleName()) {
-                    case "ShieldFloater":
-                        Sound.playSound("shieldup.wav");
-                        CommandCenter.getInstance().getFalcon().setShield(Falcon.MAX_SHIELD);
-                        break;
-                    case "NewWallFloater":
-                        Sound.playSound("insect.wav");
-                        buildWall();
-                        break;
-                    case "NukeFloater":
-                        Sound.playSound("nuke-up.wav");
-                        CommandCenter.getInstance().getFalcon().setNukeMeter(Falcon.MAX_NUKE);
-                        break;
-                }
+                //enqueue the floater
                 CommandCenter.getInstance().getOpsQueue().enqueue(movFloater, GameOp.Action.REMOVE);
-
-
             }//end if
         }//end for
 
@@ -263,20 +233,7 @@ public class Game implements Runnable, KeyListener {
     }
 
     //shows how to add walls or rectangular elements one brick at a time
-    private void buildWall() {
-        final int BRICK_SIZE = Game.DIM.width / 30, ROWS = 2, COLS = 20, X_OFFSET = BRICK_SIZE * 5, Y_OFFSET = 50;
 
-        for (int nCol = 0; nCol < COLS; nCol++) {
-            for (int nRow = 0; nRow < ROWS; nRow++) {
-                CommandCenter.getInstance().getOpsQueue().enqueue(
-                        new Brick(
-                                new Point(nCol * BRICK_SIZE + X_OFFSET, nRow * BRICK_SIZE + Y_OFFSET),
-                                BRICK_SIZE),
-                        GameOp.Action.ADD);
-
-            }
-        }
-    }
 
 
     private void spawnNewWallFloater() {

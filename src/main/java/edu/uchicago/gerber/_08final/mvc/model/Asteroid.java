@@ -11,6 +11,7 @@ import java.awt.*;
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 import edu.uchicago.gerber._08final.mvc.controller.GameOp;
+import edu.uchicago.gerber._08final.mvc.controller.Sound;
 
 
 public class Asteroid extends Sprite {
@@ -121,9 +122,11 @@ public class Asteroid extends Sprite {
 
 	@Override
 	public void remove(LinkedList<Movable> list) {
-
+		super.remove(list);
 		spawnSmallerAsteroidsOrDebris(this);
-		list.remove(this);
+		//give the user some points for destroying the asteroid
+		CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + 10L * (getSize() + 1));
+		Sound.playSound("kapow.wav");
 
 	}
 

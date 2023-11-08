@@ -118,7 +118,20 @@ public class CommandCenter {
 	}
 
 
+	public void buildWall() {
+		final int BRICK_SIZE = Game.DIM.width / 30, ROWS = 2, COLS = 20, X_OFFSET = BRICK_SIZE * 5, Y_OFFSET = 50;
 
+		for (int nCol = 0; nCol < COLS; nCol++) {
+			for (int nRow = 0; nRow < ROWS; nRow++) {
+				CommandCenter.getInstance().getOpsQueue().enqueue(
+						new Brick(
+								new Point(nCol * BRICK_SIZE + X_OFFSET, nRow * BRICK_SIZE + Y_OFFSET),
+								BRICK_SIZE),
+						GameOp.Action.ADD);
+
+			}
+		}
+	}
 
 
 

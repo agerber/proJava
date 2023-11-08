@@ -183,6 +183,6 @@ public class Falcon extends Sprite {
 
 	@Override
 	public void remove(LinkedList<Movable> list) {
-		CommandCenter.getInstance().initFalconAndDecrementFalconNum();
+		if (!isProtected())  CommandCenter.getInstance().initFalconAndDecrementFalconNum();
 	}
 } //end class
