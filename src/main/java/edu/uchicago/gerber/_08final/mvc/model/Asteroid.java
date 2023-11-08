@@ -2,12 +2,15 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import java.awt.*;
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
+import edu.uchicago.gerber._08final.mvc.controller.GameOp;
 
 
 public class Asteroid extends Sprite {
@@ -116,6 +119,30 @@ public class Asteroid extends Sprite {
 		renderVector(g);
 	}
 
+	@Override
+	public void remove(LinkedList<Movable> list) {
 
+		spawnSmallerAsteroidsOrDebris(this);
+		list.remove(this);
 
+	}
+
+	private void spawnSmallerAsteroidsOrDebris(Asteroid originalAsteroid) {
+
+		int size = originalAsteroid.getSize();
+		//small asteroids
+		if (size > 1) {
+			CommandCenter.getInstance().getOpsQueue().enqueue(new WhiteCloudDebris(originalAsteroid), GameOp.Action.ADD);
+		}
+		//med and large
+		else {
+			//for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
+			//We can use the existing variable (size) to do this
+			size += 2;
+			while (size-- > 0) {
+				CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(originalAsteroid), GameOp.Action.ADD);
+			}
+		}
+
+	}
 }

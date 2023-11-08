@@ -228,41 +228,34 @@ public class Game implements Runnable, KeyListener {
             switch (mov.getTeam()) {
                 case FOE:
                     if (action == GameOp.Action.ADD) {
-                        CommandCenter.getInstance().getMovFoes().add(mov);
-                    } else { //GameOp.Operation.REMOVE
-                        CommandCenter.getInstance().getMovFoes().remove(mov);
-                        if (mov instanceof Asteroid) spawnSmallerAsteroidsOrDebris((Asteroid) mov);
+                        mov.add(CommandCenter.getInstance().getMovFoes());
+                    } else {
+                        mov.remove(CommandCenter.getInstance().getMovFoes());
                     }
-
                     break;
                 case FRIEND:
                     if (action == GameOp.Action.ADD) {
-                        CommandCenter.getInstance().getMovFriends().add(mov);
-                    } else { //GameOp.Operation.REMOVE
-                        if (mov instanceof Falcon) {
-                            CommandCenter.getInstance().initFalconAndDecrementFalconNum();
-                        } else {
-                            CommandCenter.getInstance().getMovFriends().remove(mov);
-                        }
+                        mov.add(CommandCenter.getInstance().getMovFriends());
+                    } else {
+                        mov.remove(CommandCenter.getInstance().getMovFriends());
                     }
                     break;
 
                 case FLOATER:
                     if (action == GameOp.Action.ADD) {
-                        CommandCenter.getInstance().getMovFloaters().add(mov);
-                    } else { //GameOp.Operation.REMOVE
-                        CommandCenter.getInstance().getMovFloaters().remove(mov);
+                        mov.add(CommandCenter.getInstance().getMovFloaters());
+                    } else {
+                        mov.remove(CommandCenter.getInstance().getMovFloaters());
                     }
                     break;
 
                 case DEBRIS:
                     if (action == GameOp.Action.ADD) {
-                        CommandCenter.getInstance().getMovDebris().add(mov);
-                    } else { //GameOp.Operation.REMOVE
-                        CommandCenter.getInstance().getMovDebris().remove(mov);
+                        mov.add(CommandCenter.getInstance().getMovDebris());
+                    } else {
+                        mov.remove(CommandCenter.getInstance().getMovDebris());
                     }
                     break;
-
 
             }
 
@@ -317,24 +310,7 @@ public class Game implements Runnable, KeyListener {
         }
     }
 
-    private void spawnSmallerAsteroidsOrDebris(Asteroid originalAsteroid) {
 
-        int size = originalAsteroid.getSize();
-        //small asteroids
-        if (size > 1) {
-            CommandCenter.getInstance().getOpsQueue().enqueue(new WhiteCloudDebris(originalAsteroid), GameOp.Action.ADD);
-        }
-        //med and large
-        else {
-            //for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
-            //We can use the existing variable (size) to do this
-            size += 2;
-            while (size-- > 0) {
-                CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(originalAsteroid), GameOp.Action.ADD);
-            }
-        }
-
-    }
 
     private boolean isBrickFree() {
         //if there are no more Bricks on the screen

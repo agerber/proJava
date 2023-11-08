@@ -5,10 +5,8 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 
 import edu.uchicago.gerber._08final.mvc.controller.GameOp;
@@ -249,6 +247,18 @@ public abstract class Sprite implements Movable {
         //g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
         //#########################################
     }
+
+    //default behavior for adding a removing objects from game space
+    @Override
+    public void add(LinkedList<Movable> list) {
+        list.add(this);
+    }
+
+    @Override
+    public void remove(LinkedList<Movable> list) {
+        list.remove(this);
+    }
+
 
 
 

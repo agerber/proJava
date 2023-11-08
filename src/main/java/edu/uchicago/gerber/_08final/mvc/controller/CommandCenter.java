@@ -31,10 +31,10 @@ public class CommandCenter {
 	private final Falcon falcon  = new Falcon();
 
 	//lists containing our movables subdivided by team
-	private final List<Movable> movDebris = new LinkedList<>();
-	private final List<Movable> movFriends = new LinkedList<>();
-	private final List<Movable> movFoes = new LinkedList<>();
-	private final List<Movable> movFloaters = new LinkedList<>();
+	private final LinkedList<Movable> movDebris = new LinkedList<>();
+	private final LinkedList<Movable> movFriends = new LinkedList<>();
+	private final LinkedList<Movable> movFoes = new LinkedList<>();
+	private final LinkedList<Movable> movFloaters = new LinkedList<>();
 
 	private final GameOpsQueue opsQueue = new GameOpsQueue();
 

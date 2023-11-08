@@ -1,6 +1,7 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 public interface Movable {
 
@@ -15,6 +16,12 @@ public interface Movable {
 	int getRadius();
 	Team getTeam();
 	boolean isProtected();
+
+
+	//for adding or removing from game-space
+	void add(LinkedList<Movable> list);
+
+	void remove(LinkedList<Movable> list);
 
 
 } //end Movable

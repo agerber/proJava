@@ -4,6 +4,7 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 import lombok.Data;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 //Sprite has a lot of bloat that we don't need to simply render a star field.
 //This class demonstrates how we can use the Movable interface without extending Sprite.
@@ -49,9 +50,27 @@ public class Star implements Movable{
         return false;
     }
 
+
+
+
     @Override
     public void move() {
         //do nothing
     }
+
+
+    @Override
+    public void add(LinkedList<Movable> list) {
+
+        list.add(this);
+    }
+
+    @Override
+    public void remove(LinkedList<Movable> list) {
+
+        list.remove(this);
+    }
+
+
 
 }
