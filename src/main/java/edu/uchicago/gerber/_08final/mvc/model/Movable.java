@@ -18,7 +18,8 @@ public interface Movable {
 	boolean isProtected();
 
 
-	//for adding or removing from game-space
+	//callbacks which occur before or after this object is added or removed from the game-space.
+	//this is your opportunity to add sounds or perform other operations.
 	void add(LinkedList<Movable> list);
 
 	void remove(LinkedList<Movable> list);

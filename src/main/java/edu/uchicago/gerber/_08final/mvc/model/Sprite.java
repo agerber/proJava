@@ -256,7 +256,7 @@ public abstract class Sprite implements Movable {
 
     @Override
     public void remove(LinkedList<Movable> list) {
-        list.remove(this);
+      if (!isProtected())  list.remove(this);
     }
 
 

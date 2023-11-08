@@ -140,7 +140,7 @@ public class Game implements Runnable, KeyListener {
         Point pntFriendCenter, pntFoeCenter;
         int radFriend, radFoe;
 
-        //This has order-of-growth of O(n^2), there is no way around this.
+        //This has order-of-growth of O(FOES * FRIENDS)
         for (Movable movFriend : CommandCenter.getInstance().getMovFriends()) {
             for (Movable movFoe : CommandCenter.getInstance().getMovFoes()) {
 
@@ -159,7 +159,7 @@ public class Game implements Runnable, KeyListener {
             }//end inner for
         }//end outer for
 
-        //check for collisions between falcon and floaters. Order of growth of O(n) where n is number of floaters
+        //check for collisions between falcon and floaters. Order of growth of O(FLOATERS)
         Point pntFalCenter = CommandCenter.getInstance().getFalcon().getCenter();
         int radFalcon = CommandCenter.getInstance().getFalcon().getRadius();
 
@@ -383,15 +383,10 @@ public class Game implements Runnable, KeyListener {
                 synchronized (this){
                     CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(falcon), GameOp.Action.ADD);
                 }
-                Sound.playSound("thump.wav");
                 break;
             case NUKE:
-                if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
-                    synchronized (this) {
-                        CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
-                    }
-                    Sound.playSound("nuke.wav");
-                    CommandCenter.getInstance().getFalcon().setNukeMeter(0);
+                synchronized (this) {
+                    CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
                 }
                 break;
             //releasing either the LEFT or RIGHT arrow key will set the TurnState to IDLE
