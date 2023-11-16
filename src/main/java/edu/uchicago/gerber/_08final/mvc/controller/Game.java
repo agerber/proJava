@@ -292,7 +292,8 @@ public class Game implements Runnable, KeyListener {
             spawnBigAsteroids(level);
             //make falcon invincible momentarily in case new asteroids spawn on top of him, and give player
             //time to adjust to new asteroids in game space.
-            CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
+            if (CommandCenter.getInstance().getFalcon().getShield() < Falcon.INITIAL_SPAWN_TIME)
+                CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
             //show "Level X" in middle of screen
             CommandCenter.getInstance().getFalcon().setShowLevel(Falcon.INITIAL_SPAWN_TIME);
 
