@@ -218,7 +218,7 @@ public class GamePanel extends Panel {
     }
 
 
-    //this method causes all sprites to move and draw themselves
+    //this method causes all sprites to move and draw themselves. This method takes a variable number of teams.
     @SafeVarargs
     private final void moveDrawMovables(final Graphics g, List<Movable>... teams) {
 

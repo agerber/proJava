@@ -123,19 +123,19 @@ public class Asteroid extends Sprite {
 	@Override
 	public void remove(LinkedList<Movable> list) {
 		super.remove(list);
-		spawnSmallerAsteroidsOrDebris(this);
+		spawnSmallerAsteroidsOrDebris();
 		//give the user some points for destroying the asteroid
 		CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + 10L * (getSize() + 1));
 		Sound.playSound("kapow.wav");
 
 	}
 
-	private void spawnSmallerAsteroidsOrDebris(Asteroid originalAsteroid) {
+	private void spawnSmallerAsteroidsOrDebris() {
 
-		int size = originalAsteroid.getSize();
+		int size = getSize();
 		//small asteroids
 		if (size > 1) {
-			CommandCenter.getInstance().getOpsQueue().enqueue(new WhiteCloudDebris(originalAsteroid), GameOp.Action.ADD);
+			CommandCenter.getInstance().getOpsQueue().enqueue(new WhiteCloudDebris(this), GameOp.Action.ADD);
 		}
 		//med and large
 		else {
@@ -143,7 +143,7 @@ public class Asteroid extends Sprite {
 			//We can use the existing variable (size) to do this
 			size += 2;
 			while (size-- > 0) {
-				CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(originalAsteroid), GameOp.Action.ADD);
+				CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(this), GameOp.Action.ADD);
 			}
 		}
 
