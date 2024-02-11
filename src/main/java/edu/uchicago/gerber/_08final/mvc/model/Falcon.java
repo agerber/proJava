@@ -34,8 +34,8 @@ public class Falcon extends Sprite {
 		FALCON_INVISIBLE, //for pre-spawning
 		FALCON, //normal ship
 		FALCON_THR, //normal ship thrusting
-		FALCON_PRO, //protected ship (green)
-		FALCON_PRO_THR, //protected ship (green) thrusting
+		FALCON_PRO, //protected ship (cyan)
+		FALCON_PRO_THR, //protected ship (cyan) thrusting
 
 	}
 
@@ -75,8 +75,8 @@ public class Falcon extends Sprite {
 		rasterMap.put(ImageState.FALCON_INVISIBLE, null );
 		rasterMap.put(ImageState.FALCON, loadGraphic("/imgs/fal/falcon125.png") ); //normal ship
 		rasterMap.put(ImageState.FALCON_THR, loadGraphic("/imgs/fal/falcon125_thr.png") ); //normal ship thrusting
-		rasterMap.put(ImageState.FALCON_PRO, loadGraphic("/imgs/fal/falcon125_PRO.png") ); //protected ship (green)
-		rasterMap.put(ImageState.FALCON_PRO_THR, loadGraphic("/imgs/fal/falcon125_PRO_thr.png") ); //green thrusting
+		rasterMap.put(ImageState.FALCON_PRO, loadGraphic("/imgs/fal/falcon125_PRO.png") ); //protected ship (cyan)
+		rasterMap.put(ImageState.FALCON_PRO_THR, loadGraphic("/imgs/fal/falcon125_PRO_thr.png") ); //cyan thrusting
 
 		setRasterMap(rasterMap);
 
