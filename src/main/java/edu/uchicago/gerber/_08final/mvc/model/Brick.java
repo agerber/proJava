@@ -2,7 +2,6 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Sound;
-import lombok.Data;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -54,8 +53,8 @@ public class Brick extends Sprite {
 	}
 
 	@Override
-	public void remove(LinkedList<Movable> list) {
-		super.remove(list);
+	public void removeFromGame(LinkedList<Movable> list) {
+		super.removeFromGame(list);
 		CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + 1000);
 		Sound.playSound("rock.wav");
 
