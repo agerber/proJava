@@ -17,6 +17,7 @@ import lombok.experimental.Tolerate;
 import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.util.stream.Collectors;
 
 //the lombok @Data gives us automatic getters and setters on all members
 
