@@ -130,7 +130,7 @@ public class Asteroid extends Sprite {
 		//if large (0) or medium (1) asteroid
 		if (getSize() < 2)
 			Sound.playSound("kapow.wav");
-		else //small (0) asteroid
+		else //small (2) asteroid
 			Sound.playSound("pillow.wav");
 
 	}
