@@ -24,7 +24,7 @@ public class Sound {
 
 	public static final Map<String, Clip> LOOP_SOUNDS;
 
-	// Load all looping sounds prior to runtime in the static context. Other sounds, which may have multiple instances
+	// Load all looping sounds in the static context. Other sounds, which may have multiple instances
 	// and played simultaneously, must be queued onto the soundExecutor.
 	static {
 		Path rootDirectory = Paths.get("src/main/resources/sounds");
@@ -36,6 +36,7 @@ public class Sound {
 			throw new ExceptionInInitializerError(e);
 		}
 		LOOP_SOUNDS = localMap;
+		System.out.println("Loaded looping sounds:");
 		for (String s : LOOP_SOUNDS.keySet()) {
 			System.out.println(s);
 		}

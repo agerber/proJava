@@ -28,6 +28,11 @@ public class ImageLoader {
             e.fillInStackTrace();
         }
         IMAGES = localMap;
+        System.out.println("Loaded images:");
+        assert IMAGES != null;
+        for (String s : IMAGES.keySet()) {
+            System.out.println(s);
+        }
     }
 
     private static Map<String, BufferedImage> loadPngImages(Path rootDirectory) throws IOException {
