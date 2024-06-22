@@ -25,10 +25,10 @@ public class Sound {
 	public static final Map<String, Clip> LOOP_SOUNDS;
 
 	// Load all looping sounds in the static context. Other sounds, which may have multiple instances
-	// and played simultaneously, must be queued onto the soundExecutor.
+	// and played simultaneously, must be queued onto the soundExecutor at runtime.
 	static {
 		Path rootDirectory = Paths.get("src/main/resources/sounds");
-		Map<String, Clip> localMap = new HashMap<>();
+		Map<String, Clip> localMap = null;
 		try {
 			localMap = loadLoopedSounds(rootDirectory);
 		} catch (IOException e) {
