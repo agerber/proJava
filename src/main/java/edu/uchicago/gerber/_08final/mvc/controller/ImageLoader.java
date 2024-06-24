@@ -36,7 +36,8 @@ public class ImageLoader {
         Files.walkFileTree(rootDirectory, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-                if (file.toString().toLowerCase().endsWith(".png")) {
+                if (file.toString().toLowerCase().endsWith(".png")
+                        && !file.toString().toLowerCase().contains("do_not_load.png")) {
                     try {
                         BufferedImage bufferedImage = ImageIO.read(file.toFile());
                         if (bufferedImage != null) {
