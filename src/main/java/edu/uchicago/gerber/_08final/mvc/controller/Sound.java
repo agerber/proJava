@@ -36,10 +36,7 @@ public class Sound {
 			throw new ExceptionInInitializerError(e);
 		}
 		LOOP_SOUNDS = localMap;
-		System.out.println("Loaded looping sounds:");
-		for (String s : LOOP_SOUNDS.keySet()) {
-			System.out.println(s);
-		}
+
 	}
 
 	private static Map<String, Clip> loadLoopedSounds(Path rootDirectory) throws IOException {
