@@ -20,7 +20,7 @@ public class ImageLoader {
 
 //"src/main/resources/imgs"
 //src/main/resources/imgs/fal/falcon125_thr.png
-    private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = true;
+    private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = false;
 
     public static Map<String, BufferedImage> IMAGE_MAP = null;
     //load all images prior to runtime in the static context
@@ -65,7 +65,8 @@ public class ImageLoader {
                     try {
                         BufferedImage bufferedImage = ImageIO.read(file.toFile());
                         if (bufferedImage != null) {
-                            pngImages.put(file.toString().toLowerCase(), bufferedImage);
+                            //substring(18) removes "src/main/resources" so that keys are consistent with non-static
+                            pngImages.put(file.toString().toLowerCase().substring(18), bufferedImage);
                         }
                     } catch (IOException e) {
                         e.fillInStackTrace();

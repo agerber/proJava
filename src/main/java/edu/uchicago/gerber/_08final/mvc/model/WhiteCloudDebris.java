@@ -21,15 +21,15 @@ public class WhiteCloudDebris extends Sprite{
 
         Map<Integer, BufferedImage> rasterMap = new HashMap<>();
         //see readme.txt file in the resources/imgs/exp directory for how I created these assets
-        rasterMap.put(0, ImageLoader.IMAGE_MAP.get("row-1-column-1.png"));
-        rasterMap.put(1, ImageLoader.IMAGE_MAP.get("row-1-column-2.png"));
-        rasterMap.put(2, ImageLoader.IMAGE_MAP.get("row-1-column-3.png"));
-        rasterMap.put(3, ImageLoader.IMAGE_MAP.get("row-2-column-1.png"));
-        rasterMap.put(4, ImageLoader.IMAGE_MAP.get("row-2-column-2.png"));
-        rasterMap.put(5, ImageLoader.IMAGE_MAP.get("row-2-column-3.png"));
-        rasterMap.put(6, ImageLoader.IMAGE_MAP.get("row-3-column-1.png"));
-        rasterMap.put(7, ImageLoader.IMAGE_MAP.get("row-3-column-2.png"));
-        rasterMap.put(8, ImageLoader.IMAGE_MAP.get("row-3-column-3.png"));
+        rasterMap.put(0, ImageLoader.getImage("/imgs/exp/row-1-column-1.png"));
+        rasterMap.put(1, ImageLoader.getImage("/imgs/exp/row-1-column-2.png"));
+        rasterMap.put(2, ImageLoader.getImage("/imgs/exp/row-1-column-3.png"));
+        rasterMap.put(3, ImageLoader.getImage("/imgs/exp/row-2-column-1.png"));
+        rasterMap.put(4, ImageLoader.getImage("/imgs/exp/row-2-column-2.png"));
+        rasterMap.put(5, ImageLoader.getImage("/imgs/exp/row-2-column-3.png"));
+        rasterMap.put(6, ImageLoader.getImage("/imgs/exp/row-3-column-1.png"));
+        rasterMap.put(7, ImageLoader.getImage("/imgs/exp/row-3-column-2.png"));
+        rasterMap.put(8, ImageLoader.getImage("/imgs/exp/row-3-column-3.png"));
 
         setRasterMap(rasterMap);
 
