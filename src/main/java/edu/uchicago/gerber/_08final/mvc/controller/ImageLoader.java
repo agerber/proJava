@@ -20,7 +20,7 @@ public class ImageLoader {
 
 //"src/main/resources/imgs"
 //src/main/resources/imgs/fal/falcon125_thr.png
-    private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = false;
+    private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = true;
 
     public static Map<String, BufferedImage> IMAGE_MAP = null;
     //load all images prior to runtime in the static context
