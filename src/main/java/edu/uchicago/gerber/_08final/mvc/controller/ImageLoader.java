@@ -1,7 +1,5 @@
 package edu.uchicago.gerber._08final.mvc.controller;
 
-import edu.uchicago.gerber._08final.mvc.model.Sprite;
-
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -24,22 +22,26 @@ public class ImageLoader {
 //src/main/resources/imgs/fal/falcon125_thr.png
     private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = false;
 
-    public static final Map<String, BufferedImage> IMAGES;
+    public static Map<String, BufferedImage> IMAGE_MAP = null;
     //load all images prior to runtime in the static context
     static {
-        Path rootDirectory = Paths.get("src/main/resources/imgs");
-        Map<String, BufferedImage> localMap = null;
-        try {
-            localMap = loadPngImages(rootDirectory);
-        } catch (IOException e) {
-            e.fillInStackTrace();
+        if (LOAD_IMAGES_IN_STATIC_CONTEXT){
+            Path rootDirectory = Paths.get("src/main/resources/imgs");
+            Map<String, BufferedImage> localMap = null;
+            try {
+                localMap = loadPngImages(rootDirectory);
+            } catch (IOException e) {
+                e.fillInStackTrace();
+            }
+            IMAGE_MAP = localMap;
         }
-        IMAGES = localMap;
-
     }
 
     //used to load raster graphics
     public static BufferedImage getImage(String imagePath) {
+        if (LOAD_IMAGES_IN_STATIC_CONTEXT){
+            return IMAGE_MAP.get(imagePath.toLowerCase());
+        }
         BufferedImage bufferedImage;
         try {
             bufferedImage = ImageIO.read(Objects.requireNonNull(ImageLoader.class.getResourceAsStream(imagePath)));
@@ -49,6 +51,7 @@ public class ImageLoader {
             bufferedImage = null;
         }
         return bufferedImage;
+
     }
 
 
