@@ -34,6 +34,9 @@ public class ImageLoader {
                 e.fillInStackTrace();
             }
             IMAGE_MAP = localMap;
+            System.out.println("loading:");
+            if (IMAGE_MAP != null)
+                IMAGE_MAP.forEach( (k, v) ->  System.out.println(k));
         }
     }
 

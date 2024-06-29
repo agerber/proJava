@@ -22,6 +22,8 @@ public class Sound {
 	private static final ThreadPoolExecutor soundExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
 
 
+	//A Looped thread is one that plays for an indefinite time until
+	// you call the .stopSound() method.
 	public static final Map<String, Clip> LOOP_SOUNDS;
 
 	// Load all looping sounds in the static context. Other sounds, which may have multiple instances
@@ -90,10 +92,20 @@ public class Sound {
 		return clip;
 	}
 
+	public static void stopSound(final String strPath) {
+		//non-looped sounds can not be 'stopped', they simply expire.
+		if (strPath.contains("_loop")) {
+			LOOP_SOUNDS.get(strPath).stop();
+		}
+	}
 
 	//for individual wav sounds (not looped)
 	//http://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
 	public static void playSound(final String strPath) {
+		if (strPath.contains("_loop")){
+			LOOP_SOUNDS.get(strPath).loop(Clip.LOOP_CONTINUOUSLY);
+			return;
+		}
 
 		soundExecutor.execute(new Runnable() {
 			public void run() {

@@ -325,7 +325,8 @@ public class Game implements Runnable, KeyListener {
                 break;
             case UP:
                 falcon.setThrusting(true);
-                Sound.LOOP_SOUNDS.get("whitenoise_loop.wav").loop(Clip.LOOP_CONTINUOUSLY);
+                Sound.playSound("whitenoise_loop.wav");
+                //Sound.LOOP_SOUNDS.get("whitenoise_loop.wav").loop(Clip.LOOP_CONTINUOUSLY);
                 break;
             case LEFT:
                 falcon.setTurnState(Falcon.TurnState.LEFT);
@@ -367,16 +368,18 @@ public class Game implements Runnable, KeyListener {
                 break;
             case UP:
                 falcon.setThrusting(false);
-                Sound.LOOP_SOUNDS.get("whitenoise_loop.wav").stop();
+                //Sound.LOOP_SOUNDS.get("whitenoise_loop.wav").stop();
+                Sound.stopSound("whitenoise_loop.wav");
                 break;
 
             case MUTE:
                 CommandCenter.getInstance().setMuted(!CommandCenter.getInstance().isMuted());
 
                 if (!CommandCenter.getInstance().isMuted()) {
-                    stopLoopingSounds();
+                    Sound.stopSound("music-background_loop.wav");
                 } else {
-                    Sound.LOOP_SOUNDS.get("music-background_loop.wav").loop(Clip.LOOP_CONTINUOUSLY);
+                    Sound.playSound("music-background_loop.wav");
+                    //Sound.LOOP_SOUNDS.get("music-background_loop.wav").loop(Clip.LOOP_CONTINUOUSLY);
                 }
                 break;
 
