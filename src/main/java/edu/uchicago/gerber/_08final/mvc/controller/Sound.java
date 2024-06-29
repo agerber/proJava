@@ -21,13 +21,11 @@ public class Sound {
 	//for sound playing. Limit the number of threads to 5 at a time.
 	private static final ThreadPoolExecutor soundExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
 
-
 	//A Looped thread is one that plays for an indefinite time until
 	// you call the .stopSound() method.
 	public static final Map<String, Clip> LOOP_SOUNDS;
 
-	// Load all looping sounds in the static context. Other sounds, which may have multiple instances
-	// and played simultaneously, must be queued onto the soundExecutor at runtime.
+	// Load all looping sounds in the static context.
 	static {
 		Path rootDirectory = Paths.get("src/main/resources/sounds");
 		Map<String, Clip> localMap = null;
@@ -48,7 +46,7 @@ public class Sound {
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
 				if (file.toString().toLowerCase().endsWith("_loop.wav")) {
 					try {
-						Clip clip = getLoopedClip(file);
+						Clip clip = getLoopClip(file);
 						if (clip != null) {
 							soundClips.put(file.getFileName().toString(), clip);
 						}
@@ -68,7 +66,7 @@ public class Sound {
 		return soundClips;
 	}
 
-	private static Clip getLoopedClip(Path fileName) throws Exception {
+	private static Clip getLoopClip(Path fileName) throws Exception {
 		Clip clip = null;
 		try {
 			// Adjust the path to be relative to the resources directory
@@ -99,8 +97,8 @@ public class Sound {
 		}
 	}
 
-	//for individual wav sounds (not looped)
-	//http://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+
+	//Sounds that can be played simultaneously, must be queued onto the soundExecutor at runtime.
 	public static void playSound(final String strPath) {
 		if (strPath.contains("_loop")){
 			LOOP_SOUNDS.get(strPath).loop(Clip.LOOP_CONTINUOUSLY);
@@ -126,11 +124,7 @@ public class Sound {
 		});
 
 	}
-	
-	
 
-	
-	
 
 
 }
