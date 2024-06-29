@@ -2,7 +2,7 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.ImageLoader;
-import edu.uchicago.gerber._08final.mvc.controller.Sound;
+import edu.uchicago.gerber._08final.mvc.controller.SoundLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -57,7 +57,7 @@ public class Brick extends Sprite {
 	public void removeFromGame(LinkedList<Movable> list) {
 		super.removeFromGame(list);
 		CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + 1000);
-		Sound.playSound("rock.wav");
+		SoundLoader.playSound("rock.wav");
 
 	}
 } //end class

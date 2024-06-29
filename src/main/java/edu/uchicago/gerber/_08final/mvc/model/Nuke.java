@@ -2,7 +2,7 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
-import edu.uchicago.gerber._08final.mvc.controller.Sound;
+import edu.uchicago.gerber._08final.mvc.controller.SoundLoader;
 import lombok.Data;
 
 import java.awt.*;
@@ -75,7 +75,7 @@ public class Nuke extends Sprite{
     public void addToGame(LinkedList<Movable> list) {
         if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
             list.add(this);
-            Sound.playSound("nuke.wav");
+            SoundLoader.playSound("nuke.wav");
             CommandCenter.getInstance().getFalcon().setNukeMeter(0);
         }
     }

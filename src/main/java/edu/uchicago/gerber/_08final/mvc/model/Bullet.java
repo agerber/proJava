@@ -1,6 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
-import edu.uchicago.gerber._08final.mvc.controller.Sound;
+import edu.uchicago.gerber._08final.mvc.controller.SoundLoader;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -67,7 +67,7 @@ public class Bullet extends Sprite {
     @Override
     public void addToGame(LinkedList<Movable> list) {
         super.addToGame(list);
-        Sound.playSound("thump.wav");
+        SoundLoader.playSound("thump.wav");
 
     }
 }

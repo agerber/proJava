@@ -16,14 +16,14 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class Sound {
+public class SoundLoader {
 
-	//for sound playing. Limit the number of threads to 5 at a time.
-	private static final ThreadPoolExecutor soundExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
 
-	//A Looped thread is one that plays for an indefinite time until
-	// you call the .stopSound() method.
-	public static final Map<String, Clip> LOOP_SOUNDS;
+	/* A Looped clip is one that plays for an indefinite time until you call the .stopSound() method. Non-looped
+		clips, which may have multiple instances that play simultaneously, must be queued onto the ThreadPoolExecutor
+		below.
+	 */
+	public static final Map<String, Clip> LOOP_SOUNDS_MAP;
 
 	// Load all looping sounds in the static context.
 	static {
@@ -35,9 +35,15 @@ public class Sound {
 			e.fillInStackTrace();
 			throw new ExceptionInInitializerError(e);
 		}
-		LOOP_SOUNDS = localMap;
+		LOOP_SOUNDS_MAP = localMap;
 
 	}
+
+	/* ThreadPoolExecutor for playing non-looped sounds. Limit the number of threads to 5 at a time. Sounds that can
+	be played simultaneously, must be queued onto the soundExecutor at runtime.
+	 */
+	private static final ThreadPoolExecutor soundExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
+
 
 	private static Map<String, Clip> loadLoopedSounds(Path rootDirectory) throws IOException {
 		Map<String, Clip> soundClips = new HashMap<>();
@@ -71,7 +77,7 @@ public class Sound {
 		try {
 			// Adjust the path to be relative to the resources directory
 			String relativePath = "/sounds/" + fileName.getFileName().toString();
-			InputStream audioSrc = Sound.class.getResourceAsStream(relativePath);
+			InputStream audioSrc = SoundLoader.class.getResourceAsStream(relativePath);
 
 			if (audioSrc == null) {
 				throw new IOException("No such sound file exists at " + relativePath);
@@ -90,27 +96,29 @@ public class Sound {
 		return clip;
 	}
 
+	//Non-looped clips can not be stopped, they simply expire on their own. Calling this method on a
+	// non-looped clip will do nothing.
 	public static void stopSound(final String strPath) {
-		//non-looped sounds can not be 'stopped', they simply expire.
 		if (strPath.contains("_loop")) {
-			LOOP_SOUNDS.get(strPath).stop();
+			LOOP_SOUNDS_MAP.get(strPath).stop();
 		}
 	}
 
 
-	//Sounds that can be played simultaneously, must be queued onto the soundExecutor at runtime.
+	// Used for both looped and non-looped clips
 	public static void playSound(final String strPath) {
+		//Looped clips are fetched from existing static LOOP_SOUNDS_MAP at runtime.
 		if (strPath.contains("_loop")){
-			LOOP_SOUNDS.get(strPath).loop(Clip.LOOP_CONTINUOUSLY);
+			LOOP_SOUNDS_MAP.get(strPath).loop(Clip.LOOP_CONTINUOUSLY);
 			return;
 		}
-
+        //Non-looped clips are enqueued onto executor-threadpool at runtime.
 		soundExecutor.execute(new Runnable() {
 			public void run() {
 				try {
 					Clip clp = AudioSystem.getClip();
 
-					InputStream audioSrc = Sound.class.getResourceAsStream("/sounds/" + strPath);
+					InputStream audioSrc = SoundLoader.class.getResourceAsStream("/sounds/" + strPath);
                     assert audioSrc != null;
                     InputStream bufferedIn = new BufferedInputStream(audioSrc);
 					AudioInputStream aisStream = AudioSystem.getAudioInputStream(bufferedIn);

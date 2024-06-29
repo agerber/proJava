@@ -3,7 +3,7 @@ package edu.uchicago.gerber._08final.mvc.model;
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 import edu.uchicago.gerber._08final.mvc.controller.GameOp;
-import edu.uchicago.gerber._08final.mvc.controller.Sound;
+import edu.uchicago.gerber._08final.mvc.controller.SoundLoader;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -23,7 +23,7 @@ public class NewWallFloater extends Floater {
 		super.removeFromGame(list);
 		//if getExpiry() > 0, then this remove was the result of a collision, rather than natural mortality
 		if (getExpiry() > 0) {
-			Sound.playSound("insect.wav");
+			SoundLoader.playSound("insect.wav");
 			buildWall();
 		}
 	}

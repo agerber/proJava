@@ -3,7 +3,7 @@ package edu.uchicago.gerber._08final.mvc.model;
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 import edu.uchicago.gerber._08final.mvc.controller.ImageLoader;
-import edu.uchicago.gerber._08final.mvc.controller.Sound;
+import edu.uchicago.gerber._08final.mvc.controller.SoundLoader;
 import lombok.Data;
 
 import java.awt.*;
@@ -191,7 +191,7 @@ public class Falcon extends Sprite {
 
 		CommandCenter.getInstance().setNumFalcons(CommandCenter.getInstance().getNumFalcons() -1);
 		if (CommandCenter.getInstance().isGameOver()) return;
-		Sound.playSound("shipspawn.wav");
+		SoundLoader.playSound("shipspawn.wav");
 		setShield(Falcon.INITIAL_SPAWN_TIME);
 		setInvisible(Falcon.INITIAL_SPAWN_TIME/4);
 		//put falcon in the middle of the game-space

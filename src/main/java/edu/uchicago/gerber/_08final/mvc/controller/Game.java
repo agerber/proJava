@@ -4,7 +4,6 @@ import edu.uchicago.gerber._08final.mvc.model.*;
 import edu.uchicago.gerber._08final.mvc.view.GamePanel;
 
 
-import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -296,8 +295,8 @@ public class Game implements Runnable, KeyListener {
 
     //or stopping looping-music-clips
     private static void stopLoopingSounds() {
-        Set<String> keys = Sound.LOOP_SOUNDS.keySet();
-        keys.forEach(key -> Sound.LOOP_SOUNDS.get(key).stop());
+        Set<String> keys = SoundLoader.LOOP_SOUNDS_MAP.keySet();
+        keys.forEach(key -> SoundLoader.LOOP_SOUNDS_MAP.get(key).stop());
     }
 
     // ===============================================
@@ -325,7 +324,7 @@ public class Game implements Runnable, KeyListener {
                 break;
             case UP:
                 falcon.setThrusting(true);
-                Sound.playSound("whitenoise_loop.wav");
+                SoundLoader.playSound("whitenoise_loop.wav");
                 //Sound.LOOP_SOUNDS.get("whitenoise_loop.wav").loop(Clip.LOOP_CONTINUOUSLY);
                 break;
             case LEFT:
@@ -369,16 +368,16 @@ public class Game implements Runnable, KeyListener {
             case UP:
                 falcon.setThrusting(false);
                 //Sound.LOOP_SOUNDS.get("whitenoise_loop.wav").stop();
-                Sound.stopSound("whitenoise_loop.wav");
+                SoundLoader.stopSound("whitenoise_loop.wav");
                 break;
 
             case MUTE:
                 CommandCenter.getInstance().setMuted(!CommandCenter.getInstance().isMuted());
 
                 if (!CommandCenter.getInstance().isMuted()) {
-                    Sound.stopSound("music-background_loop.wav");
+                    SoundLoader.stopSound("music-background_loop.wav");
                 } else {
-                    Sound.playSound("music-background_loop.wav");
+                    SoundLoader.playSound("music-background_loop.wav");
                     //Sound.LOOP_SOUNDS.get("music-background_loop.wav").loop(Clip.LOOP_CONTINUOUSLY);
                 }
                 break;

@@ -18,12 +18,16 @@ Place all .png image assets in this directory src/main/resources/imgs or its sub
  */
 public class ImageLoader {
 
-//"src/main/resources/imgs"
-//src/main/resources/imgs/fal/falcon125_thr.png
-    private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = false;
+    /*
+        The default setting for the image-loader is NOT to load images before runtime (false). You should
+        keep this setting in most game implementations. However, if your game uses a lot of raster graphics,
+        you may consider setting the LOAD_IMAGES_IN_STATIC_CONTEXT flag to true. This will load all image
+        assets in the static context prior to runtime, thereby increasing runtime performance.
+     */
+    private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = true;
 
-    public static Map<String, BufferedImage> IMAGE_MAP = null;
-    //load all images prior to runtime in the static context
+    private static Map<String, BufferedImage> IMAGE_MAP = null;
+    //If LOAD_IMAGES_IN_STATIC_CONTEXT is true, load all images prior to runtime in the static context
     static {
         if (LOAD_IMAGES_IN_STATIC_CONTEXT){
             Path rootDirectory = Paths.get("src/main/resources/imgs");
@@ -40,7 +44,8 @@ public class ImageLoader {
         }
     }
 
-    //used to load raster graphics
+    //If LOAD_IMAGES_IN_STATIC_CONTEXT is true, fetch the image from existing static map, otherwise
+    // load the image at runtime. This is the only public method of this class.
     public static BufferedImage getImage(String imagePath) {
         if (LOAD_IMAGES_IN_STATIC_CONTEXT){
             return IMAGE_MAP.get(imagePath.toLowerCase());
@@ -57,7 +62,10 @@ public class ImageLoader {
 
     }
 
-
+    /*
+     Walks the directory and sub-directories at root src/main/resources/imgs and returns a Map<String, BufferedImage>
+     of images in that file hierarcy.
+     */
     private static Map<String, BufferedImage> loadPngImages(Path rootDirectory) throws IOException {
         Map<String, BufferedImage> pngImages = new HashMap<>();
         Files.walkFileTree(rootDirectory, new SimpleFileVisitor<Path>() {

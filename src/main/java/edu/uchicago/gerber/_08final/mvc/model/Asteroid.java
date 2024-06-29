@@ -11,7 +11,7 @@ import java.awt.*;
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 import edu.uchicago.gerber._08final.mvc.controller.GameOp;
-import edu.uchicago.gerber._08final.mvc.controller.Sound;
+import edu.uchicago.gerber._08final.mvc.controller.SoundLoader;
 
 
 public class Asteroid extends Sprite {
@@ -129,10 +129,10 @@ public class Asteroid extends Sprite {
 
 		//small (2) asteroids
 		if (getSize() > 1)
-			Sound.playSound("pillow.wav");
+			SoundLoader.playSound("pillow.wav");
 		//else large (0) or medium (1) asteroids
 		else
-			Sound.playSound("kapow.wav");
+			SoundLoader.playSound("kapow.wav");
 
 	}
 
