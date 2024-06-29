@@ -21,7 +21,8 @@ public class SoundLoader {
 
 	/* A Looped clip is one that plays for an indefinite time until you call the .stopSound() method. Non-looped
 		clips, which may have multiple instances that play simultaneously, must be queued onto the ThreadPoolExecutor
-		below.
+		below. Make sure to place all sounds directly in the src/main/resources/sounds directory and suffix any looped
+		clips with _loop.
 	 */
 	public static final Map<String, Clip> LOOP_SOUNDS_MAP;
 
