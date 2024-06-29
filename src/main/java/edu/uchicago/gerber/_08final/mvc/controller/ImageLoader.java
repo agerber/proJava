@@ -24,7 +24,7 @@ public class ImageLoader {
         you may consider setting the LOAD_IMAGES_IN_STATIC_CONTEXT flag to true. This will load all image
         assets in the static context prior to runtime, thereby increasing runtime performance.
      */
-    private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = true;
+    private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = false;
 
     private static Map<String, BufferedImage> IMAGE_MAP = null;
     //If LOAD_IMAGES_IN_STATIC_CONTEXT is true, load all images prior to runtime in the static context

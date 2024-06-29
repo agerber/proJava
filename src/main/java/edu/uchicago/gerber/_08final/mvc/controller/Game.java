@@ -293,11 +293,7 @@ public class Game implements Runnable, KeyListener {
     }
 
 
-    //or stopping looping-music-clips
-    private static void stopLoopingSounds() {
-        Set<String> keys = SoundLoader.LOOP_SOUNDS_MAP.keySet();
-        keys.forEach(key -> SoundLoader.LOOP_SOUNDS_MAP.get(key).stop());
-    }
+
 
     // ===============================================
     // KEYLISTENER METHODS
@@ -317,7 +313,6 @@ public class Game implements Runnable, KeyListener {
         switch (keyCode) {
             case PAUSE:
                 CommandCenter.getInstance().setPaused(!CommandCenter.getInstance().isPaused());
-                if (CommandCenter.getInstance().isPaused()) stopLoopingSounds();
                 break;
             case QUIT:
                 System.exit(0);

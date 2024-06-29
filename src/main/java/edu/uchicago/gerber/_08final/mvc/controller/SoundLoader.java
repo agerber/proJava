@@ -8,6 +8,7 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import javax.sound.sampled.AudioInputStream;
@@ -24,7 +25,7 @@ public class SoundLoader {
 		below. Make sure to place all sounds directly in the src/main/resources/sounds directory and suffix any looped
 		clips with _loop.
 	 */
-	public static final Map<String, Clip> LOOP_SOUNDS_MAP;
+	private static final Map<String, Clip> LOOP_SOUNDS_MAP;
 
 	// Load all looping sounds in the static context.
 	static {
@@ -97,13 +98,6 @@ public class SoundLoader {
 		return clip;
 	}
 
-	//Non-looped clips can not be stopped, they simply expire on their own. Calling this method on a
-	// non-looped clip will do nothing.
-	public static void stopSound(final String strPath) {
-		if (strPath.contains("_loop")) {
-			LOOP_SOUNDS_MAP.get(strPath).stop();
-		}
-	}
 
 
 	// Used for both looped and non-looped clips
@@ -133,6 +127,16 @@ public class SoundLoader {
 		});
 
 	}
+
+	//Non-looped clips can not be stopped, they simply expire on their own. Calling this method on a
+	// non-looped clip will do nothing.
+	public static void stopSound(final String strPath) {
+		if (strPath.contains("_loop")) {
+			LOOP_SOUNDS_MAP.get(strPath).stop();
+		}
+	}
+
+
 
 
 
