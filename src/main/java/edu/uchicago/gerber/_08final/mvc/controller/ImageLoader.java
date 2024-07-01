@@ -44,23 +44,7 @@ public class ImageLoader {
         }
     }
 
-    //If LOAD_IMAGES_IN_STATIC_CONTEXT is true, fetch the image from existing static map, otherwise
-    // load the image at runtime. This is the only public method of this class.
-    public static BufferedImage getImage(String imagePath) {
-        if (LOAD_IMAGES_IN_STATIC_CONTEXT){
-            return IMAGE_MAP.get(imagePath.toLowerCase());
-        }
-        BufferedImage bufferedImage;
-        try {
-            bufferedImage = ImageIO.read(Objects.requireNonNull(ImageLoader.class.getResourceAsStream(imagePath)));
-        }
-        catch (IOException e) {
-            e.fillInStackTrace();
-            bufferedImage = null;
-        }
-        return bufferedImage;
 
-    }
 
     /*
      Walks the directory and sub-directories at root src/main/resources/imgs and returns a Map<String, BufferedImage>
@@ -94,4 +78,25 @@ public class ImageLoader {
         });
         return pngImages;
     }
+
+
+    //If LOAD_IMAGES_IN_STATIC_CONTEXT is true, fetch the image from existing static map, otherwise
+    // load the image at runtime. This is the only public method of this class.
+    public static BufferedImage getImage(String imagePath) {
+        if (LOAD_IMAGES_IN_STATIC_CONTEXT){
+            return IMAGE_MAP.get(imagePath.toLowerCase());
+        }
+        BufferedImage bufferedImage;
+        try {
+            bufferedImage = ImageIO.read(Objects.requireNonNull(ImageLoader.class.getResourceAsStream(imagePath)));
+        }
+        catch (IOException e) {
+            e.fillInStackTrace();
+            bufferedImage = null;
+        }
+        return bufferedImage;
+
+    }
+
+
 }
