@@ -19,8 +19,8 @@ Place all .png image assets in this directory src/main/resources/imgs or its sub
 public class ImageLoader {
 
     /*
-        The default setting for the image-loader is NOT to load images before runtime (false). You should
-        keep this setting in most game implementations. However, if your game uses a lot of raster graphics,
+        The default setting for the image-loader is NOT to load images before runtime (LOAD_IMAGES_IN_STATIC_CONTEXT =
+        false). You should keep this setting in most game implementations. However, if your game uses a lot of raster graphics,
         you may consider setting the LOAD_IMAGES_IN_STATIC_CONTEXT flag to true. This will load all image
         assets in the static context prior to runtime, thereby increasing runtime performance.
      */
@@ -76,7 +76,8 @@ public class ImageLoader {
                     try {
                         BufferedImage bufferedImage = ImageIO.read(file.toFile());
                         if (bufferedImage != null) {
-                            //substring(18) removes "src/main/resources" so that keys are consistent with non-static
+                            //substring(18) removes "src/main/resources" so that keys/paths are consistent with
+                            // static and non-static
                             pngImages.put(file.toString().toLowerCase().substring(18), bufferedImage);
                         }
                     } catch (IOException e) {

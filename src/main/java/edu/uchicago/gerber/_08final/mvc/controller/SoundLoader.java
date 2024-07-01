@@ -8,7 +8,6 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import javax.sound.sampled.AudioInputStream;
@@ -21,11 +20,11 @@ public class SoundLoader {
 
 
 	/* A Looped clip is one that plays for an indefinite time until you call the .stopSound() method. Non-looped
-		clips, which may have multiple instances that play simultaneously, must be queued onto the ThreadPoolExecutor
+		clips, which may have multiple instances that play concurrently, must be queued onto the ThreadPoolExecutor
 		below. Make sure to place all sounds directly in the src/main/resources/sounds directory and suffix any looped
 		clips with _loop.
 	 */
-	private static final Map<String, Clip> LOOP_SOUNDS_MAP;
+	private static final Map<String, Clip> LOOPED_CLIPS_MAP;
 
 	// Load all looping sounds in the static context.
 	static {
@@ -37,7 +36,7 @@ public class SoundLoader {
 			e.fillInStackTrace();
 			throw new ExceptionInInitializerError(e);
 		}
-		LOOP_SOUNDS_MAP = localMap;
+		LOOPED_CLIPS_MAP = localMap;
 
 	}
 
@@ -103,8 +102,8 @@ public class SoundLoader {
 	// Used for both looped and non-looped clips
 	public static void playSound(final String strPath) {
 		//Looped clips are fetched from existing static LOOP_SOUNDS_MAP at runtime.
-		if (strPath.contains("_loop")){
-			LOOP_SOUNDS_MAP.get(strPath).loop(Clip.LOOP_CONTINUOUSLY);
+		if (strPath.endsWith("_loop.wav")){
+			LOOPED_CLIPS_MAP.get(strPath).loop(Clip.LOOP_CONTINUOUSLY);
 			return;
 		}
         //Non-looped clips are enqueued onto executor-threadpool at runtime.
@@ -131,8 +130,13 @@ public class SoundLoader {
 	//Non-looped clips can not be stopped, they simply expire on their own. Calling this method on a
 	// non-looped clip will do nothing.
 	public static void stopSound(final String strPath) {
-		if (strPath.contains("_loop")) {
-			LOOP_SOUNDS_MAP.get(strPath).stop();
+		try {
+			if (strPath.contains("_loop")) {
+				LOOPED_CLIPS_MAP.get(strPath).stop();
+			}
+		} catch (Exception e){
+			//catch any exception and continue.
+			e.fillInStackTrace();
 		}
 	}
 
