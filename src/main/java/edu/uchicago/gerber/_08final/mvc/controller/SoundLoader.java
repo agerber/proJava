@@ -131,7 +131,7 @@ public class SoundLoader {
 	// non-looped clip will do nothing.
 	public static void stopSound(final String strPath) {
 		try {
-			if (strPath.contains("_loop")) {
+			if (strPath.endsWith("_loop.wav")) {
 				LOOPED_CLIPS_MAP.get(strPath).stop();
 			}
 		} catch (Exception e){
