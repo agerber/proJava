@@ -22,7 +22,8 @@ public class ImageLoader {
         The default setting for the image-loader is NOT to load images before runtime (LOAD_IMAGES_IN_STATIC_CONTEXT =
         false). You should keep this setting in most game implementations. However, if your game uses a lot of raster graphics,
         you may consider setting the LOAD_IMAGES_IN_STATIC_CONTEXT flag to true. This will load all image
-        assets in the static context prior to runtime, thereby increasing runtime performance.
+        assets in the static context prior to runtime, thereby increasing runtime performance at the cost of memory.
+
      */
     private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = false;
 

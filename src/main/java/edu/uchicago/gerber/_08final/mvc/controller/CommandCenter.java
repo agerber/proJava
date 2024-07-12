@@ -58,7 +58,7 @@ public class CommandCenter {
 		setLevel(0);
 		setScore(0);
 		setPaused(false);
-		//set to one greater than number of falcons lives in your game as initFalconAndDecrementNum() also decrements
+		//set to one greater than number of falcons lives in your game as decrementFalconNumAndSpawn() also decrements
 		setNumFalcons(4);
 		falcon.decrementFalconNumAndSpawn();
 		//add the falcon to the movFriends list

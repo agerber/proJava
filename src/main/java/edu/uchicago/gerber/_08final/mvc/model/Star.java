@@ -1,5 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 import lombok.Data;
 
@@ -50,7 +51,25 @@ public class Star implements Movable{
 
     @Override
     public void move() {
-        //do nothing
+        if (center.x > Game.DIM.width) {
+            setCenter(new Point(1, center.y));
+            //left-bounds reached
+        } else if (center.x < 0) {
+            setCenter(new Point(Game.DIM.width - 1, center.y));
+            //bottom-bounds reached
+        } else if (center.y > Game.DIM.height) {
+            setCenter(new Point(center.x, 1));
+            //top-bounds reached
+        } else if (center.y < 0) {
+            setCenter(new Point(center.x, Game.DIM.height - 1));
+            //in-bounds
+        } else {
+            //move star in opposite direction of falcon.
+            double newXPos = center.x - CommandCenter.getInstance().getFalcon().getDeltaX() / 6;
+            double newYPos = center.y - CommandCenter.getInstance().getFalcon().getDeltaY() / 6;
+            setCenter(new Point((int) Math.round(newXPos), (int) Math.round(newYPos)));
+        }
+
     }
 
 
