@@ -51,6 +51,10 @@ public class Star implements Movable{
 
     @Override
     public void move() {
+
+       /*
+
+            //right-bounds reached
         if (center.x > Game.DIM.width) {
             setCenter(new Point(1, center.y));
             //left-bounds reached
@@ -65,10 +69,12 @@ public class Star implements Movable{
             //in-bounds
         } else {
             //move star in opposite direction of falcon.
-            double newXPos = center.x - CommandCenter.getInstance().getFalcon().getDeltaX() / 6;
-            double newYPos = center.y - CommandCenter.getInstance().getFalcon().getDeltaY() / 6;
+            double newXPos = center.x - CommandCenter.getInstance().getFalcon().getDeltaX();
+            double newYPos = center.y - CommandCenter.getInstance().getFalcon().getDeltaY();
             setCenter(new Point((int) Math.round(newXPos), (int) Math.round(newYPos)));
         }
+
+        */
 
     }
 
