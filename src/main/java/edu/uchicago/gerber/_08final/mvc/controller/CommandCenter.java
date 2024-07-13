@@ -16,8 +16,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Data
 public class CommandCenter {
 
-	//the starting game-play will centered.
-	private boolean falconCentered = true;
+	private boolean falconCentered;
 	private  int numFalcons;
 	private  int level;
 	private  long score;
@@ -31,6 +30,8 @@ public class CommandCenter {
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap.
 	//Lombok will not provide setter methods on final members
 	private final Falcon falcon  = new Falcon();
+
+	private final MiniMap miniMap = new MiniMap();
 
 	//lists containing our movables subdivided by team
 	private final LinkedList<Movable> movDebris = new LinkedList<>();
@@ -67,7 +68,7 @@ public class CommandCenter {
 		falcon.decrementFalconNumAndSpawn();
 		//add the falcon to the movFriends list
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
-
+		opsQueue.enqueue(miniMap, GameOp.Action.ADD);
 
 
 	}
