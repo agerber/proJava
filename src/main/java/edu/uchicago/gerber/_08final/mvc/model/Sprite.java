@@ -79,21 +79,25 @@ public abstract class Sprite implements Movable {
 
         //right-bounds reached
         if (center.x > Game.DIM.width) {
-            setCenter(new Point(1, center.y));
+            setCenter(new Point(0, center.y));
         //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(new Point(Game.DIM.width - 1, center.y));
+            setCenter(new Point(Game.DIM.width , center.y));
         //bottom-bounds reached
         } else if (center.y > Game.DIM.height) {
-            setCenter(new Point(center.x, 1));
+            setCenter(new Point(center.x, 0));
         //top-bounds reached
         } else if (center.y < 0) {
-            setCenter(new Point(center.x, Game.DIM.height - 1));
+            setCenter(new Point(center.x, Game.DIM.height ));
         //in-bounds
         } else {
             double newXPos = center.x + getDeltaX();
             double newYPos = center.y + getDeltaY();
-            setCenter(new Point((int) newXPos, (int) newYPos));
+            if (Game.FALCON_CENTERED){
+                newXPos -= CommandCenter.getInstance().getFalcon().getDeltaX();
+                newYPos -= CommandCenter.getInstance().getFalcon().getDeltaY();
+            }
+            setCenter(new Point((int) Math.round(newXPos), (int) Math.round(newYPos)));
         }
 
         //expire (decrement expiry) on short-lived objects only

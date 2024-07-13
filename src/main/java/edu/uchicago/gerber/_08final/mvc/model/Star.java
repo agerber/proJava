@@ -52,7 +52,7 @@ public class Star implements Movable{
     @Override
     public void move() {
 
-       /*
+        if (!Game.FALCON_CENTERED) return;
 
             //right-bounds reached
         if (center.x > Game.DIM.width) {
@@ -74,7 +74,7 @@ public class Star implements Movable{
             setCenter(new Point((int) Math.round(newXPos), (int) Math.round(newYPos)));
         }
 
-        */
+
 
     }
 

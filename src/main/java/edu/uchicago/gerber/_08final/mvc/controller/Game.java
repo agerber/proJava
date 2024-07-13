@@ -22,7 +22,8 @@ public class Game implements Runnable, KeyListener {
     // FIELDS
     // ===============================================
 
-    public static final Dimension DIM = new Dimension(1100, 900); //the dimension of the game.
+    public static final boolean FALCON_CENTERED = false;
+    public static final Dimension DIM = new Dimension(1110, 900); //the dimension of the game.
     private final GamePanel gamePanel;
     //this is used throughout many classes.
     public static final Random R = new Random();
@@ -215,7 +216,7 @@ public class Game implements Runnable, KeyListener {
 
     private void spawnNewWallFloater() {
 
-        if (CommandCenter.getInstance().getFrame() % NewWallFloater.SPAWN_NEW_WALL_FLOATER == 0 && isBrickFree()) {
+        if (!FALCON_CENTERED && CommandCenter.getInstance().getFrame() % NewWallFloater.SPAWN_NEW_WALL_FLOATER == 0 && isBrickFree()) {
             CommandCenter.getInstance().getOpsQueue().enqueue(new NewWallFloater(), GameOp.Action.ADD);
         }
     }

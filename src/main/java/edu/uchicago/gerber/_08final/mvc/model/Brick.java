@@ -46,12 +46,7 @@ public class Brick extends Sprite {
 		//g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
 	}
 
-	//the reason we override the move method is to skip the logic contained in super-class Sprite move() method
-	//which is laborious, thereby gaining slight performance
-	@Override
-	public void move(){
-		//do NOT call super.move() and do nothing; a brick does not move.
-	}
+
 
 	@Override
 	public void removeFromGame(LinkedList<Movable> list) {
@@ -60,4 +55,7 @@ public class Brick extends Sprite {
 		SoundLoader.playSound("rock.wav");
 
 	}
+
+
+
 } //end class
