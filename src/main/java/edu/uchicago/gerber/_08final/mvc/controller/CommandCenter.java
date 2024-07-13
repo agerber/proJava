@@ -60,20 +60,11 @@ public class CommandCenter {
 	}
 
 	public int getUniScalar() {
-		int localScalar;
-		switch (universe){
-			case BIG:
-				localScalar = Game.BIG_UNIVERSE_SCALAR;
-				break;
-			case SMALL:
-			case SMALL_CENTERED:
-			default:
-				localScalar = 1;
-		}
-		return localScalar;
+		return universe == Universe.BIG ? Game.BIG_UNIVERSE_SCALAR : 1;
 	}
 
 	public void cycleUniverse() {
+		//tri-cycle universe among its vals
 		switch (universe) {
 			case SMALL:
 				universe = Universe.SMALL_CENTERED;
