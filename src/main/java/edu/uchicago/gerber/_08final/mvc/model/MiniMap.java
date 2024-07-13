@@ -13,7 +13,7 @@ import java.util.LinkedList;
  */
 public class MiniMap extends Sprite {
      //size of mini-map as percentage of view-port
-    private static final double MINI_MAP_PERCENT = 0.31;
+    private static final double MINI_MAP_PERCENT = 0.42;
 
     public MiniMap() {
         setTeam(Team.DEBRIS);
@@ -44,20 +44,21 @@ public class MiniMap extends Sprite {
                 miniHeight
         );
 
-
-        //blue bounding box (view-port or players view of universe)
-       // Point centerOfMiniMap = new Point(miniWidth / 2, miniHeight / 2);
+        //mini-view-port blue bounding box (players view of universe)
+        int miniViewPortWidth = miniWidth / Game.UNIVERSE_SCALAR;
+        int miniViewPortHeight = miniHeight / Game.UNIVERSE_SCALAR;
         g.drawRect(
                 0 ,
                 1, //adjust one pixel down
-                miniWidth / Game.UNIVERSE_SCALAR,
-                miniHeight / Game.UNIVERSE_SCALAR
+                miniViewPortWidth,
+                miniViewPortHeight
 
         );
 
-
-        drawRadarBlips(g, Color.RED, CommandCenter.getInstance().getMovFoes());
-
+        //draw the non-debris movables
+        drawRadarBlips(g, Color.WHITE, CommandCenter.getInstance().getMovFoes());
+        drawRadarBlips(g, Color.CYAN, CommandCenter.getInstance().getMovFloaters());
+        drawRadarBlips(g, Color.ORANGE, CommandCenter.getInstance().getMovFriends());
 
 
     }
@@ -75,5 +76,9 @@ public class MiniMap extends Sprite {
 
         );
 
-    }
+    }//end method
+
+
+
+
 }
