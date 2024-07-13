@@ -91,7 +91,7 @@ public class Falcon extends Sprite {
 	@Override
 	public void move() {
 
-		if (!CommandCenter.getInstance().isFalconCentered()) super.move();
+		if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.SMALL) super.move();
 
 		if (invisible > 0) invisible--;
 		if (shield > 0) shield--;

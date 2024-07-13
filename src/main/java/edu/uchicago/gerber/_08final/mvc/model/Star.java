@@ -52,7 +52,7 @@ public class Star implements Movable{
     @Override
     public void move() {
 
-        if (!CommandCenter.getInstance().isFalconCentered()) return;
+        if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.SMALL) return;
 
             //right-bounds reached
         if (center.x > Game.DIM.width) {

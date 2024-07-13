@@ -23,6 +23,8 @@ public class MiniMap extends Sprite {
 
     public void draw(final Graphics g) {
 
+       if (CommandCenter.getInstance().getUniverse() != CommandCenter.Universe.BIG) return;
+
        int miniWidth = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
        int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
 

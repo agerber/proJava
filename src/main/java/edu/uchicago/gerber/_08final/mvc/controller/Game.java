@@ -371,15 +371,7 @@ public class Game implements Runnable, KeyListener {
                 }
                 break;
             case CENTERED:
-                if (CommandCenter.getInstance().isFalconCentered()) {
-                    CommandCenter.getInstance().setFalconCentered(false);
-                } else {
-                    CommandCenter.getInstance().getFalcon().setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
-                    CommandCenter.getInstance().setFalconCentered(true);
-                }
-                break;
-
-            default:
+                CommandCenter.getInstance().cycleUniverse();
                 break;
         }
 

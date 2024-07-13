@@ -23,6 +23,9 @@ import java.awt.image.BufferedImage;
 // draw().
 @Data
 public abstract class Sprite implements Movable {
+
+
+
     //the center-point of this sprite
     private Point center;
     //this causes movement; change-in-x and change-in-y
@@ -58,12 +61,15 @@ public abstract class Sprite implements Movable {
     //constructor
     public Sprite() {
 
+        //getting circular calls between this contructor and getSpriteScalar()
         //place the sprite at some random location in the game-space at instantiation
-        setCenter(new Point(Game.R.nextInt(Game.UNIVERSE_SCALAR * Game.DIM.width),
-                Game.R.nextInt(Game.UNIVERSE_SCALAR * Game.DIM.height)));
+        setCenter(new Point(Game.R.nextInt(Game.DIM.width),
+                Game.R.nextInt(Game.DIM.height)));
 
 
     }
+
+
 
 
     @Override
@@ -74,22 +80,22 @@ public abstract class Sprite implements Movable {
         // where you need to override the move() method.
 
         //right-bounds reached
-        if (center.x > Game.UNIVERSE_SCALAR * Game.DIM.width) {
+        if (center.x > CommandCenter.getInstance().getUniScalar() * Game.DIM.width) {
             setCenter(new Point(0, center.y));
         //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(new Point(Game.UNIVERSE_SCALAR * Game.DIM.width , center.y));
+            setCenter(new Point(CommandCenter.getInstance().getUniScalar() * Game.DIM.width , center.y));
         //bottom-bounds reached
-        } else if (center.y > Game.UNIVERSE_SCALAR * Game.DIM.height) {
+        } else if (center.y > CommandCenter.getInstance().getUniScalar() * Game.DIM.height) {
             setCenter(new Point(center.x, 0));
         //top-bounds reached
         } else if (center.y < 0) {
-            setCenter(new Point(center.x, Game.UNIVERSE_SCALAR * Game.DIM.height ));
+            setCenter(new Point(center.x, CommandCenter.getInstance().getUniScalar() * Game.DIM.height ));
         //in-bounds
         } else {
             double newXPos = center.x + getDeltaX();
             double newYPos = center.y + getDeltaY();
-            if (CommandCenter.getInstance().isFalconCentered()){
+            if (CommandCenter.getInstance().getUniverse() != CommandCenter.Universe.SMALL){
                 newXPos -= CommandCenter.getInstance().getFalcon().getDeltaX();
                 newYPos -= CommandCenter.getInstance().getFalcon().getDeltaY();
             }

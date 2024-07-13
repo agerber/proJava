@@ -4,33 +4,38 @@ package edu.uchicago.gerber._08final.mvc.controller;
 
 import edu.uchicago.gerber._08final.mvc.model.*;
 import lombok.Data;
-import java.awt.*;
 
 import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 //The CommandCenter is a singleton that manages the state of the game.
 //the lombok @Data gives us automatic getters and setters on all members
 @Data
 public class CommandCenter {
 
-	private boolean falconCentered = true;
+
+	public enum Universe {
+		SMALL,
+		SMALL_CENTERED,
+		BIG
+
+	}
+
+	public Universe universe = Universe.SMALL;
+	//private boolean falconCentered = true;
+
 	private  int numFalcons;
 	private  int level;
 	private  long score;
 	private  boolean paused;
 	private  boolean muted;
-
 	//this value is used to count the number of frames (full animation cycles) in the game
 	private long frame;
 
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap.
 	//Lombok will not provide setter methods on final members
-	private final Falcon falcon  = new Falcon();
 
+	private final Falcon falcon  = new Falcon();
 	private final MiniMap miniMap = new MiniMap();
 
 	//lists containing our movables subdivided by team
@@ -54,6 +59,34 @@ public class CommandCenter {
 			instance = new CommandCenter();
 		}
 		return instance;
+	}
+
+	public int getUniScalar() {
+		int localScalar;
+		switch (universe){
+			case BIG:
+				localScalar = Game.UNIVERSE_SCALAR;
+				break;
+			case SMALL:
+			case SMALL_CENTERED:
+			default:
+				localScalar = 1;
+		}
+		return localScalar;
+	}
+
+	public void cycleUniverse() {
+		switch (universe) {
+			case SMALL:
+				universe = Universe.SMALL_CENTERED;
+				break;
+			case SMALL_CENTERED:
+				universe = Universe.BIG;
+				break;
+			case BIG:
+				universe = Universe.SMALL;
+				break;
+		}
 	}
 
 
