@@ -66,6 +66,8 @@ public class MiniMap extends Sprite {
         drawRadarBlips(g, Color.WHITE, CommandCenter.getInstance().getMovFoes());
         drawRadarBlips(g, Color.CYAN, CommandCenter.getInstance().getMovFloaters());
         drawRadarBlips(g, Color.ORANGE, CommandCenter.getInstance().getMovFriends());
+        //feel free to uncomment this line. you will notice that the star-field remains in the view-port
+        //drawRadarBlips(g, Color.darkGray, CommandCenter.getInstance().getMovDebris());
 
 
     }
@@ -74,10 +76,12 @@ public class MiniMap extends Sprite {
 
         g.setColor(color);
         movables.forEach( mov -> {
+                    //transform the mov center-point so that when drawn, it fits within the mini-map
                     Point scaledPoint = new Point(
                             (int) Math.round(MINI_MAP_PERCENT * mov.getCenter().x / Game.BIG_UNIVERSE_SCALAR),
                             (int) Math.round(MINI_MAP_PERCENT *  mov.getCenter().y / Game.BIG_UNIVERSE_SCALAR)
                     );
+                    //draw an oval (circle) with bounding box 4x4
                     g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
                 }
 
