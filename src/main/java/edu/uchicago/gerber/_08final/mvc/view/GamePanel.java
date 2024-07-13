@@ -105,12 +105,12 @@ public class GamePanel extends Panel {
         graphics.setColor(Color.white);
         graphics.setFont(fontNormal);
 
-        //draw score always
-        graphics.drawString("Score :  " + CommandCenter.getInstance().getScore(), fontWidth, fontHeight);
-
-        //draw the level upper-left corner always
+        //draw the level upper-right corner always
         String levelText = "Level: " + CommandCenter.getInstance().getLevel();
-        graphics.drawString(levelText, 20, 30); //upper-left corner
+        graphics.drawString(levelText, Game.DIM.width - 160, fontHeight); //upper-right corner
+        //draw score always
+        graphics.drawString("Score :  " + CommandCenter.getInstance().getScore(), Game.DIM.width - 160,
+                30);
 
         //build the status string array with possible messages in middle of screen
         List<String> statusArray = new ArrayList<>();

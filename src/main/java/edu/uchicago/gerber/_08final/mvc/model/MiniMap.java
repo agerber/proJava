@@ -30,7 +30,7 @@ public class MiniMap extends Sprite {
         g.setColor(Color.BLACK);
         g.fillRect(
                 0,
-                0,
+                1, //adjust one pixel down
                 miniWidth,
                 miniHeight
         );
@@ -39,17 +39,17 @@ public class MiniMap extends Sprite {
         g.setColor(Color.BLUE);
         g.drawRect(
                 0,
-                0,
+                1, //adjust one pixel down
                 miniWidth,
                 miniHeight
         );
 
 
         //blue bounding box (view-port or players view of universe)
-        Point centerOfMiniMap = new Point(miniWidth / 2, miniHeight / 2);
+       // Point centerOfMiniMap = new Point(miniWidth / 2, miniHeight / 2);
         g.drawRect(
-                centerOfMiniMap.x -(miniWidth / Game.UNIVERSE_SCALAR/2) ,
-                centerOfMiniMap.y -(miniHeight / Game.UNIVERSE_SCALAR/2),
+                0 ,
+                1, //adjust one pixel down
                 miniWidth / Game.UNIVERSE_SCALAR,
                 miniHeight / Game.UNIVERSE_SCALAR
 
