@@ -21,14 +21,9 @@ public class Game implements Runnable, KeyListener {
     // FIELDS
     // ===============================================
 
+    public static final Dimension DIM = new Dimension(1400,900); //the dimension of the game.
 
-    public static final Dimension ASPECT_RATIO = new Dimension(3,2);
-    public static final int PIXELS = 400;
-    public static final Dimension DIM = new Dimension(ASPECT_RATIO.width * PIXELS,
-            ASPECT_RATIO.height * PIXELS); //the dimension of the game.
-
-    //the entire universe is UNIVERSE_SCALAR-times bigger than then view-port
-    public static final int UNIVERSE_SCALAR = 5;
+    public static final int BIG_UNIVERSE_SCALAR = 5;
     private final GamePanel gamePanel;
     //this is used throughout many classes.
     public static final Random R = new Random();
@@ -53,7 +48,7 @@ public class Game implements Runnable, KeyListener {
 
             UNIVERSE = 67, //c-key
 
-            NUKE = 78; // n-key mute
+            NUKE = 86; // v-key mute
 
     // for possible future use
     // HYPER = 68, 					// D key

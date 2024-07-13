@@ -52,8 +52,8 @@ public class MiniMap extends Sprite {
 
         //mini-view-port gray bounding box (player's view of universe)
         g.setColor(Color.DARK_GRAY);
-        int miniViewPortWidth = width / Game.UNIVERSE_SCALAR;
-        int miniViewPortHeight = height / Game.UNIVERSE_SCALAR;
+        int miniViewPortWidth = width / Game.BIG_UNIVERSE_SCALAR;
+        int miniViewPortHeight = height / Game.BIG_UNIVERSE_SCALAR;
         g.drawRect(
                 0 ,
                 1, //adjust one pixel down
@@ -75,8 +75,8 @@ public class MiniMap extends Sprite {
         g.setColor(color);
         movables.forEach( mov -> {
                     Point scaledPoint = new Point(
-                            (int) Math.round(MINI_MAP_PERCENT * mov.getCenter().x / Game.UNIVERSE_SCALAR),
-                            (int) Math.round(MINI_MAP_PERCENT *  mov.getCenter().y / Game.UNIVERSE_SCALAR)
+                            (int) Math.round(MINI_MAP_PERCENT * mov.getCenter().x / Game.BIG_UNIVERSE_SCALAR),
+                            (int) Math.round(MINI_MAP_PERCENT *  mov.getCenter().y / Game.BIG_UNIVERSE_SCALAR)
                     );
                     g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
                 }

@@ -65,7 +65,7 @@ public class CommandCenter {
 		int localScalar;
 		switch (universe){
 			case BIG:
-				localScalar = Game.UNIVERSE_SCALAR;
+				localScalar = Game.BIG_UNIVERSE_SCALAR;
 				break;
 			case SMALL:
 			case SMALL_CENTERED:

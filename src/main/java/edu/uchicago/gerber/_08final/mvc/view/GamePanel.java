@@ -119,7 +119,7 @@ public class GamePanel extends Panel {
         List<String> statusArray = new ArrayList<>();
         if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) statusArray.add(levelText);
         if (CommandCenter.getInstance().getFalcon().isMaxSpeedAttained()) statusArray.add("WARNING - SLOW DOWN");
-        if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0) statusArray.add("PRESS N for NUKE");
+        if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0) statusArray.add("PRESS V for NUKE");
 
         //draw the statusArray strings to middle of screen
         if (!statusArray.isEmpty())
