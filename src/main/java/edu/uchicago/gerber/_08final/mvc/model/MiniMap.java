@@ -23,32 +23,37 @@ public class MiniMap extends Sprite {
 
     public void draw(final Graphics g) {
 
-       if (CommandCenter.getInstance().getUniverse() != CommandCenter.Universe.BIG) return;
+        if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.SMALL) return;
 
-       int miniWidth = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
-       int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
 
-        //black background (entire universe)
-        g.setColor(Color.BLACK);
-        g.fillRect(
-                0,
-                1, //adjust one pixel down
-                miniWidth,
-                miniHeight
-        );
+        int width = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
+        int height = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
 
-        //blue bounding box (entire universe)
-        g.setColor(Color.BLUE);
-        g.drawRect(
-                0,
-                1, //adjust one pixel down
-                miniWidth,
-                miniHeight
-        );
+        //if BIG - show entire universe.
+        if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.BIG) {
 
-        //mini-view-port blue bounding box (players view of universe)
-        int miniViewPortWidth = miniWidth / Game.UNIVERSE_SCALAR;
-        int miniViewPortHeight = miniHeight / Game.UNIVERSE_SCALAR;
+            g.setColor(Color.BLACK);
+            g.fillRect(
+                    0,
+                    1, //adjust one pixel down
+                    width,
+                    height
+            );
+
+            //gray bounding box (entire universe)
+            g.setColor(Color.DARK_GRAY);
+            g.drawRect(
+                    0,
+                    1, //adjust one pixel down
+                    width,
+                    height
+            );
+        }
+
+        //mini-view-port gray bounding box (player's view of universe)
+        g.setColor(Color.DARK_GRAY);
+        int miniViewPortWidth = width / Game.UNIVERSE_SCALAR;
+        int miniViewPortHeight = height / Game.UNIVERSE_SCALAR;
         g.drawRect(
                 0 ,
                 1, //adjust one pixel down

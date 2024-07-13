@@ -51,7 +51,7 @@ public class Game implements Runnable, KeyListener {
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
 
-            CENTERED = 67, //c-key
+            UNIVERSE = 67, //c-key
 
             NUKE = 78; // n-key mute
 
@@ -370,7 +370,7 @@ public class Game implements Runnable, KeyListener {
                     //Sound.LOOP_SOUNDS.get("music-background_loop.wav").loop(Clip.LOOP_CONTINUOUSLY);
                 }
                 break;
-            case CENTERED:
+            case UNIVERSE:
                 CommandCenter.getInstance().cycleUniverse();
                 break;
         }

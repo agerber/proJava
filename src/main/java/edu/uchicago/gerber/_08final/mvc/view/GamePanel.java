@@ -104,13 +104,16 @@ public class GamePanel extends Panel {
 
         graphics.setColor(Color.white);
         graphics.setFont(fontNormal);
+        final int OFFSET_LEFT = 200;
 
+        graphics.drawString("Universe: "+CommandCenter.getInstance().universe.toString(), Game.DIM.width - OFFSET_LEFT,
+                fontHeight);
         //draw the level upper-right corner always
         String levelText = "Level: " + CommandCenter.getInstance().getLevel();
-        graphics.drawString(levelText, Game.DIM.width - 160, fontHeight); //upper-right corner
+        graphics.drawString(levelText, Game.DIM.width - OFFSET_LEFT, fontHeight * 2); //upper-right corner
         //draw score always
-        graphics.drawString("Score :  " + CommandCenter.getInstance().getScore(), Game.DIM.width - 160,
-                30);
+        graphics.drawString("Score :  " + CommandCenter.getInstance().getScore(), Game.DIM.width - OFFSET_LEFT,
+                fontHeight * 3);
 
         //build the status string array with possible messages in middle of screen
         List<String> statusArray = new ArrayList<>();
@@ -185,7 +188,7 @@ public class GamePanel extends Panel {
                     "'P' to Pause",
                     "'Q' to Quit",
                     "'M' to toggle music",
-                    "'C' to toggle centered"
+                    "'C' to toggle universes"
 
             );
         } else if (CommandCenter.getInstance().isPaused()) {
