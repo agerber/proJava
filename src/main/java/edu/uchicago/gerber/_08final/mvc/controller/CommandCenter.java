@@ -21,8 +21,6 @@ public class CommandCenter {
 	}
 
 	public Universe universe = Universe.SMALL;
-	//private boolean falconCentered = true;
-
 	private  int numFalcons;
 	private  int level;
 	private  long score;
