@@ -63,8 +63,8 @@ public abstract class Sprite implements Movable {
     public Sprite() {
 
         //place the sprite at some random location in the game-space at instantiation
-        setCenter(new Point(Game.R.nextInt(Game.DIM.width),
-                Game.R.nextInt(Game.DIM.height)));
+        setCenter(new Point(Game.R.nextInt(Game.DIMENSION_SCALAR * Game.DIM.width),
+                Game.R.nextInt(Game.DIMENSION_SCALAR * Game.DIM.height)));
 
 
     }
@@ -78,17 +78,17 @@ public abstract class Sprite implements Movable {
         // where you need to override the move() method.
 
         //right-bounds reached
-        if (center.x > Game.DIM.width) {
+        if (center.x > Game.DIMENSION_SCALAR * Game.DIM.width) {
             setCenter(new Point(0, center.y));
         //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(new Point(Game.DIM.width , center.y));
+            setCenter(new Point(Game.DIMENSION_SCALAR * Game.DIM.width , center.y));
         //bottom-bounds reached
-        } else if (center.y > Game.DIM.height) {
+        } else if (center.y > Game.DIMENSION_SCALAR * Game.DIM.height) {
             setCenter(new Point(center.x, 0));
         //top-bounds reached
         } else if (center.y < 0) {
-            setCenter(new Point(center.x, Game.DIM.height ));
+            setCenter(new Point(center.x, Game.DIMENSION_SCALAR * Game.DIM.height ));
         //in-bounds
         } else {
             double newXPos = center.x + getDeltaX();
