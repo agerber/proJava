@@ -56,16 +56,16 @@ public class Star implements Movable{
 
             //right-bounds reached
         if (center.x > Game.DIM.width) {
-            setCenter(new Point(1, center.y));
+            setCenter(new Point(0, center.y));
             //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(new Point(Game.DIM.width - 1, center.y));
+            setCenter(new Point(Game.DIM.width , center.y));
             //bottom-bounds reached
         } else if (center.y > Game.DIM.height) {
-            setCenter(new Point(center.x, 1));
+            setCenter(new Point(center.x, 0));
             //top-bounds reached
         } else if (center.y < 0) {
-            setCenter(new Point(center.x, Game.DIM.height - 1));
+            setCenter(new Point(center.x, Game.DIM.height));
             //in-bounds
         } else {
             //move star in opposite direction of falcon.

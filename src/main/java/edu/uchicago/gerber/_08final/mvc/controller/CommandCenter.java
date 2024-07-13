@@ -7,6 +7,7 @@ import lombok.Data;
 import java.awt.*;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -15,13 +16,13 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Data
 public class CommandCenter {
 
-
+	//the starting game-play will centered.
+	private boolean falconCentered = true;
 	private  int numFalcons;
 	private  int level;
 	private  long score;
 	private  boolean paused;
 	private  boolean muted;
-	private boolean falconCentered;
 
 	//this value is used to count the number of frames (full animation cycles) in the game
 	private long frame;
@@ -98,23 +99,6 @@ public class CommandCenter {
 		return numFalcons < 1;
 	}
 
-	public void recenterAllMovables(){
-		//compare the falcon-center to game-center
-		Point gameCenter = new Point((int) Math.round(Game.DIM.width / 2.0), (int) Math.round(Game.DIM.height / 2.0));
-		Point falconCenter = CommandCenter.getInstance().getFalcon().getCenter();
-
-		int diffX = gameCenter.x = falconCenter.x;
-		int diffY = gameCenter.y = falconCenter.y;
-
-		//when you adjust you must substract the y
-		//stream over the movables
-		//   people.stream().forEach(person -> person.incrementAge());
-
-
-
-
-
-	}
 
 
 
