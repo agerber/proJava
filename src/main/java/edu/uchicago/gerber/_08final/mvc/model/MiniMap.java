@@ -2,46 +2,78 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Inspired by Michael Vasiliou's Sinistar, winner of Java game contest 2016.
  */
 public class MiniMap extends Sprite {
-    private static final int MAP_MARGIN = 20;
-    private static final int WIDTH_FACTOR = 5;
-    private static final int HEIGHT_FACTOR = 4;
+     //size of mini-map as percentage of view-port
+    private static final double MINI_MAP_PERCENT = 0.31;
 
     public MiniMap() {
         setTeam(Team.DEBRIS);
     }
 
-    public void move() {
+    public void move() {}
+
+    public void draw(final Graphics g) {
+
+       int miniWidth = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
+       int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
+
+        //black background (entire universe)
+        g.setColor(Color.BLACK);
+        g.fillRect(
+                0,
+                0,
+                miniWidth,
+                miniHeight
+        );
+
+        //blue bounding box (entire universe)
+        g.setColor(Color.BLUE);
+        g.drawRect(
+                0,
+                0,
+                miniWidth,
+                miniHeight
+        );
+
+
+        //blue bounding box (view-port or players view of universe)
+        Point centerOfMiniMap = new Point(miniWidth / 2, miniHeight / 2);
+        g.drawRect(
+                centerOfMiniMap.x -(miniWidth / Game.UNIVERSE_SCALAR/2) ,
+                centerOfMiniMap.y -(miniHeight / Game.UNIVERSE_SCALAR/2),
+                miniWidth / Game.UNIVERSE_SCALAR,
+                miniHeight / Game.UNIVERSE_SCALAR
+
+        );
+
+
+        drawRadarBlips(g, Color.RED, CommandCenter.getInstance().getMovFoes());
+
 
 
     }
 
-    public void draw(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(Game.DIM.width - (Game.DIM.width / WIDTH_FACTOR) - MAP_MARGIN,
-                MAP_MARGIN,
-                Game.DIM.width / WIDTH_FACTOR + 4,
-                Game.DIM.height / HEIGHT_FACTOR + 4);
-        g.setColor(Color.BLUE);
+    private void drawRadarBlips(final Graphics g, Color color, LinkedList<Movable> movables){
 
-        g.drawRect(Game.DIM.width - (Game.DIM.width / WIDTH_FACTOR) - MAP_MARGIN,
-                   MAP_MARGIN,
-                   Game.DIM.width / WIDTH_FACTOR + 4,
-                   Game.DIM.height / HEIGHT_FACTOR + 4);
+        g.setColor(color);
+        movables.forEach( mov -> {
+                    Point scaledPoint = new Point(
+                            (int) Math.round(MINI_MAP_PERCENT * mov.getCenter().x / Game.UNIVERSE_SCALAR),
+                            (int) Math.round(MINI_MAP_PERCENT *  mov.getCenter().y / Game.UNIVERSE_SCALAR)
+                    );
+                    g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
+                }
 
-        g.drawRect(Game.DIM.width - (2 * Game.DIM.width / (3 *WIDTH_FACTOR)) - MAP_MARGIN,
-                   MAP_MARGIN + (Game.DIM.height / (3* HEIGHT_FACTOR)),
-                   Game.DIM.width / (3 * WIDTH_FACTOR),
-                   Game.DIM.height / (3 * HEIGHT_FACTOR));
-
+        );
 
     }
 }

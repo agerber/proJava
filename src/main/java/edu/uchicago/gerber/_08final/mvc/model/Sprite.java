@@ -4,7 +4,6 @@ import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 import java.util.function.Function;
@@ -12,12 +11,9 @@ import java.util.function.Function;
 import edu.uchicago.gerber._08final.mvc.controller.GameOp;
 import edu.uchicago.gerber._08final.mvc.controller.Utils;
 import lombok.Data;
-import lombok.experimental.Tolerate;
 
-import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.util.stream.Collectors;
 
 //the lombok @Data gives us automatic getters and setters on all members
 
@@ -63,8 +59,8 @@ public abstract class Sprite implements Movable {
     public Sprite() {
 
         //place the sprite at some random location in the game-space at instantiation
-        setCenter(new Point(Game.R.nextInt(Game.DIMENSION_SCALAR * Game.DIM.width),
-                Game.R.nextInt(Game.DIMENSION_SCALAR * Game.DIM.height)));
+        setCenter(new Point(Game.R.nextInt(Game.UNIVERSE_SCALAR * Game.DIM.width),
+                Game.R.nextInt(Game.UNIVERSE_SCALAR * Game.DIM.height)));
 
 
     }
@@ -78,17 +74,17 @@ public abstract class Sprite implements Movable {
         // where you need to override the move() method.
 
         //right-bounds reached
-        if (center.x > Game.DIMENSION_SCALAR * Game.DIM.width) {
+        if (center.x > Game.UNIVERSE_SCALAR * Game.DIM.width) {
             setCenter(new Point(0, center.y));
         //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(new Point(Game.DIMENSION_SCALAR * Game.DIM.width , center.y));
+            setCenter(new Point(Game.UNIVERSE_SCALAR * Game.DIM.width , center.y));
         //bottom-bounds reached
-        } else if (center.y > Game.DIMENSION_SCALAR * Game.DIM.height) {
+        } else if (center.y > Game.UNIVERSE_SCALAR * Game.DIM.height) {
             setCenter(new Point(center.x, 0));
         //top-bounds reached
         } else if (center.y < 0) {
-            setCenter(new Point(center.x, Game.DIMENSION_SCALAR * Game.DIM.height ));
+            setCenter(new Point(center.x, Game.UNIVERSE_SCALAR * Game.DIM.height ));
         //in-bounds
         } else {
             double newXPos = center.x + getDeltaX();

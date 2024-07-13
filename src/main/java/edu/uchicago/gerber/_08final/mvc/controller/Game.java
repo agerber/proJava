@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.Set;
 
 
 // ===============================================
@@ -23,8 +22,13 @@ public class Game implements Runnable, KeyListener {
     // ===============================================
 
 
-    public static final Dimension DIM = new Dimension(1110, 900); //the dimension of the game.
-    public static final int DIMENSION_SCALAR = 5;
+    public static final Dimension ASPECT_RATIO = new Dimension(3,2);
+    public static final int PIXELS = 400;
+    public static final Dimension DIM = new Dimension(ASPECT_RATIO.width * PIXELS,
+            ASPECT_RATIO.height * PIXELS); //the dimension of the game.
+
+    //the entire universe is UNIVERSE_SCALAR-times bigger than then view-port
+    public static final int UNIVERSE_SCALAR = 5;
     private final GamePanel gamePanel;
     //this is used throughout many classes.
     public static final Random R = new Random();
@@ -236,6 +240,7 @@ public class Game implements Runnable, KeyListener {
 
     //this method spawns new Large (0) Asteroids
     private void spawnBigAsteroids(int num) {
+        num += 10;
         while (num-- > 0) {
             //Asteroids with size of zero are big
             CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(0), GameOp.Action.ADD);
