@@ -22,7 +22,7 @@ public class Game implements Runnable, KeyListener {
     // FIELDS
     // ===============================================
 
-    public static final boolean FALCON_CENTERED = false;
+
     public static final Dimension DIM = new Dimension(1110, 900); //the dimension of the game.
     private final GamePanel gamePanel;
     //this is used throughout many classes.
@@ -45,6 +45,8 @@ public class Game implements Runnable, KeyListener {
             START = 83, // s key
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
+
+            CENTERED = 67, //c-key
 
             NUKE = 78; // n-key mute
 
@@ -126,7 +128,7 @@ public class Game implements Runnable, KeyListener {
     } // end run
 
     private void checkFloaters() {
-        spawnNewWallFloater();
+
         spawnShieldFloater();
         spawnNukeFloater();
     }
@@ -214,12 +216,7 @@ public class Game implements Runnable, KeyListener {
 
 
 
-    private void spawnNewWallFloater() {
 
-        if (!FALCON_CENTERED && CommandCenter.getInstance().getFrame() % NewWallFloater.SPAWN_NEW_WALL_FLOATER == 0 && isBrickFree()) {
-            CommandCenter.getInstance().getOpsQueue().enqueue(new NewWallFloater(), GameOp.Action.ADD);
-        }
-    }
 
     private void spawnShieldFloater() {
 
@@ -247,17 +244,7 @@ public class Game implements Runnable, KeyListener {
 
 
 
-    private boolean isBrickFree() {
-        //if there are no more Bricks on the screen
-        boolean brickFree = true;
-        for (Movable movFoe : CommandCenter.getInstance().getMovFoes()) {
-            if (movFoe instanceof Brick) {
-                brickFree = false;
-                break;
-            }
-        }
-        return brickFree;
-    }
+
 
     private boolean isLevelClear() {
         //if there are no more Asteroids on the screen
@@ -375,6 +362,14 @@ public class Game implements Runnable, KeyListener {
                 } else {
                     SoundLoader.playSound("music-background_loop.wav");
                     //Sound.LOOP_SOUNDS.get("music-background_loop.wav").loop(Clip.LOOP_CONTINUOUSLY);
+                }
+                break;
+            case CENTERED:
+                if (CommandCenter.getInstance().isFalconCentered()) {
+                    CommandCenter.getInstance().setFalconCentered(false);
+                } else {
+                    CommandCenter.getInstance().getFalcon().setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
+                    CommandCenter.getInstance().setFalconCentered(true);
                 }
                 break;
 

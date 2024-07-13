@@ -93,7 +93,7 @@ public abstract class Sprite implements Movable {
         } else {
             double newXPos = center.x + getDeltaX();
             double newYPos = center.y + getDeltaY();
-            if (Game.FALCON_CENTERED){
+            if (CommandCenter.getInstance().isFalconCentered()){
                 newXPos -= CommandCenter.getInstance().getFalcon().getDeltaX();
                 newYPos -= CommandCenter.getInstance().getFalcon().getDeltaY();
             }
