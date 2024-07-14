@@ -119,7 +119,7 @@ public class GamePanel extends Panel {
         List<String> statusArray = new ArrayList<>();
         if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) statusArray.add(levelText);
         if (CommandCenter.getInstance().getFalcon().isMaxSpeedAttained()) statusArray.add("WARNING - SLOW DOWN");
-        if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0) statusArray.add("PRESS V for NUKE");
+        if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0) statusArray.add("PRESS F for NUKE");
 
         //draw the statusArray strings to middle of screen
         if (!statusArray.isEmpty())
@@ -188,7 +188,7 @@ public class GamePanel extends Panel {
                     "'P' to Pause",
                     "'Q' to Quit",
                     "'M' to toggle music",
-                    "'C' to toggle universes"
+                    "'A' to toggle among universes"
 
             );
         } else if (CommandCenter.getInstance().isPaused()) {

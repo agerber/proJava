@@ -46,14 +46,14 @@ public class Game implements Runnable, KeyListener {
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
 
-            UNIVERSE = 67, //c-key
+            UNIVERSE = 65, //a-key
 
-            NUKE = 86; // v-key mute
+            NUKE = 70; // f-key mute
 
     // for possible future use
     // HYPER = 68, 					// D key
     //ALIEN = 65;                // A key
-    // SPECIAL = 70; 					// fire special weapon;  F key
+
 
 
     // ===============================================
