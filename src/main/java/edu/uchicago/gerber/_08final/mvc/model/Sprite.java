@@ -81,16 +81,16 @@ public abstract class Sprite implements Movable {
 
         //right-bounds reached
         if (center.x > CommandCenter.getInstance().getUniScalar() * Game.DIM.width) {
-            setCenter(new Point(0, center.y));
+            setCenter(new Point(1, center.y));
         //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(new Point(CommandCenter.getInstance().getUniScalar() * Game.DIM.width , center.y));
+            setCenter(new Point(CommandCenter.getInstance().getUniScalar() * Game.DIM.width -1 , center.y));
         //bottom-bounds reached
         } else if (center.y > CommandCenter.getInstance().getUniScalar() * Game.DIM.height) {
-            setCenter(new Point(center.x, 0));
+            setCenter(new Point(center.x, 1));
         //top-bounds reached
         } else if (center.y < 0) {
-            setCenter(new Point(center.x, CommandCenter.getInstance().getUniScalar() * Game.DIM.height ));
+            setCenter(new Point(center.x, CommandCenter.getInstance().getUniScalar() * Game.DIM.height -1 ));
         //in-bounds
         } else {
             double newXPos = center.x + getDeltaX();

@@ -17,6 +17,7 @@ public class MiniMap extends Sprite {
 
     public MiniMap() {
         setTeam(Team.DEBRIS);
+        setCenter(new Point(0,0));
     }
 
     public void move() {}
@@ -32,14 +33,6 @@ public class MiniMap extends Sprite {
         //if BIG - show entire universe.
         if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.BIG) {
 
-            g.setColor(Color.BLACK);
-            g.fillRect(
-                    0,
-                    1, //adjust one pixel down
-                    width,
-                    height
-            );
-
             //gray bounding box (entire universe)
             g.setColor(Color.DARK_GRAY);
             g.drawRect(
@@ -48,7 +41,7 @@ public class MiniMap extends Sprite {
                     width,
                     height
             );
-        }
+        } //end big
 
         //mini-view-port gray bounding box (player's view of universe)
         g.setColor(Color.DARK_GRAY);
@@ -62,12 +55,11 @@ public class MiniMap extends Sprite {
 
         );
 
-        //draw the non-debris movables
+        //draw movables on mini-map
         drawRadarBlips(g, Color.WHITE, CommandCenter.getInstance().getMovFoes());
         drawRadarBlips(g, Color.CYAN, CommandCenter.getInstance().getMovFloaters());
         drawRadarBlips(g, Color.ORANGE, CommandCenter.getInstance().getMovFriends());
-        //feel free to uncomment this line. you will notice that the star-field remains in the view-port
-        //drawRadarBlips(g, Color.darkGray, CommandCenter.getInstance().getMovDebris());
+        drawRadarBlips(g, Color.darkGray, CommandCenter.getInstance().getMovDebris());
 
 
     }
