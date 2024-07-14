@@ -56,10 +56,11 @@ public class MiniMap extends Sprite {
         );
 
         //draw movables on mini-map
+        drawRadarBlips(g, Color.darkGray, CommandCenter.getInstance().getMovDebris());
         drawRadarBlips(g, Color.WHITE, CommandCenter.getInstance().getMovFoes());
         drawRadarBlips(g, Color.CYAN, CommandCenter.getInstance().getMovFloaters());
         drawRadarBlips(g, Color.ORANGE, CommandCenter.getInstance().getMovFriends());
-        drawRadarBlips(g, Color.darkGray, CommandCenter.getInstance().getMovDebris());
+
 
 
     }
