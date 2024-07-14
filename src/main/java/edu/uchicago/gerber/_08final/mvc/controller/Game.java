@@ -21,8 +21,9 @@ public class Game implements Runnable, KeyListener {
     // FIELDS
     // ===============================================
 
-    public static final Dimension DIM = new Dimension(1400,900); //the dimension of the game.
+    public static final Dimension DIM = new Dimension(1400,900); //the dimension of the game-screen.
 
+    //the size of big universe as a multiplier in relation to the game-screen.
     public static final int BIG_UNIVERSE_SCALAR = 3;
     private final GamePanel gamePanel;
     //this is used throughout many classes.
@@ -309,7 +310,6 @@ public class Game implements Runnable, KeyListener {
             case UP:
                 falcon.setThrusting(true);
                 SoundLoader.playSound("whitenoise_loop.wav");
-                //Sound.LOOP_SOUNDS.get("whitenoise_loop.wav").loop(Clip.LOOP_CONTINUOUSLY);
                 break;
             case LEFT:
                 falcon.setTurnState(Falcon.TurnState.LEFT);
@@ -351,7 +351,6 @@ public class Game implements Runnable, KeyListener {
                 break;
             case UP:
                 falcon.setThrusting(false);
-                //Sound.LOOP_SOUNDS.get("whitenoise_loop.wav").stop();
                 SoundLoader.stopSound("whitenoise_loop.wav");
                 break;
 
@@ -362,7 +361,6 @@ public class Game implements Runnable, KeyListener {
                     SoundLoader.stopSound("music-background_loop.wav");
                 } else {
                     SoundLoader.playSound("music-background_loop.wav");
-                    //Sound.LOOP_SOUNDS.get("music-background_loop.wav").loop(Clip.LOOP_CONTINUOUSLY);
                 }
                 break;
             case UNIVERSE:

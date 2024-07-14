@@ -1,5 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.model;
 
+import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.SoundLoader;
 
 import java.awt.*;
@@ -16,8 +17,8 @@ public class Bullet extends Sprite {
         setTeam(Team.FRIEND);
         setColor(Color.ORANGE);
 
-        //a bullet expires after 20 frames.
-        setExpiry(20);
+        //give the bullet more range in a big universe
+        setExpiry(20 * CommandCenter.getInstance().getUniScalar());
         setRadius(6);
 
 
