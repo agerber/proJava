@@ -61,7 +61,6 @@ public abstract class Sprite implements Movable {
     //constructor
     public Sprite() {
 
-        //getting circular calls between this contructor and getSpriteScalar()
         //place the sprite at some random location in the game-space at instantiation
         setCenter(new Point(Game.R.nextInt(Game.DIM.width),
                 Game.R.nextInt(Game.DIM.height)));
