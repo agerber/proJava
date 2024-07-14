@@ -12,8 +12,8 @@ import java.util.LinkedList;
  * Inspired by Michael Vasiliou's Sinistar, winner of Java game contest 2016.
  */
 public class MiniMap extends Sprite {
-     //size of mini-map as percentage of view-port
-    private static final double MINI_MAP_PERCENT = 0.42;
+     //size of mini-map as percentage of screen
+    private static final double MINI_MAP_PERCENT = 0.23;
 
     public MiniMap() {
         setTeam(Team.DEBRIS);
