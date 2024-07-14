@@ -23,7 +23,7 @@ public class Game implements Runnable, KeyListener {
 
     public static final Dimension DIM = new Dimension(1400,900); //the dimension of the game.
 
-    public static final int BIG_UNIVERSE_SCALAR = 5;
+    public static final int BIG_UNIVERSE_SCALAR = 3;
     private final GamePanel gamePanel;
     //this is used throughout many classes.
     public static final Random R = new Random();
