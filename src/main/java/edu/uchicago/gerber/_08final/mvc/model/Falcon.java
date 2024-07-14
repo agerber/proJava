@@ -203,7 +203,7 @@ public class Falcon extends Sprite {
 		setDeltaY(0);
 		setRadius(Falcon.MIN_RADIUS);
 		setMaxSpeedAttained(false);
-		setNukeMeter(0);
+
 	}
 
 } //end class
