@@ -26,7 +26,8 @@ public class MiniMap extends Sprite {
 
     public void move() {}
 
-    public void draw(final Graphics g) {
+    @Override
+    public void draw(Graphics g) {
 
         if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.SMALL) return;
 
