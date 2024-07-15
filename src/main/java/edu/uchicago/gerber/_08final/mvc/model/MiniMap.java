@@ -62,7 +62,7 @@ public class MiniMap extends Sprite {
         //draw debris
         CommandCenter.getInstance().getMovDebris().forEach( mov -> {
                     g.setColor(Color.darkGray);
-                    Point scaledPoint = scalePointFunction.apply(mov.getCenter());
+                    Point scaledPoint = scalePoint(mov.getCenter());
                     g.fillOval(scaledPoint.x - 1, scaledPoint.y - 1, 2, 2);
                 }
         );
@@ -71,7 +71,7 @@ public class MiniMap extends Sprite {
         //draw foes (asteroids)
         CommandCenter.getInstance().getMovFoes().forEach( mov -> {
                     g.setColor(Color.WHITE);
-                    Point scaledPoint = scalePointFunction.apply(mov.getCenter());
+                    Point scaledPoint = scalePoint(mov.getCenter());
                     g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
                 }
         );
@@ -80,7 +80,7 @@ public class MiniMap extends Sprite {
         //draw floaters
         CommandCenter.getInstance().getMovFloaters().forEach( mov -> {
                     g.setColor(mov instanceof NukeFloater ? Color.YELLOW : Color.CYAN);
-                    Point scaledPoint = scalePointFunction.apply(mov.getCenter());
+                    Point scaledPoint = scalePoint(mov.getCenter());
                     g.fillRect(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
                 }
         );
@@ -94,7 +94,7 @@ public class MiniMap extends Sprite {
                     else
                         color = new Color(200, 100, 50);
                     g.setColor(color);
-                    Point scaledPoint = scalePointFunction.apply(mov.getCenter());
+                    Point scaledPoint = scalePoint(mov.getCenter());
                     g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
                 }
         );
@@ -102,11 +102,15 @@ public class MiniMap extends Sprite {
 
     }
 
-    //this function takes a center-point of a movable and scales it to display the blip on the mini-map
-    Function<Point, Point> scalePointFunction = point -> new Point(
-            (int) Math.round(MINI_MAP_PERCENT * point.x / Game.BIG_UNIVERSE_SCALAR),
-            (int) Math.round(MINI_MAP_PERCENT * point.y / Game.BIG_UNIVERSE_SCALAR)
-    );
+    //this function takes a center-point of a movable and scales it to display the blip on the mini-map.
+    //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
+    private Point scalePoint(Point point){
+        return new Point(
+                (int) Math.round(MINI_MAP_PERCENT * point.x / Game.BIG_UNIVERSE_SCALAR),
+                (int) Math.round(MINI_MAP_PERCENT * point.y / Game.BIG_UNIVERSE_SCALAR)
+        );
+    }
+
 
 
 
