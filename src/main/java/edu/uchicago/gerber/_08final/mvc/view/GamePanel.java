@@ -31,8 +31,7 @@ public class GamePanel extends Panel {
     private Image imgOff;
     private Graphics grpOff;
 
-    //background colorMap
-    private Map<CommandCenter.Universe, Color> colorMap;
+
 
 
     // ==============================================================
@@ -84,10 +83,6 @@ public class GamePanel extends Panel {
         listShip.add(new Point(1,6));
         listShip.add(new Point(0,9));
 
-        colorMap = new HashMap<>();
-        colorMap.put(CommandCenter.Universe.SMALL, new Color(0, 10, 30)); //deep blue
-        colorMap.put(CommandCenter.Universe.SMALL_CENTERED, new Color(15, 15, 15)); //dark gray
-        colorMap.put(CommandCenter.Universe.BIG_CENTERED, Color.BLACK);
 
         pntShipsRemaining = listShip.toArray(new Point[0]);
 
@@ -178,9 +173,8 @@ public class GamePanel extends Panel {
         //get its graphics context
         grpOff = imgOff.getGraphics();
 
-        //Fill the off-screen image background. Differentiate between universes.
-        grpOff.setColor(colorMap.get(CommandCenter.getInstance().universe));
-
+        //fill the entire off-screen image with black background
+        grpOff.setColor(Color.BLACK);
         grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
 
         //this is used for development, you may remove drawNumFrame() in your final game.

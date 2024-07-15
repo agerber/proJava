@@ -59,7 +59,7 @@ public class MiniMap extends Sprite {
 
         );
 
-        //draw debris
+        //draw debris radar-blips
         CommandCenter.getInstance().getMovDebris().forEach( mov -> {
                     g.setColor(Color.darkGray);
                     Point scaledPoint = scalePoint(mov.getCenter());
@@ -68,7 +68,7 @@ public class MiniMap extends Sprite {
         );
 
 
-        //draw foes (asteroids)
+        //draw foe (asteroids) radar-blips
         CommandCenter.getInstance().getMovFoes().forEach( mov -> {
                     g.setColor(Color.WHITE);
                     Point scaledPoint = scalePoint(mov.getCenter());
@@ -77,7 +77,7 @@ public class MiniMap extends Sprite {
         );
 
 
-        //draw floaters
+        //draw floater radar-blips
         CommandCenter.getInstance().getMovFloaters().forEach( mov -> {
                     g.setColor(mov instanceof NukeFloater ? Color.YELLOW : Color.CYAN);
                     Point scaledPoint = scalePoint(mov.getCenter());
@@ -86,11 +86,13 @@ public class MiniMap extends Sprite {
         );
 
 
-        //draw friends
+        //draw friend radar-blips
         CommandCenter.getInstance().getMovFriends().forEach( mov -> {
                     Color color;
                     if (mov instanceof Falcon && CommandCenter.getInstance().getFalcon().getShield() > 0)
                         color = Color.CYAN;
+                    else if (mov instanceof Nuke)
+                        color = Color.YELLOW;
                     else
                         color = new Color(200, 100, 50);
                     g.setColor(color);
