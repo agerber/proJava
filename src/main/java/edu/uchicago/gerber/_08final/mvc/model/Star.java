@@ -52,7 +52,8 @@ public class Star implements Movable{
     @Override
     public void move() {
 
-        if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.SMALL) return;
+        //if falcon position is NOT fixed return
+        if (!CommandCenter.getInstance().isFalconPositionFixed()) return;
 
             //right-bounds reached
         if (center.x > Game.DIM.width) {

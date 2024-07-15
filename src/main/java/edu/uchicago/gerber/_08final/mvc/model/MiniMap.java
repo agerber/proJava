@@ -15,7 +15,7 @@ public class MiniMap extends Sprite {
      //size of mini-map as percentage of screen (game dimension)
     private static final double MINI_MAP_PERCENT = 0.23;
 
-    private Color pumpkin = new Color(200, 100, 50);
+    private final Color pumpkin = new Color(200, 100, 50);
 
     public MiniMap() {
         setTeam(Team.DEBRIS);
