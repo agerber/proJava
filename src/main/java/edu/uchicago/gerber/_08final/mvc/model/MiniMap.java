@@ -7,6 +7,10 @@ import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+
+
 
 /**
  * Inspired by Michael Vasiliou's Sinistar, winner of Java game contest 2016.
@@ -26,27 +30,27 @@ public class MiniMap extends Sprite {
 
         if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.SMALL) return;
 
+        //scale the mini-map to some percent of game-dim
+        int miniWidth = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
+        int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
 
-        int width = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
-        int height = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
-
-        //if BIG - show entire universe.
-        if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.BIG) {
+        //if BIG - show the entire big universe in mini-map.
+        if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.BIG_CENTERED) {
 
             //gray bounding box (entire universe)
             g.setColor(Color.DARK_GRAY);
             g.drawRect(
                     0,
                     1, //adjust one pixel down
-                    width,
-                    height
+                    miniWidth,
+                    miniHeight
             );
         } //end big
 
-        //mini-view-port gray bounding box (player's view of universe)
+        //in the case of both SMALL_CENTERED AND BIG_CENTERED, show player's view of universe
         g.setColor(Color.DARK_GRAY);
-        int miniViewPortWidth = width / Game.BIG_UNIVERSE_SCALAR;
-        int miniViewPortHeight = height / Game.BIG_UNIVERSE_SCALAR;
+        int miniViewPortWidth = miniWidth / Game.BIG_UNIVERSE_SCALAR;
+        int miniViewPortHeight = miniHeight / Game.BIG_UNIVERSE_SCALAR;
         g.drawRect(
                 0 ,
                 1, //adjust one pixel down
@@ -55,33 +59,54 @@ public class MiniMap extends Sprite {
 
         );
 
-        //draw movables on mini-map
-        drawRadarBlips(g, Color.darkGray, CommandCenter.getInstance().getMovDebris());
-        drawRadarBlips(g, Color.WHITE, CommandCenter.getInstance().getMovFoes());
-        drawRadarBlips(g, Color.CYAN, CommandCenter.getInstance().getMovFloaters());
-        drawRadarBlips(g, Color.ORANGE, CommandCenter.getInstance().getMovFriends());
+        //draw debris
+        CommandCenter.getInstance().getMovDebris().forEach( mov -> {
+                    g.setColor(Color.darkGray);
+                    Point scaledPoint = scalePointFunction.apply(mov.getCenter());
+                    g.fillOval(scaledPoint.x - 1, scaledPoint.y - 1, 2, 2);
+                }
+        );
 
+
+        //draw foes (asteroids)
+        CommandCenter.getInstance().getMovFoes().forEach( mov -> {
+                    g.setColor(Color.WHITE);
+                    Point scaledPoint = scalePointFunction.apply(mov.getCenter());
+                    g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
+                }
+        );
+
+
+        //draw floaters
+        CommandCenter.getInstance().getMovFloaters().forEach( mov -> {
+                    g.setColor(mov instanceof NukeFloater ? Color.YELLOW : Color.CYAN);
+                    Point scaledPoint = scalePointFunction.apply(mov.getCenter());
+                    g.fillRect(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
+                }
+        );
+
+
+        //draw friends
+        CommandCenter.getInstance().getMovFriends().forEach( mov -> {
+                    Color color;
+                    if (mov instanceof Falcon && CommandCenter.getInstance().getFalcon().getShield() > 0)
+                        color = Color.CYAN;
+                    else
+                        color = new Color(200, 100, 50);
+                    g.setColor(color);
+                    Point scaledPoint = scalePointFunction.apply(mov.getCenter());
+                    g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
+                }
+        );
 
 
     }
 
-    private void drawRadarBlips(final Graphics g, Color color, LinkedList<Movable> movables){
-
-        g.setColor(color);
-        movables.forEach( mov -> {
-                    //transform the mov center-point so that when drawn, it fits within the mini-map
-                    Point scaledPoint = new Point(
-                            (int) Math.round(MINI_MAP_PERCENT * mov.getCenter().x / Game.BIG_UNIVERSE_SCALAR),
-                            (int) Math.round(MINI_MAP_PERCENT *  mov.getCenter().y / Game.BIG_UNIVERSE_SCALAR)
-                    );
-                    //draw an oval (circle) with bounding box 4x4
-                    g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
-                }
-
-        );
-
-    }//end method
-
+    //this function takes a center-point of a movable and scales it to display the blip on the mini-map
+    Function<Point, Point> scalePointFunction = point -> new Point(
+            (int) Math.round(MINI_MAP_PERCENT * point.x / Game.BIG_UNIVERSE_SCALAR),
+            (int) Math.round(MINI_MAP_PERCENT * point.y / Game.BIG_UNIVERSE_SCALAR)
+    );
 
 
 

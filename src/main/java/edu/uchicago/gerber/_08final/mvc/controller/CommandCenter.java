@@ -16,7 +16,7 @@ public class CommandCenter {
 	public enum Universe {
 		SMALL,
 		SMALL_CENTERED,
-		BIG
+		BIG_CENTERED
 
 	}
 
@@ -59,8 +59,8 @@ public class CommandCenter {
 		return instance;
 	}
 
-	public int getUniScalar() {
-		return universe == Universe.BIG ? Game.BIG_UNIVERSE_SCALAR : 1;
+	public int getUniverseScalar() {
+		return universe == Universe.BIG_CENTERED ? Game.BIG_UNIVERSE_SCALAR : 1;
 	}
 
 	public void cycleUniverse() {
@@ -70,12 +70,16 @@ public class CommandCenter {
 				universe = Universe.SMALL_CENTERED;
 				break;
 			case SMALL_CENTERED:
-				universe = Universe.BIG;
+				universe = Universe.BIG_CENTERED;
 				break;
-			case BIG:
+			case BIG_CENTERED:
 				universe = Universe.SMALL;
 				break;
 		}
+	}
+
+	public boolean isFalconCentered(){
+		return CommandCenter.getInstance().getUniverse() != CommandCenter.Universe.SMALL;
 	}
 
 

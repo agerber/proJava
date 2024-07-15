@@ -17,8 +17,7 @@ public class Bullet extends Sprite {
         setTeam(Team.FRIEND);
         setColor(Color.ORANGE);
 
-        //give the bullet more range in a big universe
-        setExpiry(20 * CommandCenter.getInstance().getUniScalar());
+        setExpiry(20);
         setRadius(6);
 
 

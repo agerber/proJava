@@ -78,8 +78,9 @@ public abstract class Sprite implements Movable {
         //To ensure this behavior among all sprites in your game, make sure to call super.move() in extending classes
         // where you need to override the move() method.
 
-        //scalar allows the sprite to move beyond the bounds of the game-screen dimension (what the player can see).
-        int scalar = CommandCenter.getInstance().getUniScalar();
+        //A scalar(larger than 1) allows the sprite to move beyond the bounds of the game-screen dimension (what the
+        // player can see).
+        int scalar = CommandCenter.getInstance().getUniverseScalar();
         //right-bounds reached
         if (center.x > scalar * Game.DIM.width) {
             setCenter(new Point(1, center.y));
@@ -96,7 +97,8 @@ public abstract class Sprite implements Movable {
         } else {
             double newXPos = center.x + getDeltaX();
             double newYPos = center.y + getDeltaY();
-            if (CommandCenter.getInstance().getUniverse() != CommandCenter.Universe.SMALL){
+            //move the sprite in the opposite direction of the falcon to create centered-play
+            if (CommandCenter.getInstance().isFalconCentered()){
                 newXPos -= CommandCenter.getInstance().getFalcon().getDeltaX();
                 newYPos -= CommandCenter.getInstance().getFalcon().getDeltaY();
             }
