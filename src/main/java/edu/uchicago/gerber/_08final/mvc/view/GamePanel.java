@@ -6,9 +6,7 @@ import edu.uchicago.gerber._08final.mvc.controller.Utils;
 import edu.uchicago.gerber._08final.mvc.model.*;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
@@ -32,6 +30,9 @@ public class GamePanel extends Panel {
     //used for double-buffering
     private Image imgOff;
     private Graphics grpOff;
+
+    //background colorMap
+    private Map<CommandCenter.Universe, Color> colorMap;
 
 
     // ==============================================================
@@ -82,6 +83,11 @@ public class GamePanel extends Panel {
         listShip.add(new Point(1, 3));
         listShip.add(new Point(1,6));
         listShip.add(new Point(0,9));
+
+        colorMap = new HashMap<>();
+        colorMap.put(CommandCenter.Universe.SMALL, new Color(0, 10, 30)); //deep blue
+        colorMap.put(CommandCenter.Universe.SMALL_CENTERED, new Color(15, 15, 15)); //dark gray
+        colorMap.put(CommandCenter.Universe.BIG_CENTERED, Color.BLACK);
 
         pntShipsRemaining = listShip.toArray(new Point[0]);
 
@@ -172,8 +178,9 @@ public class GamePanel extends Panel {
         //get its graphics context
         grpOff = imgOff.getGraphics();
 
-        //Fill the off-screen image background with black.
-        grpOff.setColor(Color.BLACK);
+        //Fill the off-screen image background. Differentiate between universes.
+        grpOff.setColor(colorMap.get(CommandCenter.getInstance().universe));
+
         grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
 
         //this is used for development, you may remove drawNumFrame() in your final game.

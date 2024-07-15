@@ -34,7 +34,7 @@ public class MiniMap extends Sprite {
         int miniWidth = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
         int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
 
-        //if BIG - show the entire big universe in mini-map.
+        //if BIG_CENTERED - show the entire big universe in mini-map.
         if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.BIG_CENTERED) {
 
             //gray bounding box (entire universe)
