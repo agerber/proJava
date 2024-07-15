@@ -19,6 +19,8 @@ public class MiniMap extends Sprite {
      //size of mini-map as percentage of screen
     private static final double MINI_MAP_PERCENT = 0.23;
 
+    private Color pumpkin = new Color(200, 100, 50);
+
     public MiniMap() {
         setTeam(Team.DEBRIS);
         setCenter(new Point(0,0));
@@ -87,6 +89,7 @@ public class MiniMap extends Sprite {
         );
 
 
+
         //draw friend radar-blips
         CommandCenter.getInstance().getMovFriends().forEach( mov -> {
                     Color color;
@@ -95,7 +98,7 @@ public class MiniMap extends Sprite {
                     else if (mov instanceof Nuke)
                         color = Color.YELLOW;
                     else
-                        color = new Color(200, 100, 50);
+                        color = pumpkin;
                     g.setColor(color);
                     Point scaledPoint = scalePoint(mov.getCenter());
                     g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
