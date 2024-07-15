@@ -42,7 +42,7 @@ public class MiniMap extends Sprite {
             g.setColor(Color.DARK_GRAY);
             g.drawRect(
                     0,
-                    1, //adjust one pixel down
+                    0,
                     miniWidth,
                     miniHeight
             );
@@ -54,7 +54,7 @@ public class MiniMap extends Sprite {
         int miniViewPortHeight = miniHeight / Game.BIG_UNIVERSE_SCALAR;
         g.drawRect(
                 0 ,
-                1, //adjust one pixel down
+                0,
                 miniViewPortWidth,
                 miniViewPortHeight
 
