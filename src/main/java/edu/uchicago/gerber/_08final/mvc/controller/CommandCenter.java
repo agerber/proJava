@@ -15,8 +15,8 @@ public class CommandCenter {
 
 	public enum Universe {
 		SMALL,
-		SMALL_CENTERED,
-		BIG_CENTERED
+		SMALL_FIXED_POSITION,
+		BIG_FIXED_POSITION
 
 	}
 
@@ -60,25 +60,25 @@ public class CommandCenter {
 	}
 
 	public int getUniverseScalar() {
-		return universe == Universe.BIG_CENTERED ? Game.BIG_UNIVERSE_SCALAR : 1;
+		return universe == Universe.BIG_FIXED_POSITION ? Game.BIG_UNIVERSE_SCALAR : 1;
 	}
 
 	public void cycleUniverse() {
 		//tri-cycle universe among its vals
 		switch (universe) {
 			case SMALL:
-				universe = Universe.SMALL_CENTERED;
+				universe = Universe.SMALL_FIXED_POSITION;
 				break;
-			case SMALL_CENTERED:
-				universe = Universe.BIG_CENTERED;
+			case SMALL_FIXED_POSITION:
+				universe = Universe.BIG_FIXED_POSITION;
 				break;
-			case BIG_CENTERED:
+			case BIG_FIXED_POSITION:
 				universe = Universe.SMALL;
 				break;
 		}
 	}
 
-	public boolean isFalconCentered(){
+	public boolean isFalconPositionFixed(){
 		return CommandCenter.getInstance().getUniverse() != CommandCenter.Universe.SMALL;
 	}
 

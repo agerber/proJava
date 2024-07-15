@@ -91,8 +91,8 @@ public class Falcon extends Sprite {
 	@Override
 	public void move() {
 
-		//only call super.move() is falcon is not centered
-		if (!CommandCenter.getInstance().isFalconCentered()) super.move();
+		//only call super.move() if falcon is not fixed
+		if (!CommandCenter.getInstance().isFalconPositionFixed()) super.move();
 
 		if (invisible > 0) invisible--;
 		if (shield > 0) shield--;

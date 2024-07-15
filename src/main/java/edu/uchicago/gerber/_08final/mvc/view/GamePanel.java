@@ -105,7 +105,7 @@ public class GamePanel extends Panel {
 
         graphics.setColor(Color.white);
         graphics.setFont(fontNormal);
-        final int OFFSET_LEFT = 200;
+        final int OFFSET_LEFT = 220;
 
         graphics.drawString("Universe: "+CommandCenter.getInstance().universe.toString(), Game.DIM.width - OFFSET_LEFT,
                 fontHeight);

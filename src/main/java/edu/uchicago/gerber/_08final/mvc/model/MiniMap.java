@@ -6,17 +6,13 @@ import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
 
 import java.awt.*;
-import java.util.LinkedList;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
-
 
 
 /**
  * Inspired by Michael Vasiliou's Sinistar, winner of Java game contest 2016.
  */
 public class MiniMap extends Sprite {
-     //size of mini-map as percentage of screen
+     //size of mini-map as percentage of screen (game dimension)
     private static final double MINI_MAP_PERCENT = 0.23;
 
     private Color pumpkin = new Color(200, 100, 50);
@@ -26,6 +22,7 @@ public class MiniMap extends Sprite {
         setCenter(new Point(0,0));
     }
 
+    @Override
     public void move() {}
 
     @Override
@@ -37,8 +34,8 @@ public class MiniMap extends Sprite {
         int miniWidth = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
         int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
 
-        //if BIG_CENTERED - show the entire big universe in mini-map.
-        if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.BIG_CENTERED) {
+        //if BIG_FIXED_POSITION - show the entire big universe in mini-map.
+        if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.BIG_FIXED_POSITION) {
 
             //gray bounding box (entire universe)
             g.setColor(Color.DARK_GRAY);
@@ -50,7 +47,7 @@ public class MiniMap extends Sprite {
             );
         } //end big
 
-        //in the case of both SMALL_CENTERED AND BIG_CENTERED, show player's view of universe
+        //in the case of both SMALL_FIXED_POSITION AND BIG_FIXED_POSITION, show player's view of universe
         g.setColor(Color.DARK_GRAY);
         int miniViewPortWidth = miniWidth / Game.BIG_UNIVERSE_SCALAR;
         int miniViewPortHeight = miniHeight / Game.BIG_UNIVERSE_SCALAR;
