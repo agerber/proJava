@@ -34,11 +34,11 @@ public class MiniMap extends Sprite {
         //don't show the mini-map if universe is small
         if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.SMALL) return;
 
-        //scale the mini-map to some percent of game-dim
+        //scale to some percent of game-dim
         int miniWidth = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
         int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
 
-        //if BIG_FIXED_POSITION - show the entire big universe in mini-map.
+        //if BIG_FIXED_POSITION - draw the big bounding box.
         if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.BIG_FIXED_POSITION) {
 
             //gray bounding box (entire universe)
@@ -51,7 +51,7 @@ public class MiniMap extends Sprite {
             );
         } //end big
 
-        //in the case of both SMALL_FIXED_POSITION AND BIG_FIXED_POSITION, show player's view of universe
+        //in the case of both SMALL_FIXED_POSITION AND BIG_FIXED_POSITION, draw small bounding box (view-port)
         g.setColor(Color.DARK_GRAY);
         int miniViewPortWidth = miniWidth / MiniMap.BIG_UNIVERSE_SCALAR;
         int miniViewPortHeight = miniHeight / MiniMap.BIG_UNIVERSE_SCALAR;
