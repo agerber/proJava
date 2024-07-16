@@ -60,7 +60,7 @@ public class CommandCenter {
 	}
 
 	public int getUniverseScalar() {
-		return universe == Universe.BIG_FIXED_POSITION ? Game.BIG_UNIVERSE_SCALAR : 1;
+		return universe == Universe.BIG_FIXED_POSITION ? MiniMap.BIG_UNIVERSE_SCALAR : 1;
 	}
 
 	public void cycleUniverse() {

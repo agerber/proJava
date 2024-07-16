@@ -15,6 +15,9 @@ public class MiniMap extends Sprite {
      //size of mini-map as percentage of screen (game dimension)
     private final double MINI_MAP_PERCENT = 0.23;
 
+    //the size of big universe as a multiplier in relation to the game-dim (screen).
+    public static final int BIG_UNIVERSE_SCALAR = 3;
+
     private final Color pumpkin = new Color(200, 100, 50);
 
     public MiniMap() {
@@ -50,8 +53,8 @@ public class MiniMap extends Sprite {
 
         //in the case of both SMALL_FIXED_POSITION AND BIG_FIXED_POSITION, show player's view of universe
         g.setColor(Color.DARK_GRAY);
-        int miniViewPortWidth = miniWidth / Game.BIG_UNIVERSE_SCALAR;
-        int miniViewPortHeight = miniHeight / Game.BIG_UNIVERSE_SCALAR;
+        int miniViewPortWidth = miniWidth / MiniMap.BIG_UNIVERSE_SCALAR;
+        int miniViewPortHeight = miniHeight / MiniMap.BIG_UNIVERSE_SCALAR;
         g.drawRect(
                 0 ,
                 0,
@@ -110,8 +113,8 @@ public class MiniMap extends Sprite {
     //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
     private Point scalePoint(Point point){
         return new Point(
-                (int) Math.round(MINI_MAP_PERCENT * point.x / Game.BIG_UNIVERSE_SCALAR),
-                (int) Math.round(MINI_MAP_PERCENT * point.y / Game.BIG_UNIVERSE_SCALAR)
+                (int) Math.round(MINI_MAP_PERCENT * point.x / MiniMap.BIG_UNIVERSE_SCALAR),
+                (int) Math.round(MINI_MAP_PERCENT * point.y / MiniMap.BIG_UNIVERSE_SCALAR)
         );
     }
 
