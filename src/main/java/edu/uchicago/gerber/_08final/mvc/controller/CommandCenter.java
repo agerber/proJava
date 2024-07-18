@@ -1,7 +1,7 @@
 package edu.uchicago.gerber._08final.mvc.controller;
 
 
-
+import java.awt.*;
 import edu.uchicago.gerber._08final.mvc.model.*;
 import lombok.Data;
 
@@ -25,7 +25,7 @@ public class CommandCenter {
 
 	public Universe universe = Universe.SMALL;
 
-	private Map<Universe, MiniMeta> miniHash = new HashMap<>();
+
 
 	private  int numFalcons;
 	private  int level;
@@ -41,6 +41,8 @@ public class CommandCenter {
 
 	private final Falcon falcon  = new Falcon();
 
+	//miniHash contains meta-data about the Universe.
+	private Map<Universe, Dimension> miniHash = new HashMap<>();
 	private final MiniMap miniMap = new MiniMap();
 
 	//lists containing our movables subdivided by team
@@ -66,7 +68,7 @@ public class CommandCenter {
 		return instance;
 	}
 
-	public MiniMeta getMeta(){
+	public Dimension getMeta(){
 		return miniHash.get(universe);
 	}
 
@@ -98,10 +100,10 @@ public class CommandCenter {
 		clearAll();
 		generateStarField();
 
-		miniHash.put(Universe.SMALL_FREE_FLY, new MiniMeta(1,1));
-		miniHash.put(Universe.SMALL, new MiniMeta(1,1));
-		miniHash.put(Universe.BIG, new MiniMeta(3,3));
-		miniHash.put(Universe.HORIZONTAL, new MiniMeta(5,1));
+		miniHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
+		miniHash.put(Universe.SMALL, new Dimension(1,1));
+		miniHash.put(Universe.BIG, new Dimension(3,3));
+		miniHash.put(Universe.HORIZONTAL, new Dimension(5,1));
 
 		setLevel(0);
 		setScore(0);

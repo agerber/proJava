@@ -52,8 +52,8 @@ public class MiniMap extends Sprite {
         } //end not small
 
         g.setColor(Color.DARK_GRAY);
-        int miniViewPortWidth = miniWidth / CommandCenter.getInstance().getMeta().getScaleX();
-        int miniViewPortHeight = miniHeight / CommandCenter.getInstance().getMeta().getScaleY();
+        int miniViewPortWidth = miniWidth / CommandCenter.getInstance().getMeta().width;
+        int miniViewPortHeight = miniHeight / CommandCenter.getInstance().getMeta().height;
         g.drawRect(
                 0 ,
                 0,
@@ -112,8 +112,8 @@ public class MiniMap extends Sprite {
     //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
     private Point scalePoint(Point point){
         return new Point(
-                (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getMeta().getScaleX()),
-                (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getMeta().getScaleY())
+                (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getMeta().width),
+                (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getMeta().height)
         );
     }
 
