@@ -31,9 +31,6 @@ public class MiniMap extends Sprite {
     @Override
     public void draw(Graphics g) {
 
-        //don't show the mini-map if universe is small
-        if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.SMALL) return;
-
         //scale to some percent of game-dim
         int miniWidth = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
         int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
@@ -51,7 +48,6 @@ public class MiniMap extends Sprite {
             );
         } //end big
 
-        //in the case of both SMALL_FIXED_POSITION AND BIG_FIXED_POSITION, draw small bounding box (view-port)
         g.setColor(Color.DARK_GRAY);
         int miniViewPortWidth = miniWidth / MiniMap.BIG_UNIVERSE_SCALAR;
         int miniViewPortHeight = miniHeight / MiniMap.BIG_UNIVERSE_SCALAR;
@@ -63,7 +59,7 @@ public class MiniMap extends Sprite {
 
         );
 
-        //draw debris radar-blips
+        //draw debris radar-blips.
         CommandCenter.getInstance().getMovDebris().forEach( mov -> {
                     g.setColor(Color.darkGray);
                     Point scaledPoint = scalePoint(mov.getCenter());
