@@ -156,6 +156,8 @@ public class Falcon extends Sprite {
 	@Override
 	public void draw(Graphics g) {
 
+		if (nukeMeter > 0) drawNukeHalo(g);
+
 		//set local image-state
 		ImageState imageState;
 		if (invisible > 0){
@@ -181,6 +183,12 @@ public class Falcon extends Sprite {
 		g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
 	}
 
+	private void drawNukeHalo(Graphics g){
+		g.setColor(Color.YELLOW);
+		g.drawOval(getCenter().x - getRadius()+10, getCenter().y - getRadius()+10, getRadius() *2 -20,
+				getRadius() *2-20);
+	}
+
 	@Override
 	public void removeFromGame(LinkedList<Movable> list) {
 		//The falcon is never actually removed from the game-space; instead we decrement numFalcons
@@ -204,6 +212,7 @@ public class Falcon extends Sprite {
 		setDeltaY(0);
 		setRadius(Falcon.MIN_RADIUS);
 		setMaxSpeedAttained(false);
+		setNukeMeter(0);
 
 	}
 

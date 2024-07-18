@@ -51,7 +51,7 @@ public class Nuke extends Sprite{
         switch (nukeState) {
             //travelling
             case 0:
-                setRadius(2);
+                setRadius(17);
                 break;
             //exploding
             case 1:

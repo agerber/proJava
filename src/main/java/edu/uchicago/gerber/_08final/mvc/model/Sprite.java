@@ -74,12 +74,11 @@ public abstract class Sprite implements Movable {
     @Override
     public void move() {
 
-        //The following code block just keeps the sprite inside the bounds of the game window.
+        //The following code block just keeps the sprite inside the bounds of the universe.
         //To ensure this behavior among all sprites in your game, make sure to call super.move() in extending classes
         // where you need to override the move() method.
 
-        //A scalar(larger than 1) allows the sprite to move beyond the bounds of the game-screen dimension (what the
-        // player can see).
+        //A scalar(larger than 1) allows the sprite to move beyond the bounds of the game-screen dimension
         int scalar = CommandCenter.getInstance().getUniverseScalar();
         //right-bounds reached
         if (center.x > scalar * Game.DIM.width) {

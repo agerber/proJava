@@ -15,22 +15,13 @@ import java.util.Objects;
 
 /*
 Place all .png image assets in this directory src/main/resources/imgs or its subdirectories.
+All raster images loaded in static context prior to runtime.
  */
 public class ImageLoader {
-
-    /*
-        The default setting for the image-loader is NOT to load images before runtime (LOAD_IMAGES_IN_STATIC_CONTEXT =
-        false). You should keep this setting in most game implementations. However, if your game uses a lot of raster graphics,
-        you may consider setting the LOAD_IMAGES_IN_STATIC_CONTEXT flag to true. This will load all image
-        assets in the static context prior to runtime, thereby increasing runtime performance at the cost of memory.
-
-     */
-    private static final boolean LOAD_IMAGES_IN_STATIC_CONTEXT = false;
 
     private static Map<String, BufferedImage> IMAGE_MAP = null;
     //If LOAD_IMAGES_IN_STATIC_CONTEXT is true, load all images prior to runtime in the static context
     static {
-        if (LOAD_IMAGES_IN_STATIC_CONTEXT){
             Path rootDirectory = Paths.get("src/main/resources/imgs");
             Map<String, BufferedImage> localMap = null;
             try {
@@ -39,13 +30,7 @@ public class ImageLoader {
                 e.fillInStackTrace();
             }
             IMAGE_MAP = localMap;
-            System.out.println("loading:");
-            if (IMAGE_MAP != null)
-                IMAGE_MAP.forEach( (k, v) ->  System.out.println(k));
-        }
     }
-
-
 
     /*
      Walks the directory and sub-directories at root src/main/resources/imgs and returns a Map<String, BufferedImage>
@@ -81,21 +66,9 @@ public class ImageLoader {
     }
 
 
-    //If LOAD_IMAGES_IN_STATIC_CONTEXT is true, fetch the image from existing static map, otherwise
-    // load the image at runtime. This is the only public method of this class.
+    //fetch the image from existing static map
     public static BufferedImage getImage(String imagePath) {
-        if (LOAD_IMAGES_IN_STATIC_CONTEXT){
             return IMAGE_MAP.get(imagePath.toLowerCase());
-        }
-        BufferedImage bufferedImage;
-        try {
-            bufferedImage = ImageIO.read(Objects.requireNonNull(ImageLoader.class.getResourceAsStream(imagePath)));
-        }
-        catch (IOException e) {
-            e.fillInStackTrace();
-            bufferedImage = null;
-        }
-        return bufferedImage;
 
     }
 
