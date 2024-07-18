@@ -26,7 +26,6 @@ public class CommandCenter {
 	public Universe universe = Universe.SMALL;
 
 
-
 	private  int numFalcons;
 	private  int level;
 	private  long score;
@@ -103,7 +102,7 @@ public class CommandCenter {
 		miniDimHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
 		miniDimHash.put(Universe.SMALL, new Dimension(1,1));
 		miniDimHash.put(Universe.BIG, new Dimension(3,3));
-		miniDimHash.put(Universe.HORIZONTAL, new Dimension(5,1));
+		miniDimHash.put(Universe.HORIZONTAL, new Dimension(3,1));
 
 		setLevel(0);
 		setScore(0);
