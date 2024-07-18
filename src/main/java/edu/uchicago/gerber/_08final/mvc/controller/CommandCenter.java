@@ -41,8 +41,8 @@ public class CommandCenter {
 
 	private final Falcon falcon  = new Falcon();
 
-	//miniHash contains meta-data about the Universe.
-	private Map<Universe, Dimension> miniHash = new HashMap<>();
+	//miniDimHash contains meta-data dimension about the Universe.
+	private Map<Universe, Dimension> miniDimHash = new HashMap<>();
 	private final MiniMap miniMap = new MiniMap();
 
 	//lists containing our movables subdivided by team
@@ -68,8 +68,8 @@ public class CommandCenter {
 		return instance;
 	}
 
-	public Dimension getMeta(){
-		return miniHash.get(universe);
+	public Dimension getUniDim(){
+		return miniDimHash.get(universe);
 	}
 
 
@@ -100,10 +100,10 @@ public class CommandCenter {
 		clearAll();
 		generateStarField();
 
-		miniHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
-		miniHash.put(Universe.SMALL, new Dimension(1,1));
-		miniHash.put(Universe.BIG, new Dimension(3,3));
-		miniHash.put(Universe.HORIZONTAL, new Dimension(5,1));
+		miniDimHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
+		miniDimHash.put(Universe.SMALL, new Dimension(1,1));
+		miniDimHash.put(Universe.BIG, new Dimension(3,3));
+		miniDimHash.put(Universe.HORIZONTAL, new Dimension(5,1));
 
 		setLevel(0);
 		setScore(0);
@@ -114,6 +114,9 @@ public class CommandCenter {
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 		opsQueue.enqueue(miniMap, GameOp.Action.ADD);
 
+		//if you like the theme to Dr. Who, uncomment this
+//		setThemeMusic(true);
+//		SoundLoader.playSound("theme_loop.wav");
 
 
 
