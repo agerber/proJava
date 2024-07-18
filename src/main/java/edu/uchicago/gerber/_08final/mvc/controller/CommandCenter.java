@@ -15,15 +15,15 @@ import java.util.Map;
 public class CommandCenter {
 
 	public enum Universe {
+		SMALL_FREE_FLY,
 		SMALL,
-		SMALL_FIXED_POSITION,
 		BIG,
 		HORIZONTAL
 
 	}
 
 
-	public Universe universe = Universe.SMALL_FIXED_POSITION;
+	public Universe universe = Universe.SMALL;
 
 	private Map<Universe, MiniMeta> miniHash = new HashMap<>();
 
@@ -74,23 +74,23 @@ public class CommandCenter {
 	public void cycleUniverse() {
 		//cycle universe among its vals
 		switch (universe) {
-			case SMALL:
-				universe = Universe.SMALL_FIXED_POSITION;
+			case SMALL_FREE_FLY:
+				universe = Universe.SMALL;
 				break;
-			case SMALL_FIXED_POSITION:
+			case SMALL:
 				universe = Universe.BIG;
 				break;
 			case BIG:
 				universe = Universe.HORIZONTAL;
 				break;
 			case HORIZONTAL:
-				universe = Universe.SMALL;
+				universe = Universe.SMALL_FREE_FLY;
 				break;
 		}
 	}
 
 	public boolean isFalconPositionFixed(){
-		return CommandCenter.getInstance().getUniverse() != CommandCenter.Universe.SMALL;
+		return CommandCenter.getInstance().getUniverse() != CommandCenter.Universe.SMALL_FREE_FLY;
 	}
 
 
@@ -98,8 +98,8 @@ public class CommandCenter {
 		clearAll();
 		generateStarField();
 
+		miniHash.put(Universe.SMALL_FREE_FLY, new MiniMeta(1,1));
 		miniHash.put(Universe.SMALL, new MiniMeta(1,1));
-		miniHash.put(Universe.SMALL_FIXED_POSITION, new MiniMeta(1,1));
 		miniHash.put(Universe.BIG, new MiniMeta(3,3));
 		miniHash.put(Universe.HORIZONTAL, new MiniMeta(5,1));
 
