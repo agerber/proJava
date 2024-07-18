@@ -279,11 +279,7 @@ public class Game implements Runnable, KeyListener {
                 CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
             //show "Level X" in middle of screen
             CommandCenter.getInstance().getFalcon().setShowLevel(Falcon.INITIAL_SPAWN_TIME);
-            //after three levels cleared, play theme
-            if (level % 3 == 0)
-                SoundLoader.playSound("theme_loop.wav");
-            else
-                SoundLoader.stopSound("theme_loop.wav");
+
         }
     }
 
@@ -359,14 +355,14 @@ public class Game implements Runnable, KeyListener {
                 SoundLoader.stopSound("whitenoise_loop.wav");
                 break;
 
-//            case MUTE:
-//                CommandCenter.getInstance().setThemeMusic(!CommandCenter.getInstance().isThemeMusic());
-//                if (!CommandCenter.getInstance().isThemeMusic()) {
-//                    SoundLoader.stopSound("theme.wav");
-//                } else {
-//                    SoundLoader.playSound("theme.wav");
-//                }
-//                break;
+            case MUTE:
+                CommandCenter.getInstance().setThemeMusic(!CommandCenter.getInstance().isThemeMusic());
+                if (!CommandCenter.getInstance().isThemeMusic()) {
+                    SoundLoader.stopSound("theme_loop.wav");
+                } else {
+                    SoundLoader.playSound("theme_loop.wav");
+                }
+                break;
             case UNIVERSE:
                 CommandCenter.getInstance().cycleUniverse();
                 break;

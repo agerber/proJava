@@ -17,7 +17,7 @@ public class CommandCenter {
 	public enum Universe {
 		SMALL,
 		SMALL_FIXED_POSITION,
-		BIG_FIXED_POSITION,
+		BIG,
 		HORIZONTAL
 
 	}
@@ -31,7 +31,7 @@ public class CommandCenter {
 	private  int level;
 	private  long score;
 	private  boolean paused;
-	//private  boolean themeMusic;
+	private  boolean themeMusic;
 	//this value is used to count the number of frames (full animation cycles) in the game
 	private long frame;
 
@@ -70,9 +70,6 @@ public class CommandCenter {
 		return miniHash.get(universe);
 	}
 
-//	public int getUniverseScalar() {
-//		return (universe == Universe.BIG_FIXED_POSITION) ? MiniMap.BIG_UNIVERSE_SCALAR : 1;
-//	}
 
 	public void cycleUniverse() {
 		//cycle universe among its vals
@@ -81,9 +78,9 @@ public class CommandCenter {
 				universe = Universe.SMALL_FIXED_POSITION;
 				break;
 			case SMALL_FIXED_POSITION:
-				universe = Universe.BIG_FIXED_POSITION;
+				universe = Universe.BIG;
 				break;
-			case BIG_FIXED_POSITION:
+			case BIG:
 				universe = Universe.HORIZONTAL;
 				break;
 			case HORIZONTAL:
@@ -100,6 +97,12 @@ public class CommandCenter {
 	public void initGame(){
 		clearAll();
 		generateStarField();
+
+		miniHash.put(Universe.SMALL, new MiniMeta(1,1));
+		miniHash.put(Universe.SMALL_FIXED_POSITION, new MiniMeta(1,1));
+		miniHash.put(Universe.BIG, new MiniMeta(3,3));
+		miniHash.put(Universe.HORIZONTAL, new MiniMeta(5,1));
+
 		setLevel(0);
 		setScore(0);
 		setPaused(false);
@@ -108,10 +111,8 @@ public class CommandCenter {
 		falcon.decrementFalconNumAndSpawn();
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 		opsQueue.enqueue(miniMap, GameOp.Action.ADD);
-		miniHash.put(Universe.SMALL, new MiniMeta(1,1));
-		miniHash.put(Universe.SMALL_FIXED_POSITION, new MiniMeta(1,1));
-		miniHash.put(Universe.BIG_FIXED_POSITION, new MiniMeta(3,3));
-		miniHash.put(Universe.HORIZONTAL, new MiniMeta(6,1));
+
+
 
 
 	}
