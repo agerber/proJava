@@ -5,22 +5,28 @@ package edu.uchicago.gerber._08final.mvc.controller;
 import edu.uchicago.gerber._08final.mvc.model.*;
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 //The CommandCenter is a singleton that manages the state of the game.
 //the lombok @Data gives us automatic getters and setters on all members
 @Data
 public class CommandCenter {
 
-
 	public enum Universe {
 		SMALL,
 		SMALL_FIXED_POSITION,
-		BIG_FIXED_POSITION
+		BIG_FIXED_POSITION,
+		HORIZONTAL
 
 	}
 
+
 	public Universe universe = Universe.SMALL_FIXED_POSITION;
+
+	private Map<Universe, MiniMeta> miniHash = new HashMap<>();
+
 	private  int numFalcons;
 	private  int level;
 	private  long score;
@@ -34,6 +40,7 @@ public class CommandCenter {
 	//Lombok will not provide setter methods on final members
 
 	private final Falcon falcon  = new Falcon();
+
 	private final MiniMap miniMap = new MiniMap();
 
 	//lists containing our movables subdivided by team
@@ -59,12 +66,16 @@ public class CommandCenter {
 		return instance;
 	}
 
-	public int getUniverseScalar() {
-		return (universe == Universe.BIG_FIXED_POSITION) ? MiniMap.BIG_UNIVERSE_SCALAR : 1;
+	public MiniMeta getMeta(){
+		return miniHash.get(universe);
 	}
 
+//	public int getUniverseScalar() {
+//		return (universe == Universe.BIG_FIXED_POSITION) ? MiniMap.BIG_UNIVERSE_SCALAR : 1;
+//	}
+
 	public void cycleUniverse() {
-		//tri-cycle universe among its vals
+		//cycle universe among its vals
 		switch (universe) {
 			case SMALL:
 				universe = Universe.SMALL_FIXED_POSITION;
@@ -73,6 +84,9 @@ public class CommandCenter {
 				universe = Universe.BIG_FIXED_POSITION;
 				break;
 			case BIG_FIXED_POSITION:
+				universe = Universe.HORIZONTAL;
+				break;
+			case HORIZONTAL:
 				universe = Universe.SMALL;
 				break;
 		}
@@ -94,6 +108,10 @@ public class CommandCenter {
 		falcon.decrementFalconNumAndSpawn();
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 		opsQueue.enqueue(miniMap, GameOp.Action.ADD);
+		miniHash.put(Universe.SMALL, new MiniMeta(1,1));
+		miniHash.put(Universe.SMALL_FIXED_POSITION, new MiniMeta(1,1));
+		miniHash.put(Universe.BIG_FIXED_POSITION, new MiniMeta(3,3));
+		miniHash.put(Universe.HORIZONTAL, new MiniMeta(6,1));
 
 
 	}

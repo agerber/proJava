@@ -12,11 +12,13 @@ import java.awt.*;
  * Inspired by Michael Vasiliou's Sinistar, winner of Java game contest 2016.
  */
 public class MiniMap extends Sprite {
+
+
      //size of mini-map as percentage of screen (game dimension)
-    private final double MINI_MAP_PERCENT = 0.23;
+    private final double MINI_MAP_PERCENT = 0.31;
 
     //the size of big universe as a multiplier in relation to the game-dim (screen).
-    public static final int BIG_UNIVERSE_SCALAR = 3;
+   // public static final int BIG_UNIVERSE_SCALAR = 3;
 
     private final Color pumpkin = new Color(200, 100, 50);
 
@@ -31,12 +33,13 @@ public class MiniMap extends Sprite {
     @Override
     public void draw(Graphics g) {
 
+
         //scale to some percent of game-dim
-        int miniWidth = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.width);
+        int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width);
         int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
 
-        //if BIG_FIXED_POSITION - draw the big bounding box.
-        if (CommandCenter.getInstance().getUniverse() == CommandCenter.Universe.BIG_FIXED_POSITION) {
+        //if not small universe.
+        if (!CommandCenter.getInstance().getUniverse().toString().contains("SMALL")) {
 
             //gray bounding box (entire universe)
             g.setColor(Color.DARK_GRAY);
@@ -46,11 +49,11 @@ public class MiniMap extends Sprite {
                     miniWidth,
                     miniHeight
             );
-        } //end big
+        } //end not small
 
         g.setColor(Color.DARK_GRAY);
-        int miniViewPortWidth = miniWidth / MiniMap.BIG_UNIVERSE_SCALAR;
-        int miniViewPortHeight = miniHeight / MiniMap.BIG_UNIVERSE_SCALAR;
+        int miniViewPortWidth = miniWidth / CommandCenter.getInstance().getMeta().getScaleX();
+        int miniViewPortHeight = miniHeight / CommandCenter.getInstance().getMeta().getScaleY();
         g.drawRect(
                 0 ,
                 0,
@@ -109,8 +112,8 @@ public class MiniMap extends Sprite {
     //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
     private Point scalePoint(Point point){
         return new Point(
-                (int) Math.round(MINI_MAP_PERCENT * point.x / MiniMap.BIG_UNIVERSE_SCALAR),
-                (int) Math.round(MINI_MAP_PERCENT * point.y / MiniMap.BIG_UNIVERSE_SCALAR)
+                (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getMeta().getScaleX()),
+                (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getMeta().getScaleY())
         );
     }
 

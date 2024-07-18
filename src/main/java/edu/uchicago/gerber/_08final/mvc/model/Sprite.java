@@ -79,19 +79,20 @@ public abstract class Sprite implements Movable {
         // where you need to override the move() method.
 
         //A scalar(larger than 1) allows the sprite to move beyond the bounds of the game-screen dimension
-        int scalar = CommandCenter.getInstance().getUniverseScalar();
+        int scalarX = CommandCenter.getInstance().getMeta().getScaleX();
+        int scalarY = CommandCenter.getInstance().getMeta().getScaleY();
         //right-bounds reached
-        if (center.x > scalar * Game.DIM.width) {
+        if (center.x > scalarX * Game.DIM.width) {
             setCenter(new Point(1, center.y));
         //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(new Point(scalar * Game.DIM.width -1 , center.y));
+            setCenter(new Point(scalarX * Game.DIM.width -1 , center.y));
         //bottom-bounds reached
-        } else if (center.y > scalar * Game.DIM.height) {
+        } else if (center.y > scalarY * Game.DIM.height) {
             setCenter(new Point(center.x, 1));
         //top-bounds reached
         } else if (center.y < 0) {
-            setCenter(new Point(center.x, scalar * Game.DIM.height -1 ));
+            setCenter(new Point(center.x, scalarY * Game.DIM.height -1 ));
         //in-bounds
         } else {
             double newXPos = center.x + getDeltaX();
