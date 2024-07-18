@@ -188,7 +188,6 @@ public class GamePanel extends Panel {
                     "'S' to Start",
                     "'P' to Pause",
                     "'Q' to Quit",
-                    "'M' to toggle music",
                     "'A' to toggle among universes"
 
             );
