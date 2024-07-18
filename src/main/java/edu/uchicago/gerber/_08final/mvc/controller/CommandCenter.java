@@ -25,7 +25,7 @@ public class CommandCenter {
 	private  int level;
 	private  long score;
 	private  boolean paused;
-	private  boolean themeMusic;
+	//private  boolean themeMusic;
 	//this value is used to count the number of frames (full animation cycles) in the game
 	private long frame;
 
@@ -89,8 +89,6 @@ public class CommandCenter {
 		setLevel(0);
 		setScore(0);
 		setPaused(false);
-		setThemeMusic(true);
-		SoundLoader.playSound("dr-who_loop.wav");
 		//set to one greater than number of falcons lives in your game as decrementFalconNumAndSpawn() also decrements
 		setNumFalcons(4);
 		falcon.decrementFalconNumAndSpawn();

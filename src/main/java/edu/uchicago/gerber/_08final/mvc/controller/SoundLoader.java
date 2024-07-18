@@ -45,13 +45,17 @@ public class SoundLoader {
 	 */
 	private static final ThreadPoolExecutor soundExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
 
+	private static boolean loopedCondition(String str){
+		str = str.toLowerCase();
+		return str.endsWith("_loop.wav");
+	}
 
 	private static Map<String, Clip> loadLoopedSounds(Path rootDirectory) throws IOException {
 		Map<String, Clip> soundClips = new HashMap<>();
 		Files.walkFileTree(rootDirectory, new SimpleFileVisitor<Path>() {
 			@Override
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-				if (file.toString().toLowerCase().endsWith("_loop.wav")) {
+				if (loopedCondition(file.toString())) {
 					try {
 						Clip clip = getLoopClip(file);
 						if (clip != null) {
@@ -102,7 +106,7 @@ public class SoundLoader {
 	// Used for both looped and non-looped clips
 	public static void playSound(final String strPath) {
 		//Looped clips are fetched from existing static LOOP_SOUNDS_MAP at runtime.
-		if (strPath.endsWith("_loop.wav")){
+		if (loopedCondition(strPath)){
 			LOOPED_CLIPS_MAP.get(strPath).loop(Clip.LOOP_CONTINUOUSLY);
 			return;
 		}
@@ -131,7 +135,7 @@ public class SoundLoader {
 	// non-looped clip will do nothing.
 	public static void stopSound(final String strPath) {
 		try {
-			if (strPath.endsWith("_loop.wav")) {
+			if (loopedCondition(strPath)) {
 				LOOPED_CLIPS_MAP.get(strPath).stop();
 			}
 		} catch (Exception e){
@@ -139,6 +143,8 @@ public class SoundLoader {
 			e.fillInStackTrace();
 		}
 	}
+
+
 
 
 

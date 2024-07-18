@@ -267,6 +267,7 @@ public class Game implements Runnable, KeyListener {
             int level = CommandCenter.getInstance().getLevel();
             //award some points for having cleared the previous level
             CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + (10_000L * level));
+
             //bump the level up
             level = level + 1;
             CommandCenter.getInstance().setLevel(level);
@@ -278,6 +279,8 @@ public class Game implements Runnable, KeyListener {
                 CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
             //show "Level X" in middle of screen
             CommandCenter.getInstance().getFalcon().setShowLevel(Falcon.INITIAL_SPAWN_TIME);
+            //after three levels cleared, play theme
+            if (level % 3 == 0) SoundLoader.playSound("theme.wav");
 
         }
     }
@@ -354,14 +357,14 @@ public class Game implements Runnable, KeyListener {
                 SoundLoader.stopSound("whitenoise_loop.wav");
                 break;
 
-            case MUTE:
-                CommandCenter.getInstance().setThemeMusic(!CommandCenter.getInstance().isThemeMusic());
-                if (!CommandCenter.getInstance().isThemeMusic()) {
-                    SoundLoader.stopSound("dr-who_loop.wav");
-                } else {
-                    SoundLoader.playSound("dr-who_loop.wav");
-                }
-                break;
+//            case MUTE:
+//                CommandCenter.getInstance().setThemeMusic(!CommandCenter.getInstance().isThemeMusic());
+//                if (!CommandCenter.getInstance().isThemeMusic()) {
+//                    SoundLoader.stopSound("theme.wav");
+//                } else {
+//                    SoundLoader.playSound("theme.wav");
+//                }
+//                break;
             case UNIVERSE:
                 CommandCenter.getInstance().cycleUniverse();
                 break;
