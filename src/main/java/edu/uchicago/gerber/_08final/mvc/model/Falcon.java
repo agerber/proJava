@@ -165,8 +165,7 @@ public class Falcon extends Sprite {
 		}
 		else if (shield > 0){
 			imageState = thrusting ? ImageState.FALCON_PRO_THR : ImageState.FALCON_PRO;
-			//you can also combine vector elements and raster elements
-		    drawShield(g);
+		    drawShieldHalo(g);
 		}
 		else { //not protected
 			imageState = thrusting ? ImageState.FALCON_THR : ImageState.FALCON;
@@ -178,12 +177,13 @@ public class Falcon extends Sprite {
 
 	}
 
-	private void drawShield(Graphics g){
+	private void drawShieldHalo(Graphics g){
 		g.setColor(Color.CYAN);
 		g.drawOval(getCenter().x - getRadius(), getCenter().y - getRadius(), getRadius() *2, getRadius() *2);
 	}
 
 	private void drawNukeHalo(Graphics g){
+		if (invisible > 0) return;
 		g.setColor(Color.YELLOW);
 		g.drawOval(getCenter().x - getRadius()+10, getCenter().y - getRadius()+10, getRadius() *2 -20,
 				getRadius() *2-20);
