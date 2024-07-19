@@ -17,8 +17,6 @@ public class MiniMap extends Sprite {
      //size of mini-map as percentage of screen (game dimension)
     private final double MINI_MAP_PERCENT = 0.31;
 
-    //the size of big universe as a multiplier in relation to the game-dim (screen).
-   // public static final int BIG_UNIVERSE_SCALAR = 3;
 
     private final Color pumpkin = new Color(200, 100, 50);
 
@@ -51,6 +49,7 @@ public class MiniMap extends Sprite {
             );
         } //end not small
 
+        //draw the view-portal box
         g.setColor(Color.DARK_GRAY);
         int miniViewPortWidth = miniWidth / CommandCenter.getInstance().getUniDim().width;
         int miniViewPortHeight = miniHeight / CommandCenter.getInstance().getUniDim().height;

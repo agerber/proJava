@@ -90,9 +90,6 @@ public class CommandCenter {
 		}
 	}
 
-	public boolean isFalconPositionFixed(){
-		return CommandCenter.getInstance().getUniverse() != CommandCenter.Universe.SMALL_FREE_FLY;
-	}
 
 
 	public void initGame(){
@@ -113,7 +110,7 @@ public class CommandCenter {
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 		opsQueue.enqueue(miniMap, GameOp.Action.ADD);
 
-		//if you like the theme to Dr. Who, uncomment this
+		//if you like the theme to Dr. Who, uncomment these two lines to start with music playing; M toggle mute
 //		setThemeMusic(true);
 //		SoundLoader.playSound("theme_loop.wav");
 
@@ -148,6 +145,10 @@ public class CommandCenter {
 		return numFalcons < 1;
 	}
 
+
+	public boolean isFalconPositionFixed(){
+		return universe != Universe.SMALL_FREE_FLY;
+	}
 
 
 
