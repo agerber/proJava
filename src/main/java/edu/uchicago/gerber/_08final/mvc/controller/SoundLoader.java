@@ -107,7 +107,12 @@ public class SoundLoader {
 	public static void playSound(final String strPath) {
 		//Looped clips are fetched from existing static LOOP_SOUNDS_MAP at runtime.
 		if (loopedCondition(strPath)){
-			LOOPED_CLIPS_MAP.get(strPath).loop(Clip.LOOP_CONTINUOUSLY);
+			try {
+				LOOPED_CLIPS_MAP.get(strPath).loop(Clip.LOOP_CONTINUOUSLY);
+			} catch (Exception e){
+				//catch any exception and continue.
+				e.fillInStackTrace();
+			}
 			return;
 		}
         //Non-looped clips are enqueued onto executor-threadpool at runtime.
@@ -134,10 +139,9 @@ public class SoundLoader {
 	//Non-looped clips can not be stopped, they simply expire on their own. Calling this method on a
 	// non-looped clip will do nothing.
 	public static void stopSound(final String strPath) {
+		if (!loopedCondition(strPath)) return;
 		try {
-			if (loopedCondition(strPath)) {
-				LOOPED_CLIPS_MAP.get(strPath).stop();
-			}
+			LOOPED_CLIPS_MAP.get(strPath).stop();
 		} catch (Exception e){
 			//catch any exception and continue.
 			e.fillInStackTrace();

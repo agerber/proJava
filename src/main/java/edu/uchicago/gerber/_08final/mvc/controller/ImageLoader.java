@@ -20,7 +20,6 @@ All raster images loaded in static context prior to runtime.
 public class ImageLoader {
 
     private static Map<String, BufferedImage> IMAGE_MAP = null;
-    //If LOAD_IMAGES_IN_STATIC_CONTEXT is true, load all images prior to runtime in the static context
     static {
             Path rootDirectory = Paths.get("src/main/resources/imgs");
             Map<String, BufferedImage> localMap = null;
