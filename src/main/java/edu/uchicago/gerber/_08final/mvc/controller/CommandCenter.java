@@ -67,9 +67,6 @@ public class CommandCenter {
 		return instance;
 	}
 
-	public Dimension getUniDim(){
-		return miniDimHash.get(universe);
-	}
 
 
 	public void cycleUniverse() {
@@ -145,6 +142,9 @@ public class CommandCenter {
 		return numFalcons < 1;
 	}
 
+	public Dimension getUniDim(){
+		return miniDimHash.get(universe);
+	}
 
 	public boolean isFalconPositionFixed(){
 		return universe != Universe.SMALL_FREE_FLY;
