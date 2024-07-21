@@ -22,10 +22,7 @@ public class CommandCenter {
 
 	}
 
-
 	public Universe universe = Universe.BIG;
-
-
 	private  int numFalcons;
 	private  int level;
 	private  long score;
@@ -37,11 +34,9 @@ public class CommandCenter {
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap.
 	//Lombok will not provide setter methods on final members
-
 	private final Falcon falcon  = new Falcon();
-
 	//miniDimHash contains meta-data dimension about the Universe.
-	private Map<Universe, Dimension> miniDimHash = new HashMap<>();
+	private final Map<Universe, Dimension> miniDimHash = new HashMap<>();
 	private final MiniMap miniMap = new MiniMap();
 
 	//lists containing our movables subdivided by team
@@ -70,7 +65,6 @@ public class CommandCenter {
 
 
 	public void cycleUniverse() {
-		//cycle universe among its vals
 		switch (universe) {
 			case SMALL_FREE_FLY:
 				universe = Universe.SMALL;
@@ -93,6 +87,7 @@ public class CommandCenter {
 		clearAll();
 		generateStarField();
 
+		//initialize with values which define the aspect ratio of the Universe
 		miniDimHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
 		miniDimHash.put(Universe.SMALL, new Dimension(1,1));
 		miniDimHash.put(Universe.BIG, new Dimension(2,2));
@@ -127,7 +122,6 @@ public class CommandCenter {
 
 
 	public void incrementFrame(){
-		//use of ternary expression to simplify the logic to one line
 		frame = frame < Long.MAX_VALUE ? frame + 1 : 0;
 	}
 
