@@ -52,28 +52,28 @@ public class Star implements Movable{
     @Override
     public void move() {
 
-        //if falcon position is NOT fixed return
+        //if falcon position is NOT fixed (e.g. SMALL_FREE_FLY), return
         if (!CommandCenter.getInstance().isFalconPositionFixed()) return;
+
+        //else, falcon position is fixed, and the stars must move to orient player in falcon-fixed-play
 
             //right-bounds reached
         if (center.x > Game.DIM.width) {
-            setCenter(new Point(1, center.y));
-            //left-bounds reached
+            center.x = 1;
+         //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(new Point(Game.DIM.width - 1 , center.y));
+            center.x = Game.DIM.width - 1;
             //bottom-bounds reached
         } else if (center.y > Game.DIM.height) {
-            setCenter(new Point(center.x, 1));
+            center.y = 1;
             //top-bounds reached
         } else if (center.y < 0) {
-            setCenter(new Point(center.x, Game.DIM.height - 1));
+            center.y = Game.DIM.height - 1;
             //in-bounds
         } else {
             //move star in opposite direction of falcon.
-            double newXPos = center.x - CommandCenter.getInstance().getFalcon().getDeltaX();
-            double newYPos = center.y - CommandCenter.getInstance().getFalcon().getDeltaY();
-            center.x = (int) Math.round(newXPos);
-            center.y = (int) Math.round(newYPos);
+            center.x = (int) Math.round(center.x - CommandCenter.getInstance().getFalcon().getDeltaX());
+            center.y = (int) Math.round(center.y - CommandCenter.getInstance().getFalcon().getDeltaY());
         }
 
 

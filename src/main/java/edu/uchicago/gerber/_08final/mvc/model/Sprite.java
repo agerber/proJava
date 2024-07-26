@@ -83,25 +83,28 @@ public abstract class Sprite implements Movable {
         int scalarY = CommandCenter.getInstance().getUniDim().height;
         //right-bounds reached
         if (center.x > scalarX * Game.DIM.width) {
-            setCenter(new Point(1, center.y));
+            center.x = 1;
         //left-bounds reached
         } else if (center.x < 0) {
-            setCenter(new Point(scalarX * Game.DIM.width -1 , center.y));
+            center.x = scalarX * Game.DIM.width -1;
         //bottom-bounds reached
         } else if (center.y > scalarY * Game.DIM.height) {
-            setCenter(new Point(center.x, 1));
+            center.y = 1;
         //top-bounds reached
         } else if (center.y < 0) {
-            setCenter(new Point(center.x, scalarY * Game.DIM.height -1 ));
+            center.y = scalarY * Game.DIM.height -1;
         //in-bounds
         } else {
-            double newXPos = center.x + getDeltaX();
-            double newYPos = center.y + getDeltaY();
+            double newXPos = center.x;
+            double newYPos = center.y;
             //move the sprite in the opposite direction of the falcon to create centered-play
             if (CommandCenter.getInstance().isFalconPositionFixed()){
                 newXPos -= CommandCenter.getInstance().getFalcon().getDeltaX();
                 newYPos -= CommandCenter.getInstance().getFalcon().getDeltaY();
             }
+            newXPos += getDeltaX();
+            newYPos += getDeltaY();
+            //we can not mutate the center directly in this case, we must instantiate an entirely new Point
             setCenter(new Point((int) Math.round(newXPos), (int) Math.round(newYPos)));
         }
 
@@ -184,6 +187,7 @@ public abstract class Sprite implements Movable {
         //The reason we convert cartesian-points to polar-points is that it's much easier to rotate polar-points
         List<PolarPoint> polars = Utils.cartesianToPolar(getCartesians());
 
+        //The following 3 functions are used in map transforms in stream below.
         //2: rotate raw polars given the orientation of the sprite.
         Function<PolarPoint, PolarPoint> rotatePolarByOrientation =
                 pp -> new PolarPoint(
