@@ -97,15 +97,13 @@ public abstract class Sprite implements Movable {
         } else {
             double newXPos = center.x;
             double newYPos = center.y;
-            //move the sprite in the opposite direction of the falcon to create centered-play
+            //if falcon-fixed, move the sprite in the opposite direction of the falcon to create centered-play
             if (CommandCenter.getInstance().isFalconPositionFixed()){
                 newXPos -= CommandCenter.getInstance().getFalcon().getDeltaX();
                 newYPos -= CommandCenter.getInstance().getFalcon().getDeltaY();
             }
-            newXPos += getDeltaX();
-            newYPos += getDeltaY();
-            //we can not mutate the center directly in this case, we must instantiate an entirely new Point
-            setCenter(new Point((int) Math.round(newXPos), (int) Math.round(newYPos)));
+            center.x = (int) Math.round(newXPos + getDeltaX());
+            center.y = (int) Math.round(newYPos + getDeltaY());
         }
 
         //expire (decrement expiry) on short-lived objects only

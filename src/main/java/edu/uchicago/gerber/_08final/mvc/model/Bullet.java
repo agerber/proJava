@@ -22,7 +22,7 @@ public class Bullet extends Sprite {
 
 
         //everything is relative to the falcon ship that fired the bullet
-        setCenter(falcon.getCenter());
+        setCenter((Point)falcon.getCenter().clone());
 
         //set the bullet orientation to the falcon (ship) orientation
         setOrientation(falcon.getOrientation());

@@ -48,7 +48,7 @@ public class Asteroid extends Sprite {
 	public Asteroid(Asteroid astExploded){
 		//calls the other constructor: Asteroid(int size)
 		this(astExploded.getSize() + 1);
-		setCenter(astExploded.getCenter());
+		setCenter((Point)astExploded.getCenter().clone());
 		int newSmallerSize = astExploded.getSize() + 1;
 		//random delta-x : inertia + the smaller the asteroid, the faster its possible speed
 		setDeltaX(astExploded.getDeltaX() / 1.5 + somePosNegValue( 5 + newSmallerSize * 2));

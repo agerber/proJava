@@ -38,7 +38,7 @@ public class WhiteCloudDebris extends Sprite{
 
         //everything is relative to the exploding sprite
         setSpin(explodingSprite.getSpin());
-        setCenter(explodingSprite.getCenter());
+        setCenter((Point)explodingSprite.getCenter().clone());
         setDeltaX(explodingSprite.getDeltaX());
         setDeltaY(explodingSprite.getDeltaY());
         setRadius((int) (explodingSprite.getRadius() * 1.3));

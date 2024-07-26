@@ -15,7 +15,7 @@ public class Nuke extends Sprite{
     private int nukeState = 0;
 
     public Nuke(Falcon falcon) {
-        setCenter(falcon.getCenter());
+        setCenter((Point)falcon.getCenter().clone());
         setColor(Color.YELLOW);
         setExpiry(EXPIRE);
         setRadius(0);
