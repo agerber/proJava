@@ -5,7 +5,6 @@ import edu.uchicago.gerber._08final.mvc.model.PolarPoint;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -16,7 +15,7 @@ public class Utils {
     ////////////////////////////////////////////////////////////////////
     //Utility method for transforming cartesian2Polar
     ////////////////////////////////////////////////////////////////////
-    public static List<PolarPoint> cartesianToPolar(Point[]  pntCartesians) {
+    public static List<PolarPoint> cartesiansToPolars(Point[]  pntCartesians) {
 
         //Function used in stream below, as well as in BiFunction below
         Function<Point, Double> hypotenuseOfPoint = (pnt) ->

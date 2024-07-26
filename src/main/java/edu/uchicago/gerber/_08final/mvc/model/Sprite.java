@@ -183,14 +183,14 @@ public abstract class Sprite implements Movable {
 
         //1: convert raw cartesians to raw polars (used later in stream below).
         //The reason we convert cartesian-points to polar-points is that it's much easier to rotate polar-points
-        List<PolarPoint> polars = Utils.cartesianToPolar(getCartesians());
+        List<PolarPoint> polars = Utils.cartesiansToPolars(cartesians);
 
-        //The following 3 functions are used in map transforms in stream below.
+        //The following 3 functions are used in map transforms in stream of polars below.
         //2: rotate raw polars given the orientation of the sprite.
         Function<PolarPoint, PolarPoint> rotatePolarByOrientation =
                 pp -> new PolarPoint(
                         pp.getR(),
-                        pp.getTheta() + Math.toRadians(getOrientation()) //rotated Theta
+                        pp.getTheta() + Math.toRadians(orientation) //rotated Theta
                 );
 
         //3: convert the rotated polars back to cartesians

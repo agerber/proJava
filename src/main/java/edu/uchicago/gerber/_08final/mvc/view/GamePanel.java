@@ -9,7 +9,6 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 
@@ -259,7 +258,7 @@ public class GamePanel extends Panel {
         final int Y_POS = Game.DIM.height - 45;
 
         //the reason we convert to polar-points is that it's much easier to rotate polar-points.
-        List<PolarPoint> polars = Utils.cartesianToPolar(pntShipsRemaining);
+        List<PolarPoint> polars = Utils.cartesiansToPolars(pntShipsRemaining);
 
         Function<PolarPoint, PolarPoint> rotatePolarBy90 =
                 pp -> new PolarPoint(
