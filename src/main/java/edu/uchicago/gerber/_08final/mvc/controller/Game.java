@@ -21,7 +21,7 @@ public class Game implements Runnable, KeyListener {
     // FIELDS
     // ===============================================
 
-    public static final Dimension DIM = new Dimension(1400,800); //the dimension of the game-screen.
+    public static final Dimension DIM = new Dimension(1500,950); //the dimension of the game-screen.
 
 
 

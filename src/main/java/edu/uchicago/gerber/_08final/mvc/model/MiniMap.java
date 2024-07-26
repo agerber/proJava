@@ -14,7 +14,7 @@ import java.awt.*;
 public class MiniMap extends Sprite {
 
 
-     //size of mini-map as percentage of screen (game dimension)
+    //size of mini-map as percentage of screen (game dimension)
     private final double MINI_MAP_PERCENT = 0.31;
 
 
@@ -31,23 +31,22 @@ public class MiniMap extends Sprite {
     @Override
     public void draw(Graphics g) {
 
+        //exclude ordinals 0 and 1 (the small universes)
+        if (CommandCenter.getInstance().getUniverse().ordinal() < 2) return;
 
         //scale to some percent of game-dim
         int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width);
         int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height);
 
-        //if not small universe.
-        if (!CommandCenter.getInstance().getUniverse().toString().contains("SMALL")) {
+        //gray bounding box (entire universe)
+        g.setColor(Color.DARK_GRAY);
+        g.drawRect(
+                0,
+                0,
+                miniWidth,
+                miniHeight
+        );
 
-            //gray bounding box (entire universe)
-            g.setColor(Color.DARK_GRAY);
-            g.drawRect(
-                    0,
-                    0,
-                    miniWidth,
-                    miniHeight
-            );
-        } //end not small
 
         //draw the view-portal box
         g.setColor(Color.DARK_GRAY);
@@ -60,6 +59,7 @@ public class MiniMap extends Sprite {
                 miniViewPortHeight
 
         );
+
 
         //draw debris radar-blips.
         CommandCenter.getInstance().getMovDebris().forEach( mov -> {
