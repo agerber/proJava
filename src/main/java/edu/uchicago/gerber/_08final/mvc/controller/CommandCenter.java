@@ -104,7 +104,7 @@ public class CommandCenter {
 
 		//if you like the theme to Dr. Who, uncomment these two lines to start with music playing; M toggle mute
 //		setThemeMusic(true);
-//		SoundLoader.playSound("dr-who_loop.wav");
+//		SoundLoader.playSound("dr_loop.wav");
 
 
 

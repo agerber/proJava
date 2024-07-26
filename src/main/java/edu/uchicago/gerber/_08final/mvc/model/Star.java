@@ -72,7 +72,8 @@ public class Star implements Movable{
             //move star in opposite direction of falcon.
             double newXPos = center.x - CommandCenter.getInstance().getFalcon().getDeltaX();
             double newYPos = center.y - CommandCenter.getInstance().getFalcon().getDeltaY();
-            setCenter(new Point((int) Math.round(newXPos), (int) Math.round(newYPos)));
+            center.x = (int) Math.round(newXPos);
+            center.y = (int) Math.round(newYPos);
         }
 
 
