@@ -251,8 +251,6 @@ public class GamePanel extends Panel {
 
         g.setColor(Color.ORANGE);
 
-        //rotate the ship 90 degrees
-        final double DEGREES_90 = 90.0;
         final int SHIP_RADIUS = 15;
         final int X_POS = Game.DIM.width - (27 * offSet);
         final int Y_POS = Game.DIM.height - 45;
@@ -263,7 +261,7 @@ public class GamePanel extends Panel {
         Function<PolarPoint, PolarPoint> rotatePolarBy90 =
                 pp -> new PolarPoint(
                         pp.getR(),
-                        pp.getTheta() + Math.toRadians(DEGREES_90) //rotated Theta
+                        pp.getTheta() + Math.toRadians(90.0) //rotated Theta
                 );
 
         Function<PolarPoint, Point> polarToCartesian =
