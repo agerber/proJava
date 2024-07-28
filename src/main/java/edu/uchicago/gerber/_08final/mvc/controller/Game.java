@@ -262,42 +262,42 @@ public class Game implements Runnable, KeyListener {
 
     private void checkNewLevel() {
 
-        if (isLevelClear()) {
-            //currentLevel will be zero at beginning of game
-            int level = CommandCenter.getInstance().getLevel();
-            //award some points for having cleared the previous level
-            CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + (10_000L * level));
+        //short-circuit if level not yet cleared
+        if (!isLevelClear()) return;
 
-            //center the falcon at each level-clear
-            CommandCenter.getInstance().getFalcon().setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
+        //currentLevel will be zero at beginning of game
+        int level = CommandCenter.getInstance().getLevel();
+        //award some points for having cleared the previous level
+        CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + (10_000L * level));
 
-            // 4 is the length of current universes. Set universe according to mod of level
-            int ordinal = level % CommandCenter.Universe.values().length;
-            CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
-            CommandCenter.getInstance().setUniverse(key);
+        //center the falcon at each level-clear
+        CommandCenter.getInstance().getFalcon().setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 
-            //bump the level up
-            level = level + 1;
-            CommandCenter.getInstance().setLevel(level);
-            //spawn some big new asteroids
-            spawnBigAsteroids(level);
-            //make falcon invincible momentarily in case new asteroids spawn on top of him, and give player
-            //time to adjust to new universe and new asteroids in game space.
-            CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
-            //show "Level X" in middle of screen
-            CommandCenter.getInstance().getFalcon().setShowLevel(Falcon.INITIAL_SPAWN_TIME);
+        // 4 is the length of current universes. Set universe according to mod of level
+        int ordinal = level % CommandCenter.Universe.values().length;
+        CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
+        CommandCenter.getInstance().setUniverse(key);
 
-            //play theme music during bonus round. Currently, the bonus round does nothing.
-            if (CommandCenter.getInstance().getLevel() % 3 == 0) {
-                CommandCenter.getInstance().setThemeMusic(true);
-                SoundLoader.playSound("dr_loop.wav");
-            } else {
-                CommandCenter.getInstance().setThemeMusic(false);
-                SoundLoader.stopSound("dr_loop.wav");
-            }
+        //bump the level up
+        level = level + 1;
+        CommandCenter.getInstance().setLevel(level);
+        //spawn some big new asteroids
+        spawnBigAsteroids(level);
+        //make falcon invincible momentarily in case new asteroids spawn on top of him, and give player
+        //time to adjust to new universe and new asteroids in game space.
+        CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
+        //show "Level X" in middle of screen
+        CommandCenter.getInstance().getFalcon().setShowLevel(Falcon.INITIAL_SPAWN_TIME);
 
-
+        //play theme music during bonus round. Currently, the bonus round does nothing.
+        if (CommandCenter.getInstance().getLevel() % 3 == 0) {
+            CommandCenter.getInstance().setThemeMusic(true);
+            SoundLoader.playSound("dr_loop.wav");
+        } else {
+            CommandCenter.getInstance().setThemeMusic(false);
+            SoundLoader.stopSound("dr_loop.wav");
         }
+
     }
 
 
