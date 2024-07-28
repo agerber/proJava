@@ -373,12 +373,14 @@ public class Game implements Runnable, KeyListener {
                 break;
 
             case MUTE:
-                CommandCenter.getInstance().setThemeMusic(!CommandCenter.getInstance().isThemeMusic());
-                if (!CommandCenter.getInstance().isThemeMusic()) {
+                //if music is currently playing, then stop
+                if (CommandCenter.getInstance().isThemeMusic()) {
                     SoundLoader.stopSound("dr_loop.wav");
-                } else {
+                } else { //else not playing, then play
                     SoundLoader.playSound("dr_loop.wav");
                 }
+                //toggle the boolean switch
+                CommandCenter.getInstance().setThemeMusic(!CommandCenter.getInstance().isThemeMusic());
                 break;
             case UNIVERSE:
                 CommandCenter.getInstance().cycleUniverse();
