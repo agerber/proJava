@@ -22,7 +22,7 @@ public class CommandCenter {
 
 	}
 
-	public Universe universe = Universe.BIG;
+	public Universe universe = Universe.SMALL_FREE_FLY;
 	private  int numFalcons;
 	private  int level;
 	private  long score;
@@ -83,6 +83,8 @@ public class CommandCenter {
 
 
 
+
+
 	public void initGame(){
 		clearAll();
 		generateStarField();
@@ -102,9 +104,7 @@ public class CommandCenter {
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 		opsQueue.enqueue(miniMap, GameOp.Action.ADD);
 
-		//if you like the theme to Dr. Who, uncomment these two lines to start with music playing; M toggle mute
-//		setThemeMusic(true);
-//		SoundLoader.playSound("dr_loop.wav");
+
 
 
 

@@ -22,7 +22,7 @@ public class Falcon extends Sprite {
 	//number of degrees the falcon will turn at each animation cycle if the turnState is LEFT or RIGHT
 	public final static int TURN_STEP = 11;
 	//number of frames that the falcon will be protected after a spawn
-	public static final int INITIAL_SPAWN_TIME = 46;
+	public static final int INITIAL_SPAWN_TIME = 76;
 	//number of frames falcon will be protected after consuming a NewShieldFloater
 	public static final int MAX_SHIELD = 200;
 	public static final int MAX_NUKE = 600;
@@ -203,7 +203,7 @@ public class Falcon extends Sprite {
 		if (CommandCenter.getInstance().isGameOver()) return;
 		SoundLoader.playSound("shipspawn.wav");
 		setShield(Falcon.INITIAL_SPAWN_TIME);
-		setInvisible(Falcon.INITIAL_SPAWN_TIME/4);
+		setInvisible(Falcon.INITIAL_SPAWN_TIME/5);
 		//put falcon in the middle of the game-space
 		setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 		//random number between 0-360 in steps of TURN_STEP

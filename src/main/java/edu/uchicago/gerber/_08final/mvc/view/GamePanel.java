@@ -110,6 +110,7 @@ public class GamePanel extends Panel {
                 fontHeight);
         //draw the level upper-right corner always
         String levelText = "Level: " + CommandCenter.getInstance().getLevel();
+        if (CommandCenter.getInstance().getLevel() % 3 == 0) levelText += " BONUS ROUND";
         graphics.drawString(levelText, Game.DIM.width - OFFSET_LEFT, fontHeight * 2); //upper-right corner
         //draw score always
         graphics.drawString("Score :  " + CommandCenter.getInstance().getScore(), Game.DIM.width - OFFSET_LEFT,
@@ -121,7 +122,7 @@ public class GamePanel extends Panel {
         if (CommandCenter.getInstance().getFalcon().isMaxSpeedAttained()) statusArray.add("WARNING - SLOW DOWN");
         if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0) statusArray.add("PRESS F for NUKE");
 
-        //draw the statusArray strings to middle of screen
+            //draw the statusArray strings to middle of screen
         if (!statusArray.isEmpty())
             displayTextOnScreen(graphics, statusArray.toArray(new String[0]));
 

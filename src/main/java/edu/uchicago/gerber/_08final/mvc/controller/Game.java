@@ -268,6 +268,12 @@ public class Game implements Runnable, KeyListener {
             //award some points for having cleared the previous level
             CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + (10_000L * level));
 
+            // 4 is the length of universes.
+            CommandCenter.getInstance().getFalcon().setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
+            int ordinal = level % CommandCenter.Universe.values().length;
+            CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
+            CommandCenter.getInstance().setUniverse(key);
+
             //bump the level up
             level = level + 1;
             CommandCenter.getInstance().setLevel(level);
@@ -279,6 +285,16 @@ public class Game implements Runnable, KeyListener {
                 CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
             //show "Level X" in middle of screen
             CommandCenter.getInstance().getFalcon().setShowLevel(Falcon.INITIAL_SPAWN_TIME);
+
+            //play theme music during bonus round
+            if (CommandCenter.getInstance().getLevel() % 3 == 0) {
+                CommandCenter.getInstance().setThemeMusic(true);
+                SoundLoader.playSound("dr_loop.wav");
+            } else {
+                CommandCenter.getInstance().setThemeMusic(false);
+                SoundLoader.stopSound("dr_loop.wav");
+            }
+
 
         }
     }
