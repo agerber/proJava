@@ -204,8 +204,6 @@ public class Falcon extends Sprite {
 		SoundLoader.playSound("shipspawn.wav");
 		setShield(Falcon.INITIAL_SPAWN_TIME);
 		setInvisible(Falcon.INITIAL_SPAWN_TIME/5);
-		//put falcon in the middle of the game-space
-		setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 		//random number between 0-360 in steps of TURN_STEP
 		setOrientation(Game.R.nextInt(360 / Falcon.TURN_STEP) * Falcon.TURN_STEP);
 		setDeltaX(0);

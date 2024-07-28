@@ -268,8 +268,10 @@ public class Game implements Runnable, KeyListener {
             //award some points for having cleared the previous level
             CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + (10_000L * level));
 
-            // 4 is the length of universes.
+            //center the falcon at each level-clear
             CommandCenter.getInstance().getFalcon().setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
+
+            // 4 is the length of current universes. Set universe according to mod of level
             int ordinal = level % CommandCenter.Universe.values().length;
             CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
             CommandCenter.getInstance().setUniverse(key);
