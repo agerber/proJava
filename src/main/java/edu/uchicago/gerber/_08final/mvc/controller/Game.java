@@ -282,13 +282,12 @@ public class Game implements Runnable, KeyListener {
             //spawn some big new asteroids
             spawnBigAsteroids(level);
             //make falcon invincible momentarily in case new asteroids spawn on top of him, and give player
-            //time to adjust to new asteroids in game space.
-            if (CommandCenter.getInstance().getFalcon().getShield() < Falcon.INITIAL_SPAWN_TIME)
-                CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
+            //time to adjust to new universe and new asteroids in game space.
+            CommandCenter.getInstance().getFalcon().setShield(Falcon.INITIAL_SPAWN_TIME);
             //show "Level X" in middle of screen
             CommandCenter.getInstance().getFalcon().setShowLevel(Falcon.INITIAL_SPAWN_TIME);
 
-            //play theme music during bonus round
+            //play theme music during bonus round. Currently, the bonus round does nothing.
             if (CommandCenter.getInstance().getLevel() % 3 == 0) {
                 CommandCenter.getInstance().setThemeMusic(true);
                 SoundLoader.playSound("dr_loop.wav");
