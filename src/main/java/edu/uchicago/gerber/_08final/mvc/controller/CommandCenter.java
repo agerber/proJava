@@ -16,7 +16,7 @@ public class CommandCenter {
 
 	public enum Universe {
 		SMALL_FREE_FLY,
-		SMALL,
+		SMALL_FIXED,
 		BIG,
 		HORIZONTAL
 
@@ -67,9 +67,9 @@ public class CommandCenter {
 	public void cycleUniverse() {
 		switch (universe) {
 			case SMALL_FREE_FLY:
-				universe = Universe.SMALL;
+				universe = Universe.SMALL_FIXED;
 				break;
-			case SMALL:
+			case SMALL_FIXED:
 				universe = Universe.BIG;
 				break;
 			case BIG:
@@ -91,7 +91,7 @@ public class CommandCenter {
 
 		//initialize with values which define the aspect ratio of the Universe
 		miniDimHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
-		miniDimHash.put(Universe.SMALL, new Dimension(1,1));
+		miniDimHash.put(Universe.SMALL_FIXED, new Dimension(1,1));
 		miniDimHash.put(Universe.BIG, new Dimension(2,2));
 		miniDimHash.put(Universe.HORIZONTAL, new Dimension(2,1));
 

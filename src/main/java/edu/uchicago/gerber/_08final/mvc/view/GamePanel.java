@@ -106,13 +106,14 @@ public class GamePanel extends Panel {
         graphics.setFont(fontNormal);
         final int OFFSET_LEFT = 220;
 
-        graphics.drawString("Universe: "+CommandCenter.getInstance().universe.toString(), Game.DIM.width - OFFSET_LEFT,
-                fontHeight);
-        //draw the level upper-right corner always
+
+        //draw the level upper-right corner
         String levelText = "Level: " + CommandCenter.getInstance().getLevel();
         if (CommandCenter.getInstance().getLevel() % 3 == 0) levelText += " BONUS ROUND";
-        graphics.drawString(levelText, Game.DIM.width - OFFSET_LEFT, fontHeight * 2); //upper-right corner
-        //draw score always
+        graphics.drawString(levelText, Game.DIM.width - OFFSET_LEFT, fontHeight); //upper-right corner
+        //draw universes and score
+        graphics.drawString("Universe: "+CommandCenter.getInstance().universe.toString(), Game.DIM.width - OFFSET_LEFT,
+                fontHeight * 2);
         graphics.drawString("Score :  " + CommandCenter.getInstance().getScore(), Game.DIM.width - OFFSET_LEFT,
                 fontHeight * 3);
 
