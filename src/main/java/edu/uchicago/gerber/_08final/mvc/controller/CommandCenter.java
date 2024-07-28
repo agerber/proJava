@@ -18,7 +18,9 @@ public class CommandCenter {
 		SMALL_FREE_FLY,
 		SMALL_FIXED,
 		BIG,
-		HORIZONTAL
+		HORIZONTAL,
+		VERTICAL,
+		DARK
 
 	}
 
@@ -76,6 +78,12 @@ public class CommandCenter {
 				universe = Universe.HORIZONTAL;
 				break;
 			case HORIZONTAL:
+				universe = Universe.VERTICAL;
+				break;
+			case VERTICAL:
+				universe = Universe.DARK;
+				break;
+			case DARK:
 				universe = Universe.SMALL_FREE_FLY;
 				break;
 		}
@@ -93,7 +101,9 @@ public class CommandCenter {
 		miniDimHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
 		miniDimHash.put(Universe.SMALL_FIXED, new Dimension(1,1));
 		miniDimHash.put(Universe.BIG, new Dimension(2,2));
-		miniDimHash.put(Universe.HORIZONTAL, new Dimension(2,1));
+		miniDimHash.put(Universe.HORIZONTAL, new Dimension(3,1));
+		miniDimHash.put(Universe.VERTICAL, new Dimension(1,3));
+		miniDimHash.put(Universe.DARK, new Dimension(4,4));
 
 		setLevel(0);
 		setScore(0);
