@@ -109,7 +109,6 @@ public class GamePanel extends Panel {
 
         //draw the level upper-right corner
         String levelText = "Level: " + CommandCenter.getInstance().getLevel();
-        if (CommandCenter.getInstance().getLevel() % 3 == 0) levelText += " BONUS ROUND";
         graphics.drawString(levelText, Game.DIM.width - OFFSET_LEFT, fontHeight); //upper-right corner
         //draw universes and score
         graphics.drawString("Universe: "+CommandCenter.getInstance().universe.toString(), Game.DIM.width - OFFSET_LEFT,
@@ -189,8 +188,8 @@ public class GamePanel extends Panel {
                     "'S' to Start",
                     "'P' to Pause",
                     "'Q' to Quit",
-                    "'M' to toggle music",
-                    "'A' to toggle among universes"
+                    "'M' to toggle music"
+                    //"'A' to toggle among universes"
 
             );
         } else if (CommandCenter.getInstance().isPaused()) {

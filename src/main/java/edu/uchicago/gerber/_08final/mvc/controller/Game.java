@@ -21,7 +21,7 @@ public class Game implements Runnable, KeyListener {
     // FIELDS
     // ===============================================
 
-    public static final Dimension DIM = new Dimension(1500,950); //the dimension of the game-screen.
+    public static final Dimension DIM = new Dimension(1500, 950); //the dimension of the game-screen.
 
 
 
@@ -46,14 +46,7 @@ public class Game implements Runnable, KeyListener {
             START = 83, // s key
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
-
-            UNIVERSE = 65, //a-key
-
             NUKE = 70; // f-key mute
-
-    // for possible future use
-    // HYPER = 68, 					// D key
-    //ALIEN = 65;                // A key
 
 
 
@@ -67,6 +60,7 @@ public class Game implements Runnable, KeyListener {
         gamePanel.addKeyListener(this); //Game object implements KeyListener
         //fire up the animation thread
         animationThread = new Thread(this); // pass the animation thread a runnable object, the Game object
+        //set as daemon so as not to block the main thread from exiting
         animationThread.setDaemon(true);
         animationThread.start();
 
@@ -216,9 +210,6 @@ public class Game implements Runnable, KeyListener {
     }
 
 
-
-
-
     private void spawnShieldFloater() {
 
         if (CommandCenter.getInstance().getFrame() % ShieldFloater.SPAWN_SHIELD_FLOATER == 0) {
@@ -273,7 +264,7 @@ public class Game implements Runnable, KeyListener {
         //center the falcon at each level-clear
         CommandCenter.getInstance().getFalcon().setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 
-        // 4 is the length of current universes. Set universe according to mod of level
+        //Set universe according to mod of level - cycle through universes
         int ordinal = level % CommandCenter.Universe.values().length;
         CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
         CommandCenter.getInstance().setUniverse(key);
@@ -289,14 +280,6 @@ public class Game implements Runnable, KeyListener {
         //show "Level X" in middle of screen
         CommandCenter.getInstance().getFalcon().setShowLevel(Falcon.INITIAL_SPAWN_TIME);
 
-        //play theme music during bonus round. Currently, the bonus round does nothing.
-        if (CommandCenter.getInstance().getLevel() % 3 == 0) {
-            CommandCenter.getInstance().setThemeMusic(true);
-            SoundLoader.playSound("dr_loop.wav");
-        } else {
-            CommandCenter.getInstance().setThemeMusic(false);
-            SoundLoader.stopSound("dr_loop.wav");
-        }
 
     }
 
@@ -335,12 +318,6 @@ public class Game implements Runnable, KeyListener {
             case RIGHT:
                 falcon.setTurnState(Falcon.TurnState.RIGHT);
                 break;
-
-
-            // possible future use
-            // case KILL:
-            // case SHIELD:
-            // case NUM_ENTER:
 
             default:
                 break;
@@ -382,9 +359,7 @@ public class Game implements Runnable, KeyListener {
                 //toggle the boolean switch
                 CommandCenter.getInstance().setThemeMusic(!CommandCenter.getInstance().isThemeMusic());
                 break;
-            case UNIVERSE:
-                CommandCenter.getInstance().cycleUniverse();
-                break;
+
         }
 
     }

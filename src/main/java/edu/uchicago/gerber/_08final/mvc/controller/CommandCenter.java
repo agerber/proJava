@@ -24,7 +24,7 @@ public class CommandCenter {
 
 	}
 
-	public Universe universe = Universe.SMALL_FREE_FLY;
+	public Universe universe;
 	private  int numFalcons;
 	private  int level;
 	private  long score;
@@ -37,7 +37,7 @@ public class CommandCenter {
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap.
 	//Lombok will not provide setter methods on final members
 	private final Falcon falcon  = new Falcon();
-	//miniDimHash contains meta-data dimension about the Universe.
+	//miniDimHash associates dimension with the Universe. See constructor below.
 	private final Map<Universe, Dimension> miniDimHash = new HashMap<>();
 	private final MiniMap miniMap = new MiniMap();
 
@@ -54,7 +54,15 @@ public class CommandCenter {
 	private static CommandCenter instance = null;
 
 	// Constructor made private
-	private CommandCenter() {}
+	private CommandCenter() {
+		//initialize with values which define the aspect ratio of the Universe
+		miniDimHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
+		miniDimHash.put(Universe.SMALL_FIXED, new Dimension(1,1));
+		miniDimHash.put(Universe.BIG, new Dimension(2,2));
+		miniDimHash.put(Universe.HORIZONTAL, new Dimension(3,1));
+		miniDimHash.put(Universe.VERTICAL, new Dimension(1,3));
+		miniDimHash.put(Universe.DARK, new Dimension(4,4));
+	}
 
     //this class maintains game state - make this a singleton.
 	public static CommandCenter getInstance(){
@@ -65,46 +73,9 @@ public class CommandCenter {
 	}
 
 
-
-	public void cycleUniverse() {
-		switch (universe) {
-			case SMALL_FREE_FLY:
-				universe = Universe.SMALL_FIXED;
-				break;
-			case SMALL_FIXED:
-				universe = Universe.BIG;
-				break;
-			case BIG:
-				universe = Universe.HORIZONTAL;
-				break;
-			case HORIZONTAL:
-				universe = Universe.VERTICAL;
-				break;
-			case VERTICAL:
-				universe = Universe.DARK;
-				break;
-			case DARK:
-				universe = Universe.SMALL_FREE_FLY;
-				break;
-		}
-	}
-
-
-
-
-
 	public void initGame(){
 		clearAll();
 		generateStarField();
-
-		//initialize with values which define the aspect ratio of the Universe
-		miniDimHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
-		miniDimHash.put(Universe.SMALL_FIXED, new Dimension(1,1));
-		miniDimHash.put(Universe.BIG, new Dimension(2,2));
-		miniDimHash.put(Universe.HORIZONTAL, new Dimension(3,1));
-		miniDimHash.put(Universe.VERTICAL, new Dimension(1,3));
-		miniDimHash.put(Universe.DARK, new Dimension(4,4));
-
 		setLevel(0);
 		setScore(0);
 		setPaused(false);
@@ -114,10 +85,6 @@ public class CommandCenter {
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 		opsQueue.enqueue(miniMap, GameOp.Action.ADD);
 
-
-
-
-
 	}
 
 	private void generateStarField(){
@@ -126,10 +93,7 @@ public class CommandCenter {
 		while (count-- > 0){
 			opsQueue.enqueue(new Star(), GameOp.Action.ADD);
 		}
-
 	}
-
-
 
 	public void incrementFrame(){
 		frame = frame < Long.MAX_VALUE ? frame + 1 : 0;
