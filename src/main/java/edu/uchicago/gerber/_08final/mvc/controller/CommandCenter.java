@@ -15,8 +15,8 @@ import java.util.Map;
 public class CommandCenter {
 
 	public enum Universe {
-		SMALL_FREE_FLY,
-		SMALL_FIXED,
+		FREE_FLY,
+		CENTER,
 		BIG,
 		HORIZONTAL,
 		VERTICAL,
@@ -56,8 +56,8 @@ public class CommandCenter {
 	// Constructor made private
 	private CommandCenter() {
 		//initialize with values that define the aspect ratio of the Universe. See checkNewLevel() of Game class.
-		miniDimHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
-		miniDimHash.put(Universe.SMALL_FIXED, new Dimension(1,1));
+		miniDimHash.put(Universe.FREE_FLY, new Dimension(1,1));
+		miniDimHash.put(Universe.CENTER, new Dimension(1,1));
 		miniDimHash.put(Universe.BIG, new Dimension(2,2));
 		miniDimHash.put(Universe.HORIZONTAL, new Dimension(3,1));
 		miniDimHash.put(Universe.VERTICAL, new Dimension(1,3));
@@ -115,7 +115,7 @@ public class CommandCenter {
 	}
 
 	public boolean isFalconPositionFixed(){
-		return universe != Universe.SMALL_FREE_FLY;
+		return universe != Universe.FREE_FLY;
 	}
 
 
