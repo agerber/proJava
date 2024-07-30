@@ -55,7 +55,7 @@ public class CommandCenter {
 
 	// Constructor made private
 	private CommandCenter() {
-		//initialize with values which define the aspect ratio of the Universe
+		//initialize with values that define the aspect ratio of the Universe. See checkNewLevel() of Game class.
 		miniDimHash.put(Universe.SMALL_FREE_FLY, new Dimension(1,1));
 		miniDimHash.put(Universe.SMALL_FIXED, new Dimension(1,1));
 		miniDimHash.put(Universe.BIG, new Dimension(2,2));

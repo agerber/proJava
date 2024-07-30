@@ -108,13 +108,11 @@ public class GamePanel extends Panel {
 
 
         //draw the level upper-right corner
-        String levelText = "Level: " + CommandCenter.getInstance().getLevel();
+        String levelText = "Level : [" + CommandCenter.getInstance().getLevel() + "] " +
+        CommandCenter.getInstance().universe.toString();
         graphics.drawString(levelText, Game.DIM.width - OFFSET_LEFT, fontHeight); //upper-right corner
-        //draw universes and score
-        graphics.drawString("Universe: "+CommandCenter.getInstance().universe.toString(), Game.DIM.width - OFFSET_LEFT,
-                fontHeight * 2);
         graphics.drawString("Score :  " + CommandCenter.getInstance().getScore(), Game.DIM.width - OFFSET_LEFT,
-                fontHeight * 3);
+                fontHeight * 2);
 
         //build the status string array with possible messages in middle of screen
         List<String> statusArray = new ArrayList<>();
