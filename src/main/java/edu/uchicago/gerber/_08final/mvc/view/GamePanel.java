@@ -109,7 +109,7 @@ public class GamePanel extends Panel {
 
         //draw the level upper-right corner
         String levelText = "Level : [" + CommandCenter.getInstance().getLevel() + "] " +
-        CommandCenter.getInstance().universe.toString();
+        CommandCenter.getInstance().universe.toString().replace('_', ' ');
         graphics.drawString(levelText, Game.DIM.width - OFFSET_LEFT, fontHeight); //upper-right corner
         graphics.drawString("Score :  " + CommandCenter.getInstance().getScore(), Game.DIM.width - OFFSET_LEFT,
                 fontHeight * 2);
