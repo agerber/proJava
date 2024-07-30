@@ -6,6 +6,7 @@ import edu.uchicago.gerber._08final.mvc.controller.Utils;
 import edu.uchicago.gerber._08final.mvc.model.*;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -19,6 +20,7 @@ public class GamePanel extends Panel {
     // ==============================================================
     private final Font fontNormal = new Font("SansSerif", Font.BOLD, 12);
     private final Font fontBig = new Font("SansSerif", Font.BOLD + Font.ITALIC, 36);
+    private final DecimalFormat decimalFormat = new DecimalFormat("#,###");
     private FontMetrics fontMetrics;
     private int fontWidth;
     private int fontHeight;
@@ -29,7 +31,6 @@ public class GamePanel extends Panel {
     //used for double-buffering
     private Image imgOff;
     private Graphics grpOff;
-
 
 
 
@@ -108,10 +109,11 @@ public class GamePanel extends Panel {
 
 
         //draw the level upper-right corner
-        String levelText = "Level : [" + CommandCenter.getInstance().getLevel() + "] " +
+        String levelText = "Level : [" + CommandCenter.getInstance().getLevel() + "]  " +
         CommandCenter.getInstance().universe.toString().replace('_', ' ');
         graphics.drawString(levelText, Game.DIM.width - OFFSET_LEFT, fontHeight); //upper-right corner
-        graphics.drawString("Score :  " + CommandCenter.getInstance().getScore(), Game.DIM.width - OFFSET_LEFT,
+        graphics.drawString("Score : " + decimalFormat.format(CommandCenter.getInstance().getScore()),
+                Game.DIM.width - OFFSET_LEFT,
                 fontHeight * 2);
 
         //build the status string array with possible messages in middle of screen
