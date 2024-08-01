@@ -283,9 +283,6 @@ public class Game implements Runnable, KeyListener {
 
     }
 
-
-
-
     // ===============================================
     // KEYLISTENER METHODS
     // ===============================================
@@ -294,19 +291,12 @@ public class Game implements Runnable, KeyListener {
     public void keyPressed(KeyEvent e) {
         Falcon falcon = CommandCenter.getInstance().getFalcon();
         int keyCode = e.getKeyCode();
-
-        if (keyCode == START && CommandCenter.getInstance().isGameOver()) {
-            CommandCenter.getInstance().initGame();
-            return;
-        }
-
-
         switch (keyCode) {
-            case PAUSE:
-                CommandCenter.getInstance().setPaused(!CommandCenter.getInstance().isPaused());
+            case FIRE:
+                CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(falcon), GameOp.Action.ADD);
                 break;
-            case QUIT:
-                System.exit(0);
+            case NUKE:
+                CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
                 break;
             case UP:
                 falcon.setThrusting(true);
@@ -318,7 +308,6 @@ public class Game implements Runnable, KeyListener {
             case RIGHT:
                 falcon.setTurnState(Falcon.TurnState.RIGHT);
                 break;
-
             default:
                 break;
         }
@@ -332,13 +321,13 @@ public class Game implements Runnable, KeyListener {
         //show the key-code in the console
         System.out.println(keyCode);
 
+        if (keyCode == START && CommandCenter.getInstance().isGameOver()) {
+            CommandCenter.getInstance().initGame();
+            return;
+        }
+
         switch (keyCode) {
-            case FIRE:
-                CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(falcon), GameOp.Action.ADD);
-                break;
-            case NUKE:
-                CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
-                break;
+
             //releasing either the LEFT or RIGHT arrow key will set the TurnState to IDLE
             case LEFT:
             case RIGHT:
@@ -348,7 +337,12 @@ public class Game implements Runnable, KeyListener {
                 falcon.setThrusting(false);
                 SoundLoader.stopSound("whitenoise_loop.wav");
                 break;
-
+            case PAUSE:
+                CommandCenter.getInstance().setPaused(!CommandCenter.getInstance().isPaused());
+                break;
+            case QUIT:
+                System.exit(0);
+                break;
             case MUTE:
                 //if music is currently playing, then stop
                 if (CommandCenter.getInstance().isThemeMusic()) {
@@ -358,6 +352,8 @@ public class Game implements Runnable, KeyListener {
                 }
                 //toggle the boolean switch
                 CommandCenter.getInstance().setThemeMusic(!CommandCenter.getInstance().isThemeMusic());
+                break;
+            default:
                 break;
 
         }
