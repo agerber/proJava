@@ -35,8 +35,8 @@ public class Falcon extends Sprite {
 		FALCON_INVISIBLE, //for pre-spawning
 		FALCON, //normal ship
 		FALCON_THR, //normal ship thrusting
-		FALCON_PRO, //protected ship (cyan)
-		FALCON_PRO_THR, //protected ship (cyan) thrusting
+		FALCON_SHIELD, //shielded ship (cyan)
+		FALCON_SHIELD_THR, //shielded ship (cyan) thrusting
 
 	}
 
@@ -76,8 +76,8 @@ public class Falcon extends Sprite {
 		rasterMap.put(ImageState.FALCON_INVISIBLE, null );
 		rasterMap.put(ImageState.FALCON, ImageLoader.getImage("/imgs/fal/falcon125.png")); //normal ship
 		rasterMap.put(ImageState.FALCON_THR, ImageLoader.getImage("/imgs/fal/falcon125_thr.png")); //normal ship thrusting
-		rasterMap.put(ImageState.FALCON_PRO, ImageLoader.getImage("/imgs/fal/falcon125_PRO.png")); //protected ship (cyan)
-		rasterMap.put(ImageState.FALCON_PRO_THR, ImageLoader.getImage("/imgs/fal/falcon125_PRO_thr.png")); //cyan thrusting
+		rasterMap.put(ImageState.FALCON_SHIELD, ImageLoader.getImage("/imgs/fal/falcon125_SHIELD.png")); //SHIELD
+		rasterMap.put(ImageState.FALCON_SHIELD_THR, ImageLoader.getImage("/imgs/fal/falcon125_SHIELD_thr.png")); //S+THR
 
 		setRasterMap(rasterMap);
 
@@ -164,7 +164,7 @@ public class Falcon extends Sprite {
 			imageState = ImageState.FALCON_INVISIBLE;
 		}
 		else if (shield > 0){
-			imageState = thrusting ? ImageState.FALCON_PRO_THR : ImageState.FALCON_PRO;
+			imageState = thrusting ? ImageState.FALCON_SHIELD_THR : ImageState.FALCON_SHIELD;
 		    drawShieldHalo(g);
 		}
 		else { //not protected
