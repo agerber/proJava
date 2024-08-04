@@ -22,7 +22,7 @@ public class Falcon extends Sprite {
 	//number of degrees the falcon will turn at each animation cycle if the turnState is LEFT or RIGHT
 	public final static int TURN_STEP = 11;
 	//number of frames that the falcon will be protected after a spawn
-	public static final int INITIAL_SPAWN_TIME = 60;
+	public static final int INITIAL_SPAWN_TIME = 48;
 	//number of frames falcon will be protected after consuming a NewShieldFloater
 	public static final int MAX_SHIELD = 200;
 	public static final int MAX_NUKE = 600;

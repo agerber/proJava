@@ -122,7 +122,7 @@ public class MiniMap extends Sprite {
     }
 
 
-    //the purpose of this method is to adjust the aspect of those universes with different widths and heights
+    //the purpose of this method is to adjust the aspect of non-square universes
     private AspectDim aspectAdjustedDimension(Dimension universeDim){
         if (universeDim.width == universeDim.height){
             return new AspectDim(1.0, 1.0);
