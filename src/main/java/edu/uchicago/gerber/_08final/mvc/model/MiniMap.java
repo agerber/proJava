@@ -17,6 +17,8 @@ public class MiniMap extends Sprite {
     //size of mini-map as percentage of screen (game dimension)
     private final double MINI_MAP_PERCENT = 0.31;
 
+    //used to adjust non-square universes. Set in draw()
+    private AspectDim aspectDim;
 
     private final Color pumpkin = new Color(200, 100, 50);
 
@@ -36,7 +38,7 @@ public class MiniMap extends Sprite {
         if (CommandCenter.getInstance().getUniverse().ordinal() < 2) return;
 
         //get the aspect-dimension which is used for those universes with differing widths and heights
-        AspectDim aspectDim = aspectAdjustedDimension(CommandCenter.getInstance().getUniDim());
+        aspectDim = aspectAdjustedDimension(CommandCenter.getInstance().getUniDim());
 
         //scale to some percent of game-dim
         int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width * aspectDim.getWidth());
@@ -114,7 +116,6 @@ public class MiniMap extends Sprite {
     //this function takes a center-point of a movable and scales it to display the blip on the mini-map.
     //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
     private Point scalePoint(Point point){
-        AspectDim aspectDim = aspectAdjustedDimension(CommandCenter.getInstance().getUniDim());
         return new Point(
                 (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getUniDim().width * aspectDim.getWidth()),
                 (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getUniDim().height * aspectDim.getHeight())
