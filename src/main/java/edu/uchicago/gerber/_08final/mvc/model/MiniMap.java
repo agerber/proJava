@@ -37,7 +37,7 @@ public class MiniMap extends Sprite {
         //exclude ordinals 0 and 1 (the small universes)
         if (CommandCenter.getInstance().getUniverse().ordinal() < 2) return;
 
-        //get the aspect-dimension which is used for those universes with differing widths and heights
+        //get the aspect-dimension which is used to adjust for non-square universes
         aspectDim = aspectAdjustedDimension(CommandCenter.getInstance().getUniDim());
 
         //scale to some percent of game-dim
@@ -70,8 +70,8 @@ public class MiniMap extends Sprite {
         //draw debris radar-blips.
         CommandCenter.getInstance().getMovDebris().forEach( mov -> {
                     g.setColor(Color.darkGray);
-                    Point scaledPoint = scalePoint(mov.getCenter());
-                    g.fillOval(scaledPoint.x - 1, scaledPoint.y - 1, 2, 2);
+                    Point translatedPoint = translatePoint(mov.getCenter());
+                    g.fillOval(translatedPoint.x - 1, translatedPoint.y - 1, 2, 2);
                 }
         );
 
@@ -79,8 +79,8 @@ public class MiniMap extends Sprite {
         //draw foe (asteroids) radar-blips
         CommandCenter.getInstance().getMovFoes().forEach( mov -> {
                     g.setColor(Color.WHITE);
-                    Point scaledPoint = scalePoint(mov.getCenter());
-                    g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
+                    Point translatedPoint = translatePoint(mov.getCenter());
+                    g.fillOval(translatedPoint.x - 2, translatedPoint.y - 2, 4, 4);
                 }
         );
 
@@ -88,8 +88,8 @@ public class MiniMap extends Sprite {
         //draw floater radar-blips
         CommandCenter.getInstance().getMovFloaters().forEach( mov -> {
                     g.setColor(mov instanceof NukeFloater ? Color.YELLOW : Color.CYAN);
-                    Point scaledPoint = scalePoint(mov.getCenter());
-                    g.fillRect(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
+                    Point translatedPoint = translatePoint(mov.getCenter());
+                    g.fillRect(translatedPoint.x - 2, translatedPoint.y - 2, 4, 4);
                 }
         );
 
@@ -105,8 +105,8 @@ public class MiniMap extends Sprite {
                     else
                         color = pumpkin;
                     g.setColor(color);
-                    Point scaledPoint = scalePoint(mov.getCenter());
-                    g.fillOval(scaledPoint.x - 2, scaledPoint.y - 2, 4, 4);
+                    Point translatedPoint = translatePoint(mov.getCenter());
+                    g.fillOval(translatedPoint.x - 2, translatedPoint.y - 2, 4, 4);
                 }
         );
 
@@ -115,7 +115,7 @@ public class MiniMap extends Sprite {
 
     //this function takes a center-point of a movable and scales it to display the blip on the mini-map.
     //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
-    private Point scalePoint(Point point){
+    private Point translatePoint(Point point){
         return new Point(
                 (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getUniDim().width * aspectDim.getWidth()),
                 (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getUniDim().height * aspectDim.getHeight())
