@@ -10,10 +10,8 @@ public class AspectDim {
     private double height;
 
     public AspectDim scale(double scale){
-
         setHeight(this.height * scale);
         setWidth(this.width * scale);
-
         return this;
     }
 }

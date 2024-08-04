@@ -129,14 +129,12 @@ public class MiniMap extends Sprite {
         }
         else if (universeDim.width > universeDim.height){
             double wMultiple = (double) universeDim.width / universeDim.height;
-            AspectDim aspectDim = new AspectDim(wMultiple, 1.0);
-            return aspectDim.scale(0.5);
+            return new AspectDim(wMultiple, 1.0).scale(0.5);
         }
         //universeDim.width < universeDim.height
         else {
             double hMultiple = (double) universeDim.height / universeDim.width;
-            AspectDim aspectDim = new AspectDim(1.0, hMultiple);
-            return aspectDim.scale(0.5);
+            return new AspectDim(1.0, hMultiple).scale(0.5);
         }
 
     }
