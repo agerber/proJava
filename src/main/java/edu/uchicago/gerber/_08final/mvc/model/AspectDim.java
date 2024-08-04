@@ -6,10 +6,14 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AspectDim {
-    private double w;
-    private double h;
+    private double width;
+    private double height;
 
     public AspectDim scale(double scale){
-        return new AspectDim(this.w * scale, this.h * scale);
+
+        setHeight(this.height * scale);
+        setWidth(this.width * scale);
+
+        return this;
     }
 }

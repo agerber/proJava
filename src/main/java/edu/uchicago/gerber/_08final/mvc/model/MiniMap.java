@@ -39,8 +39,8 @@ public class MiniMap extends Sprite {
         AspectDim aspectDim = aspectAdjustedDimension(CommandCenter.getInstance().getUniDim());
 
         //scale to some percent of game-dim
-        int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width * aspectDim.getW());
-        int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height * aspectDim.getH());
+        int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width * aspectDim.getWidth());
+        int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height * aspectDim.getHeight());
 
         //gray bounding box (entire universe)
         g.setColor(Color.DARK_GRAY);
@@ -116,8 +116,8 @@ public class MiniMap extends Sprite {
     private Point scalePoint(Point point){
         AspectDim aspectDim = aspectAdjustedDimension(CommandCenter.getInstance().getUniDim());
         return new Point(
-                (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getUniDim().width * aspectDim.getW()),
-                (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getUniDim().height * aspectDim.getH())
+                (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getUniDim().width * aspectDim.getWidth()),
+                (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getUniDim().height * aspectDim.getHeight())
         );
     }
 
