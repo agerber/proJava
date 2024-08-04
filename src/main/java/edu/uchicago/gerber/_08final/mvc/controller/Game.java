@@ -46,7 +46,7 @@ public class Game implements Runnable, KeyListener {
             START = 83, // s key
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
-            NUKE = 70; // f-key mute
+            NUKE = 70; // f-key
 
 
 
@@ -100,7 +100,7 @@ public class Game implements Runnable, KeyListener {
             checkCollisions();
             checkNewLevel();
             checkFloaters();
-            //this method will execute add() and remove() callbacks on Movable objects
+            //this method will execute addToGame() and removeFromGame() callbacks on Movable objects
             processGameOpsQueue();
             //keep track of the frame for development purposes
             CommandCenter.getInstance().incrementFrame();
