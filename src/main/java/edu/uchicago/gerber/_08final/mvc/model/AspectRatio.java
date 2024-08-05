@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AspectDim {
+public class AspectRatio {
     private double width;
     private double height;
 
-    public AspectDim scale(double scale){
+    public AspectRatio scale(double scale){
         setHeight(this.height * scale);
         setWidth(this.width * scale);
         return this;

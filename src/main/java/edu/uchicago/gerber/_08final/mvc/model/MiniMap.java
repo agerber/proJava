@@ -18,7 +18,7 @@ public class MiniMap extends Sprite {
     private final double MINI_MAP_PERCENT = 0.31;
 
     //used to adjust non-square universes. Set in draw()
-    private AspectDim aspectDim;
+    private AspectRatio aspectRatio;
 
     private final Color pumpkin = new Color(200, 100, 50);
 
@@ -38,11 +38,11 @@ public class MiniMap extends Sprite {
         if (CommandCenter.getInstance().getUniverse().ordinal() < 2) return;
 
         //get the aspect-dimension which is used to adjust for non-square universes
-        aspectDim = aspectAdjustedDimension(CommandCenter.getInstance().getUniDim());
+        aspectRatio = aspectAdjustedRatio(CommandCenter.getInstance().getUniDim());
 
         //scale to some percent of game-dim
-        int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width * aspectDim.getWidth());
-        int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height * aspectDim.getHeight());
+        int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width * aspectRatio.getWidth());
+        int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height * aspectRatio.getHeight());
 
         //gray bounding box (entire universe)
         g.setColor(Color.DARK_GRAY);
@@ -117,25 +117,25 @@ public class MiniMap extends Sprite {
     //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
     private Point translatePoint(Point point){
         return new Point(
-                (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getUniDim().width * aspectDim.getWidth()),
-                (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getUniDim().height * aspectDim.getHeight())
+                (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getUniDim().width * aspectRatio.getWidth()),
+                (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getUniDim().height * aspectRatio.getHeight())
         );
     }
 
 
     //the purpose of this method is to adjust the aspect of non-square universes
-    private AspectDim aspectAdjustedDimension(Dimension universeDim){
+    private AspectRatio aspectAdjustedRatio(Dimension universeDim){
         if (universeDim.width == universeDim.height){
-            return new AspectDim(1.0, 1.0);
+            return new AspectRatio(1.0, 1.0);
         }
         else if (universeDim.width > universeDim.height){
             double wMultiple = (double) universeDim.width / universeDim.height;
-            return new AspectDim(wMultiple, 1.0).scale(0.5);
+            return new AspectRatio(wMultiple, 1.0).scale(0.5);
         }
         //universeDim.width < universeDim.height
         else {
             double hMultiple = (double) universeDim.height / universeDim.width;
-            return new AspectDim(1.0, hMultiple).scale(0.5);
+            return new AspectRatio(1.0, hMultiple).scale(0.5);
         }
 
     }
