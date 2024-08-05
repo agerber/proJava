@@ -35,9 +35,9 @@ public class MiniMap extends Sprite {
     public void draw(Graphics g) {
 
         //exclude ordinals 0 and 1 (the small universes)
-        if (CommandCenter.getInstance().getUniverse().ordinal() < 2) return;
+        //if (CommandCenter.getInstance().getUniverse().ordinal() < 2) return;
 
-        //get the aspect-dimension which is used to adjust for non-square universes
+        //get the aspect-ratio which is used to adjust for non-square universes
         aspectRatio = aspectAdjustedRatio(CommandCenter.getInstance().getUniDim());
 
         //scale to some percent of game-dim
