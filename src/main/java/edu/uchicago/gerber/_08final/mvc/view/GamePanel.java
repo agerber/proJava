@@ -188,8 +188,8 @@ public class GamePanel extends Panel {
                     "'S' to Start",
                     "'P' to Pause",
                     "'Q' to Quit",
-                    "'M' to toggle music"
-                    //"'A' to toggle among universes"
+                    "'M' to toggle music",
+                    "'A' to toggle mini-map"
 
             );
         } else if (CommandCenter.getInstance().isPaused()) {

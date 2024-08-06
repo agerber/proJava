@@ -34,6 +34,9 @@ public class MiniMap extends Sprite {
     @Override
     public void draw(Graphics g) {
 
+        //controlled by the A-key
+        if (!CommandCenter.getInstance().isMini()) return;
+
         //exclude ordinals 0 and 1 (the small universes)
         //if (CommandCenter.getInstance().getUniverse().ordinal() < 2) return;
 

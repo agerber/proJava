@@ -52,7 +52,7 @@ public class Star implements Movable{
     @Override
     public void move() {
 
-        //if falcon position is NOT fixed (e.g. SMALL_FREE_FLY), return
+        //if falcon position is NOT fixed (e.g. FREE_FLY), return
         if (!CommandCenter.getInstance().isFalconPositionFixed()) return;
 
         //else, falcon position is fixed, and the stars must move to orient player in falcon-fixed-play
