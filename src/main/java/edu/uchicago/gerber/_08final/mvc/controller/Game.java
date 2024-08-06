@@ -47,7 +47,7 @@ public class Game implements Runnable, KeyListener {
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
             NUKE = 70, // f-key
-            MINI = 65; // a-key
+            MINI = 82; // r-key
 
 
     // ===============================================
