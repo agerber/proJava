@@ -30,7 +30,7 @@ public class CommandCenter {
 	private  long score;
 	private  boolean paused;
 	private  boolean themeMusic;
-	private boolean mini; //to toggle on/off the mini-map
+	private boolean radar; //to toggle on/off the mini-map
 	//this value is used to count the number of frames (full animation cycles) in the game
 	private long frame;
 
@@ -85,7 +85,7 @@ public class CommandCenter {
 		falcon.decrementFalconNumAndSpawn();
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 		opsQueue.enqueue(miniMap, GameOp.Action.ADD);
-		setMini(true);
+		setRadar(true);
 
 	}
 

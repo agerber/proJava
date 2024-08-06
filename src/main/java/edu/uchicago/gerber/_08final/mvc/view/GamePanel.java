@@ -189,7 +189,7 @@ public class GamePanel extends Panel {
                     "'P' to Pause",
                     "'Q' to Quit",
                     "'M' to toggle music",
-                    "'R' to toggle radar"
+                    "'A' to toggle radar"
 
             );
         } else if (CommandCenter.getInstance().isPaused()) {

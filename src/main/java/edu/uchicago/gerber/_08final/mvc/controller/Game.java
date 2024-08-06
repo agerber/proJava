@@ -47,7 +47,7 @@ public class Game implements Runnable, KeyListener {
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
             NUKE = 70, // f-key
-            MINI = 82; // r-key
+            RADAR = 65; // a-key
 
 
     // ===============================================
@@ -343,9 +343,9 @@ public class Game implements Runnable, KeyListener {
             case QUIT:
                 System.exit(0);
                 break;
-            case MINI:
+            case RADAR:
                 //toggle the boolean switch
-                CommandCenter.getInstance().setMini(!CommandCenter.getInstance().isMini());
+                CommandCenter.getInstance().setRadar(!CommandCenter.getInstance().isRadar());
                 break;
             case MUTE:
                 //if music is currently playing, then stop
