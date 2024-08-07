@@ -134,7 +134,7 @@ public class GamePanel extends Panel {
     private void drawNumFrame(Graphics g) {
         g.setColor(Color.white);
         g.setFont(fontNormal);
-        g.drawString("FRAME :  " + CommandCenter.getInstance().getFrame(), fontWidth,
+        g.drawString("FRAME [JAVA] :  " + CommandCenter.getInstance().getFrame(), fontWidth,
                 Game.DIM.height  - (fontHeight + 22));
 
     }
