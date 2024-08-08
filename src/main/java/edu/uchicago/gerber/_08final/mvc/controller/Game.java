@@ -268,6 +268,8 @@ public class Game implements Runnable, KeyListener {
         int ordinal = level % CommandCenter.Universe.values().length;
         CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
         CommandCenter.getInstance().setUniverse(key);
+        //players will need radar in the big universes, but they can still toggle it off
+        if (ordinal > 1) CommandCenter.getInstance().setRadar(true);
 
         //bump the level up
         level = level + 1;
