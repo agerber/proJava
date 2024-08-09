@@ -79,7 +79,7 @@ public class Asteroid extends Sprite {
 		  //6.283 is the max radians
 		  final int MAX_RADIANS_X1000 =6283;
 		  //When casting from double to int, we truncate and lose precision, so best to be generous with the
-		  //precision factor as this will create a more random distribution of vertices. Precision is a proxy for
+		  //precision factor as this will create a more normal distribution of vertices. Precision is a proxy for
 		  //radius in the absence of a predefined radius.
 		  final double PRECISION = 1000.0;
 
