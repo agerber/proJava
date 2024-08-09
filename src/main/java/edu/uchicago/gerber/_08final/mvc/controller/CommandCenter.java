@@ -85,7 +85,7 @@ public class CommandCenter {
 		falcon.decrementFalconNumAndSpawn();
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 		opsQueue.enqueue(miniMap, GameOp.Action.ADD);
-		setRadar(true);
+
 
 	}
 
