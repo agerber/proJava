@@ -37,9 +37,6 @@ public class MiniMap extends Sprite {
         //controlled by the A-key
         if (!CommandCenter.getInstance().isRadar()) return;
 
-        //exclude ordinals 0 and 1 (the small universes)
-        //if (CommandCenter.getInstance().getUniverse().ordinal() < 2) return;
-
         //get the aspect-ratio which is used to adjust for non-square universes
         aspectRatio = aspectAdjustedRatio(CommandCenter.getInstance().getUniDim());
 

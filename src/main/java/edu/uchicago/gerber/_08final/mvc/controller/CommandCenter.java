@@ -24,7 +24,7 @@ public class CommandCenter {
 
 	}
 
-	public Universe universe;
+	private Universe universe;
 	private  int numFalcons;
 	private  int level;
 	private  long score;
