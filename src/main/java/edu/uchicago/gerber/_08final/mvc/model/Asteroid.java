@@ -106,7 +106,7 @@ public class Asteroid extends Sprite {
 				 .sorted(new Comparator<PolarPoint>() {
 							@Override
 							public int compare(PolarPoint pp1, PolarPoint pp2) {
-								return  pp1.getTheta().compareTo(pp2.getTheta());
+								return  pp1.compareTo(pp2);
 							}
 						})
 				 .map(polarToCartesian)
