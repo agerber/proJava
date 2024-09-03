@@ -10,6 +10,7 @@ import java.util.function.Function;
 
 import edu.uchicago.gerber._08final.mvc.controller.GameOp;
 import edu.uchicago.gerber._08final.mvc.controller.Utils;
+import edu.uchicago.gerber._08final.mvc.model.prime.PolarPoint;
 import lombok.Data;
 
 import java.awt.geom.AffineTransform;

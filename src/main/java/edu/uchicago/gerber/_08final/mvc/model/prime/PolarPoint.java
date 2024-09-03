@@ -1,4 +1,4 @@
-package edu.uchicago.gerber._08final.mvc.model;
+package edu.uchicago.gerber._08final.mvc.model.prime;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

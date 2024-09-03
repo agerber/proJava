@@ -1,6 +1,6 @@
 package edu.uchicago.gerber._08final.mvc.controller;
 
-import edu.uchicago.gerber._08final.mvc.model.PolarPoint;
+import edu.uchicago.gerber._08final.mvc.model.prime.PolarPoint;
 
 import java.awt.*;
 import java.util.Arrays;
