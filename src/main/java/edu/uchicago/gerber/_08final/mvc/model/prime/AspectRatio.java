@@ -12,6 +12,7 @@ public class AspectRatio {
     private double width;
     private double height;
 
+    //this is an example of the Fluent Interface pattern
     public AspectRatio scale(double scale){
         setHeight(this.height * scale);
         setWidth(this.width * scale);

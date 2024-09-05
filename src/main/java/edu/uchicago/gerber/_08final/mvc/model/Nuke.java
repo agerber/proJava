@@ -70,9 +70,10 @@ public class Nuke extends Sprite{
         }
 
     }
-
+    //the following overrides are an example of the Lifecycle Callback pattern.
     @Override
     public void addToGame(LinkedList<Movable> list) {
+        //only deploy the nuke if the nukeMeter > 0
         if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
             list.add(this);
             SoundLoader.playSound("nuke.wav");

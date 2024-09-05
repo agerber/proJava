@@ -21,7 +21,8 @@ public class MiniMap extends Sprite {
     //used to adjust non-square universes. Set in draw()
     private AspectRatio aspectRatio;
 
-    private final Color pumpkin = new Color(200, 100, 50);
+    private final Color PUMPKIN = new Color(200, 100, 50);
+    private final Color LIGHT_GRAY = new Color(200, 200, 200);
 
     public MiniMap() {
         setTeam(Team.DEBRIS);
@@ -70,7 +71,7 @@ public class MiniMap extends Sprite {
 
         //draw debris radar-blips.
         CommandCenter.getInstance().getMovDebris().forEach( mov -> {
-                    g.setColor(Color.darkGray);
+                    g.setColor(Color.DARK_GRAY);
                     Point translatedPoint = translatePoint(mov.getCenter());
                     g.fillOval(translatedPoint.x - 1, translatedPoint.y - 1, 2, 2);
                 }
@@ -79,9 +80,24 @@ public class MiniMap extends Sprite {
 
         //draw foe (asteroids) radar-blips
         CommandCenter.getInstance().getMovFoes().forEach( mov -> {
-                    g.setColor(Color.WHITE);
-                    Point translatedPoint = translatePoint(mov.getCenter());
-                    g.fillOval(translatedPoint.x - 2, translatedPoint.y - 2, 4, 4);
+                    if (!(mov instanceof  Asteroid)) return;
+                    Asteroid asteroid = (Asteroid) mov;
+                    g.setColor(LIGHT_GRAY);
+                    Point translatedPoint = translatePoint(asteroid.getCenter());
+                    switch (asteroid.getSize()){
+                        //large
+                        case 0:
+                            g.fillOval(translatedPoint.x - 3, translatedPoint.y - 3, 6, 6);
+                            break;
+                        //med
+                        case 1:
+                            g.drawOval(translatedPoint.x - 3, translatedPoint.y - 3, 6, 6);
+                            break;
+                        //small
+                        case 2:
+                        default:
+                            g.drawOval(translatedPoint.x - 2, translatedPoint.y - 2, 4, 4);
+                    }
                 }
         );
 
@@ -104,7 +120,7 @@ public class MiniMap extends Sprite {
                     else if (mov instanceof Nuke)
                         color = Color.YELLOW;
                     else
-                        color = pumpkin;
+                        color = PUMPKIN;
                     g.setColor(color);
                     Point translatedPoint = translatePoint(mov.getCenter());
                     g.fillOval(translatedPoint.x - 2, translatedPoint.y - 2, 4, 4);
