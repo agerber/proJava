@@ -55,9 +55,7 @@ public class CommandCenter {
 	private static CommandCenter instance = null;
 
 	// Constructor made private
-	private CommandCenter() {
-		initMiniDimHash();
-	}
+	private CommandCenter() {}
 
     //this class maintains game state - make this a singleton.
 	public static CommandCenter getInstance(){
@@ -71,6 +69,7 @@ public class CommandCenter {
 	public void initGame(){
 		clearAll();
 		generateStarField();
+		setDimHash();
 		setLevel(0);
 		setScore(0);
 		setPaused(false);
@@ -83,7 +82,7 @@ public class CommandCenter {
 
 	}
 
-	private void initMiniDimHash(){
+	private void setDimHash(){
 		//initialize with values that define the aspect ratio of the Universe. See checkNewLevel() of Game class.
 		miniDimHash.put(Universe.FREE_FLY, new Dimension(1,1));
 		miniDimHash.put(Universe.CENTER, new Dimension(1,1));
