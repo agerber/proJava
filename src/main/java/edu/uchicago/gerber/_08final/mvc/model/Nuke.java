@@ -70,7 +70,11 @@ public class Nuke extends Sprite{
         }
 
     }
-    //the following overrides are an example of the Lifecycle Callback pattern.
+
+    /* The following overrides are examples of Lifecycle Callbacks which are classified as a specific kind of Template
+    Method design pattern. Lifecycle Callbacks allow an object to perform specific actions at
+    well-defined stages of its lifecycle. Lifecycle Callbacks encapsulate logic that would otherwise be scattered throughout
+     other classes, thereby making the code more organized and easier to manage. */
     @Override
     public void addToGame(LinkedList<Movable> list) {
         //only deploy the nuke if the nukeMeter > 0
