@@ -45,8 +45,7 @@ public class ImageLoader {
                     try {
                         BufferedImage bufferedImage = ImageIO.read(file.toFile());
                         if (bufferedImage != null) {
-                            //substring(18) removes "src/main/resources" so that keys/paths are consistent with
-                            // static and non-static
+                            //substring(18) removes "src/main/resources" so that keys/paths are simple
                             pngImages.put(file.toString().toLowerCase().substring(18), bufferedImage);
                         }
                     } catch (IOException e) {

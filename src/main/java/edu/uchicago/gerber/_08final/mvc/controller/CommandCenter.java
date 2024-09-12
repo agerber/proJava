@@ -39,7 +39,7 @@ public class CommandCenter {
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap.
 	//Lombok will not provide setter methods on final members
 	private final Falcon falcon  = new Falcon();
-	//miniDimHash associates dimension with the Universe. See constructor below.
+	//miniDimHash associates dimension with the Universe.
 	private final Map<Universe, Dimension> miniDimHash = new HashMap<>();
 	private final MiniMap miniMap = new MiniMap();
 
