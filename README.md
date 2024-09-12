@@ -16,4 +16,14 @@ You may create however many branches you like, but be sure to merge those change
 If you don't know how to merge, stay on master...or ask me during office hours and I will show you how to merge.
 
 
+## Java Design Patterns
+The following design patterns are annotated in the _08final project:
+
+Template Method
+Singleton
+Fluent Interface
+State
+Observer (Lifecycle Callback)
+Command
+Composite
 
