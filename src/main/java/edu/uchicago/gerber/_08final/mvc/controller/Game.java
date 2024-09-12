@@ -130,7 +130,7 @@ public class Game implements Runnable, KeyListener {
 
     /*
     The following two methods are an example of the Command design pattern. This approach involves deferring
-    modifications to collections (linked lists of Movables) while iterating over them, and then processing the changes
+    mutations to collections (linked lists of Movables) while iterating over them, and then processing the mutations
     later. The Command design pattern decouples the request for an operation from the execution of
     the operation itself. We do this because mutating a data structure while iterating it is dangerous and may lead
     to null-pointer or array-index-out-of-bounds exceptions, or other erroneous behavior.
