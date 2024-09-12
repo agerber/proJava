@@ -4,6 +4,7 @@ package edu.uchicago.gerber._08final.mvc.controller;
 import java.awt.*;
 import edu.uchicago.gerber._08final.mvc.model.*;
 import lombok.Data;
+import sun.util.logging.resources.logging;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -51,7 +52,11 @@ public class CommandCenter {
 	private final GameOpsQueue opsQueue = new GameOpsQueue();
 
 
-	//singleton
+
+	/* This is an example of the Singleton design pattern. The Singleton ensures that a class has one (and only
+	one) instance on the heap and provides a global point of access at instance. This is useful when you need to
+	coordinate actions among objects in your system or manage state. CommandCenter manages the state of the game.
+	 */
 	private static CommandCenter instance = null;
 
 	// Constructor made private

@@ -53,7 +53,10 @@ public class Falcon extends Sprite {
 	// methods are being called every ~40ms, this is a very convenient place to store this variable.
 	private int showLevel;
 	private boolean thrusting;
-	//enum used for turnState field
+
+	/* The enum TurnState is an example of the State design pattern. This pattern allows an object to change its behavior
+	when its internal state changes. In this case, the TurnState (with values IDLE, LEFT, and RIGHT) affects how the Falcon
+	moves and draws itself. */
 	public enum TurnState {IDLE, LEFT, RIGHT}
 	private TurnState turnState = TurnState.IDLE;
 
