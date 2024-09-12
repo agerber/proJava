@@ -43,7 +43,21 @@ public class CommandCenter {
 	private final Map<Universe, Dimension> miniDimHash = new HashMap<>();
 	private final MiniMap miniMap = new MiniMap();
 
-	//lists containing our movables subdivided by team
+	/*
+	 The following LinkedList<Movable> are examples of the Composite design pattern which is used to allow compositions
+	 of objects to be treated uniformly. Here are the elements of the Composite design pattern:
+
+     Component: Movable serves as the component interface. It defines common methods (move(), draw(Graphics g), etc.)
+     that all concrete implementations must provide.
+
+     Leaf: Concrete classes that implement Movable (e.g., Bullet, Asteroid) are the leaf nodes. They implement the
+     Movable interface and provide specific behavior.
+
+     Composite: The LinkedLists below that aggregate Movable objects (e.g., movFriends, movFoes) act as
+     composites. They manage collections of Movable objects and provide a way to iterate over and operate on them as a
+     group.
+
+	 */
 	private final LinkedList<Movable> movDebris = new LinkedList<>();
 	private final LinkedList<Movable> movFriends = new LinkedList<>();
 	private final LinkedList<Movable> movFoes = new LinkedList<>();
