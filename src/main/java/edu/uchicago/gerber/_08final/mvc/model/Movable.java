@@ -4,8 +4,7 @@ import java.awt.*;
 import java.util.LinkedList;
 
 
-/*
-This interface is an example of the Facade design pattern which provides a simplified
+/* TODO This interface is an example of the Facade design pattern which provides a simplified
 interface to a complex subsystem or set of classes. It hides the complexity by offering a more straightforward and unified API.
 The goal is to make subsystems easier to use by providing a higher-level interface that clients can interact with.
  */

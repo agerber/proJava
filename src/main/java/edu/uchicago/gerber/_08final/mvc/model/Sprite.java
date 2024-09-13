@@ -71,7 +71,7 @@ public abstract class Sprite implements Movable {
 
 
 
-    /* The following methods are an example of the Template_Method design pattern. The Sprite class provides
+    /* TODO The following methods are an example of the Template_Method design pattern. The Sprite class provides
     the common framework for Movable, such as move(), expire(), somePosNegValue(), renderRaster(), renderVector(), etc.
       while delegating certain details to its subclasses. Also note that Sprite omits draw() and this contract debt
       (inherited from Movable) is passed to Sprite's subclasses
@@ -219,7 +219,7 @@ public abstract class Sprite implements Movable {
 
 
         //5: draw the polygon using the List of raw polars from above, applying mapping transforms as required.
-        /*The following is an example of the Pipeline design pattern, which is a way of chaining a series of operations
+        /*TODO The following is an example of the Pipeline design pattern, which is a way of chaining a series of operations
         where the output of one operation becomes the input for the next, forming a "pipeline" of transformations and
         processing steps. This is a key concept in functional programming and data processing.
          */

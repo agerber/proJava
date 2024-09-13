@@ -44,11 +44,11 @@ public class CommandCenter {
 	private final MiniMap miniMap = new MiniMap();
 
 	/*
-	 The following LinkedList<Movable> are examples of the Composite design pattern which is used to allow compositions
-	 of objects to be treated uniformly. Here are the elements of the Composite design pattern:
+	 TODO The following LinkedList<Movable> are examples of the Composite design pattern which is used to allow
+	 compositions of objects to be treated uniformly. Here are the elements of the Composite design pattern:
 
      Component: Movable serves as the component interface. It defines common methods (move(), draw(Graphics g), etc.)
-     that all concrete implementations must provide.
+     that all concrete implementing classes must provide.
 
      Leaf: Concrete classes that implement Movable (e.g., Bullet, Asteroid) are the leaf nodes. They implement the
      Movable interface and provide specific behavior.
@@ -67,7 +67,7 @@ public class CommandCenter {
 
 
 
-	/* This is an example of the Singleton design pattern. The Singleton ensures that a class has one (and only
+	/* TODO This is an example of the Singleton design pattern. The Singleton ensures that a class has one (and only
 	one) instance on the heap and provides a global point of access at instance. This is useful when you need to
 	coordinate actions among objects in your system or manage state. CommandCenter manages the state of the game.
 	 */

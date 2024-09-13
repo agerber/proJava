@@ -71,8 +71,8 @@ public class Nuke extends Sprite{
 
     }
 
-    /* The following overrides are examples of Lifecycle Callbacks which are classified as a specific kind of Observer
-    design pattern. Lifecycle Callbacks allow an object to perform specific actions at
+    /* TODO The following overrides are examples of Observer design pattern (Lifecycle Callbacks). Lifecycle
+     Callbacks allow an object to perform specific actions at
     well-defined stages of its lifecycle. Lifecycle Callbacks encapsulate logic that would otherwise be scattered throughout
     other classes, thereby making the code more organized and easier to manage.
 

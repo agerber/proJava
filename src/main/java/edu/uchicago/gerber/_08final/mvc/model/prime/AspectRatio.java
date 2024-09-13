@@ -12,7 +12,7 @@ public class AspectRatio {
     private double width;
     private double height;
 
-    /* This is an example of the Fluent_Interface design pattern, which relies on method chaining to make the code
+    /* TODO This is an example of the Fluent_Interface design pattern, which relies on method chaining to make the code
     more readable and intuitive. In this pattern, methods return the instance of the object, allowing multiple method
     calls to be linked together in a single, fluid expression.
    */

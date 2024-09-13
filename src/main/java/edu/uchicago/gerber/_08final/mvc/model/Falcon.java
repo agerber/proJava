@@ -52,14 +52,14 @@ public class Falcon extends Sprite {
 	// screen. However, given that the Falcon reference is never null, and that a Falcon is a Movable whose move/draw
 	// methods are being called every ~40ms, this is a very convenient place to store this variable.
 	private int showLevel;
-	private boolean thrusting;
 
-	/* The enum TurnState is an example of the State design pattern. This pattern allows an object to change its behavior
-	when its internal state changes. In this case, the TurnState (with values IDLE, LEFT, and RIGHT) affects how the Falcon
-	moves and draws itself. */
+	/* TODO The enum TurnState as well as the boolean thrusting are examples of the State design pattern. This pattern
+	allows an object to change its behavior when its internal state changes. In this case, the boolean thrusting, and
+	 the TurnState (with values IDLE, LEFT, and RIGHT) affects how the Falcon moves and draws itself. */
 	public enum TurnState {IDLE, LEFT, RIGHT}
 	private TurnState turnState = TurnState.IDLE;
 
+	private boolean thrusting;
 
 	// ==============================================================
 	// CONSTRUCTOR
