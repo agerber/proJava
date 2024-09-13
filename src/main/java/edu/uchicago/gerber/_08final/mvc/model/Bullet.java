@@ -58,7 +58,7 @@ public class Bullet extends Sprite {
 
     }
 
-    /* This is an example of the Template Method design pattern. In this case, the superclass Sprite omits the
+    /* This is an example of the Template_Method design pattern. In this case, the superclass Sprite omits the
       implementation of draw(). The contract debt is passed to Sprite's subclasses (Bullet and others) which must
       provide the specific implementations for draw. The Sprite class provides the common framework for Movable
       while delegating certain details to subclasses.

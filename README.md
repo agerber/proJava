@@ -19,9 +19,9 @@ If you don't know how to merge, stay on master...or ask me during office hours a
 ## Java Design Patterns
 The following design patterns are annotated in the _08final project:
 
-Template Method
+Template_Method
 Singleton
-Fluent Interface
+Fluent_Interface
 State
 Observer (Lifecycle Callback)
 Command
