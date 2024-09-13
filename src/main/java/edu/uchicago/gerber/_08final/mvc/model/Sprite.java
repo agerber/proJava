@@ -211,7 +211,11 @@ public abstract class Sprite implements Movable {
 
 
 
-        //5: draw the polygon using the List of raw polars from above, applying mapping transforms as required
+        //5: draw the polygon using the List of raw polars from above, applying mapping transforms as required.
+        /*The following is an example of the Pipeline design pattern, which is a way of chaining a series of operations
+        where the output of one operation becomes the input for the next, forming a "pipeline" of transformations and
+        processing steps. This is a key concept in functional programming and data processing.
+         */
         g.drawPolygon(
                 polars.stream()
                         .map(rotatePolarByOrientation)

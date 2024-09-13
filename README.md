@@ -26,4 +26,6 @@ State
 Observer (Lifecycle Callback)
 Command
 Composite
+Pipleline
+Facade
 
