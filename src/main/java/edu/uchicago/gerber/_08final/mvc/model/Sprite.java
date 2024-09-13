@@ -71,6 +71,13 @@ public abstract class Sprite implements Movable {
 
 
 
+    /* The following methods are an example of the Template_Method design pattern. The Sprite class provides
+    the common framework for Movable, such as move(), expire(), somePosNegValue(), renderRaster(), renderVector(), etc.
+      while delegating certain details to its subclasses. Also note that Sprite omits draw() and this contract debt
+      (inherited from Movable) is passed to Sprite's subclasses
+      which must satisfy the contract by providing implementations for draw(), and this will depend on whether the
+      subclass renders as raster or vector.
+    */
 
     @Override
     public void move() {
