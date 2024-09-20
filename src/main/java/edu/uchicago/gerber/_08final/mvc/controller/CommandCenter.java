@@ -86,7 +86,7 @@ public class CommandCenter {
 
 	private void setLevelFromEnv(){
 		String strLevel = System.getenv("LEVEL");
-		String envLevel = (strLevel != null) ? strLevel : "0";
+		String envLevel = (strLevel != null) ? strLevel : "1";
 		try {
 			setLevel(Integer.parseInt(envLevel) - 1);
 		} catch (NumberFormatException e) {
