@@ -84,12 +84,22 @@ public class CommandCenter {
 		return instance;
 	}
 
+	private void setLevelFromEnv(){
+		String strLevel = System.getenv("LEVEL");
+		String envLevel = (strLevel != null) ? strLevel : "0";
+		try {
+			setLevel(Integer.parseInt(envLevel) - 1);
+		} catch (NumberFormatException e) {
+			setLevel(0);
+		}
+	}
+
 
 	public void initGame(){
 		clearAll();
 		generateStarField();
 		setDimHash();
-		setLevel(0);
+		setLevelFromEnv();
 		setScore(0);
 		setPaused(false);
 		//set to one greater than number of falcons lives in your game as decrementFalconNumAndSpawn() also decrements
