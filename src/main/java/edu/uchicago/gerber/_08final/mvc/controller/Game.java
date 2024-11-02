@@ -47,6 +47,7 @@ public class Game implements Runnable, KeyListener {
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
             NUKE = 70, // f-key
+            KILL = 75, // f-key
             RADAR = 65; // a-key
 
 
@@ -258,6 +259,17 @@ public class Game implements Runnable, KeyListener {
         return asteroidFree;
     }
 
+    private void smartBomb(){
+        //for each enemy in game-space
+            //remove them from the game space
+
+      LinkedList<Movable> foes =  CommandCenter.getInstance().getMovFoes();
+      for (Movable foe : foes) {
+            CommandCenter.getInstance().getOpsQueue().enqueue(foe, GameOp.Action.REMOVE);
+        }
+
+    }
+
     private void checkNewLevel() {
 
         //short-circuit if level not yet cleared
@@ -351,6 +363,9 @@ public class Game implements Runnable, KeyListener {
                 break;
             case QUIT:
                 System.exit(0);
+                break;
+            case KILL:
+                smartBomb();
                 break;
             case RADAR:
                 //toggle the boolean switch
