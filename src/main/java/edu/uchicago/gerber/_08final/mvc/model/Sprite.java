@@ -103,27 +103,15 @@ public abstract class Sprite implements Movable {
             center.y = scalarY * Game.DIM.height -1;
         //in-bounds
         } else {
-
-
-            final int STEP = 10;
-            Falcon falcon = CommandCenter.getInstance().getFalcon();
-
-            switch (falcon.getDirection()){
-                case NORTH -> getCenter().translate(0, STEP);
-                case SOUTH -> getCenter().translate(0, -STEP);
-                case EAST ->  getCenter().translate(-STEP, 0);
-                case WEST -> getCenter().translate(STEP, 0);
+            double newXPos = center.x;
+            double newYPos = center.y;
+            //if falcon-fixed, move the sprite in the opposite direction of the falcon to create centered-play
+            if (CommandCenter.getInstance().isFalconPositionFixed()){
+                newXPos -= CommandCenter.getInstance().getFalcon().getDeltaX();
+                newYPos -= CommandCenter.getInstance().getFalcon().getDeltaY();
             }
-
-//            double newXPos = center.x;
-//            double newYPos = center.y;
-//            //if falcon-fixed, move the sprite in the opposite direction of the falcon to create centered-play
-//            if (CommandCenter.getInstance().isFalconPositionFixed()){
-//                newXPos -= CommandCenter.getInstance().getFalcon().getDeltaX();
-//                newYPos -= CommandCenter.getInstance().getFalcon().getDeltaY();
-//            }
-//            center.x = (int) Math.round(newXPos + getDeltaX());
-//            center.y = (int) Math.round(newYPos + getDeltaY());
+            center.x = (int) Math.round(newXPos + getDeltaX());
+            center.y = (int) Math.round(newYPos + getDeltaY());
         }
 
         //expire (decrement expiry) on short-lived objects only
