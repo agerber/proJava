@@ -71,9 +71,17 @@ public class Star implements Movable{
             center.y = Game.DIM.height - 1;
             //in-bounds
         } else {
-            //move star in opposite direction of falcon.
-            center.x = (int) Math.round(center.x - CommandCenter.getInstance().getFalcon().getDeltaX());
-            center.y = (int) Math.round(center.y - CommandCenter.getInstance().getFalcon().getDeltaY());
+            //move stars in opposite direction as falcon
+            final int STEP = 10;
+            Falcon falcon = CommandCenter.getInstance().getFalcon();
+
+            switch (falcon.getDirection()){
+                case NORTH -> getCenter().translate(0, STEP);
+                case SOUTH -> getCenter().translate(0, -STEP);
+                case EAST ->  getCenter().translate(-STEP, 0);
+                case WEST -> getCenter().translate(STEP, 0);
+            }
+
         }
 
 

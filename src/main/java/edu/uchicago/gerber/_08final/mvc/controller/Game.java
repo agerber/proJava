@@ -43,6 +43,7 @@ public class Game implements Runnable, KeyListener {
             LEFT = 37, // rotate left; left arrow
             RIGHT = 39, // rotate right; right arrow
             UP = 38, // thrust; up arrow
+            DOWN = 40, // down
             START = 83, // s key
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
@@ -272,11 +273,13 @@ public class Game implements Runnable, KeyListener {
         CommandCenter.getInstance().getFalcon().setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 
         //Set universe according to mod of level - cycle through universes
-        int ordinal = level % CommandCenter.Universe.values().length;
-        CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
-        CommandCenter.getInstance().setUniverse(key);
-        //players will need radar in the big universes, but they can still toggle it off
-        CommandCenter.getInstance().setRadar(ordinal > 1);
+//        int ordinal = level % CommandCenter.Universe.values().length;
+//        CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
+//        CommandCenter.getInstance().setUniverse(key);
+//        //players will need radar in the big universes, but they can still toggle it off
+//        CommandCenter.getInstance().setRadar(ordinal > 1);
+        CommandCenter.getInstance().setUniverse(CommandCenter.Universe.DARK);
+        CommandCenter.getInstance().setRadar(true);
 
         //bump the level up
         level = level + 1;
@@ -308,14 +311,16 @@ public class Game implements Runnable, KeyListener {
                 CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(falcon), GameOp.Action.ADD);
                 break;
             case UP:
-                falcon.setThrusting(true);
-                SoundLoader.playSound("whitenoise_loop.wav");
+                falcon.setDirection(Falcon.Direction.NORTH);
                 break;
             case LEFT:
-                falcon.setTurnState(Falcon.TurnState.LEFT);
+                falcon.setDirection(Falcon.Direction.WEST);
                 break;
             case RIGHT:
-                falcon.setTurnState(Falcon.TurnState.RIGHT);
+                falcon.setDirection(Falcon.Direction.EAST);
+                break;
+            case DOWN:
+                falcon.setDirection(Falcon.Direction.SOUTH);
                 break;
             default:
                 break;
@@ -340,11 +345,11 @@ public class Game implements Runnable, KeyListener {
             //releasing either the LEFT or RIGHT arrow key will set the TurnState to IDLE
             case LEFT:
             case RIGHT:
-                falcon.setTurnState(Falcon.TurnState.IDLE);
+               // falcon.setTurnState(Falcon.TurnState.IDLE);
                 break;
             case UP:
-                falcon.setThrusting(false);
-                SoundLoader.stopSound("whitenoise_loop.wav");
+               // falcon.setThrusting(false);
+              //  SoundLoader.stopSound("whitenoise_loop.wav");
                 break;
             case PAUSE:
                 CommandCenter.getInstance().setPaused(!CommandCenter.getInstance().isPaused());
