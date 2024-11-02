@@ -4,7 +4,6 @@ package edu.uchicago.gerber._08final.mvc.model;
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.SoundLoader;
 import lombok.Data;
-import java.awt.event.MouseEvent;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -32,14 +31,6 @@ public class Nuke extends Sprite{
         setDeltaX(falcon.getDeltaX() + vectorX);
         setDeltaY(falcon.getDeltaY() + vectorY);
 
-    }
-
-    public Nuke(MouseEvent mouseEvent){
-        setCenter(new Point(mouseEvent.getXOnScreen() , mouseEvent.getYOnScreen()));
-        setColor(Color.ORANGE);
-        setExpiry(EXPIRE);
-        setRadius(0);
-        setTeam(Team.FRIEND);
     }
 
 
@@ -96,14 +87,11 @@ public class Nuke extends Sprite{
     @Override
     public void addToGame(LinkedList<Movable> list) {
         //only deploy the nuke if the nukeMeter > 0
-//        if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
-//            list.add(this);
-//            SoundLoader.playSound("nuke.wav");
-//            CommandCenter.getInstance().getFalcon().setNukeMeter(0);
-//        }
+        if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0){
             list.add(this);
             SoundLoader.playSound("nuke.wav");
-
+            CommandCenter.getInstance().getFalcon().setNukeMeter(0);
+        }
     }
 
     @Override
