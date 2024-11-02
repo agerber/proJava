@@ -9,13 +9,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.Random;
+import java.awt.event.*;
 
 
 // ===============================================
 // == This Game class is the CONTROLLER
 // ===============================================
 
-public class Game implements Runnable, KeyListener {
+public class Game implements Runnable, KeyListener, MouseListener{
 
     // ===============================================
     // FIELDS
@@ -58,6 +59,8 @@ public class Game implements Runnable, KeyListener {
 
         gamePanel = new GamePanel(DIM);
         gamePanel.addKeyListener(this); //Game object implements KeyListener
+        gamePanel.addMouseListener(this); //Game object implements MouseListener
+
         //fire up the animation thread
         animationThread = new Thread(this); // pass the animation thread a runnable object, the Game object
         //set as daemon so as not to block the main thread from exiting
@@ -375,9 +378,27 @@ public class Game implements Runnable, KeyListener {
 
     @Override
     // does nothing, but we need it b/c of KeyListener contract
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(KeyEvent e) {}
+
+    // does nothing, but we need it b/c of MouseMotionListener contract
+
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        CommandCenter.getInstance().getOpsQueue().enqueue(new Nuke(e), GameOp.Action.ADD);
     }
 
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
 }
 
 
