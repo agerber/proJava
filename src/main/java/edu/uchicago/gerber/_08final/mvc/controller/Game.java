@@ -47,7 +47,8 @@ public class Game implements Runnable, KeyListener {
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
             NUKE = 70, // f-key
-            RADAR = 65; // a-key
+            RADAR = 65,  // a-key
+            TOW = 84; // t-key
 
 
     // ===============================================
@@ -351,6 +352,10 @@ public class Game implements Runnable, KeyListener {
                 break;
             case QUIT:
                 System.exit(0);
+                break;
+
+            case TOW:
+                CommandCenter.getInstance().getOpsQueue().enqueue(new Tow(falcon), GameOp.Action.ADD);
                 break;
             case RADAR:
                 //toggle the boolean switch
