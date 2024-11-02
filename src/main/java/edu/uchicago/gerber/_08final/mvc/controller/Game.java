@@ -100,6 +100,7 @@ public class Game implements Runnable, KeyListener {
             checkCollisions();
             checkNewLevel();
             checkFloaters();
+            addBird();
             //this method will execute addToGame() and removeFromGame() callbacks on Movable objects
             processGameOpsQueue();
             //keep track of the frame for development purposes
@@ -127,6 +128,14 @@ public class Game implements Runnable, KeyListener {
         spawnShieldFloater();
         spawnNukeFloater();
     }
+
+    private void addBird(){
+        if (CommandCenter.getInstance().getFrame() % 200 == 0) {
+            CommandCenter.getInstance().getOpsQueue().enqueue(new Bird(), GameOp.Action.ADD);
+        }
+    }
+
+
 
     /*
     TODO The following two methods are an example of the Command design pattern. This approach involves deferring
