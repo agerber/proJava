@@ -125,7 +125,6 @@ public class Game implements Runnable, KeyListener {
     private void checkFloaters() {
 
         spawnShieldFloater();
-        spawnFreezeFloater();
         spawnNukeFloater();
     }
 
@@ -222,12 +221,6 @@ public class Game implements Runnable, KeyListener {
 
         if (CommandCenter.getInstance().getFrame() % ShieldFloater.SPAWN_SHIELD_FLOATER == 0) {
             CommandCenter.getInstance().getOpsQueue().enqueue(new ShieldFloater(), GameOp.Action.ADD);
-        }
-    }
-    private void spawnFreezeFloater() {
-
-        if (CommandCenter.getInstance().getFrame() % 20 == 0) {
-            CommandCenter.getInstance().getOpsQueue().enqueue(new FreezeFloater(), GameOp.Action.ADD);
         }
     }
 

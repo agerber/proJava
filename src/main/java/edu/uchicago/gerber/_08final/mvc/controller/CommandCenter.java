@@ -34,8 +34,6 @@ public class CommandCenter {
 	//this value is used to count the number of frames (full animation cycles) in the game
 	private long frame;
 
-
-
 	//the falcon is located in the movFriends list, but since we use this reference a lot, we keep track of it in a
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap.
 	//Lombok will not provide setter methods on final members

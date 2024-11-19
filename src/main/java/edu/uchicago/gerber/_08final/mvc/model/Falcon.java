@@ -47,7 +47,6 @@ public class Falcon extends Sprite {
 	private int nukeMeter;
 	private int invisible;
 	private boolean maxSpeedAttained;
-	private int freeze;
 
 	//showLevel is not germane to the Falcon. Rather, it controls whether the level is shown in the middle of the
 	// screen. However, given that the Falcon reference is never null, and that a Falcon is a Movable whose move/draw
@@ -99,10 +98,8 @@ public class Falcon extends Sprite {
 		if (!CommandCenter.getInstance().isFalconPositionFixed()) super.move();
 
 		if (invisible > 0) invisible--;
-		if (freeze > 0) freeze--;
 		if (shield > 0) shield--;
 		if (nukeMeter > 0) nukeMeter--;
-
 		//The falcon is a convenient place to decrement the showLevel variable as the falcon
 		//move() method is being called every frame (~40ms); and the falcon reference is never null.
 		if (showLevel > 0) showLevel--;
