@@ -154,4 +154,13 @@ public class Asteroid extends Sprite {
 		}
 
 	}
+
+	@Override
+	public void move() {
+		if (CommandCenter.getInstance().getFalcon().getFreeze() > 0){
+			return;
+		}
+		super.move();
+
+	}
 }
