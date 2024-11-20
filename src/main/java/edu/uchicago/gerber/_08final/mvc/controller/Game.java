@@ -21,7 +21,7 @@ public class Game implements Runnable, KeyListener {
     // FIELDS
     // ===============================================
 
-    public static final Dimension DIM = new Dimension(1500, 950); //the dimension of the game-screen.
+    public static Dimension DIM; //the dimension of the game-screen.
 
 
 
@@ -55,7 +55,7 @@ public class Game implements Runnable, KeyListener {
     // ===============================================
 
     public Game() {
-
+        DIM = setDimFromEnv();
         gamePanel = new GamePanel(DIM);
         gamePanel.addKeyListener(this); //Game object implements KeyListener
         //fire up the animation thread
@@ -63,6 +63,7 @@ public class Game implements Runnable, KeyListener {
         //set as daemon so as not to block the main thread from exiting
         animationThread.setDaemon(true);
         animationThread.start();
+
 
 
     }
@@ -76,6 +77,22 @@ public class Game implements Runnable, KeyListener {
 
         //typical Swing application start; we pass EventQueue a Runnable object.
         EventQueue.invokeLater(Game::new);
+    }
+
+    /*
+    in the Environmental Variables of the runtime configuration:
+    WIDTH=980;HEIGHT=600 or something like this.
+     */
+    private Dimension setDimFromEnv(){
+        String width = System.getenv("WIDTH");
+        String height = System.getenv("HEIGHT");
+        Dimension dimension;
+        try {
+            dimension = new Dimension(Integer.parseInt(width), Integer.parseInt(height));
+        } catch (NumberFormatException e) {
+            dimension =  new Dimension(1500, 950);
+        }
+        return dimension;
     }
 
     // Game implements runnable, and must have run method
