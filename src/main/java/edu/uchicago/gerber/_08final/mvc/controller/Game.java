@@ -84,12 +84,14 @@ public class Game implements Runnable, KeyListener {
     WIDTH=980;HEIGHT=600 or something like this.
      */
     private Dimension setDimFromEnv(){
-        String width = System.getenv("WIDTH");
-        String height = System.getenv("HEIGHT");
+
         Dimension dimension;
         try {
+            String width = System.getenv("WIDTH");
+            String height = System.getenv("HEIGHT");
             dimension = new Dimension(Integer.parseInt(width), Integer.parseInt(height));
         } catch (NumberFormatException e) {
+            //some default value
             dimension =  new Dimension(1500, 950);
         }
         return dimension;
