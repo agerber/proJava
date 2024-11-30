@@ -91,12 +91,12 @@ public class MiniMap extends Sprite {
                             break;
                         //med
                         case 1:
-                            g.drawOval(translatedPoint.x - 3, translatedPoint.y - 3, 6, 6);
+                            g.drawOval(translatedPoint.x - 2, translatedPoint.y - 2, 4, 4);
                             break;
                         //small
                         case 2:
                         default:
-                            g.drawOval(translatedPoint.x - 2, translatedPoint.y - 2, 4, 4);
+                            g.drawOval(translatedPoint.x - 1, translatedPoint.y - 1, 2, 2);
                     }
                 }
         );
