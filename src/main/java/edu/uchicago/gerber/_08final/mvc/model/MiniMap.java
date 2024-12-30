@@ -46,7 +46,14 @@ public class MiniMap extends Sprite {
         int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width * aspectRatio.getWidth());
         int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height * aspectRatio.getHeight());
 
-        //gray bounding box (entire universe)
+        //black fill and gray bounding box (entire universe)
+        g.setColor(Color.BLACK);
+        g.fillRect(
+                0,
+                0,
+                miniWidth,
+                miniHeight
+        );
         g.setColor(Color.DARK_GRAY);
         g.drawRect(
                 0,
