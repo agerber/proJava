@@ -5,7 +5,7 @@ import java.awt.*;
 import edu.uchicago.gerber._08final.mvc.model.*;
 import lombok.Data;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public class CommandCenter {
 	private  long score;
 	private  boolean paused;
 	private  boolean themeMusic;
-	private boolean radar; //to toggle on/off the mini-map
+	private boolean radarToggle; //to toggle on/off the radar
 	//this value is used to count the number of frames (full animation cycles) in the game
 	private long frame;
 
@@ -38,9 +38,9 @@ public class CommandCenter {
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap.
 	//Lombok will not provide setter methods on final members
 	private final Falcon falcon  = new Falcon();
-	//miniDimHash associates dimension with the Universe.
-	private final Map<Universe, Dimension> miniDimHash = new HashMap<>();
-	private final MiniMap miniMap = new MiniMap();
+	//associates dimension with the Universe.
+	private final Map<Universe, Dimension> universeMap = new LinkedHashMap<>();
+	private final Radar radar = new Radar();
 
 	/*
 	 TODO The following LinkedList<Movable> are examples of the Composite design pattern which is used to allow
@@ -95,19 +95,19 @@ public class CommandCenter {
 		setNumFalcons(4);
 		falcon.decrementFalconNumAndSpawn();
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
-		opsQueue.enqueue(miniMap, GameOp.Action.ADD);
+		opsQueue.enqueue(radar, GameOp.Action.ADD);
 
 
 	}
 
 	private void setDimHash(){
 		//initialize with values that define the aspect ratio of the Universe. See checkNewLevel() of Game class.
-		miniDimHash.put(Universe.FREE_FLY, new Dimension(1,1));
-		miniDimHash.put(Universe.CENTER, new Dimension(1,1));
-		miniDimHash.put(Universe.BIG, new Dimension(2,2));
-		miniDimHash.put(Universe.HORIZONTAL, new Dimension(3,1));
-		miniDimHash.put(Universe.VERTICAL, new Dimension(1,3));
-		miniDimHash.put(Universe.DARK, new Dimension(4,4));
+		universeMap.put(Universe.FREE_FLY, new Dimension(1,1));
+		universeMap.put(Universe.CENTER, new Dimension(1,1));
+		universeMap.put(Universe.BIG, new Dimension(2,2));
+		universeMap.put(Universe.HORIZONTAL, new Dimension(3,1));
+		universeMap.put(Universe.VERTICAL, new Dimension(1,3));
+		universeMap.put(Universe.DARK, new Dimension(4,4));
 	}
 
 
@@ -135,7 +135,7 @@ public class CommandCenter {
 	}
 
 	public Dimension getUniDim(){
-		return miniDimHash.get(universe);
+		return universeMap.get(universe);
 	}
 
 	public boolean isFalconPositionFixed(){

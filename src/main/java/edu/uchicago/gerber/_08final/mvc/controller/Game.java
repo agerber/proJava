@@ -295,7 +295,7 @@ public class Game implements Runnable, KeyListener {
         CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
         CommandCenter.getInstance().setUniverse(key);
         //players will need radar in the big universes, but they can still toggle it off
-        CommandCenter.getInstance().setRadar(ordinal > 1);
+        CommandCenter.getInstance().setRadarToggle(ordinal > 1);
 
         //bump the level up
         level = level + 1;
@@ -373,7 +373,7 @@ public class Game implements Runnable, KeyListener {
                 break;
             case RADAR:
                 //toggle the boolean switch
-                CommandCenter.getInstance().setRadar(!CommandCenter.getInstance().isRadar());
+                CommandCenter.getInstance().setRadarToggle(!CommandCenter.getInstance().isRadarToggle());
                 break;
             case MUTE:
                 //if music is currently playing, then stop

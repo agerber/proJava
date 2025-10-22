@@ -12,7 +12,7 @@ import java.awt.*;
 /**
  * Inspired by Michael Vasiliou's Sinistar, winner of Java game contest 2016.
  */
-public class MiniMap extends Sprite {
+public class Radar extends Sprite {
 
 
     //size of mini-map as percentage of screen (game dimension)
@@ -24,7 +24,7 @@ public class MiniMap extends Sprite {
     private final Color PUMPKIN = new Color(200, 100, 50);
     private final Color LIGHT_GRAY = new Color(200, 200, 200);
 
-    public MiniMap() {
+    public Radar() {
         setTeam(Team.DEBRIS);
         setCenter(new Point(0,0));
     }
@@ -37,7 +37,7 @@ public class MiniMap extends Sprite {
     public void draw(Graphics g) {
 
         //controlled by the A-key
-        if (!CommandCenter.getInstance().isRadar()) return;
+        if (!CommandCenter.getInstance().isRadarToggle()) return;
 
         //get the aspect-ratio which is used to adjust for non-square universes
         aspectRatio = aspectAdjustedRatio(CommandCenter.getInstance().getUniDim());
