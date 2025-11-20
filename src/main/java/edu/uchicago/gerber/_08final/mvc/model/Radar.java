@@ -4,7 +4,6 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import edu.uchicago.gerber._08final.mvc.controller.CommandCenter;
 import edu.uchicago.gerber._08final.mvc.controller.Game;
-import edu.uchicago.gerber._08final.mvc.model.prime.AspectRatio;
 
 import java.awt.*;
 
@@ -17,9 +16,6 @@ public class Radar extends Sprite {
 
     //size of mini-map as percentage of screen (game dimension)
     private final double MINI_MAP_PERCENT = 0.31;
-
-    //used to adjust non-square universes. Set in draw()
-    private AspectRatio aspectRatio;
 
     private final Color PUMPKIN = new Color(200, 100, 50);
     private final Color LIGHT_GRAY = new Color(200, 200, 200);
@@ -39,12 +35,8 @@ public class Radar extends Sprite {
         //controlled by the A-key
         if (!CommandCenter.getInstance().isRadarToggle()) return;
 
-        //get the aspect-ratio which is used to adjust for non-square universes
-        aspectRatio = aspectAdjustedRatio(CommandCenter.getInstance().getUniDim());
-
-        //scale to some percent of game-dim
-        int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width * aspectRatio.getWidth());
-        int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height * aspectRatio.getHeight());
+        int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width );
+        int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height );
 
         //black fill and gray bounding box (entire universe)
         g.setColor(Color.BLACK);
@@ -141,27 +133,9 @@ public class Radar extends Sprite {
     //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
     private Point translatePoint(Point point){
         return new Point(
-                (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getUniDim().width * aspectRatio.getWidth()),
-                (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getUniDim().height * aspectRatio.getHeight())
+                (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getUniDim().width ),
+                (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getUniDim().height )
         );
-    }
-
-
-    //the purpose of this method is to adjust the aspect of non-square universes
-    private AspectRatio aspectAdjustedRatio(Dimension universeDim){
-        if (universeDim.width == universeDim.height){
-            return new AspectRatio(1.0, 1.0);
-        }
-        else if (universeDim.width > universeDim.height){
-            double wMultiple = (double) universeDim.width / universeDim.height;
-            return new AspectRatio(wMultiple, 1.0).scale(0.5);
-        }
-        //universeDim.width < universeDim.height
-        else {
-            double hMultiple = (double) universeDim.height / universeDim.width;
-            return new AspectRatio(1.0, hMultiple).scale(0.5);
-        }
-
     }
 
 

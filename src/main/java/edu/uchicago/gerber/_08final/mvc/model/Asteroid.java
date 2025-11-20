@@ -98,6 +98,7 @@ public class Asteroid extends Sprite {
 
 		return Stream.generate(polarPointSupplier)
 				.limit(VERTICES)
+				// Try removing the sorted call to see how asteroids render
 				.sorted(byTheta)
 				.map(toCartesian)
 				.toArray(Point[]::new);
@@ -116,13 +117,6 @@ public class Asteroid extends Sprite {
 		//give the user some points for destroying the asteroid
 		CommandCenter.getInstance().setScore(CommandCenter.getInstance().getScore() + 10L * (getSize() + 1));
 
-		//small (2) asteroids
-		if (getSize() > 1)
-			SoundLoader.playSound("pillow.wav");
-		//else large (0) or medium (1) asteroids
-		else
-			SoundLoader.playSound("kapow.wav");
-
 	}
 
 	private void spawnSmallerAsteroidsOrDebris() {
@@ -131,6 +125,7 @@ public class Asteroid extends Sprite {
 		//small (2) asteroids
 		if (size > 1) {
 			CommandCenter.getInstance().getOpsQueue().enqueue(new WhiteCloudDebris(this), GameOp.Action.ADD);
+			SoundLoader.playSound("pillow.wav");
 		}
 		else {
 			//for large (0) and medium (1) sized Asteroids only, spawn 2 or 3 smaller asteroids respectively
@@ -139,6 +134,7 @@ public class Asteroid extends Sprite {
 			while (size-- > 0) {
 				CommandCenter.getInstance().getOpsQueue().enqueue(new Asteroid(this), GameOp.Action.ADD);
 			}
+			SoundLoader.playSound("kapow.wav");
 		}
 
 	}

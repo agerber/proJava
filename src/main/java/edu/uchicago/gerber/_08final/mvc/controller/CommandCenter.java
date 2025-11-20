@@ -88,7 +88,7 @@ public class CommandCenter {
 		clearAll();
 		generateStarField();
 		setDimHash();
-		setLevel(0);
+		setLevel(4);
 		setScore(0);
 		setPaused(false);
 		//set to one greater than number of falcons lives in your game as decrementFalconNumAndSpawn() also decrements
