@@ -142,7 +142,7 @@ public class Game implements Runnable, KeyListener {
     } // end run
 
     private void checkFloaters() {
-
+        if (CommandCenter.getInstance().isGameOver()) return;
         spawnShieldFloater();
         spawnNukeFloater();
     }
