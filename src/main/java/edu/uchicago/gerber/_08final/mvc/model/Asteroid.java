@@ -3,6 +3,7 @@ package edu.uchicago.gerber._08final.mvc.model;
 
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -73,46 +74,35 @@ public class Asteroid extends Sprite {
 
 
 
-	  private Point[] generateVertices(){
-
-		  //6.283 is the max radians
-		  final int MAX_RADIANS_X1000 =6283;
-		  //When casting from double to int, we truncate and lose precision, so best to be generous with the
-		  //precision factor as this will create a more normal distribution of vertices. Precision is a proxy for
-		  //radius in the absence of a predefined radius.
-		  final double PRECISION = 1000.0;
-
-		  Supplier<PolarPoint> polarPointSupplier = () -> {
-			  double r = (800 + Game.R.nextInt(200)) / PRECISION; //number between 0.8 and 0.999
-			  double theta = Game.R.nextInt(MAX_RADIANS_X1000) / PRECISION; // number between 0 and 6.282
-		  	  return new PolarPoint(r, theta);
-		  };
-
-		  Function<PolarPoint, Point> polarToCartesian =
-				  pp -> new Point(
-						  (int)  (pp.getR() * PRECISION * Math.sin(pp.getTheta())),
-						  (int)  (pp.getR() * PRECISION * Math.cos(pp.getTheta())));
-
-		 //random number of vertices
-		 final int VERTICES = Game.R.nextInt(7) + 25;
-
-		 return Stream.generate(polarPointSupplier)
-				 //the supplier stream will never terminate unless we use a limit.
-				 .limit(VERTICES)
-				 //I used the 'new' keyword to generate the anon-inner class; you can convert to lambda.
-				 //The polar-points must be sorted by theta, otherwise they will not render as asteroids, but
-				 //rather as a bundle of jaggedy lines. Try removing the .sorted() call to see how they render.
-				 .sorted(new Comparator<PolarPoint>() {
-							@Override
-							public int compare(PolarPoint pp1, PolarPoint pp2) {
-								return  pp1.compareTheta(pp2);
-							}
-						})
-				 .map(polarToCartesian)
-				 .toArray(Point[]::new);
+	private Point[] generateVertices() {
 
 
-	  }
+		final int VERTICES = 25 + Game.R.nextInt(7);    // 25–31 points
+		final double MIN_RADIUS = 0.8;
+		final double MAX_RADIUS = 1.0;
+
+		Supplier<PolarPoint> polarPointSupplier = () -> {
+			double r = MIN_RADIUS + (MAX_RADIUS - MIN_RADIUS) * Game.R.nextDouble();
+			double theta = Game.R.nextDouble() * (2 * Math.PI);
+			return new PolarPoint(r, theta);
+		};
+
+		Comparator<PolarPoint> byTheta = Comparator.comparingDouble(PolarPoint::getTheta);
+
+		Function<PolarPoint, Point> toCartesian = pp -> {
+			double radiusScale = 1000.0;
+			int x = (int) (pp.getR() * radiusScale * Math.sin(pp.getTheta()));
+			int y = (int) (pp.getR() * radiusScale * Math.cos(pp.getTheta()));
+			return new Point(x, y);
+		};
+
+		return Stream.generate(polarPointSupplier)
+				.limit(VERTICES)
+				.sorted(byTheta)
+				.map(toCartesian)
+				.toArray(Point[]::new);
+	}
+
 
 	@Override
 	public void draw(Graphics g) {
