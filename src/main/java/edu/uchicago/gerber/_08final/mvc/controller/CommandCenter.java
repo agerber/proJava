@@ -3,13 +3,13 @@ package edu.uchicago.gerber._08final.mvc.controller;
 
 import java.awt.*;
 import edu.uchicago.gerber._08final.mvc.model.*;
-//import edu.uchicago.gerber._08final.mvc.model.prime.Universe;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Optional;
 
 //The CommandCenter is a singleton that manages the state of the game.
 //the lombok @Data gives us automatic getters and setters on all members
@@ -89,6 +89,7 @@ public class CommandCenter {
 		clearAll();
 		generateStarField();
 		setLevel(0);
+		setRadarToggle(true);
 		setScore(0);
 		setPaused(false);
 		//set to one greater than number of falcons lives in your game as decrementFalconNumAndSpawn() also decrements
@@ -125,26 +126,26 @@ public class CommandCenter {
 	}
 
 	public Dimension getUniDim(){
-		Universe universe = trueUni();
-		return universe.getDimension();
+		Optional<Universe> universe = optUni();
+		return universe.isEmpty() ? new Dimension(1,1) : universe.get().getDimension();
 
 	}
 
 	public String getUniName(){
-		Universe universe = trueUni();
-		if (universe == null) return "";
-		return universe.getName();
+		Optional<Universe> universe = optUni();
+		return universe.isEmpty() ? "" : universe.get().getName();
 	}
 
 	public boolean isFalconPositionFixed(){
-		Universe universe = trueUni();
-		if (universe == null) return false;
-		return  (!universe.getName().toUpperCase().equals("FREE FLY"));
+		Optional<Universe> universe = optUni();
+		return universe.isEmpty() ? false : (!universe.get().getName().equalsIgnoreCase("FREE FLY"));
 	}
-	private Universe trueUni(){
-		if (getLevel() == 0) return null;
-		return universes[(getLevel() % universes.length)-1];
-
+	private Optional<Universe> optUni() {
+		if (getLevel() == 0) {
+			return Optional.empty();
+		}
+		int index = (getLevel() - 1) % universes.length;
+		return Optional.of(universes[index]);
 	}
 
 	//inner class
