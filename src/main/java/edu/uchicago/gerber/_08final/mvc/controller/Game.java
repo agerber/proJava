@@ -316,7 +316,6 @@ public class Game implements Runnable, KeyListener {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case FIRE:
-                if (falcon.isMaxSpeedAttained()) return;
                 CommandCenter.getInstance().getOpsQueue().enqueue(new Bullet(falcon), GameOp.Action.ADD);
                 break;
             case NUKE:
