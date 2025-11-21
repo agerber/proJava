@@ -138,7 +138,7 @@ public class CommandCenter {
 
 	public boolean isFalconPositionFixed(){
 		Optional<Universe> universe = optUni();
-		return universe.isEmpty() ? false : (!universe.get().getName().equalsIgnoreCase("FREE FLY"));
+		return universe.isEmpty() ? true : (!universe.get().getName().equalsIgnoreCase("FREE FLY"));
 	}
 	private Optional<Universe> optUni() {
 		if (getLevel() == 0) {
