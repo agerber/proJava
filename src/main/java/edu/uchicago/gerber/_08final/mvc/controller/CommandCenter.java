@@ -3,7 +3,8 @@ package edu.uchicago.gerber._08final.mvc.controller;
 
 import java.awt.*;
 import edu.uchicago.gerber._08final.mvc.model.*;
-import edu.uchicago.gerber._08final.mvc.model.prime.Universe;
+//import edu.uchicago.gerber._08final.mvc.model.prime.Universe;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.LinkedHashMap;
@@ -15,19 +16,16 @@ import java.util.Map;
 @Data
 public class CommandCenter {
 
-	// todo  Change to object and put in a array
-//	public enum Universe {
-//		FREE_FLY,
-//		CENTER,
-//		BIG,
-//		HORIZONTAL,
-//		VERTICAL,
-//		DARK
-//
-//	}
+	//inner class
+	@Data
+	@AllArgsConstructor
+	class Universe {
+		private String name;
+		private Dimension dimension;
+	}
 
 	private Universe[] universes =  new Universe[] {
-			new Universe("FREE_FLY", new Dimension(1,1)),
+			new Universe("FREE FLY", new Dimension(1,1)),
 			new Universe("CENTER", new Dimension(1,1)),
 			new Universe("BIG", new Dimension(2,2)),
 			new Universe("HORIZONTAL", new Dimension(3,1)),
@@ -145,9 +143,6 @@ public class CommandCenter {
 	public boolean isFalconPositionFixed(){
 		return  (getLevel() % universes.length) != 0;
 	}
-
-
-
 
 
 
