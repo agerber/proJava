@@ -30,8 +30,6 @@ public class CommandCenter {
 	//separate reference. Use final to ensure that the falcon ref always points to the single falcon object on heap.
 	//Lombok will not provide setter methods on final members
 	private final Falcon falcon  = new Falcon();
-	//associates dimension with the Universe.
-	private final Map<Universe, Dimension> universeMap = new LinkedHashMap<>();
 	private final Radar radar = new Radar();
 	private Universe[] universes =  new Universe[] {
 			new Universe("FREE FLY", new Dimension(1, 1)),
@@ -95,6 +93,7 @@ public class CommandCenter {
 		//set to one greater than number of falcons lives in your game as decrementFalconNumAndSpawn() also decrements
 		setNumFalcons(4);
 		falcon.decrementFalconNumAndSpawn();
+		//The following two objects are initialized at start game. All other sprites should be enqueued during gameplay
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 		opsQueue.enqueue(radar, GameOp.Action.ADD);
 

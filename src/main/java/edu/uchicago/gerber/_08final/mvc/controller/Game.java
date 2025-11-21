@@ -237,6 +237,7 @@ public class Game implements Runnable, KeyListener {
 
 
     private void spawnShieldFloater() {
+        if (CommandCenter.getInstance().isGameOver() || CommandCenter.getInstance().isPaused()) return;
 
         if (CommandCenter.getInstance().getFrame() % ShieldFloater.SPAWN_SHIELD_FLOATER == 0) {
             CommandCenter.getInstance().getOpsQueue().enqueue(new ShieldFloater(), GameOp.Action.ADD);
@@ -244,6 +245,7 @@ public class Game implements Runnable, KeyListener {
     }
 
     private void spawnNukeFloater() {
+        if (CommandCenter.getInstance().isGameOver() || CommandCenter.getInstance().isPaused()) return;
 
         if (CommandCenter.getInstance().getFrame() % NukeFloater.SPAWN_NUKE_FLOATER == 0) {
             CommandCenter.getInstance().getOpsQueue().enqueue(new NukeFloater(), GameOp.Action.ADD);
