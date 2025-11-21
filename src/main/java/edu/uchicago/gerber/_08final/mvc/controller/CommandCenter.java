@@ -3,6 +3,7 @@ package edu.uchicago.gerber._08final.mvc.controller;
 
 import java.awt.*;
 import edu.uchicago.gerber._08final.mvc.model.*;
+import edu.uchicago.gerber._08final.mvc.model.prime.Universe;
 import lombok.Data;
 
 import java.util.LinkedHashMap;
@@ -14,17 +15,26 @@ import java.util.Map;
 @Data
 public class CommandCenter {
 
-	public enum Universe {
-		FREE_FLY,
-		CENTER,
-		BIG,
-		HORIZONTAL,
-		VERTICAL,
-		DARK
+	// todo  Change to object and put in a array
+//	public enum Universe {
+//		FREE_FLY,
+//		CENTER,
+//		BIG,
+//		HORIZONTAL,
+//		VERTICAL,
+//		DARK
+//
+//	}
 
-	}
+	private Universe[] universes =  new Universe[] {
+			new Universe("FREE_FLY", new Dimension(1,1)),
+			new Universe("CENTER", new Dimension(1,1)),
+			new Universe("BIG", new Dimension(2,2)),
+			new Universe("HORIZONTAL", new Dimension(3,1)),
+			new Universe("VERTICAL", new Dimension(1,3)),
+			new Universe("DARK", new Dimension(4,4))
 
-	private Universe universe;
+	};
 	private  int numFalcons;
 	private  int level;
 	private  long score;
@@ -85,9 +95,9 @@ public class CommandCenter {
 
 
 	public void initGame(){
+
 		clearAll();
 		generateStarField();
-		setDimHash();
 		setLevel(0);
 		setScore(0);
 		setPaused(false);
@@ -100,15 +110,7 @@ public class CommandCenter {
 
 	}
 
-	private void setDimHash(){
-		//initialize with values that define the aspect ratio of the Universe. See checkNewLevel() of Game class.
-		universeMap.put(Universe.FREE_FLY, new Dimension(1,1));
-		universeMap.put(Universe.CENTER, new Dimension(1,1));
-		universeMap.put(Universe.BIG, new Dimension(2,2));
-		universeMap.put(Universe.HORIZONTAL, new Dimension(3,1));
-		universeMap.put(Universe.VERTICAL, new Dimension(1,3));
-		universeMap.put(Universe.DARK, new Dimension(4,4));
-	}
+
 
 
 	private void generateStarField(){
@@ -135,11 +137,11 @@ public class CommandCenter {
 	}
 
 	public Dimension getUniDim(){
-		return universeMap.get(universe);
+		return universes[getLevel() % universes.length].getDimension();
 	}
 
 	public boolean isFalconPositionFixed(){
-		return universe != Universe.FREE_FLY;
+		return  (getLevel() % universes.length) != 0;
 	}
 
 

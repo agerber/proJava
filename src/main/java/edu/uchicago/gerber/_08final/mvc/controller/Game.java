@@ -291,11 +291,11 @@ public class Game implements Runnable, KeyListener {
         CommandCenter.getInstance().getFalcon().setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 
         //Set universe according to mod of level - cycle through universes
-        int ordinal = level % CommandCenter.Universe.values().length;
-        CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
-        CommandCenter.getInstance().setUniverse(key);
+        //int ordinal = level % CommandCenter.Universe.values().length;
+        //CommandCenter.Universe key = CommandCenter.Universe.values()[ordinal];
+        //CommandCenter.getInstance().setUniverse(key);
         //players will need radar in the big universes, but they can still toggle it off
-        CommandCenter.getInstance().setRadarToggle(ordinal > 1);
+        CommandCenter.getInstance().setRadarToggle(CommandCenter.getInstance().getLevel() % CommandCenter.getInstance().getUniverses().length > 1);
 
         //bump the level up
         level = level + 1;
