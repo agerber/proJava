@@ -16,23 +16,7 @@ import java.util.Map;
 @Data
 public class CommandCenter {
 
-	//inner class
-	@Data
-	@AllArgsConstructor
-	class Universe {
-		private String name;
-		private Dimension dimension;
-	}
 
-	private Universe[] universes =  new Universe[] {
-			new Universe("FREE FLY", new Dimension(1,1)),
-			new Universe("CENTER", new Dimension(1,1)),
-			new Universe("BIG", new Dimension(2,2)),
-			new Universe("HORIZONTAL", new Dimension(3,1)),
-			new Universe("VERTICAL", new Dimension(1,3)),
-			new Universe("DARK", new Dimension(4,4))
-
-	};
 	private  int numFalcons;
 	private  int level;
 	private  long score;
@@ -49,7 +33,15 @@ public class CommandCenter {
 	//associates dimension with the Universe.
 	private final Map<Universe, Dimension> universeMap = new LinkedHashMap<>();
 	private final Radar radar = new Radar();
+	private Universe[] universes =  new Universe[] {
+			new Universe("FREE FLY", new Dimension(1, 1)),
+			new Universe("CENTER", new Dimension(1, 1)),
+			new Universe("BIG", new Dimension(2, 2)),
+			new Universe("HORIZONTAL", new Dimension(3, 1)),
+			new Universe("VERTICAL", new Dimension(1, 3)),
+			new Universe("DARK", new Dimension(4, 4))
 
+	};
 	/*
 	 TODO The following LinkedList<Movable> are examples of the Composite design pattern which is used to allow
 	 compositions of objects to be treated uniformly. Here are the elements of the Composite design pattern:
@@ -133,17 +125,34 @@ public class CommandCenter {
 	}
 
 	public Dimension getUniDim(){
-		return universes[getLevel() % universes.length].getDimension();
+		Universe universe = trueUni();
+		return universe.getDimension();
+
 	}
 
 	public String getUniName(){
-		return universes[getLevel() % universes.length].getName();
+		Universe universe = trueUni();
+		if (universe == null) return "";
+		return universe.getName();
 	}
 
 	public boolean isFalconPositionFixed(){
-		return  (getLevel() % universes.length) != 0;
+		Universe universe = trueUni();
+		if (universe == null) return false;
+		return  (!universe.getName().toUpperCase().equals("FREE FLY"));
+	}
+	private Universe trueUni(){
+		if (getLevel() == 0) return null;
+		return universes[(getLevel() % universes.length)-1];
+
 	}
 
-
+	//inner class
+	@Data
+	@AllArgsConstructor
+	class Universe {
+		private String name;
+		private Dimension dimension;
+	}
 
 }
