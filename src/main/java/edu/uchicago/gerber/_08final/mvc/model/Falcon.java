@@ -29,6 +29,7 @@ public class Falcon extends Sprite {
 
 	public static final int MIN_RADIUS = 28;
 
+	public final static int MAX_VELOCITY = 39;
 
 	//images states
 	public enum ImageState {
@@ -105,7 +106,7 @@ public class Falcon extends Sprite {
 		if (showLevel > 0) showLevel--;
 
 		final double THRUST = 0.85;
-		final int MAX_VELOCITY = 39;
+
 
 
 		//apply some thrust vectors using trig.

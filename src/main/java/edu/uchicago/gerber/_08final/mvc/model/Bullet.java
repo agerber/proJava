@@ -37,13 +37,6 @@ public class Bullet extends Sprite {
         setDeltaX(falcon.getDeltaX() + vectorX);
         setDeltaY(falcon.getDeltaY() + vectorY);
 
-        //we have a reference to the falcon passed into the constructor. Let's create some kick-back.
-        //fire kick-back on the falcon: inertia - fire-vector / some arbitrary divisor
-        final double KICK_BACK_DIVISOR = 36.0;
-        falcon.setDeltaX(falcon.getDeltaX() - vectorX / KICK_BACK_DIVISOR);
-        falcon.setDeltaY(falcon.getDeltaY() - vectorY / KICK_BACK_DIVISOR);
-
-
         //define the points on a cartesian grid
         List<Point> listPoints = new ArrayList<>();
         listPoints.add(new Point(0, 3)); //top point
