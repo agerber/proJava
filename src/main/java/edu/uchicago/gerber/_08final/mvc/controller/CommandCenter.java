@@ -111,8 +111,6 @@ public class CommandCenter {
 	}
 
 
-
-
 	private void generateStarField(){
 
 		int count = 100;
@@ -138,6 +136,10 @@ public class CommandCenter {
 
 	public Dimension getUniDim(){
 		return universes[getLevel() % universes.length].getDimension();
+	}
+
+	public String getUniName(){
+		return universes[getLevel() % universes.length].getName();
 	}
 
 	public boolean isFalconPositionFixed(){

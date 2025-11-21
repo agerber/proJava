@@ -110,16 +110,16 @@ public class GamePanel extends Panel {
 
 
         //draw the level upper-right corner
-       // String levelText = "Level : [" + CommandCenter.getInstance().getLevel() + "]  " +
-            //    universes[getLevel() % universes.length];
-      //  graphics.drawString(levelText, Game.DIM.width - OFFSET_LEFT, fontHeight); //upper-right corner
+        String levelText = "Level : [" + CommandCenter.getInstance().getLevel() + "]  " +
+                CommandCenter.getInstance().getUniName();
+        graphics.drawString(levelText, Game.DIM.width - OFFSET_LEFT, fontHeight); //upper-right corner
         graphics.drawString("Score : " + decimalFormat.format(CommandCenter.getInstance().getScore()),
                 Game.DIM.width - OFFSET_LEFT,
                 fontHeight * 2);
 
         //build the status string array with possible messages in middle of screen
         List<String> statusArray = new ArrayList<>();
-      //  if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) statusArray.add(levelText);
+        if (CommandCenter.getInstance().getFalcon().getShowLevel() > 0) statusArray.add(levelText);
         if (CommandCenter.getInstance().getFalcon().isMaxSpeedAttained()) statusArray.add("WARNING - SLOW DOWN");
         if (CommandCenter.getInstance().getFalcon().getNukeMeter() > 0) statusArray.add("PRESS F for NUKE");
 
