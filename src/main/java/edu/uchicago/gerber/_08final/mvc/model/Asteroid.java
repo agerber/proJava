@@ -59,13 +59,13 @@ public class Asteroid extends Sprite {
 
 	}
 
-	//converts the radius to integer representing the size of the Asteroid:
+	//converts the radius to integer representing the size of the Asteroid (0,1,2)
 	//0 = large, 1 = medium, 2 = small
 	public int getSize() {
 		int ratio = LARGE_RADIUS / getRadius(); // 1, 2, or 4
-		//ratio = 1 → binary 0000 0001 → trailing zeros: 0
-		//ratio = 2 → binary 0000 0010 → trailing zeros: 1
-		//ratio = 4 → binary 0000 0100 → trailing zeros: 2
+		//ratio = 1 → binary ...0000 0001 → trailing zeros: 0
+		//ratio = 2 → binary ...0000 0010 → trailing zeros: 1
+		//ratio = 4 → binary ...0000 0100 → trailing zeros: 2
 		return Integer.numberOfTrailingZeros(ratio);
 	}
 

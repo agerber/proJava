@@ -26,7 +26,9 @@ public class Radar extends Sprite {
     }
 
     @Override
-    public void move() {}
+    public void move() {
+        //override and do nothing; the radar does not move.
+    }
 
 
     @Override
