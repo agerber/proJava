@@ -21,7 +21,8 @@ public class Bullet extends Sprite {
         setRadius(6);
 
 
-        //everything is relative to the falcon ship that fired the bullet
+        //everything is relative to the falcon ship that fired the bullet.
+        // Try removing the clone call, then run, and see how the falcon behaves when you fire a bullet.
         setCenter((Point)falcon.getCenter().clone());
 
         //set the bullet orientation to the falcon (ship) orientation
