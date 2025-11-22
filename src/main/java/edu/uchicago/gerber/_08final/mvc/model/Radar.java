@@ -15,10 +15,10 @@ public class Radar extends Sprite {
 
 
     //size of mini-map as percentage of screen (game dimension)
-    private final double RADAR_PERCENT = 0.31;
+    private static final double RADAR_PERCENT = 0.31;
 
-    private final Color PUMPKIN = new Color(200, 100, 50);
-    private final Color LIGHT_GRAY = new Color(200, 200, 200);
+    private static final Color PUMPKIN = new Color(200, 100, 50);
+    private static final Color LIGHT_GRAY = new Color(200, 200, 200);
 
     public Radar() {
         setTeam(Team.DEBRIS);
@@ -131,9 +131,10 @@ public class Radar extends Sprite {
     //this function takes a center-point of a movable and scales it to display the blip on the radar.
     //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
     private Point translatePoint(Point point){
+        Dimension dimension = CommandCenter.getInstance().getUniDim();
         return new Point(
-                (int) Math.round( RADAR_PERCENT * point.x / CommandCenter.getInstance().getUniDim().width ),
-                (int) Math.round( RADAR_PERCENT * point.y / CommandCenter.getInstance().getUniDim().height )
+                (int) Math.round( RADAR_PERCENT * point.x / dimension.width ),
+                (int) Math.round( RADAR_PERCENT * point.y / dimension.height )
         );
     }
 
