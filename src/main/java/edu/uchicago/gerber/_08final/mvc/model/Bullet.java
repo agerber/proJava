@@ -10,12 +10,12 @@ import java.util.List;
 
 public class Bullet extends Sprite {
 
-
+    private final Color PUMPKIN_LIGHT = new Color(240, 140, 90);
 
     public Bullet(Falcon falcon) {
 
         setTeam(Team.FRIEND);
-        setColor(Color.ORANGE);
+        setColor(PUMPKIN_LIGHT);
 
         setExpiry(20);
         setRadius(12);

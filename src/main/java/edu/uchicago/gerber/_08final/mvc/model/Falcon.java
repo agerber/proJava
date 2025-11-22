@@ -156,7 +156,7 @@ public class Falcon extends Sprite {
 
 	//Since the superclass Spite does not provide an
 	// implementation for draw() (contract method from Movable) ,we inherit that contract debt, and therefore must
-	// provide an implementation. This is a raster and vector (see drawShield below) implementation of draw().
+	// provide an implementation. This is a raster and vector implementation of draw().
 	@Override
 	public void draw(Graphics g) {
 
@@ -195,8 +195,8 @@ public class Falcon extends Sprite {
 
 	@Override
 	public void removeFromGame(LinkedList<Movable> list) {
-		//The falcon is never actually removed from the game-space; instead we decrement numFalcons
-		//only execute the decrementFalconNumAndSpawn() method if shield is down.
+		//The falcon is never actually removed from the game-space; instead we decrement numFalcons.
+		//Only execute the decrementFalconNumAndSpawn() method if shield is down (0).
 		if ( shield == 0)  decrementFalconNumAndSpawn();
 	}
 

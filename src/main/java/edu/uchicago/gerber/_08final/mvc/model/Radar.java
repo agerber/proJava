@@ -15,21 +15,18 @@ public class Radar extends Sprite {
 
 
     //size of mini-map as percentage of screen (game dimension)
-    private final double MINI_MAP_PERCENT = 0.31;
+    private final double RADAR_PERCENT = 0.31;
 
     private final Color PUMPKIN = new Color(200, 100, 50);
     private final Color LIGHT_GRAY = new Color(200, 200, 200);
 
     public Radar() {
         setTeam(Team.DEBRIS);
-        setCenter(new Point(0,0));
     }
 
+    //override and do nothing; the radar does not move.
     @Override
-    public void move() {
-        //override and do nothing; the radar does not move.
-    }
-
+    public void move() {}
 
     @Override
     public void draw(Graphics g) {
@@ -37,30 +34,30 @@ public class Radar extends Sprite {
         //controlled by the A-key
         if (!CommandCenter.getInstance().isRadarToggle()) return;
 
-        int miniWidth = (int) Math.round( MINI_MAP_PERCENT * Game.DIM.width );
-        int miniHeight = (int) Math.round(MINI_MAP_PERCENT * Game.DIM.height );
+        int radarWidth = (int) Math.round(RADAR_PERCENT * Game.DIM.width );
+        int radarHeight = (int) Math.round(RADAR_PERCENT * Game.DIM.height );
 
         //black fill and gray bounding box (entire universe)
         g.setColor(Color.BLACK);
         g.fillRect(
                 0,
                 0,
-                miniWidth,
-                miniHeight
+                radarWidth,
+                radarHeight
         );
         g.setColor(Color.DARK_GRAY);
         g.drawRect(
                 0,
                 0,
-                miniWidth,
-                miniHeight
+                radarWidth,
+                radarHeight
         );
 
 
         //draw the view-portal box
         g.setColor(Color.DARK_GRAY);
-        int miniViewPortWidth = miniWidth / CommandCenter.getInstance().getUniDim().width;
-        int miniViewPortHeight = miniHeight / CommandCenter.getInstance().getUniDim().height;
+        int miniViewPortWidth = radarWidth / CommandCenter.getInstance().getUniDim().width;
+        int miniViewPortHeight = radarHeight / CommandCenter.getInstance().getUniDim().height;
         g.drawRect(
                 0 ,
                 0,
@@ -129,14 +126,14 @@ public class Radar extends Sprite {
         );
 
 
-    }
+    } //end draw
 
-    //this function takes a center-point of a movable and scales it to display the blip on the mini-map.
+    //this function takes a center-point of a movable and scales it to display the blip on the radar.
     //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
     private Point translatePoint(Point point){
         return new Point(
-                (int) Math.round( MINI_MAP_PERCENT  * point.x / CommandCenter.getInstance().getUniDim().width ),
-                (int) Math.round( MINI_MAP_PERCENT  * point.y / CommandCenter.getInstance().getUniDim().height )
+                (int) Math.round( RADAR_PERCENT * point.x / CommandCenter.getInstance().getUniDim().width ),
+                (int) Math.round( RADAR_PERCENT * point.y / CommandCenter.getInstance().getUniDim().height )
         );
     }
 
