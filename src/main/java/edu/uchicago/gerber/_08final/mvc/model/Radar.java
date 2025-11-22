@@ -53,9 +53,10 @@ public class Radar extends Sprite {
 
 
         //draw the view-portal box
+        Dimension uniDim = CommandCenter.getInstance().getUniDim();
         g.setColor(Color.DARK_GRAY);
-        int miniViewPortWidth = radarWidth / CommandCenter.getInstance().getUniDim().width;
-        int miniViewPortHeight = radarHeight / CommandCenter.getInstance().getUniDim().height;
+        int miniViewPortWidth = radarWidth / uniDim.width;
+        int miniViewPortHeight = radarHeight / uniDim.height;
         g.drawRect(
                 0 ,
                 0,
@@ -76,7 +77,6 @@ public class Radar extends Sprite {
 
         //draw foe (asteroids) radar-blips
         CommandCenter.getInstance().getMovFoes().forEach( mov -> {
-                    if (!(mov instanceof  Asteroid)) return;
                     Asteroid asteroid = (Asteroid) mov;
                     g.setColor(LIGHT_GRAY);
                     Point translatedPoint = translatePoint(asteroid.getCenter());
@@ -107,7 +107,6 @@ public class Radar extends Sprite {
         );
 
 
-
         //draw friend radar-blips
         CommandCenter.getInstance().getMovFriends().forEach( mov -> {
                     Color color;
@@ -129,10 +128,10 @@ public class Radar extends Sprite {
     //this function takes a center-point of a movable and scales it to display the blip on the radar.
     //Since Java's draw origin (0,0) is at the top-left, points will translate up and left.
     private Point translatePoint(Point point){
-        Dimension dimension = CommandCenter.getInstance().getUniDim();
+        Dimension uniDim = CommandCenter.getInstance().getUniDim();
         return new Point(
-                (int) Math.round( RADAR_PERCENT * point.x / dimension.width ),
-                (int) Math.round( RADAR_PERCENT * point.y / dimension.height )
+                (int) Math.round( RADAR_PERCENT * point.x / uniDim.width ),
+                (int) Math.round( RADAR_PERCENT * point.y / uniDim.height )
         );
     }
 } //end class
