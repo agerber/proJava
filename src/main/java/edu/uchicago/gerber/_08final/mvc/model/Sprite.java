@@ -25,8 +25,6 @@ import java.awt.image.BufferedImage;
 @Data
 public abstract class Sprite implements Movable {
 
-
-
     //the center-point of this sprite
     private Point center;
     //this causes movement; change-in-x and change-in-y
@@ -66,6 +64,8 @@ public abstract class Sprite implements Movable {
         setCenter(new Point(Game.R.nextInt(Game.DIM.width),
                 Game.R.nextInt(Game.DIM.height)));
 
+        //default is debris -- which is inert
+        setTeam(Team.DEBRIS);
 
     }
 

@@ -16,13 +16,11 @@ public class Radar extends Sprite {
 
     //size of mini-map as percentage of screen (game dimension)
     private static final double RADAR_PERCENT = 0.31;
-
     private static final Color PUMPKIN = new Color(200, 100, 50);
     private static final Color LIGHT_GRAY = new Color(200, 200, 200);
 
-    public Radar() {
-        setTeam(Team.DEBRIS);
-    }
+    //a default no-arg constructor is automatically provided by Java
+    //public Radar() {}
 
     //override and do nothing; the radar does not move.
     @Override
@@ -137,7 +135,4 @@ public class Radar extends Sprite {
                 (int) Math.round( RADAR_PERCENT * point.y / dimension.height )
         );
     }
-
-
-
-}
+} //end class
