@@ -96,6 +96,9 @@ public class CommandCenter {
 		//The following two objects are initialized at start game. All other sprites should be enqueued during gameplay
 		opsQueue.enqueue(falcon, GameOp.Action.ADD);
 		opsQueue.enqueue(radar, GameOp.Action.ADD);
+		//theme music
+		SoundLoader.playSound("dr_loop.wav");
+		CommandCenter.getInstance().setThemeMusic(true);
 
 
 	}

@@ -18,7 +18,7 @@ public class Bullet extends Sprite {
         setColor(Color.ORANGE);
 
         setExpiry(20);
-        setRadius(6);
+        setRadius(12);
 
 
         //everything is relative to the falcon ship that fired the bullet.
