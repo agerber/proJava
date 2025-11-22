@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Bullet extends Sprite {
 
-    private final Color PUMPKIN_LIGHT = new Color(240, 140, 90);
+    private static final Color PUMPKIN_LIGHT = new Color(240, 140, 90);
 
     public Bullet(Falcon falcon) {
 
@@ -18,7 +18,7 @@ public class Bullet extends Sprite {
         setColor(PUMPKIN_LIGHT);
 
         setExpiry(20);
-        setRadius(12);
+        setRadius(11);
 
 
         //everything is relative to the falcon ship that fired the bullet.
