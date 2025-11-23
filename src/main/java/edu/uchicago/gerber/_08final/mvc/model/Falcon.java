@@ -53,9 +53,11 @@ public class Falcon extends Sprite {
 	// methods are being called every ~40ms, this is a very convenient place to store this variable.
 	private int showLevel;
 
-	/* TODO The enum TurnState as well as the boolean thrusting are examples of the State design pattern. This pattern
+	/* TODO The enums ImageState and TurnState, as well as the boolean thrusting are examples of the State design
+	    pattern. This pattern
 	allows an object to change its behavior when its internal state changes. In this case, the boolean thrusting, and
-	 the TurnState (with values IDLE, LEFT, and RIGHT) affects how the Falcon moves and draws itself. */
+	 the ImageState, and TurnState (with values IDLE, LEFT, and RIGHT) affects how the Falcon moves and draws itself.
+	 */
 	public enum TurnState {IDLE, LEFT, RIGHT}
 	private TurnState turnState = TurnState.IDLE;
 
@@ -68,9 +70,7 @@ public class Falcon extends Sprite {
 	public Falcon() {
 
 		setTeam(Team.FRIEND);
-
 		setRadius(MIN_RADIUS);
-
 
 		//We use HashMap which has a seek-time of O(1)
 		//See the resources directory in the root of this project for pngs.
