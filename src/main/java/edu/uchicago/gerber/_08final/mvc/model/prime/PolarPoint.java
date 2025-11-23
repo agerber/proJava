@@ -8,8 +8,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class PolarPoint  {
 
-    private double r; // corresponds to the hypotenuse in cartesean, number between 0 and 1
-    private double theta; //degrees in radians, number between 0 and 6.283
+    private double r; // corresponds to the hypotenuse in cartesean, number between 0.0 and 1.0
+    private double theta; //degrees in radians, number between 0.0 and 6.283 (2 * Pi)
 
 
 }

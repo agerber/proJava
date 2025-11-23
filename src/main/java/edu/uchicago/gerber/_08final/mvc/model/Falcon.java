@@ -44,7 +44,6 @@ public class Falcon extends Sprite {
 
 	//instance fields (getters/setters provided by Lombok @Data above)
 	private int shield;
-
 	private int nukeMeter;
 	private int invisible;
 	private boolean maxSpeedAttained;
@@ -101,13 +100,9 @@ public class Falcon extends Sprite {
 		if (invisible > 0) invisible--;
 		if (shield > 0) shield--;
 		if (nukeMeter > 0) nukeMeter--;
-		//The falcon is a convenient place to decrement the showLevel variable as the falcon
-		//move() method is being called every frame (~40ms); and the falcon reference is never null.
 		if (showLevel > 0) showLevel--;
 
 		final double THRUST = 0.85;
-
-
 
 		//apply some thrust vectors using trig.
 		if (thrusting) {
