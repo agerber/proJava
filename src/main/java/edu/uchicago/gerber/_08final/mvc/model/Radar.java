@@ -19,8 +19,10 @@ public class Radar extends Sprite {
     private static final Color PUMPKIN = new Color(200, 100, 50);
     private static final Color LIGHT_GRAY = new Color(200, 200, 200);
 
-    //a default no-arg constructor is automatically provided by Java
-    //public Radar() {}
+
+    public Radar() {
+        setCenter(new Point(0,0));
+    }
 
     //override and do nothing; the radar does not move.
     @Override
@@ -64,16 +66,6 @@ public class Radar extends Sprite {
                 miniViewPortHeight
 
         );
-
-
-        //draw debris radar-blips.
-        CommandCenter.getInstance().getMovDebris().forEach( mov -> {
-                    g.setColor(Color.DARK_GRAY);
-                    Point translatedPoint = translatePoint(mov.getCenter());
-                    g.fillOval(translatedPoint.x - 1, translatedPoint.y - 1, 2, 2);
-                }
-        );
-
 
         //draw foe (asteroids) radar-blips
         CommandCenter.getInstance().getMovFoes().forEach( mov -> {

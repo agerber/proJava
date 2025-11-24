@@ -94,6 +94,7 @@ public class Asteroid extends Sprite {
 		};
 
 		return Stream.generate(polarPointSupplier)
+				// the supplier will never terminate unless we set a limit
 				.limit(VERTICES)
 				// Try removing the sorted call to see how asteroids render
 				.sorted(byTheta)
