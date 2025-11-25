@@ -57,7 +57,7 @@ public class Star implements Movable{
 
         //else, falcon position is fixed, and the stars must move to orient player in falcon-fixed-play
 
-            //right-bounds reached
+        //right-bounds reached
         if (center.x > Game.DIM.width) {
             center.x = 1;
          //left-bounds reached

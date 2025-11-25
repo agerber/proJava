@@ -19,10 +19,8 @@ public class Radar extends Sprite {
     private static final Color PUMPKIN = new Color(200, 100, 50);
     private static final Color LIGHT_GRAY = new Color(200, 200, 200);
 
-
-    public Radar() {
-        setCenter(new Point(0,0));
-    }
+    // Default no-arg constructor provided by Java
+    //public Radar() {}
 
     //override and do nothing; the radar does not move.
     @Override
