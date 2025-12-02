@@ -98,7 +98,7 @@ public class CommandCenter {
 		opsQueue.enqueue(radar, GameOp.Action.ADD);
 		//theme music
 		SoundLoader.playSound("dr_loop.wav");
-		CommandCenter.getInstance().setThemeMusic(true);
+		setThemeMusic(true);
 
 
 	}
