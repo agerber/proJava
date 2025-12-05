@@ -31,6 +31,7 @@ public class CommandCenter {
 	//Lombok will not provide setter methods on final members
 	private final Falcon falcon  = new Falcon();
 	private final Radar radar = new Radar();
+
 	private final Universe[] universes =  new Universe[] {
 			new Universe("FREE FLY", new Dimension(1, 1)),
 			new Universe("CENTER", new Dimension(1, 1)),

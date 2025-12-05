@@ -74,7 +74,7 @@ public class Asteroid extends Sprite {
 	private Point[] generateVertices() {
 
 
-		final int VERTICES = 25 + Game.R.nextInt(7);    // 25–31 points
+		final int NUM_VERTICES = 25 + Game.R.nextInt(7);    // 25–31 vertices
 		final double MIN_RADIUS = 0.8;
 		final double MAX_RADIUS = 1.0;
 
@@ -95,7 +95,7 @@ public class Asteroid extends Sprite {
 
 		return Stream.generate(polarPointSupplier)
 				// the supplier will never terminate unless we set a limit
-				.limit(VERTICES)
+				.limit(NUM_VERTICES)
 				// Try removing the sorted call to see how asteroids render
 				.sorted(byTheta)
 				.map(toCartesian)
