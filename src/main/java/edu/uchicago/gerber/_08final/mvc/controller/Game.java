@@ -92,7 +92,7 @@ public class Game implements Runnable, KeyListener {
             dimension = new Dimension(Integer.parseInt(width), Integer.parseInt(height));
         } catch (NumberFormatException e) {
             //some default value
-            dimension =  new Dimension(1500, 950);
+            dimension =  new Dimension(1200, 700);
         }
         return dimension;
     }

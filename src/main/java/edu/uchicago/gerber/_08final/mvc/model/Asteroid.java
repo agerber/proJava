@@ -59,7 +59,7 @@ public class Asteroid extends Sprite {
 
 	}
 
-	//converts the radius to integer representing the size of the Asteroid (0,1,2)
+	//converts the radius ratio to integer representing the size of the Asteroid (0,1,2)
 	//0 = large, 1 = medium, 2 = small
 	public int getSize() {
 		int ratio = LARGE_RADIUS / getRadius(); // 1, 2, or 4
