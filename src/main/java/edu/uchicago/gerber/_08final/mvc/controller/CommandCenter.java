@@ -124,6 +124,11 @@ public class CommandCenter {
 		movFloaters.clear();
 	}
 
+	public void killAllFoes(){
+		for (Movable movFoe : movFoes)
+			opsQueue.enqueue(movFoe, GameOp.Action.REMOVE);
+	}
+
 	public boolean isGameOver() {		//if the number of falcons is zero, then game over
 		return numFalcons < 1;
 	}

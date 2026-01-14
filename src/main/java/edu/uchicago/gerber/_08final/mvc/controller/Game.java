@@ -47,6 +47,7 @@ public class Game implements Runnable, KeyListener {
             FIRE = 32, // space key
             MUTE = 77, // m-key mute
             NUKE = 70, // f-key
+            KILL = 86, // v-key
             RADAR = 65; // a-key
 
 
@@ -101,7 +102,7 @@ public class Game implements Runnable, KeyListener {
     @Override
     public void run() {
 
-        // lower animation thread's priority, thereby yielding to the 'Event Dispatch Thread' or EDT
+        // lower animation thread's priority, thereby yielding to the 'Event Dispatch Thread'
         // thread which listens to keystrokes
         animationThread.setPriority(Thread.MIN_PRIORITY);
 
@@ -293,8 +294,7 @@ public class Game implements Runnable, KeyListener {
         CommandCenter.getInstance().getFalcon().setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
 
         //bump the level up
-        level = level + 1;
-        CommandCenter.getInstance().setLevel(level);
+        CommandCenter.getInstance().setLevel(++level);
         //spawn some big new asteroids
         spawnBigAsteroids(level);
         //make falcon invincible momentarily in case new asteroids spawn on top of him, and give player
@@ -362,6 +362,10 @@ public class Game implements Runnable, KeyListener {
                 break;
             case PAUSE:
                 CommandCenter.getInstance().setPaused(!CommandCenter.getInstance().isPaused());
+                break;
+            case KILL:
+                // cheat to speed game play during development
+                CommandCenter.getInstance().killAllFoes();
                 break;
             case QUIT:
                 System.exit(0);
